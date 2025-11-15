@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 # Navigate to the script's directory (e.g., /home/sinine-pi/smart_cabinet)
 # This ensures it runs from the correct folder
 cd "$(dirname "$0")"
