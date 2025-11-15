@@ -1,9 +1,19 @@
 # Python virtual environment
 venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
 
 # Local database (NEVER put data on GitHub)
 cabinet.db
+*.db
 recordings/
 
 # Local configuration with secrets
 config.ini
+
+# Build and distribution
+dist/
+build/

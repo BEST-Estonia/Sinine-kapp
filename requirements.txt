@@ -1,15 +1,2 @@
-# GUI
-pygame==2.5.2
-pygame-gui
-
-# General Pi Hardware
-gpiozero
-
-# Other libraries
-Flask
-pyserial
-picamera2
-luma.oled
-
-# Demoing
-cowsay # test to see whether the code on Pi runs automatically
+pygame==2.1.3
+Pillow
