@@ -1,0 +1,9 @@
+# Python virtual environment
+venv/
+
+# Local database (NEVER put data on GitHub)
+cabinet.db
+recordings/
+
+# Local configuration with secrets
+config.ini
