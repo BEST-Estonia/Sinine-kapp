@@ -2,17 +2,14 @@
 pygame
 pygame-gui
 
-# Hardware
-RPi.GPIO    # For solenoid relay and door switches
-hx711py  # For the scales
-pyserial    # For the RFID/QR reader (if it's a serial device)
-luma.oled   # For the 1.5" screen (if it's an I2C/SPI OLED)
+# General Pi Hardware
+gpiozero
 
-# Camera
-picamera2   # The new library for Pi 5
-
-# Web Reporting
-Flask       # For your private web dashboards
+# Other libraries
+Flask
+pyserial
+picamera2
+luma.oled
 
 # Demoing
 cowsay # test to see whether the code on Pi runs automatically
