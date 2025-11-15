@@ -13,3 +13,6 @@ picamera2   # The new library for Pi 5
 
 # Web Reporting
 Flask       # For your private web dashboards
+
+# Demoing
+cowsay # test to see whether the code on Pi runs automatically
