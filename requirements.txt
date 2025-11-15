@@ -1,5 +1,5 @@
 # GUI
-pygame
+pygame==2.5.2
 pygame-gui
 
 # General Pi Hardware
