@@ -9,6 +9,9 @@ import modules.gui_manager as gui
 import modules.hardware as hardware
 import modules.database_manager as db
 
+import cowsay
+print(cowsay.cow("--- GITHUB AUTO-UPDATE SUCCESSFUL! ---"))
+
 # Set the working directory to the script's location
 # This is crucial so it can find the theme.json file
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
