@@ -10,7 +10,7 @@ SCREEN_HEIGHT = 1024
 FPS = 30
 
 # Window settings
-FULLSCREEN = False  # Set to True for production on Raspberry Pi
+FULLSCREEN = True  # Full screen mode (set to False for development/debugging)
 NOFRAME = True  # Borderless window
 
 # Hardware configuration
