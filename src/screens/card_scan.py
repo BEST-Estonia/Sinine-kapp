@@ -10,15 +10,23 @@ from ui.buttons import Button
 class CardScanScreen(BaseScreen):
     """Screen for scanning RFID cards with user verification"""
     
-    def __init__(self, ui_manager, title, next_action):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, title, action):
+        """
+        Initialize card scan screen
+        
+        Args:
+            ui_manager: UI manager reference
+            screen_manager: Screen manager reference
+            title: Title to display
+            action: One of 'borrow', 'return', or 'admin'
+        """
+        super().__init__(ui_manager, screen_manager)
         self.title = title
-        self.next_action = next_action  # Where to go on successful scan
+        self.action = action  # 'borrow', 'return', or 'admin'
         self.status = "Please scan your card..."
         self.user_info = None
         self.scanning = False
         self.scanned = False
-        self.admin_only = (next_action == "admin_main")
         
         # Back button
         back_btn = Button(
@@ -31,8 +39,18 @@ class CardScanScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "← Back":
-            return "main"
+            # Pop back to main menu
+            self.screen_manager.pop()
         return None
+    
+    def on_enter(self, payload=None):
+        """Called when screen becomes active - start scanning"""
+        super().on_enter(payload)
+        # Reset state when entering
+        self.scanning = False
+        self.scanned = False
+        self.user_info = None
+        self.status = "Please scan your card..."
     
     def scan_card(self):
         """Initiate card scanning"""
@@ -53,27 +71,57 @@ class CardScanScreen(BaseScreen):
             
             if user:
                 # Check admin access if required
-                if self.admin_only and not user.get('is_admin'):
-                    self.status = f"Access denied! Admin access required."
-                    self.user_info = None
-                    self.scanned = True
-                    self.scanning = False
-                    return None
+                if self.action == "admin":
+                    # Only user_id == 1 can access admin panel
+                    if user.get('id') != 1:
+                        self.status = f"Access Denied! Only admin (user ID 1) can access."
+                        self.user_info = None
+                        self.scanned = True
+                        self.scanning = False
+                        # Wait a moment to show message
+                        pygame.time.wait(2000)
+                        # Pop back to main menu
+                        self.screen_manager.pop()
+                        return None
                 
+                # User authenticated successfully
                 self.user_info = user
                 self.status = f"Welcome, {user['name']}!"
                 self.scanned = True
                 self.scanning = False
-                # Wait a moment then proceed
+                
+                # Wait a moment then proceed to next screen
                 pygame.time.wait(800)
-                return (self.next_action, {'user_info': user})
+                
+                # Push appropriate next screen based on action
+                if self.action == "admin":
+                    from .admin_main import AdminMainScreen
+                    admin_screen = AdminMainScreen(self.ui, self.screen_manager, user)
+                    self.screen_manager.push(admin_screen, payload={'user_info': user})
+                elif self.action in ["borrow", "return"]:
+                    from .qr_scan import QRScanScreen
+                    qr_screen = QRScanScreen(self.ui, self.screen_manager, user, action=self.action)
+                    self.screen_manager.push(qr_screen, payload={'user_info': user, 'action': self.action})
+                
+                return None
             else:
-                # Card not registered - offer to register
+                # Card not registered - push registration screen with payload
                 self.status = f"Card {card_id} not registered."
                 self.scanned = True
                 self.scanning = False
-                # Go to registration screen
-                return ("register_user", {'card_id': card_id})
+                
+                # Wait a moment to show message
+                pygame.time.wait(800)
+                
+                # Push registration screen with payload containing card_id and next action
+                from .register_user import RegisterUserScreen
+                register_screen = RegisterUserScreen(self.ui, self.screen_manager, card_id)
+                payload = {
+                    'card_id': card_id,
+                    'next_action': self.action  # Pass the action to continue after registration
+                }
+                self.screen_manager.push(register_screen, payload=payload)
+                return None
             
         return None
     

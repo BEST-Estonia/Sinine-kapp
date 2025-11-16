@@ -59,11 +59,30 @@ def draw_sneaky_bottom(surface, sneaky_img, width):
 class BaseScreen:
     """Base class for all screens"""
     
-    def __init__(self, ui_manager):
+    def __init__(self, ui_manager, screen_manager=None):
         self.ui = ui_manager
+        self.screen_manager = screen_manager
         self.buttons = []
         self.pressed_button = None
         self.sneaky_img = load_sneaky_image()
+        self.payload = None  # Store payload from on_enter
+    
+    def on_enter(self, payload=None):
+        """
+        Called when screen becomes active (pushed or revealed by pop).
+        Override in subclasses to initialize state based on payload.
+        
+        Args:
+            payload: Optional data passed to the screen (dict or other data)
+        """
+        self.payload = payload
+    
+    def on_exit(self):
+        """
+        Called when screen is about to become inactive (being popped or covered by push).
+        Override in subclasses to cleanup resources.
+        """
+        pass
     
     def handle_event(self, event):
         """Handle pygame events - override in subclasses if needed"""

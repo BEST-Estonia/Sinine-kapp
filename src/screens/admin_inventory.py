@@ -10,8 +10,8 @@ from ui.buttons import Button
 class AdminInventoryScreen(BaseScreen):
     """Screen for managing inventory and stock levels"""
     
-    def __init__(self, ui_manager, user_info):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.items = self.ui.db.get_all_items()
         self.scroll_offset = 0
@@ -68,7 +68,8 @@ class AdminInventoryScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "← Back":
-            return ("admin_main", {'user_info': self.user_info})
+            self.screen_manager.pop()
+            return None
         return None
     
     def handle_event(self, event):

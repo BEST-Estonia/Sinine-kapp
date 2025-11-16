@@ -1,7 +1,7 @@
-# src/main_new.py
+# src/main.py
 """
 Main entry point for the Smart Cupboard application
-Complete Pygame touchscreen app with modular architecture
+Complete Pygame touchscreen app with stack-based screen management
 """
 import pygame
 import sys
@@ -15,6 +15,9 @@ from hardware.mock_camera import MockCamera
 
 # Import database
 from database import DatabaseManager
+
+# Import screen manager
+from screen_manager import ScreenManager
 
 # Import screens
 from screens import (
@@ -61,135 +64,41 @@ class SmartCupboardUI:
         # Database
         self.db = DatabaseManager()
         
-        # Screen management
-        self.current_screen = None
-        self.screen_name = "main"
-        self.screen_data = {}
+        # Screen management with stack-based ScreenManager
+        self.screen_manager = ScreenManager()
         
-        # Load main menu
-        self._load_screen("main")
-    
-    def _load_screen(self, screen_name, **kwargs):
-        """Load a screen by name with parameters"""
-        self.screen_name = screen_name
-        self.screen_data = kwargs
-        
-        # Map screen names to classes
-        if screen_name == "main":
-            self.current_screen = MainMenuScreen(self)
-        
-        elif screen_name == "card_scan_borrow":
-            self.current_screen = CardScanScreen(self, "Open Doors - Scan Card", "qr_scan_borrow")
-        
-        elif screen_name == "card_scan_return":
-            self.current_screen = CardScanScreen(self, "Return Drink - Scan Card", "qr_scan_return")
-        
-        elif screen_name == "card_scan_admin":
-            self.current_screen = CardScanScreen(self, "Admin Panel - Scan Card", "admin_main")
-        
-        elif screen_name == "register_user":
-            card_id = kwargs.get('card_id')
-            self.current_screen = RegisterUserScreen(self, card_id)
-        
-        elif screen_name == "qr_scan_borrow":
-            user_info = kwargs.get('user_info')
-            self.current_screen = QRScanScreen(self, user_info, action='borrow')
-        
-        elif screen_name == "qr_scan_return":
-            user_info = kwargs.get('user_info')
-            self.current_screen = QRScanScreen(self, user_info, action='return')
-        
-        elif screen_name == "basket":
-            user_info = kwargs.get('user_info')
-            basket = kwargs.get('basket', [])
-            action = kwargs.get('action', 'borrow')
-            self.current_screen = BasketScreen(self, user_info, basket, action)
-        
-        elif screen_name == "thank_you":
-            user_info = kwargs.get('user_info')
-            basket = kwargs.get('basket', [])
-            action = kwargs.get('action', 'borrow')
-            self.current_screen = ThankYouScreen(self, user_info, basket, action)
-        
-        elif screen_name == "stock_inventory":
-            # Show inventory (same as admin inventory but read-only)
-            # For now, redirect to admin inventory
-            # In production, you'd create a separate read-only inventory screen
-            user_info = kwargs.get('user_info', {'name': 'Guest', 'id': 0, 'is_admin': False})
-            self.current_screen = AdminInventoryScreen(self, user_info)
-        
-        elif screen_name == "admin_main":
-            user_info = kwargs.get('user_info')
-            self.current_screen = AdminMainScreen(self, user_info)
-        
-        elif screen_name == "admin_users":
-            user_info = kwargs.get('user_info')
-            self.current_screen = AdminUsersScreen(self, user_info)
-        
-        elif screen_name == "admin_user_details":
-            admin_info = kwargs.get('admin_info')
-            user_id = kwargs.get('user_id')
-            self.current_screen = AdminUserDetailsScreen(self, admin_info, user_id)
-        
-        elif screen_name == "admin_inventory":
-            user_info = kwargs.get('user_info')
-            self.current_screen = AdminInventoryScreen(self, user_info)
-        
-        elif screen_name == "admin_logs":
-            user_info = kwargs.get('user_info')
-            self.current_screen = AdminLogsScreen(self, user_info)
-        
-        elif screen_name == "qr_scan":
-            # Generic QR scan - determine action from kwargs
-            user_info = kwargs.get('user_info')
-            action = kwargs.get('action', 'borrow')
-            self.current_screen = QRScanScreen(self, user_info, action)
-        
-        else:
-            # Unknown screen, go to main
-            self.current_screen = MainMenuScreen(self)
+        # Create and load main menu as root screen
+        main_screen = MainMenuScreen(self, self.screen_manager)
+        self.screen_manager.go_to(main_screen)
     
     def run(self):
         """Main game loop"""
         running = True
         
         while running:
-            self.clock.tick(FPS)
+            dt = self.clock.tick(FPS) / 1000.0  # Delta time in seconds
             
-            # Handle events
+            # Handle events - delegate to screen manager
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                     break
                 
-                # Let current screen handle the event
-                result = self.current_screen.handle_event(event)
-                if result:
-                    self._handle_screen_result(result)
+                # Let screen manager delegate to current screen
+                self.screen_manager.handle_event(event)
             
-            # Update screen state
-            result = self.current_screen.update()
-            if result:
-                self._handle_screen_result(result)
+            # Update current screen through screen manager
+            self.screen_manager.update(dt)
             
-            # Draw
-            self.current_screen.draw(self.screen)
+            # Render current screen through screen manager
+            self.screen_manager.render(self.screen)
+            
             pygame.display.flip()
         
         # Cleanup
         self.db.close()
         pygame.quit()
         sys.exit()
-    
-    def _handle_screen_result(self, result):
-        """Handle screen transitions"""
-        if isinstance(result, str):
-            # Simple screen transition
-            self._load_screen(result)
-        elif isinstance(result, tuple) and len(result) == 2:
-            # Screen transition with data
-            screen_name, kwargs = result
-            self._load_screen(screen_name, **kwargs)
 
 
 def main():

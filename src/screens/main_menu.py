@@ -10,8 +10,8 @@ from ui.buttons import Button
 class MainMenuScreen(BaseScreen):
     """Main menu screen with 4 option buttons"""
     
-    def __init__(self, ui_manager):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager):
+        super().__init__(ui_manager, screen_manager)
         
         # Load Sneaky at larger size for main screen
         from .base_screen import load_sneaky_image
@@ -30,17 +30,26 @@ class MainMenuScreen(BaseScreen):
             Button((padding, start_y + (btn_h + spacing) * 2, btn_w, btn_h), "Admin Panel", TEAL, WHITE),
             Button((padding, start_y + (btn_h + spacing) * 3, btn_w, btn_h), "Stock/Inventory", TEAL, WHITE),
         ]
-        
-        self.button_actions = [
-            "card_scan_borrow",
-            "card_scan_return",
-            "card_scan_admin",
-            "stock_inventory"
-        ]
     
     def on_button_click(self, button):
-        idx = self.buttons.index(button)
-        return self.button_actions[idx]
+        """Handle button clicks using screen_manager.push()"""
+        if button.text == "Open Doors":
+            # Push card scan screen for borrow action
+            card_screen = CardScanScreen(self.ui, self.screen_manager, "Open Doors - Scan Card", "borrow")
+            self.screen_manager.push(card_screen)
+        elif button.text == "Return Drink":
+            # Push card scan screen for return action
+            card_screen = CardScanScreen(self.ui, self.screen_manager, "Return Drink - Scan Card", "return")
+            self.screen_manager.push(card_screen)
+        elif button.text == "Admin Panel":
+            # Push card scan screen for admin access
+            card_screen = CardScanScreen(self.ui, self.screen_manager, "Admin Panel - Scan Card", "admin")
+            self.screen_manager.push(card_screen)
+        elif button.text == "Stock/Inventory":
+            # Push inventory screen
+            inventory_screen = AdminInventoryScreen(self.ui, self.screen_manager, {'name': 'Guest', 'id': 0, 'is_admin': False})
+            self.screen_manager.push(inventory_screen)
+        return None
     
     def draw(self, surface):
         # Draw common elements

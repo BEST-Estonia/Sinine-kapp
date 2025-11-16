@@ -10,8 +10,8 @@ from ui.buttons import Button
 class AdminLogsScreen(BaseScreen):
     """Screen showing chronological system logs"""
     
-    def __init__(self, ui_manager, user_info):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.logs = self.ui.db.get_all_borrows(limit=100)
         self.scroll_offset = 0
@@ -27,7 +27,8 @@ class AdminLogsScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "← Back":
-            return ("admin_main", {'user_info': self.user_info})
+            self.screen_manager.pop()
+            return None
         return None
     
     def draw(self, surface):

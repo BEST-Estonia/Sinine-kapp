@@ -10,8 +10,8 @@ from ui.buttons import Button
 class ThankYouScreen(BaseScreen):
     """Screen shown after successful borrow/return transaction"""
     
-    def __init__(self, ui_manager, user_info, basket, action='borrow'):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.basket = basket
         self.action = action
@@ -32,14 +32,35 @@ class ThankYouScreen(BaseScreen):
         )
         self.buttons = [ok_btn]
     
+    def on_enter(self, payload=None):
+        """Initialize from payload and reset timer"""
+        super().on_enter(payload)
+        if payload:
+            if 'user_info' in payload:
+                self.user_info = payload['user_info']
+            if 'basket' in payload:
+                self.basket = payload['basket']
+            if 'action' in payload:
+                self.action = payload['action']
+        # Reset auto-return timer when entering
+        self.auto_return_timer = 0
+    
     def on_button_click(self, button):
-        return "main"
+        # Pop all screens and go back to main menu
+        # Clear the stack and go to main
+        from .main_menu import MainMenuScreen
+        main_screen = MainMenuScreen(self.ui, self.screen_manager)
+        self.screen_manager.go_to(main_screen)
+        return None
     
     def update(self):
         """Auto-return to main after delay"""
         self.auto_return_timer += 1
         if self.auto_return_timer >= self.auto_return_delay:
-            return "main"
+            # Auto return to main menu
+            from .main_menu import MainMenuScreen
+            main_screen = MainMenuScreen(self.ui, self.screen_manager)
+            self.screen_manager.go_to(main_screen)
         return None
     
     def draw(self, surface):

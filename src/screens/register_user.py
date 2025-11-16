@@ -12,11 +12,12 @@ from ui.keyboard import OnScreenKeyboard
 class RegisterUserScreen(BaseScreen):
     """Screen for registering new users with on-screen keyboard"""
     
-    def __init__(self, ui_manager, card_id):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, card_id):
+        super().__init__(ui_manager, screen_manager)
         self.card_id = card_id
         self.status = f"Card {card_id} is not registered."
         self.registered = False
+        self.next_action = None  # Will be set from payload
         
         # Input box for name
         self.input_box = InputBox(
@@ -54,9 +55,20 @@ class RegisterUserScreen(BaseScreen):
         
         self.buttons = [cancel_btn, save_btn]
     
+    def on_enter(self, payload=None):
+        """Store the next action from payload"""
+        super().on_enter(payload)
+        if payload and 'next_action' in payload:
+            self.next_action = payload['next_action']
+        if payload and 'card_id' in payload:
+            self.card_id = payload['card_id']
+            self.status = f"Card {self.card_id} is not registered."
+    
     def on_button_click(self, button):
         if button.text == "Cancel":
-            return "main"
+            # Pop back to previous screen (card scan) then pop again to main menu
+            self.screen_manager.pop()
+            self.screen_manager.pop()
         elif button.text == "Register":
             name = self.input_box.get_text().strip()
             if name:
@@ -66,7 +78,25 @@ class RegisterUserScreen(BaseScreen):
                     self.status = f"Welcome, {name}! Registration successful."
                     self.registered = True
                     pygame.time.wait(1500)
-                    return "main"
+                    
+                    # Get the newly created user
+                    user = self.ui.db.get_user_by_card(self.card_id)
+                    
+                    # Pop this registration screen
+                    self.screen_manager.pop()
+                    
+                    # Now push the appropriate next screen based on the action
+                    if self.next_action == "admin":
+                        # Check if user_id == 1 (won't be since we just registered)
+                        # Show access denied or go back to main
+                        # For simplicity, just pop back to main (already done above)
+                        # The CardScanScreen will handle admin check
+                        pass
+                    elif self.next_action in ["borrow", "return"]:
+                        # Push QR scan screen
+                        from .qr_scan import QRScanScreen
+                        qr_screen = QRScanScreen(self.ui, self.screen_manager, user, action=self.next_action)
+                        self.screen_manager.push(qr_screen, payload={'user_info': user, 'action': self.next_action})
                 else:
                     self.status = "Registration failed. Please try again."
             else:
