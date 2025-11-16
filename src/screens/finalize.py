@@ -11,7 +11,7 @@ from ui.theme import (
     RADIUS_MD, RADIUS_LG, SHADOW
 )
 from ui.buttons import Button
-
+GREEN = (0, 200, 0)
 
 class FinalizeScreen(BaseScreen):
     """Screen for finalizing borrow/return transaction"""
