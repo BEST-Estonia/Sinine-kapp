@@ -37,7 +37,11 @@ class QRScanScreen(BaseScreen):
         
         title = "Borrow Items" if action == 'borrow' else "Return Items"
         self.title = title
-        
+        TEAL = (0, 128, 128)
+        GREEN = (0, 200, 0)
+        SECONDARY = (50, 50, 50)
+        WHITE = (255, 255, 255)
+
         # Buttons
         btn_y = self.ui.height - 220
         btn_width = (self.ui.width - 90) // 3
