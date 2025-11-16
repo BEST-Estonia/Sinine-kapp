@@ -12,7 +12,11 @@ from ui.theme import (
 )
 from ui.buttons import Button
 GREEN = (0, 200, 0)
-
+TEXT_COLOR = (20, 20, 20)  # dark gray, replace with whatever you want
+WHITE = (255, 255, 255)
+TEAL = (0, 128, 128)
+GREEN = (0, 200, 0)
+SECONDARY = (50, 50, 50)
 class FinalizeScreen(BaseScreen):
     """Screen for finalizing borrow/return transaction"""
     
