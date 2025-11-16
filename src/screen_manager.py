@@ -71,7 +71,7 @@ class ScreenManager:
             screen_instance: The screen object to set as root
             payload: Optional data to pass to the screen's on_enter method
         """
-        # Exit all screens
+        # Exit all screens in reverse order
         while self.screen_stack:
             screen = self.screen_stack.pop()
             if hasattr(screen, 'on_exit'):
