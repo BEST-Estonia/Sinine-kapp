@@ -13,6 +13,12 @@ from ui.theme import (
 )
 from ui.buttons import Button
 
+TEXT_COLOR = (20, 20, 20)  # dark gray, replace with whatever you want
+WHITE = (255, 255, 255)
+TEAL = (0, 128, 128)
+GREEN = (0, 200, 0)
+SECONDARY = (50, 50, 50)
+
 
 class QRScanScreen(BaseScreen):
     """Screen for scanning QR codes with multi-item basket support"""
@@ -37,11 +43,6 @@ class QRScanScreen(BaseScreen):
         
         title = "Borrow Items" if action == 'borrow' else "Return Items"
         self.title = title
-        TEXT_COLOR = (20, 20, 20)  # dark gray, replace with whatever you want
-        WHITE = (255, 255, 255)
-        TEAL = (0, 128, 128)
-        GREEN = (0, 200, 0)
-        SECONDARY = (50, 50, 50)
 
         # Buttons
         btn_y = self.ui.height - 220
