@@ -6,7 +6,48 @@
 
 All requirements from the problem statement have been successfully implemented:
 
-#### 1. Mock SQL Database ✅
+#### 1. Portrait Orientation & Fullscreen ✅
+- **Resolution**: 480×800 (portrait/vertical orientation)
+- **Fullscreen**: No window borders (`pygame.NOFRAME`)
+- **Immersive**: Fully immersive UI optimized for vertical touchscreens
+
+#### 2. Visual Design ✅
+- **Gradient Background**: Light blue → white vertical gradient on all screens
+- **Color Palette**: 
+  - Primary buttons: Teal/cyan (#20B2AA) with white text
+  - Secondary buttons (Back): Soft red/orange (#FF6B6B) with white text
+  - Success messages: Green
+  - Error messages: Red
+  - Text: Dark gray (#1E1E1E)
+
+#### 3. Enhanced Buttons ✅
+- **Large Touch-Friendly**: 80px height, full width with 20px margins
+- **Rounded Corners**: 15px border radius
+- **Drop Shadows**: Semi-transparent shadows for depth
+- **Animations**: 
+  - Hover effect (darkens slightly)
+  - Press animation (darkens more, shifts down 2px)
+- **Gradient Overlay**: Subtle top-to-bottom gradient for visual appeal
+
+#### 4. Main Screen ✅
+- **Character PNG**: Center-top position (150×150px)
+- **Speech Bubble**: "Please pick an option" with character pointer
+- **Four Buttons**: Vertically stacked below speech bubble:
+  - Open doors
+  - Return drink
+  - Admin
+  - Stock/Inventory
+
+#### 5. Sub-Screens ✅
+- **Consistent Backgrounds**: Gradient background on all screens
+- **Character Continuity**: Smaller character (80×80px) in top-right corner
+- **Large Fonts**: 
+  - Button labels: 48px
+  - Status messages: 40px
+  - Body text: 36px
+- **Back Button**: Bottom-left, secondary color, consistent across all screens
+
+#### 6. Mock SQL Database ✅
 - **Implementation**: SQLite database (`src/database/user_db.py`)
 - **Schema**: RFID card number → user name mapping
 - **Sample Data**: Pre-populated with 3 users
@@ -15,61 +56,33 @@ All requirements from the problem statement have been successfully implemented:
   - Card 3: Charlie Brown
 - **Features**: Add, retrieve, delete users; database persistence
 
-#### 2. Main Screen with Character ✅
-- **Character**: PNG mascot "Cupby" displayed (assets/character.png)
-- **Message**: "Please pick an option:" clearly visible
-- **Design**: Clean, friendly interface optimized for touchscreen
+#### 7. Card Scanning & Verification ✅
+- **Visual Feedback**:
+  - Green box with success message for registered users
+  - Red text with denial message for unregistered users
+- **RFID Interface**: Large centered card icon during scanning
+- **User Welcome**: "Welcome, [Name]!" on successful scan
 
-#### 3. Four Large Buttons ✅
-- Open doors
-- Return drink
-- Admin
-- Stock/Inventory
-- All buttons are large, touch-friendly, and well-positioned
-
-#### 4. Card Scanning for First Three Buttons ✅
-- Open doors → Requires RFID scan
-- Return drink → Requires RFID scan
-- Admin → Requires RFID scan
-- Stock/Inventory → Direct access (no card required)
-
-#### 5. User Verification ✅
-- Database lookup for scanned cards
-- **Registered users**: Display name and proceed ("Welcome, [Name]!")
-- **Unregistered users**: Show denial message ("Access denied! Card [number] not registered.")
-- Visual feedback with color coding (green=success, red=denied)
-
-#### 6. Separate Full-Screen Windows ✅
+#### 8. Separate Full-Screen Windows ✅
 Each button opens a dedicated full-screen window:
-- **Card Scan Screen**: RFID verification interface
-- **Open Doors Screen**: Door unlock confirmation with weight readings
-- **Return Drink Screen**: QR code scanning for drink return
-- **Admin Screen**: List of all registered users
-- **Stock/Inventory Screen**: Visual inventory with quantity bars
+- **Card Scan Screen**: RFID verification with visual card icon
+- **Open Doors Screen**: Door unlock confirmation with weight readings in boxes
+- **Return Drink Screen**: QR code scanning with visual QR icon
+- **Admin Screen**: List of registered users in styled boxes
+- **Stock/Inventory Screen**: Visual inventory with color-coded quantity bars
 
-Not just status bar updates - true multi-screen navigation!
+#### 9. Navigation ✅
+- **Back Button**: Consistent placement (bottom-left) on all sub-screens
+- **Color**: Secondary color (soft red/orange) for easy recognition
+- **Touch-Friendly**: Large size (180×70px)
 
-#### 7. Navigation ✅
-- Back button ("← Back") on every sub-screen
-- Returns to main menu from any screen
-- Smooth screen transitions
-
-#### 8. Touchscreen-Optimized UI ✅
-- **Resolution**: 800×480 for Raspberry Pi 7" display
-- **Full-screen**: Optimized for touchscreen use
-- **Visual Appeal**: 
-  - Color-coded elements (blue, green, red)
-  - Hover effects on buttons
-  - Clear typography
-  - Well-positioned elements with proper spacing
-  - Visual feedback for all interactions
-
-#### 9. Modular Code Structure ✅
-- **Screen Classes**: BaseScreen, MainScreen, CardScanScreen, etc.
-- **Button Widget**: Reusable Button class with hover effects
-- **Database Module**: Separate database abstraction layer
-- **Hardware Abstraction**: Mock hardware with clean interfaces
-- **UI Manager**: Coordinates screens and state management
+#### 10. Spacing & Typography ✅
+- **Consistent Margins**: 20px padding throughout
+- **Proper Spacing**: 15px between buttons
+- **Readable Fonts**: Arial font family
+  - Large font: 48px for titles and buttons
+  - Status font: 40px for feedback messages
+  - Body font: 36px for regular text
 
 ### Code Organization
 
@@ -77,8 +90,8 @@ Not just status bar updates - true multi-screen navigation!
 src/
 ├── main.py                    # Entry point
 ├── app/
-│   ├── ui_pygame.py          # UI manager (screen coordination)
-│   └── screens.py            # All screen classes
+│   ├── ui_pygame.py          # UI manager (screen coordination, fullscreen mode)
+│   └── screens.py            # All screen classes with enhanced design
 ├── database/
 │   ├── __init__.py
 │   └── user_db.py            # Database manager
@@ -92,7 +105,7 @@ assets/
 └── character.png             # Character mascot
 
 tests/
-└── test_integration.py       # Integration tests
+└── test_integration.py       # Integration tests (updated for portrait)
 ```
 
 ### Testing
@@ -100,46 +113,49 @@ tests/
 - **Integration Tests**: All pass ✅
 - **Security Scan**: 0 CodeQL alerts ✅
 - **Visual Verification**: Screenshots confirm UI functionality ✅
-- **Manual Testing**: Complete test guide provided ✅
+- **Portrait Orientation**: Validated 480×800 resolution ✅
 
 ### Documentation
 
-- **README.md**: Updated with new features
-- **PYGAME_GUIDE.md**: Comprehensive implementation guide
+- **README.md**: Updated with portrait orientation details
+- **PYGAME_GUIDE.md**: Updated with new resolution defaults
 - **MANUAL_TEST_GUIDE.txt**: Step-by-step testing instructions
 - **Code Comments**: Clear documentation throughout
 
-### Key Features
+### Key Visual Features
 
-1. **Database-Driven**: User information stored in SQLite
-2. **Screen Navigation**: True multi-screen architecture
-3. **User Authentication**: Card verification with feedback
-4. **Visual Inventory**: Color-coded stock levels
-5. **Admin Tools**: User management interface
-6. **Extensible**: Easy to add new screens or features
-7. **Mock Hardware**: Development without physical devices
-8. **Production Ready**: Clean code, tested, documented
+1. **Gradient Backgrounds**: Smooth light blue to white transition
+2. **Button Shadows**: Drop shadows for depth and tactile feel
+3. **Press Animations**: Visual feedback on button press
+4. **Speech Bubble**: Character interaction on main screen
+5. **Color-Coded Feedback**: Green for success, red for errors
+6. **Styled Boxes**: White boxes with colored borders for information display
+7. **Progress Bars**: Color-coded inventory bars (green/red based on quantity)
+8. **Corner Character**: Consistent character presence across screens
 
 ### Technical Highlights
 
 - **Pygame 2.6.1**: Modern pygame version
-- **SQLite3**: Built-in Python database
-- **PIL/Pillow**: Image handling for character
-- **Modular Design**: Clear separation of concerns
-- **Type Safety**: Clean interfaces between modules
-- **Error Handling**: Graceful handling of user cancellations
+- **Fullscreen Mode**: `pygame.NOFRAME` for immersive experience
+- **Gradient Rendering**: Custom `draw_gradient_background()` function
+- **Alpha Blending**: Semi-transparent shadows using `pygame.SRCALPHA`
+- **Modular Design**: Reusable Button class with enhanced rendering
+- **Event Handling**: Separate mouse down/up for press animations
 
 ### How It Works
 
-1. User launches application → Main screen with 4 options
-2. User clicks button:
-   - **Open doors/Return drink/Admin**: Card scan required
-     - Scan card → Database lookup → Access granted/denied
+1. User launches application → Fullscreen portrait main screen
+2. Character mascot displays with speech bubble
+3. User taps button:
+   - **Open doors/Return drink/Admin**: Card scan screen appears
+     - Large RFID card icon shown
+     - User scans card → Database lookup
+     - Green success or red denial message
      - If granted → Proceed to function screen
    - **Stock/Inventory**: Direct access to inventory view
-3. User performs action (unlock door, scan QR, view users, check stock)
-4. User clicks "← Back" → Returns to main menu
-5. Repeat for next action
+4. User performs action with visual feedback
+5. User taps "← Back" → Smooth transition to main menu
+6. Repeat for next action
 
 ### Sample User Credentials
 
@@ -156,20 +172,27 @@ For testing RFID card scanning:
 - Database excluded from git (.gitignore)
 - SQL injection protected (parameterized queries)
 
-### Future Enhancement Possibilities
+### Screenshots
 
-- User registration screen with on-screen keyboard
-- Transaction logging
-- User photos/avatars
-- Network sync for multi-device
-- Real hardware integration
-- Statistics dashboard
-- Touch keyboard for text input
+See PR description for visual examples of:
+- Main screen with character and speech bubble
+- Card scanning with RFID icon
+- Door access screen with weight display
+- Stock inventory with color-coded bars
+- Admin panel with user list
 
 ---
 
 ## Conclusion
 
-This implementation successfully delivers a complete, production-ready Raspberry Pi Pygame touchscreen UI that meets all requirements from the problem statement. The code is modular, well-documented, tested, and ready for deployment on a Raspberry Pi with a 7" touchscreen.
+This implementation successfully delivers a **complete, production-ready Raspberry Pi Pygame touchscreen UI** with:
+- ✅ Portrait orientation (480×800)
+- ✅ Fullscreen immersive experience
+- ✅ Gradient backgrounds
+- ✅ Enhanced buttons with shadows and animations
+- ✅ Character mascot with speech bubble
+- ✅ Consistent color palette and typography
+- ✅ Touch-optimized large buttons
+- ✅ Visual feedback and navigation
 
-**Status: Complete and Ready for Use** ✅
+**Status: Complete and Ready for Deployment** ✅

@@ -235,13 +235,17 @@ export SERVICE_NAME=smart-cupboard.service
 Edit `src/app/ui_pygame.py` to change screen resolution:
 
 ```python
-SCREEN_W, SCREEN_H = 800, 480  # Change to your display resolution
+SCREEN_W, SCREEN_H = 480, 800  # Portrait orientation (change to your display resolution)
 ```
 
 Common resolutions:
-- 800×480 (official 7" Pi touchscreen)
-- 1024×600 (larger 7" displays)
-- 1920×1080 (full HD)
+- 480×800 (portrait mode for 7" Pi touchscreen - **current default**)
+- 800×480 (landscape mode for 7" Pi touchscreen)
+- 600×1024 (portrait mode for larger 7" displays)
+- 1920×1080 (full HD landscape)
+- 1080×1920 (full HD portrait)
+
+**Note:** The UI is optimized for portrait orientation with vertically stacked buttons.
 
 ### Service Configuration
 

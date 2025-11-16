@@ -187,11 +187,13 @@ RED = (255, 80, 80)
 
 ### Adjusting Screen Resolution
 
-Edit `SCREEN_W` and `SCREEN_H` in `src/app/ui_pygame.py`:
+The UI is optimized for **portrait orientation** (480×800). Edit `SCREEN_W` and `SCREEN_H` in `src/app/ui_pygame.py`:
 
 ```python
-SCREEN_W, SCREEN_H = 800, 480  # Change to your display resolution
+SCREEN_W, SCREEN_H = 480, 800  # Portrait orientation (change to your display resolution)
 ```
+
+For landscape orientation, you may need to adjust button layouts in `screens.py`.
 
 ## Integration with Real Hardware
 
