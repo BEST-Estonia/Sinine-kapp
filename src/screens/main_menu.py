@@ -5,6 +5,7 @@ Main menu screen with 4 options
 import pygame
 from .base_screen import BaseScreen, load_sneaky_image
 from ui.buttons import Button
+from ui.character_sprite import get_character_manager
 from ui.theme import (
     PRIMARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, 
     PADDING_MD, SPACING_MD, BUTTON_HEIGHT,
@@ -19,6 +20,9 @@ class MainMenuScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager):
         super().__init__(ui_manager, screen_manager)
+        
+        # Get character manager
+        self.character_mgr = get_character_manager()
         
         # Load Sneaky at larger size for main screen
         self.sneaky_large = load_sneaky_image(scale=(180, 180))
@@ -41,6 +45,11 @@ class MainMenuScreen(BaseScreen):
             Button((padding, start_y + (btn_h + spacing) * 2, btn_w, btn_h), "Admin Panel", PRIMARY, TEXT_ON_PRIMARY),
             Button((padding, start_y + (btn_h + spacing) * 3, btn_w, btn_h), "Stock/Inventory", PRIMARY, TEXT_ON_PRIMARY),
         ]
+    
+    def on_enter(self, payload=None):
+        """Called when screen becomes active - set character to waving"""
+        super().on_enter(payload)
+        self.character_mgr.set_waving()
     
     def on_button_click(self, button):
         """Handle button clicks using screen_manager.push()"""

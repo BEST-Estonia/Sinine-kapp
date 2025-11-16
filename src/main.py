@@ -25,6 +25,9 @@ from screen_manager import ScreenManager
 # Import asset manager
 from assets import get_asset_manager
 
+# Import character manager
+from ui.character_sprite import get_character_manager
+
 # Import screens
 from screens import (
     MainMenuScreen,
@@ -57,6 +60,10 @@ class SmartCupboardUI:
         # Preload assets for better performance
         assets = get_asset_manager()
         assets.preload_assets()
+        
+        # Initialize character manager
+        character_mgr = get_character_manager()
+        character_mgr.initialize(config.SCREEN_WIDTH, config.SCREEN_HEIGHT)
         
         # Fullscreen, no borders (configure via config.py)
         flags = 0
@@ -105,8 +112,20 @@ class SmartCupboardUI:
             # Update current screen through screen manager
             self.screen_manager.update(dt)
             
+            # Update character animation
+            character_mgr = get_character_manager()
+            character = character_mgr.get_character()
+            if character:
+                character.update(dt)
+            
             # Render current screen through screen manager
             self.screen_manager.render(self.screen)
+            
+            # Render character on top
+            character_mgr = get_character_manager()
+            character = character_mgr.get_character()
+            if character:
+                character.draw(self.screen)
             
             pygame.display.flip()
         

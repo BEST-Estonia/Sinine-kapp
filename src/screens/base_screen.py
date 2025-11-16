@@ -99,9 +99,8 @@ class BaseScreen:
         raise NotImplementedError("Subclasses must implement draw()")
     
     def draw_common_elements(self, surface):
-        """Draw common elements like background and Sneaky"""
+        """Draw common elements like background"""
         # Draw gradient background
         draw_gradient_background(surface, BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM)
         
-        # Draw Sneaky at bottom
-        draw_sneaky_bottom(surface, self.sneaky_img, self.ui.width)
+        # Note: Character is now drawn globally by the main loop, not here
