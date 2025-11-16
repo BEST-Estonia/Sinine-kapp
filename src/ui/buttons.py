@@ -3,41 +3,40 @@
 Enhanced button widget with modern styling
 """
 import pygame
-
-# Color constants
-WHITE = (255, 255, 255)
-TEAL = (32, 178, 170)
-TEAL_DARK = (25, 140, 135)
-SECONDARY = (255, 107, 107)
-SECONDARY_DARK = (200, 85, 85)
-TEXT_COLOR = (30, 30, 30)
+from ui.theme import (
+    PRIMARY, PRIMARY_DARK, SECONDARY, TEXT_ON_PRIMARY, 
+    GRAY_LIGHT, GRAY, SHADOW, RADIUS_MD, get_font, FONT_SIZE_BUTTON
+)
 
 
 class Button:
     """Reusable button widget with enhanced visual design"""
     
-    def __init__(self, rect, text, color=TEAL, text_color=WHITE, shadow=True, font_size=48):
+    def __init__(self, rect, text, color=None, text_color=None, shadow=True, font_size=None):
         self.rect = pygame.Rect(rect)
         self.text = text
-        self.color = color
-        self.text_color = text_color
+        self.color = color if color is not None else PRIMARY
+        self.text_color = text_color if text_color is not None else TEXT_ON_PRIMARY
         self.shadow = shadow
-        self.font_size = font_size
+        self.font_size = font_size if font_size is not None else FONT_SIZE_BUTTON
         # Slightly darker color for hover effect
-        self.hover_color = tuple(max(c - 20, 0) for c in color)
+        self.hover_color = tuple(max(c - 20, 0) for c in self.color)
         self.is_hovered = False
         self.is_pressed = False
         self.enabled = True
+        # Cache the font for this button
+        self._font = get_font(self.font_size, bold=True)
     
     def draw(self, surface, font=None):
         """Draw the button on the surface"""
+        # Use cached font or provided font
         if font is None:
-            font = pygame.font.SysFont('Arial', self.font_size)
+            font = self._font
         
         # Don't draw if not enabled
         if not self.enabled:
-            color = (150, 150, 150)
-            text_color = (100, 100, 100)
+            color = GRAY_LIGHT
+            text_color = GRAY
         else:
             # Determine colors based on state
             if self.is_pressed:
@@ -59,14 +58,14 @@ class Button:
             shadow_rect.x += 4
             shadow_rect.y += 4
             shadow_surf = pygame.Surface((shadow_rect.width, shadow_rect.height), pygame.SRCALPHA)
-            pygame.draw.rect(shadow_surf, (0, 0, 0, 60), shadow_surf.get_rect(), border_radius=15)
+            pygame.draw.rect(shadow_surf, SHADOW, shadow_surf.get_rect(), border_radius=RADIUS_MD)
             surface.blit(shadow_surf, shadow_rect.topleft)
         
         # Draw main button
         button_rect = self.rect.copy()
         button_rect.y += offset
         
-        pygame.draw.rect(surface, color, button_rect, border_radius=15)
+        pygame.draw.rect(surface, color, button_rect, border_radius=RADIUS_MD)
         
         # Draw subtle gradient
         if self.enabled:
@@ -78,7 +77,7 @@ class Button:
         
         # Draw border
         border_color = tuple(max(c - 30, 0) for c in color)
-        pygame.draw.rect(surface, border_color, button_rect, width=3, border_radius=15)
+        pygame.draw.rect(surface, border_color, button_rect, width=3, border_radius=RADIUS_MD)
         
         # Draw text
         txt = font.render(self.text, True, text_color)

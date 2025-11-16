@@ -3,8 +3,13 @@
 Card scan screen for RFID authentication
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, GREEN, RED, TEXT_COLOR, SECONDARY
+from .base_screen import BaseScreen
 from ui.buttons import Button
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, BUTTON_HEIGHT_SM, get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, 
+    FONT_SIZE_BODY, RADIUS_MD
+)
 
 
 class CardScanScreen(BaseScreen):
@@ -28,12 +33,21 @@ class CardScanScreen(BaseScreen):
         self.scanning = False
         self.scanned = False
         
-        # Back button
+        # Cache fonts
+        self._title_font = get_font(FONT_SIZE_TITLE, bold=True)
+        self._rfid_font = get_font(52, bold=True)
+        self._status_font = get_font(FONT_SIZE_HEADING, bold=False)
+        self._info_font = get_font(FONT_SIZE_BODY)
+        self._button_font = get_font(FONT_SIZE_BUTTON, bold=True)
+        
+        # Back button - positioned at bottom with padding
+        btn_x = PADDING_SM
+        btn_y = self.ui.height - BUTTON_HEIGHT_SM - PADDING_SM * 2
         back_btn = Button(
-            (20, self.ui.height - 140, 200, 70), 
+            (btn_x, btn_y, 200, BUTTON_HEIGHT_SM), 
             "← Back", 
             SECONDARY, 
-            WHITE
+            TEXT_ON_PRIMARY
         )
         self.buttons.append(back_btn)
     
@@ -137,9 +151,8 @@ class CardScanScreen(BaseScreen):
         # Draw common elements
         self.draw_common_elements(surface)
         
-        # Draw title
-        title_font = pygame.font.SysFont('Arial', 48, bold=True)
-        title_txt = title_font.render(self.title, True, TEXT_COLOR)
+        # Draw title (use cached font)
+        title_txt = self._title_font.render(self.title, True, TEXT_PRIMARY)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=60)
         surface.blit(title_txt, title_rect)
         
@@ -150,20 +163,18 @@ class CardScanScreen(BaseScreen):
             280,
             180
         )
-        pygame.draw.rect(surface, WHITE, card_box, border_radius=15)
-        pygame.draw.rect(surface, TEAL, card_box, width=4, border_radius=15)
+        pygame.draw.rect(surface, WHITE, card_box, border_radius=RADIUS_MD)
+        pygame.draw.rect(surface, PRIMARY, card_box, width=4, border_radius=RADIUS_MD)
         
-        # Draw "RFID" text in card box
-        rfid_font = pygame.font.SysFont('Arial', 52, bold=True)
-        rfid_txt = rfid_font.render("RFID", True, TEAL)
+        # Draw "RFID" text in card box (use cached font)
+        rfid_txt = self._rfid_font.render("RFID", True, PRIMARY)
         rfid_rect = rfid_txt.get_rect(center=card_box.center)
         surface.blit(rfid_txt, rfid_rect)
         
         # Draw status below card box
-        status_color = GREEN if self.user_info else (RED if "denied" in self.status.lower() or "not registered" in self.status.lower() else TEXT_COLOR)
+        status_color = SUCCESS if self.user_info else (ERROR if "denied" in self.status.lower() or "not registered" in self.status.lower() else TEXT_PRIMARY)
         
-        status_font = pygame.font.SysFont('Arial', 36, bold=False)
-        # Wrap status text if too long
+        # Wrap status text if too long (use cached font)
         max_width = self.ui.width - 60
         words = self.status.split()
         lines = []
@@ -171,7 +182,7 @@ class CardScanScreen(BaseScreen):
         
         for word in words:
             test_line = ' '.join(current_line + [word])
-            test_surface = status_font.render(test_line, True, status_color)
+            test_surface = self._status_font.render(test_line, True, status_color)
             if test_surface.get_width() <= max_width:
                 current_line.append(word)
             else:
@@ -183,22 +194,20 @@ class CardScanScreen(BaseScreen):
         
         y_pos = 520
         for line in lines:
-            status_txt = status_font.render(line, True, status_color)
+            status_txt = self._status_font.render(line, True, status_color)
             status_rect = status_txt.get_rect(center=(self.ui.width // 2, y_pos))
             surface.blit(status_txt, status_rect)
             y_pos += 45
         
-        # Draw user info if available
+        # Draw user info if available (use cached font)
         if self.user_info:
-            info_font = pygame.font.SysFont('Arial', 32)
-            info_txt = info_font.render(
+            info_txt = self._info_font.render(
                 f"Card: {self.user_info['card_id']}", 
-                True, TEXT_COLOR
+                True, TEXT_PRIMARY
             )
             info_rect = info_txt.get_rect(center=(self.ui.width // 2, y_pos + 20))
             surface.blit(info_txt, info_rect)
         
-        # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 42, bold=True)
+        # Draw buttons with cached font
         for btn in self.buttons:
-            btn.draw(surface, button_font)
+            btn.draw(surface, self._button_font)

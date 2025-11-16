@@ -3,7 +3,13 @@
 Admin inventory management screen
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, GREEN, RED, TEXT_COLOR, SECONDARY, GRAY
+from .base_screen import BaseScreen
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
+    get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY, FONT_SIZE_BUTTON,
+    RADIUS_MD, RADIUS_LG, SHADOW
+)
 from ui.buttons import Button
 
 
