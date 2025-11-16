@@ -8,7 +8,7 @@ from .screens import (
 )
 from database import UserDatabase
 
-SCREEN_W, SCREEN_H = 800, 480  # typical 7" touchscreen resolution
+SCREEN_W, SCREEN_H = 480, 800  # vertical/portrait orientation for touchscreen
 FPS = 30
 
 
@@ -21,13 +21,16 @@ class TouchUI:
         
         self.width = SCREEN_W
         self.height = SCREEN_H
-        self.screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
+        # Fullscreen, no borders
+        self.screen = pygame.display.set_mode((SCREEN_W, SCREEN_H), pygame.NOFRAME)
         pygame.display.set_caption("Smart Cupboard")
         self.clock = pygame.time.Clock()
         
-        # Fonts
-        self.font = pygame.font.SysFont(None, 36)
-        self.large_font = pygame.font.SysFont(None, 48)
+        # Fonts - larger for better readability on touchscreen
+        self.font = pygame.font.SysFont('Arial', 36)
+        self.large_font = pygame.font.SysFont('Arial', 48)
+        self.button_font = pygame.font.SysFont('Arial', 48)
+        self.status_font = pygame.font.SysFont('Arial', 40)
         
         # Hardware references
         self.rfid = rfid
