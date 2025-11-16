@@ -3,8 +3,14 @@
 Main menu screen with 4 options
 """
 import pygame
-from .base_screen import BaseScreen, TEAL, WHITE, TEXT_COLOR
+from .base_screen import BaseScreen, load_sneaky_image
 from ui.buttons import Button
+from ui.theme import (
+    PRIMARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, 
+    PADDING_MD, SPACING_MD, BUTTON_HEIGHT,
+    get_font, FONT_SIZE_HEADING, FONT_SIZE_BUTTON,
+    RADIUS_LG, SHADOW
+)
 from .card_scan import CardScanScreen
 
 
@@ -15,21 +21,25 @@ class MainMenuScreen(BaseScreen):
         super().__init__(ui_manager, screen_manager)
         
         # Load Sneaky at larger size for main screen
-        from .base_screen import load_sneaky_image
         self.sneaky_large = load_sneaky_image(scale=(180, 180))
         
+        # Cache fonts
+        self._button_font = get_font(FONT_SIZE_BUTTON, bold=True)
+        self._bubble_font = get_font(FONT_SIZE_HEADING, bold=True)
+        
         # Portrait layout - vertically stacked buttons
-        padding = 30
+        # Calculate button layout based on screen dimensions
+        padding = PADDING_MD
         btn_w = self.ui.width - (padding * 2)
-        btn_h = 90
+        btn_h = BUTTON_HEIGHT
         start_y = 400  # Start buttons in middle-lower area
-        spacing = 20
+        spacing = SPACING_MD
         
         self.buttons = [
-            Button((padding, start_y, btn_w, btn_h), "Open Doors", TEAL, WHITE),
-            Button((padding, start_y + (btn_h + spacing), btn_w, btn_h), "Return Drink", TEAL, WHITE),
-            Button((padding, start_y + (btn_h + spacing) * 2, btn_w, btn_h), "Admin Panel", TEAL, WHITE),
-            Button((padding, start_y + (btn_h + spacing) * 3, btn_w, btn_h), "Stock/Inventory", TEAL, WHITE),
+            Button((padding, start_y, btn_w, btn_h), "Open Doors", PRIMARY, TEXT_ON_PRIMARY),
+            Button((padding, start_y + (btn_h + spacing), btn_w, btn_h), "Return Drink", PRIMARY, TEXT_ON_PRIMARY),
+            Button((padding, start_y + (btn_h + spacing) * 2, btn_w, btn_h), "Admin Panel", PRIMARY, TEXT_ON_PRIMARY),
+            Button((padding, start_y + (btn_h + spacing) * 3, btn_w, btn_h), "Stock/Inventory", PRIMARY, TEXT_ON_PRIMARY),
         ]
     
     def on_button_click(self, button):
@@ -65,7 +75,7 @@ class MainMenuScreen(BaseScreen):
         
         # Draw speech bubble with message
         bubble_y = 250
-        bubble_padding = 30
+        bubble_padding = PADDING_MD
         bubble_text = "Please pick an option"
         
         # Create speech bubble
@@ -81,12 +91,12 @@ class MainMenuScreen(BaseScreen):
         shadow_rect.x += 3
         shadow_rect.y += 3
         shadow_surf = pygame.Surface((shadow_rect.width, shadow_rect.height), pygame.SRCALPHA)
-        pygame.draw.rect(shadow_surf, (0, 0, 0, 40), shadow_surf.get_rect(), border_radius=20)
+        pygame.draw.rect(shadow_surf, SHADOW, shadow_surf.get_rect(), border_radius=RADIUS_LG)
         surface.blit(shadow_surf, shadow_rect.topleft)
         
         # Draw bubble background
-        pygame.draw.rect(surface, WHITE, bubble_rect, border_radius=20)
-        pygame.draw.rect(surface, TEAL, bubble_rect, width=3, border_radius=20)
+        pygame.draw.rect(surface, WHITE, bubble_rect, border_radius=RADIUS_LG)
+        pygame.draw.rect(surface, PRIMARY, bubble_rect, width=3, border_radius=RADIUS_LG)
         
         # Draw bubble pointer (triangle pointing to character)
         pointer_points = [
@@ -95,15 +105,13 @@ class MainMenuScreen(BaseScreen):
             (self.ui.width // 2, bubble_y - 20)
         ]
         pygame.draw.polygon(surface, WHITE, pointer_points)
-        pygame.draw.lines(surface, TEAL, False, [pointer_points[0], pointer_points[2], pointer_points[1]], 3)
+        pygame.draw.lines(surface, PRIMARY, False, [pointer_points[0], pointer_points[2], pointer_points[1]], 3)
         
-        # Draw text in bubble
-        font = pygame.font.SysFont('Arial', 44, bold=True)
-        msg = font.render(bubble_text, True, TEXT_COLOR)
+        # Draw text in bubble (use cached font)
+        msg = self._bubble_font.render(bubble_text, True, TEXT_PRIMARY)
         msg_rect = msg.get_rect(center=bubble_rect.center)
         surface.blit(msg, msg_rect)
         
-        # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 48, bold=True)
+        # Draw buttons with cached font
         for btn in self.buttons:
-            btn.draw(surface, button_font)
+            btn.draw(surface, self._button_font)

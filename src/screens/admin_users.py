@@ -3,7 +3,13 @@
 Admin users list screen
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, TEXT_COLOR, SECONDARY, GRAY
+from .base_screen import BaseScreen
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
+    get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY, FONT_SIZE_BUTTON,
+    RADIUS_MD, RADIUS_LG, SHADOW
+)
 from ui.buttons import Button
 
 
@@ -12,6 +18,15 @@ class AdminUsersScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_30 = get_font(30)
+        self._font_26 = get_font(26)
+        self._font_32_bold = get_font(32, bold=True)
+        self._font_22_bold = get_font(22, bold=True)
+        self._font_42_bold = get_font(42, bold=True)
         self.user_info = user_info
         self.users = self.ui.db.get_all_users()
         self.scroll_offset = 0
@@ -82,19 +97,19 @@ class AdminUsersScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render("Registered Users", True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
         surface.blit(title_txt, title_rect)
         
         # Draw user count
-        count_font = pygame.font.SysFont('Arial', 30)
+        count_font = self._font_30
         count_txt = count_font.render(f"Total: {len(self.users)} users", True, TEAL)
         count_rect = count_txt.get_rect(centerx=self.ui.width // 2, top=110)
         surface.blit(count_txt, count_rect)
         
         # Draw instruction
-        instr_font = pygame.font.SysFont('Arial', 26)
+        instr_font = self._font_26
         instr_txt = instr_font.render("Tap user to view details", True, GRAY)
         instr_rect = instr_txt.get_rect(centerx=self.ui.width // 2, top=150)
         surface.blit(instr_txt, instr_rect)
@@ -112,18 +127,18 @@ class AdminUsersScreen(BaseScreen):
             user = next((u for u in self.users if u['id'] == btn.user_id), None)
             if user:
                 # Draw user name
-                name_font = pygame.font.SysFont('Arial', 32, bold=True)
+                name_font = self._font_32_bold
                 name_txt = name_font.render(user['name'], True, TEXT_COLOR)
                 surface.blit(name_txt, (btn_rect.x + 15, btn_rect.y + 10))
                 
                 # Draw card ID
-                card_font = pygame.font.SysFont('Arial', 26)
+                card_font = self._font_26
                 card_txt = card_font.render(f"Card: {user['card_id']}", True, GRAY)
                 surface.blit(card_txt, (btn_rect.x + 15, btn_rect.y + 42))
                 
                 # Draw admin badge if admin
                 if user.get('is_admin'):
-                    badge_font = pygame.font.SysFont('Arial', 22, bold=True)
+                    badge_font = self._font_22_bold
                     badge_txt = badge_font.render("ADMIN", True, WHITE)
                     badge_rect = badge_txt.get_rect()
                     badge_bg = pygame.Rect(
@@ -137,6 +152,6 @@ class AdminUsersScreen(BaseScreen):
                     surface.blit(badge_txt, badge_txt_rect)
         
         # Draw main buttons
-        button_font = pygame.font.SysFont('Arial', 42, bold=True)
+        button_font = self._font_42_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

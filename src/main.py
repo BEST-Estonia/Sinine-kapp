@@ -7,6 +7,9 @@ import pygame
 import sys
 from pathlib import Path
 
+# Import configuration
+import config
+
 # Import hardware
 from hardware.mock_rfid import MockRFIDReader
 from hardware.mock_scales import MockScale
@@ -18,6 +21,9 @@ from database import DatabaseManager
 
 # Import screen manager
 from screen_manager import ScreenManager
+
+# Import asset manager
+from assets import get_asset_manager
 
 # Import screens
 from screens import (
@@ -37,10 +43,6 @@ from screens import (
     AdminLogsScreen,
 )
 
-# Configuration
-SCREEN_W, SCREEN_H = 600, 1024  # Portrait orientation
-FPS = 30
-
 
 class SmartCupboardUI:
     """Main UI manager for the Smart Cupboard application"""
@@ -49,11 +51,21 @@ class SmartCupboardUI:
         pygame.init()
         pygame.font.init()
         
-        self.width = SCREEN_W
-        self.height = SCREEN_H
+        self.width = config.SCREEN_WIDTH
+        self.height = config.SCREEN_HEIGHT
         
-        # Fullscreen, no borders
-        self.screen = pygame.display.set_mode((SCREEN_W, SCREEN_H), pygame.NOFRAME)
+        # Preload assets for better performance
+        assets = get_asset_manager()
+        assets.preload_assets()
+        
+        # Fullscreen, no borders (configure via config.py)
+        flags = 0
+        if config.FULLSCREEN:
+            flags |= pygame.FULLSCREEN
+        if config.NOFRAME:
+            flags |= pygame.NOFRAME
+        
+        self.screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT), flags)
         pygame.display.set_caption("Smart Cupboard")
         self.clock = pygame.time.Clock()
         
@@ -79,7 +91,7 @@ class SmartCupboardUI:
         running = True
         
         while running:
-            dt = self.clock.tick(FPS) / 1000.0  # Delta time in seconds
+            dt = self.clock.tick(config.FPS) / 1000.0  # Delta time in seconds
             
             # Handle events - delegate to screen manager
             for event in pygame.event.get():

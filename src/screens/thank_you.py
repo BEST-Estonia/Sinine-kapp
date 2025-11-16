@@ -3,7 +3,13 @@
 Thank you screen after completing transaction
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, GREEN, TEXT_COLOR
+from .base_screen import BaseScreen
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
+    get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY, FONT_SIZE_BUTTON,
+    RADIUS_MD, RADIUS_LG, SHADOW
+)
 from ui.buttons import Button
 
 
@@ -12,6 +18,13 @@ class ThankYouScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_48_bold = get_font(48, bold=True)
+        self._font_32 = get_font(32)
+        self._font_26 = get_font(26)
+        self._font_44_bold = get_font(44, bold=True)
         self.user_info = user_info
         self.basket = basket
         self.action = action
@@ -76,14 +89,14 @@ class ThankYouScreen(BaseScreen):
         # Draw thank you message
         y_pos = 260
         
-        title_font = pygame.font.SysFont('Arial', 48, bold=True)
+        title_font = self._font_48_bold
         title_txt = title_font.render("Thank You!", True, GREEN)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
         surface.blit(title_txt, title_rect)
         
         # Draw message based on action
         y_pos += 80
-        msg_font = pygame.font.SysFont('Arial', 32)
+        msg_font = self._font_32
         
         total_items = sum(item['quantity'] for item in self.basket)
         
@@ -131,7 +144,7 @@ class ThankYouScreen(BaseScreen):
         
         # Draw items in box
         item_y = summary_box.y + 20
-        item_font = pygame.font.SysFont('Arial', 26)
+        item_font = self._font_26
         
         for i, item in enumerate(self.basket):
             if i >= 4:  # Show max 4 items
@@ -145,6 +158,6 @@ class ThankYouScreen(BaseScreen):
             item_y += 35
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 44, bold=True)
+        button_font = self._font_44_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

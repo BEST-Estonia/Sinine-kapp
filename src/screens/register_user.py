@@ -3,7 +3,13 @@
 Register new user screen with on-screen keyboard
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, GREEN, TEXT_COLOR, SECONDARY
+from .base_screen import BaseScreen
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
+    get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY, FONT_SIZE_BUTTON,
+    RADIUS_MD, RADIUS_LG, SHADOW
+)
 from ui.buttons import Button
 from ui.input_box import InputBox
 from ui.keyboard import OnScreenKeyboard
@@ -14,6 +20,13 @@ class RegisterUserScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, card_id):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_32 = get_font(32)
+        self._font_30 = get_font(30)
+        self._font_40_bold = get_font(40, bold=True)
         self.card_id = card_id
         self.status = f"Card {card_id} is not registered."
         self.registered = False
@@ -132,13 +145,13 @@ class RegisterUserScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render("Register New User", True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=60)
         surface.blit(title_txt, title_rect)
         
         # Draw status
-        status_font = pygame.font.SysFont('Arial', 32)
+        status_font = self._font_32
         status_color = GREEN if self.registered else TEXT_COLOR
         
         # Wrap status text
@@ -167,7 +180,7 @@ class RegisterUserScreen(BaseScreen):
             y_pos += 40
         
         # Draw prompt
-        prompt_font = pygame.font.SysFont('Arial', 30)
+        prompt_font = self._font_30
         prompt_txt = prompt_font.render("Please enter your name:", True, TEXT_COLOR)
         prompt_rect = prompt_txt.get_rect(x=30, y=210)
         surface.blit(prompt_txt, prompt_rect)
@@ -176,7 +189,7 @@ class RegisterUserScreen(BaseScreen):
         self.input_box.draw(surface)
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 40, bold=True)
+        button_font = self._font_40_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)
         

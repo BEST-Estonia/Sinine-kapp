@@ -3,7 +3,13 @@
 Admin system logs screen showing borrow/return history
 """
 import pygame
-from .base_screen import BaseScreen, WHITE, TEAL, GREEN, RED, TEXT_COLOR, SECONDARY, GRAY
+from .base_screen import BaseScreen
+from ui.theme import (
+    PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
+    PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
+    get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY, FONT_SIZE_BUTTON,
+    RADIUS_MD, RADIUS_LG, SHADOW
+)
 from ui.buttons import Button
 
 
@@ -12,6 +18,16 @@ class AdminLogsScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_28 = get_font(28)
+        self._font_24 = get_font(24)
+        self._font_26_bold = get_font(26, bold=True)
+        self._font_20 = get_font(20)
+        self._font_20_bold = get_font(20, bold=True)
+        self._font_42_bold = get_font(42, bold=True)
         self.user_info = user_info
         self.logs = self.ui.db.get_all_borrows(limit=100)
         self.scroll_offset = 0
@@ -36,20 +52,20 @@ class AdminLogsScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render("System Logs", True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
         surface.blit(title_txt, title_rect)
         
         # Draw log count
-        count_font = pygame.font.SysFont('Arial', 28)
+        count_font = self._font_28
         count_txt = count_font.render(f"{len(self.logs)} recent transactions", True, TEAL)
         count_rect = count_txt.get_rect(centerx=self.ui.width // 2, top=110)
         surface.blit(count_txt, count_rect)
         
         # Draw logs
         log_y = 170
-        log_font = pygame.font.SysFont('Arial', 24)
+        log_font = self._font_24
         
         if not self.logs:
             no_logs_txt = log_font.render("No transactions yet", True, GRAY)
@@ -73,7 +89,7 @@ class AdminLogsScreen(BaseScreen):
                 pygame.draw.rect(surface, border_color, log_box, width=2, border_radius=10)
                 
                 # User name
-                user_txt = pygame.font.SysFont('Arial', 26, bold=True).render(
+                user_txt = self._font_26_bold.render(
                     log['user_name'], True, TEXT_COLOR
                 )
                 surface.blit(user_txt, (log_box.x + 15, log_box.y + 10))
@@ -86,7 +102,7 @@ class AdminLogsScreen(BaseScreen):
                 
                 # Timestamp
                 timestamp = log['timestamp_out'][:16] if len(log['timestamp_out']) > 16 else log['timestamp_out']
-                time_txt = pygame.font.SysFont('Arial', 20).render(
+                time_txt = self._font_20.render(
                     f"Out: {timestamp}", True, GRAY
                 )
                 surface.blit(time_txt, (log_box.x + 15, log_box.y + 65))
@@ -94,14 +110,14 @@ class AdminLogsScreen(BaseScreen):
                 # Return status
                 if is_returned:
                     return_time = log['timestamp_returned'][:16] if len(log['timestamp_returned']) > 16 else log['timestamp_returned']
-                    status_txt = pygame.font.SysFont('Arial', 20).render(
+                    status_txt = self._font_20.render(
                         f"Returned: {return_time}", True, GREEN
                     )
                     surface.blit(status_txt, (log_box.x + 15, log_box.y + 82))
                 else:
                     # Show due date
                     due_date = log.get('due_date', 'N/A')
-                    status_txt = pygame.font.SysFont('Arial', 20, bold=True).render(
+                    status_txt = self._font_20_bold.render(
                         f"Due: {due_date}", True, TEAL
                     )
                     surface.blit(status_txt, (log_box.x + 15, log_box.y + 82))
@@ -109,6 +125,6 @@ class AdminLogsScreen(BaseScreen):
                 log_y += 110
         
         # Draw main buttons
-        button_font = pygame.font.SysFont('Arial', 42, bold=True)
+        button_font = self._font_42_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

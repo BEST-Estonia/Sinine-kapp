@@ -4,50 +4,25 @@ Base screen class and common utilities
 """
 import pygame
 from pathlib import Path
+from typing import Optional
 
-# Color constants
-WHITE = (255, 255, 255)
-LIGHT_BLUE = (220, 240, 255)
-GRADIENT_TOP = (173, 216, 230)
-GRADIENT_BOTTOM = (255, 255, 255)
-TEAL = (32, 178, 170)
-TEAL_DARK = (25, 140, 135)
-SECONDARY = (255, 107, 107)
-SECONDARY_DARK = (200, 85, 85)
-GRAY = (200, 200, 200)
-DARK_GRAY = (60, 60, 60)
-GREEN = (50, 200, 100)
-RED = (255, 80, 80)
-TEXT_COLOR = (30, 30, 30)
-SHADOW_COLOR = (0, 0, 0, 60)
+from ui.theme import (
+    PRIMARY, TEXT_PRIMARY, TEXT_ON_PRIMARY, WHITE, SUCCESS, ERROR,
+    BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM, SHADOW,
+    get_font, draw_gradient_background, create_shadow_surface,
+    FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY,
+    PADDING_MD, RADIUS_LG
+)
+from assets import get_asset_manager
 
 
-def draw_gradient_background(surface, color_top, color_bottom):
-    """Draw a vertical gradient background"""
-    height = surface.get_height()
-    for y in range(height):
-        ratio = y / height
-        r = int(color_top[0] * (1 - ratio) + color_bottom[0] * ratio)
-        g = int(color_top[1] * (1 - ratio) + color_bottom[1] * ratio)
-        b = int(color_top[2] * (1 - ratio) + color_bottom[2] * ratio)
-        pygame.draw.line(surface, (r, g, b), (0, y), (surface.get_width(), y))
+def load_sneaky_image(scale=(120, 120)) -> Optional[pygame.Surface]:
+    """Load the Sneaky character PNG from asset manager"""
+    assets = get_asset_manager()
+    return assets.get_sneaky_image(scale=scale)
 
 
-def load_sneaky_image(scale=(120, 120)):
-    """Load the Sneaky character PNG"""
-    try:
-        img_path = Path(__file__).parent.parent.parent / "assets" / "sneaky.png"
-        if img_path.exists():
-            img = pygame.image.load(str(img_path))
-            if scale:
-                img = pygame.transform.scale(img, scale)
-            return img
-    except Exception as e:
-        print(f"Could not load sneaky.png: {e}")
-    return None
-
-
-def draw_sneaky_bottom(surface, sneaky_img, width):
+def draw_sneaky_bottom(surface: pygame.Surface, sneaky_img: pygame.Surface, width: int):
     """Draw Sneaky anchored at the bottom center of the screen"""
     if sneaky_img:
         img_rect = sneaky_img.get_rect()
@@ -66,6 +41,10 @@ class BaseScreen:
         self.pressed_button = None
         self.sneaky_img = load_sneaky_image()
         self.payload = None  # Store payload from on_enter
+        # Cache commonly used fonts
+        self._title_font = get_font(FONT_SIZE_TITLE, bold=True)
+        self._heading_font = get_font(FONT_SIZE_HEADING, bold=True)
+        self._body_font = get_font(FONT_SIZE_BODY)
     
     def on_enter(self, payload=None):
         """
@@ -122,7 +101,7 @@ class BaseScreen:
     def draw_common_elements(self, surface):
         """Draw common elements like background and Sneaky"""
         # Draw gradient background
-        draw_gradient_background(surface, GRADIENT_TOP, GRADIENT_BOTTOM)
+        draw_gradient_background(surface, BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM)
         
         # Draw Sneaky at bottom
         draw_sneaky_bottom(surface, self.sneaky_img, self.ui.width)
