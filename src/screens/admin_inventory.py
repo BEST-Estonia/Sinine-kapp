@@ -18,6 +18,15 @@ class AdminInventoryScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_28 = get_font(28)
+        self._font_24 = get_font(24)
+        self._font_22 = get_font(22)
+        self._font_36_bold = get_font(36, bold=True)
+        self._font_42_bold = get_font(42, bold=True)
         self.user_info = user_info
         self.items = self.ui.db.get_all_items()
         self.scroll_offset = 0
@@ -101,26 +110,26 @@ class AdminInventoryScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render("Inventory Manager", True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
         surface.blit(title_txt, title_rect)
         
         # Draw item count
-        count_font = pygame.font.SysFont('Arial', 28)
+        count_font = self._font_28
         count_txt = count_font.render(f"{len(self.items)} items in stock", True, TEAL)
         count_rect = count_txt.get_rect(centerx=self.ui.width // 2, top=110)
         surface.blit(count_txt, count_rect)
         
         # Draw instruction
-        instr_font = pygame.font.SysFont('Arial', 24)
+        instr_font = self._font_24
         instr_txt = instr_font.render("Tap +/− to adjust quantity", True, GRAY)
         instr_rect = instr_txt.get_rect(centerx=self.ui.width // 2, top=148)
         surface.blit(instr_txt, instr_rect)
         
         # Draw items
         item_y = 200
-        item_font = pygame.font.SysFont('Arial', 28)
+        item_font = self._font_28
         
         for i, item in enumerate(self.items):
             if item_y > self.ui.height - 380:
@@ -139,26 +148,26 @@ class AdminInventoryScreen(BaseScreen):
             surface.blit(name_txt, (item_box.x + 15, item_box.y + 12))
             
             # QR code
-            qr_font = pygame.font.SysFont('Arial', 22)
+            qr_font = self._font_22
             qr_txt = qr_font.render(f"QR: {item['qr_code']}", True, GRAY)
             surface.blit(qr_txt, (item_box.x + 15, item_box.y + 45))
             
             # Quantity with color
             qty = item['quantity']
             qty_color = GREEN if qty > 5 else (RED if qty == 0 else (255, 165, 0))
-            qty_font = pygame.font.SysFont('Arial', 36, bold=True)
+            qty_font = self._font_36_bold
             qty_txt = qty_font.render(str(qty), True, qty_color)
             surface.blit(qty_txt, (self.ui.width - 230, item_box.y + 22))
             
             # Draw +/− buttons for this item
             for btn in self.item_buttons:
                 if btn.item_qr == item['qr_code']:
-                    btn_font = pygame.font.SysFont('Arial', btn.font_size, bold=True)
+                    btn_font = btn._font
                     btn.draw(surface, btn_font)
             
             item_y += 90
         
         # Draw main buttons
-        button_font = pygame.font.SysFont('Arial', 42, bold=True)
+        button_font = self._font_42_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

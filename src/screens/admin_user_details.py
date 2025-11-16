@@ -18,6 +18,17 @@ class AdminUserDetailsScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, admin_info, user_id):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_36_bold = get_font(36, bold=True)
+        self._font_40_bold = get_font(40, bold=True)
+        self._font_28 = get_font(28)
+        self._font_24 = get_font(24)
+        self._font_32_bold = get_font(32, bold=True)
+        self._font_26 = get_font(26)
+        self._font_22 = get_font(22)
+        self._font_42_bold = get_font(42, bold=True)
         self.admin_info = admin_info
         self.user_id = user_id
         self.user = self.ui.db.get_user_by_id(user_id)
@@ -60,19 +71,19 @@ class AdminUserDetailsScreen(BaseScreen):
         
         if not self.user:
             # User not found
-            error_font = pygame.font.SysFont('Arial', 36, bold=True)
+            error_font = self._font_36_bold
             error_txt = error_font.render("User not found", True, RED)
             error_rect = error_txt.get_rect(centerx=self.ui.width // 2, centery=self.ui.height // 2)
             surface.blit(error_txt, error_rect)
         else:
             # Draw title
-            title_font = pygame.font.SysFont('Arial', 40, bold=True)
+            title_font = self._font_40_bold
             title_txt = title_font.render(self.user['name'], True, TEXT_COLOR)
             title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
             surface.blit(title_txt, title_rect)
             
             # Draw card ID
-            card_font = pygame.font.SysFont('Arial', 28)
+            card_font = self._font_28
             card_txt = card_font.render(f"Card ID: {self.user['card_id']}", True, GRAY)
             card_rect = card_txt.get_rect(centerx=self.ui.width // 2, top=100)
             surface.blit(card_txt, card_rect)
@@ -88,8 +99,8 @@ class AdminUserDetailsScreen(BaseScreen):
             color = TEAL if len(self.borrowed_items) > 0 else GRAY
             pygame.draw.rect(surface, color, borrowed_box, width=3, border_radius=12)
             
-            borrowed_label = pygame.font.SysFont('Arial', 24).render("Borrowed", True, TEXT_COLOR)
-            borrowed_count = pygame.font.SysFont('Arial', 40, bold=True).render(str(len(self.borrowed_items)), True, color)
+            borrowed_label = self._font_24.render("Borrowed", True, TEXT_COLOR)
+            borrowed_count = self._font_40_bold.render(str(len(self.borrowed_items)), True, color)
             surface.blit(borrowed_label, (borrowed_box.x + 15, borrowed_box.y + 15))
             surface.blit(borrowed_count, (borrowed_box.x + 15, borrowed_box.y + 40))
             
@@ -99,20 +110,20 @@ class AdminUserDetailsScreen(BaseScreen):
             color = RED if len(self.overdue_items) > 0 else GREEN
             pygame.draw.rect(surface, color, overdue_box, width=3, border_radius=12)
             
-            overdue_label = pygame.font.SysFont('Arial', 24).render("Overdue", True, TEXT_COLOR)
-            overdue_count = pygame.font.SysFont('Arial', 40, bold=True).render(str(len(self.overdue_items)), True, color)
+            overdue_label = self._font_24.render("Overdue", True, TEXT_COLOR)
+            overdue_count = self._font_40_bold.render(str(len(self.overdue_items)), True, color)
             surface.blit(overdue_label, (overdue_box.x + 15, overdue_box.y + 15))
             surface.blit(overdue_count, (overdue_box.x + 15, overdue_box.y + 40))
             
             # Draw current borrowed items
             y_pos = 260
-            section_font = pygame.font.SysFont('Arial', 32, bold=True)
+            section_font = self._font_32_bold
             section_txt = section_font.render("Currently Borrowed", True, TEAL)
             surface.blit(section_txt, (30, y_pos))
             
             y_pos += 50
             if self.borrowed_items:
-                item_font = pygame.font.SysFont('Arial', 26)
+                item_font = self._font_26
                 for i, borrow in enumerate(self.borrowed_items):
                     if y_pos > self.ui.height - 380:
                         remaining = len(self.borrowed_items) - i
@@ -137,16 +148,16 @@ class AdminUserDetailsScreen(BaseScreen):
                     due_text = f"Due: {borrow.get('due_date', 'N/A')}"
                     if is_overdue:
                         due_text += " (OVERDUE)"
-                    due_txt = pygame.font.SysFont('Arial', 22).render(due_text, True, border_color)
+                    due_txt = self._font_22.render(due_text, True, border_color)
                     surface.blit(due_txt, (item_box.x + 15, item_box.y + 40))
                     
                     y_pos += 80
             else:
-                no_items_font = pygame.font.SysFont('Arial', 28)
+                no_items_font = self._font_28
                 no_items_txt = no_items_font.render("No items currently borrowed", True, GRAY)
                 surface.blit(no_items_txt, (40, y_pos))
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 42, bold=True)
+        button_font = self._font_42_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

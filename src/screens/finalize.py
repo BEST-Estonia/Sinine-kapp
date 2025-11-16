@@ -18,6 +18,13 @@ class FinalizeScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_36_bold = get_font(36, bold=True)
+        self._font_32_bold = get_font(32, bold=True)
+        self._font_28 = get_font(28)
         self.user_info = user_info
         self.basket = basket  # List of {'qr_code': str, 'name': str, 'quantity': int}
         self.action = action  # 'borrow' or 'return'
@@ -96,7 +103,7 @@ class FinalizeScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_text = "Finalize Borrow" if self.action == 'borrow' else "Finalize Return"
         title_txt = title_font.render(title_text, True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
@@ -104,7 +111,7 @@ class FinalizeScreen(BaseScreen):
         
         # Draw instruction
         instr_y = 120
-        instr_font = pygame.font.SysFont('Arial', 36, bold=True)
+        instr_font = self._font_36_bold
         instr1_txt = instr_font.render("Please close the cupboard", True, TEAL)
         instr1_rect = instr1_txt.get_rect(centerx=self.ui.width // 2, top=instr_y)
         surface.blit(instr1_txt, instr1_rect)
@@ -115,7 +122,7 @@ class FinalizeScreen(BaseScreen):
         
         # Draw summary header
         summary_y = 230
-        summary_font = pygame.font.SysFont('Arial', 32, bold=True)
+        summary_font = self._font_32_bold
         total_items = sum(item['quantity'] for item in self.basket)
         summary_txt = summary_font.render(f"Items to {self.action}: {total_items}", True, TEXT_COLOR)
         summary_rect = summary_txt.get_rect(centerx=self.ui.width // 2, top=summary_y)
@@ -128,7 +135,7 @@ class FinalizeScreen(BaseScreen):
         
         # Draw items list
         item_y = items_box.y + 20
-        item_font = pygame.font.SysFont('Arial', 28)
+        item_font = self._font_28
         
         for i, item in enumerate(self.basket):
             if item_y > items_box.bottom - 50:
@@ -153,6 +160,6 @@ class FinalizeScreen(BaseScreen):
             item_y += 40
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 32, bold=True)
+        button_font = self._font_32_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

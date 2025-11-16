@@ -18,6 +18,14 @@ class BasketScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_30 = get_font(30)
+        self._font_32 = get_font(32)
+        self._font_28 = get_font(28)
+        self._font_40_bold = get_font(40, bold=True)
         self.user_info = user_info
         self.basket = basket  # List of {'qr_code': str, 'name': str, 'quantity': int}
         self.action = action  # 'borrow' or 'return'
@@ -162,19 +170,19 @@ class BasketScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render(self.title, True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
         surface.blit(title_txt, title_rect)
         
         # Draw user name
-        user_font = pygame.font.SysFont('Arial', 30)
+        user_font = self._font_30
         user_txt = user_font.render(f"User: {self.user_info['name']}", True, TEXT_COLOR)
         user_rect = user_txt.get_rect(centerx=self.ui.width // 2, top=110)
         surface.blit(user_txt, user_rect)
         
         # Draw summary
-        summary_font = pygame.font.SysFont('Arial', 32)
+        summary_font = self._font_32
         total_items = sum(item['quantity'] for item in self.basket)
         summary_txt = summary_font.render(f"Total: {total_items} items", True, TEAL)
         summary_rect = summary_txt.get_rect(centerx=self.ui.width // 2, top=160)
@@ -182,7 +190,7 @@ class BasketScreen(BaseScreen):
         
         # Draw basket items
         item_y = 230
-        item_font = pygame.font.SysFont('Arial', 28)
+        item_font = self._font_28
         
         for i, item in enumerate(self.basket):
             # Create item box
@@ -201,7 +209,7 @@ class BasketScreen(BaseScreen):
             # Draw item buttons (from item_buttons list)
             for btn in self.item_buttons:
                 if btn.item_index == i:
-                    btn_font = pygame.font.SysFont('Arial', btn.font_size, bold=True)
+                    btn_font = btn._font
                     btn.draw(surface, btn_font)
             
             item_y += 70
@@ -215,6 +223,6 @@ class BasketScreen(BaseScreen):
                 break
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 40, bold=True)
+        button_font = self._font_40_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

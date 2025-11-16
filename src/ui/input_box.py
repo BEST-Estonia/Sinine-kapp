@@ -3,12 +3,7 @@
 Input box widget for text input
 """
 import pygame
-
-# Color constants
-WHITE = (255, 255, 255)
-TEAL = (32, 178, 170)
-GRAY = (200, 200, 200)
-TEXT_COLOR = (30, 30, 30)
+from ui.theme import WHITE, PRIMARY, GRAY, TEXT_PRIMARY, get_font
 
 
 class InputBox:
@@ -23,6 +18,8 @@ class InputBox:
         self.cursor_visible = True
         self.cursor_timer = 0
         self.max_length = 50
+        # Cache font
+        self._font = get_font(font_size)
     
     def draw(self, surface):
         """Draw the input box"""
@@ -31,16 +28,15 @@ class InputBox:
         pygame.draw.rect(surface, bg_color, self.rect, border_radius=10)
         
         # Border
-        border_color = TEAL if self.active else GRAY
+        border_color = PRIMARY if self.active else GRAY
         border_width = 3 if self.active else 2
         pygame.draw.rect(surface, border_color, self.rect, width=border_width, border_radius=10)
         
-        # Text
-        font = pygame.font.SysFont('Arial', self.font_size)
+        # Text (use cached font)
         if self.text:
-            txt_surface = font.render(self.text, True, TEXT_COLOR)
+            txt_surface = self._font.render(self.text, True, TEXT_PRIMARY)
         else:
-            txt_surface = font.render(self.placeholder, True, (150, 150, 150))
+            txt_surface = self._font.render(self.placeholder, True, (150, 150, 150))
         
         # Position text with padding
         txt_rect = txt_surface.get_rect(midleft=(self.rect.x + 15, self.rect.centery))

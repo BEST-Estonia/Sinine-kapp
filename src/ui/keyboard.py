@@ -3,13 +3,7 @@
 On-screen keyboard widget for touch input
 """
 import pygame
-
-# Color constants
-WHITE = (255, 255, 255)
-TEAL = (32, 178, 170)
-GRAY = (220, 220, 220)
-DARK_GRAY = (100, 100, 100)
-TEXT_COLOR = (30, 30, 30)
+from ui.theme import WHITE, PRIMARY, GRAY, GRAY_DARK, TEXT_PRIMARY, get_font
 
 
 class OnScreenKeyboard:
@@ -36,6 +30,8 @@ class OnScreenKeyboard:
         self.shift_active = False
         self.pressed_key = None
         self.callback = None
+        # Cache font
+        self._font = get_font(28, bold=True)
         self._build_keyboard()
     
     def _build_keyboard(self):
@@ -108,8 +104,7 @@ class OnScreenKeyboard:
         pygame.draw.rect(bg_surf, (240, 240, 240, 250), bg_surf.get_rect(), border_radius=15)
         surface.blit(bg_surf, self.rect.topleft)
         
-        # Draw keys
-        font = pygame.font.SysFont('Arial', 28, bold=True)
+        # Draw keys (use cached font)
         
         for key_info in self.keys:
             key_rect = key_info['rect']
@@ -118,11 +113,11 @@ class OnScreenKeyboard:
             
             # Determine key color
             if is_special:
-                color = DARK_GRAY if not is_pressed else (60, 60, 60)
+                color = GRAY_DARK if not is_pressed else (60, 60, 60)
                 text_color = WHITE
             else:
                 color = WHITE if not is_pressed else GRAY
-                text_color = TEXT_COLOR
+                text_color = TEXT_PRIMARY
             
             # Draw key background
             pygame.draw.rect(surface, color, key_rect, border_radius=8)
@@ -133,7 +128,7 @@ class OnScreenKeyboard:
             
             # Draw key label
             label = key_info['label']
-            txt = font.render(label, True, text_color)
+            txt = self._font.render(label, True, text_color)
             txt_rect = txt.get_rect(center=key_rect.center)
             surface.blit(txt, txt_rect)
     

@@ -18,6 +18,14 @@ class AdminMainScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_48_bold = get_font(48, bold=True)
+        self._font_32 = get_font(32)
+        self._font_40_bold = get_font(40, bold=True)
+        self._font_30 = get_font(30)
+        self._font_44_bold = get_font(44, bold=True)
         self.user_info = user_info
         
         # Verify admin access - should already be checked in CardScanScreen
@@ -72,30 +80,30 @@ class AdminMainScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 48, bold=True)
+        title_font = self._font_48_bold
         title_txt = title_font.render("Admin Panel", True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=60)
         surface.blit(title_txt, title_rect)
         
         # Draw admin name
-        admin_font = pygame.font.SysFont('Arial', 32)
+        admin_font = self._font_32
         admin_txt = admin_font.render(f"Admin: {self.user_info['name']}", True, TEXT_COLOR)
         admin_rect = admin_txt.get_rect(centerx=self.ui.width // 2, top=130)
         surface.blit(admin_txt, admin_rect)
         
         if self.access_denied:
             # Show access denied message
-            denied_font = pygame.font.SysFont('Arial', 40, bold=True)
+            denied_font = self._font_40_bold
             denied_txt = denied_font.render("Access Denied", True, (255, 80, 80))
             denied_rect = denied_txt.get_rect(centerx=self.ui.width // 2, centery=self.ui.height // 2 - 100)
             surface.blit(denied_txt, denied_rect)
             
-            msg_font = pygame.font.SysFont('Arial', 30)
+            msg_font = self._font_30
             msg_txt = msg_font.render("Admin privileges required", True, TEXT_COLOR)
             msg_rect = msg_txt.get_rect(centerx=self.ui.width // 2, centery=self.ui.height // 2 - 40)
             surface.blit(msg_txt, msg_rect)
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 44, bold=True)
+        button_font = self._font_44_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)

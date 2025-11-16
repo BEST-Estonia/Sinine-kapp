@@ -18,6 +18,14 @@ class QRScanScreen(BaseScreen):
     
     def __init__(self, ui_manager, screen_manager, user_info, action='borrow'):
         super().__init__(ui_manager, screen_manager)
+
+        
+        # Cache fonts
+        self._font_44_bold = get_font(44, bold=True)
+        self._font_30 = get_font(30)
+        self._font_32 = get_font(32)
+        self._font_36_bold = get_font(36, bold=True)
+        self._font_28 = get_font(28)
         self.user_info = user_info
         self.action = action  # 'borrow' or 'return'
         self.basket = []  # List of {'qr_code': str, 'name': str, 'quantity': int}
@@ -180,33 +188,33 @@ class QRScanScreen(BaseScreen):
         self.draw_common_elements(surface)
         
         # Draw title
-        title_font = pygame.font.SysFont('Arial', 44, bold=True)
+        title_font = self._font_44_bold
         title_txt = title_font.render(self.title, True, TEXT_COLOR)
         title_rect = title_txt.get_rect(centerx=self.ui.width // 2, top=50)
         surface.blit(title_txt, title_rect)
         
         # Draw user name
-        user_font = pygame.font.SysFont('Arial', 30)
+        user_font = self._font_30
         user_txt = user_font.render(f"User: {self.user_info['name']}", True, TEXT_COLOR)
         user_rect = user_txt.get_rect(centerx=self.ui.width // 2, top=110)
         surface.blit(user_txt, user_rect)
         
         # Draw status
-        status_font = pygame.font.SysFont('Arial', 32)
+        status_font = self._font_32
         status_txt = status_font.render(self.status, True, TEXT_COLOR)
         status_rect = status_txt.get_rect(centerx=self.ui.width // 2, top=160)
         surface.blit(status_txt, status_rect)
         
         # Draw basket header
         basket_y = 220
-        basket_font = pygame.font.SysFont('Arial', 36, bold=True)
+        basket_font = self._font_36_bold
         basket_txt = basket_font.render(f"Basket ({len(self.basket)} items)", True, TEAL)
         surface.blit(basket_txt, (30, basket_y))
         
         # Draw basket items
         if self.basket:
             item_y = basket_y + 50
-            item_font = pygame.font.SysFont('Arial', 28)
+            item_font = self._font_28
             
             for i, item in enumerate(self.basket):
                 # Create item box
@@ -226,7 +234,7 @@ class QRScanScreen(BaseScreen):
                 # Draw delete button for this item
                 for btn in self.item_buttons:
                     if btn.item_index == i:
-                        btn_font = pygame.font.SysFont('Arial', btn.font_size, bold=True)
+                        btn_font = btn._font
                         btn.draw(surface, btn_font)
                 
                 item_y += 70
@@ -240,12 +248,12 @@ class QRScanScreen(BaseScreen):
                     break
         else:
             # Empty basket message
-            empty_font = pygame.font.SysFont('Arial', 30)
+            empty_font = self._font_30
             empty_txt = empty_font.render("No items scanned yet", True, GRAY)
             empty_rect = empty_txt.get_rect(centerx=self.ui.width // 2, top=basket_y + 80)
             surface.blit(empty_txt, empty_rect)
         
         # Draw buttons
-        button_font = pygame.font.SysFont('Arial', 36, bold=True)
+        button_font = self._font_36_bold
         for btn in self.buttons:
             btn.draw(surface, button_font)
