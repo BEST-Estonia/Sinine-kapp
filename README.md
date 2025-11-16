@@ -86,15 +86,25 @@ smart-cupboard/
 
 The application includes mock hardware modules that simulate real devices for development and testing:
 
-- **MockRFIDReader**: Prompts for RFID input via console
-- **MockQRScanner**: Accepts QR codes through console input
+- **MockRFIDReader**: Shows on-screen dialog for RFID input (falls back to console if no UI)
+- **MockQRScanner**: Shows on-screen dialog for QR code input (falls back to console if no UI)
 - **MockScale**: Generates random weight values (0.5-5.0 kg)
 - **MockCamera**: Simulates image capture
+
+### On-Screen Input Dialogs (NEW!)
+
+When running with the UI, mock hardware now displays **touch-friendly input dialogs** instead of requiring terminal input. This enables:
+- ✅ Running the app in **autorun mode** on Raspberry Pi (no terminal needed)
+- ✅ **Touch-only** operation without switching to keyboard
+- ✅ Consistent UI experience across all interactions
+
+The dialogs automatically appear when you need to enter a card ID or QR code, with an on-screen keyboard for easy input.
 
 These mock modules allow you to:
 - Develop and test the UI without physical hardware
 - Prototype features before hardware arrives
 - Debug application logic independently
+- **Run in autorun/kiosk mode** without terminal access (NEW!)
 
 To use real hardware, replace the mock classes with actual hardware drivers while maintaining the same interface.
 
@@ -127,9 +137,13 @@ To use real hardware, replace the mock classes with actual hardware drivers whil
 
 5. **Testing the UI**:
    - The main screen will show 4 options with a character mascot
-   - When prompted in console for RFID, enter: `1`, `2`, or `3` for registered users
-   - For QR codes, enter any text
+   - Click "Borrow Items" or "Return Items" to test the flow
+   - **On-screen dialogs** will appear for card ID and QR code input (no terminal prompts!)
+   - Use the on-screen keyboard to enter: `1`, `2`, or `3` for registered users
+   - For QR codes, enter item codes like `ITEM001` using the on-screen keyboard
    - See [MANUAL_TEST_GUIDE.txt](MANUAL_TEST_GUIDE.txt) for complete testing instructions
+   - See [MOCK_DIALOG_IMPLEMENTATION.md](MOCK_DIALOG_IMPLEMENTATION.md) for mock hardware details
+   - Run manual visual test: `python manual_visual_test.py`
    - Run integration tests: `python tests/test_integration.py`
 
 ### Raspberry Pi Setup
