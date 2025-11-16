@@ -23,10 +23,13 @@ from screen_manager import ScreenManager
 from screens import (
     MainMenuScreen,
     CardScanScreen,
+    RegisterPromptScreen,
     RegisterUserScreen,
     QRScanScreen,
     BasketScreen,
+    FinalizeScreen,
     ThankYouScreen,
+    InventoryViewScreen,
     AdminMainScreen,
     AdminUsersScreen,
     AdminUserDetailsScreen,

@@ -88,17 +88,21 @@ class ThankYouScreen(BaseScreen):
         total_items = sum(item['quantity'] for item in self.basket)
         
         if self.action == 'borrow':
-            msg1 = f"You borrowed {total_items} item(s)"
-            msg2 = "Please close the doors"
-            
+            # Format: "Thank you, username! Please return borrowed items by the first Wednesday of next month."
             # Calculate due date
             due_date = self.ui.db.calculate_due_date()
-            msg3 = f"Due: {due_date}"
+            
+            msg1 = f"Thank you, {self.user_info['name']}!"
+            msg2 = "Please return borrowed items by"
+            msg3 = f"the first Wednesday of next month."
+            msg4 = f"(Due: {due_date})"
         else:
-            msg1 = f"You returned {total_items} item(s)"
-            msg2 = "Thank you for returning!"
-            msg3 = ""
+            msg1 = f"Thank you, {self.user_info['name']}!"
+            msg2 = f"You returned {total_items} item(s)."
+            msg3 = "Thank you for returning!"
+            msg4 = ""
         
+        # Draw messages centered
         msg1_txt = msg_font.render(msg1, True, TEXT_COLOR)
         msg1_rect = msg1_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
         surface.blit(msg1_txt, msg1_rect)
@@ -108,11 +112,16 @@ class ThankYouScreen(BaseScreen):
         msg2_rect = msg2_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
         surface.blit(msg2_txt, msg2_rect)
         
-        if msg3:
+        y_pos += 50
+        msg3_txt = msg_font.render(msg3, True, TEXT_COLOR)
+        msg3_rect = msg3_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
+        surface.blit(msg3_txt, msg3_rect)
+        
+        if msg4:
             y_pos += 50
-            msg3_txt = msg_font.render(msg3, True, TEAL)
-            msg3_rect = msg3_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
-            surface.blit(msg3_txt, msg3_rect)
+            msg4_txt = msg_font.render(msg4, True, TEAL)
+            msg4_rect = msg4_txt.get_rect(centerx=self.ui.width // 2, top=y_pos)
+            surface.blit(msg4_txt, msg4_rect)
         
         # Draw item summary box
         y_pos += 80

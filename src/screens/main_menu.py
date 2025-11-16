@@ -6,7 +6,6 @@ import pygame
 from .base_screen import BaseScreen, TEAL, WHITE, TEXT_COLOR
 from ui.buttons import Button
 from .card_scan import CardScanScreen
-from .admin_inventory import AdminInventoryScreen
 
 
 class MainMenuScreen(BaseScreen):
@@ -48,8 +47,9 @@ class MainMenuScreen(BaseScreen):
             card_screen = CardScanScreen(self.ui, self.screen_manager, "Admin Panel - Scan Card", "admin")
             self.screen_manager.push(card_screen)
         elif button.text == "Stock/Inventory":
-            # Push inventory screen
-            inventory_screen = AdminInventoryScreen(self.ui, self.screen_manager, {'name': 'Guest', 'id': 0, 'is_admin': False})
+            # Push read-only inventory screen
+            from .inventory_view import InventoryViewScreen
+            inventory_screen = InventoryViewScreen(self.ui, self.screen_manager)
             self.screen_manager.push(inventory_screen)
         return None
     

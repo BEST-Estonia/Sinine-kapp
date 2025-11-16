@@ -66,8 +66,7 @@ class RegisterUserScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "Cancel":
-            # Pop back to previous screen (card scan) then pop again to main menu
-            self.screen_manager.pop()
+            # Pop back to registration prompt
             self.screen_manager.pop()
         elif button.text == "Register":
             name = self.input_box.get_text().strip()

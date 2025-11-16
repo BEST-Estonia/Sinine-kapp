@@ -72,9 +72,9 @@ class CardScanScreen(BaseScreen):
             if user:
                 # Check admin access if required
                 if self.action == "admin":
-                    # Only user_id == 1 can access admin panel
-                    if user.get('id') != 1:
-                        self.status = f"Access Denied! Only admin (user ID 1) can access."
+                    # Only users with is_admin flag can access admin panel
+                    if not user.get('is_admin'):
+                        self.status = f"Access Denied! Admin privileges required."
                         self.user_info = None
                         self.scanned = True
                         self.scanning = False
@@ -105,7 +105,7 @@ class CardScanScreen(BaseScreen):
                 
                 return None
             else:
-                # Card not registered - push registration screen with payload
+                # Card not registered - push registration prompt screen
                 self.status = f"Card {card_id} not registered."
                 self.scanned = True
                 self.scanning = False
@@ -113,14 +113,14 @@ class CardScanScreen(BaseScreen):
                 # Wait a moment to show message
                 pygame.time.wait(800)
                 
-                # Push registration screen with payload containing card_id and next action
-                from .register_user import RegisterUserScreen
-                register_screen = RegisterUserScreen(self.ui, self.screen_manager, card_id)
+                # Push registration prompt screen
+                from .register_prompt import RegisterPromptScreen
+                prompt_screen = RegisterPromptScreen(self.ui, self.screen_manager, card_id, self.action)
                 payload = {
                     'card_id': card_id,
                     'next_action': self.action  # Pass the action to continue after registration
                 }
-                self.screen_manager.push(register_screen, payload=payload)
+                self.screen_manager.push(prompt_screen, payload=payload)
                 return None
             
         return None
