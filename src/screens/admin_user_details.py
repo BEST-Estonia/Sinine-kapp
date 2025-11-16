@@ -10,9 +10,10 @@ from ui.buttons import Button
 class AdminUserDetailsScreen(BaseScreen):
     """Screen showing detailed information about a specific user"""
     
-    def __init__(self, ui_manager, admin_info, user_id):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, admin_info, user_id):
+        super().__init__(ui_manager, screen_manager)
         self.admin_info = admin_info
+        self.user_id = user_id
         self.user = self.ui.db.get_user_by_id(user_id)
         self.borrowed_items = self.ui.db.get_user_borrows(user_id, include_returned=False)
         self.overdue_items = self.ui.db.get_overdue_items(user_id)
@@ -27,9 +28,24 @@ class AdminUserDetailsScreen(BaseScreen):
         )
         self.buttons = [back_btn]
     
+    def on_enter(self, payload=None):
+        """Initialize from payload"""
+        super().on_enter(payload)
+        if payload:
+            if 'admin_info' in payload:
+                self.admin_info = payload['admin_info']
+            if 'user_id' in payload:
+                self.user_id = payload['user_id']
+                # Reload user data
+                self.user = self.ui.db.get_user_by_id(self.user_id)
+                self.borrowed_items = self.ui.db.get_user_borrows(self.user_id, include_returned=False)
+                self.overdue_items = self.ui.db.get_overdue_items(self.user_id)
+                self.history = self.ui.db.get_user_borrows(self.user_id, include_returned=True)
+    
     def on_button_click(self, button):
         if button.text == "← Back":
-            return ("admin_users", {'user_info': self.admin_info})
+            # Pop back to admin users screen
+            self.screen_manager.pop()
         return None
     
     def draw(self, surface):

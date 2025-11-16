@@ -10,8 +10,8 @@ from ui.buttons import Button
 class BasketScreen(BaseScreen):
     """Screen for reviewing and confirming basket contents"""
     
-    def __init__(self, ui_manager, user_info, basket, action='borrow'):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.basket = basket  # List of {'qr_code': str, 'name': str, 'quantity': int}
         self.action = action  # 'borrow' or 'return'
@@ -44,6 +44,19 @@ class BasketScreen(BaseScreen):
         
         # Item management buttons (remove, adjust quantity)
         self.item_buttons = []
+        self._build_item_buttons()
+    
+    def on_enter(self, payload=None):
+        """Initialize from payload"""
+        super().on_enter(payload)
+        if payload:
+            if 'user_info' in payload:
+                self.user_info = payload['user_info']
+            if 'basket' in payload:
+                self.basket = payload['basket']
+            if 'action' in payload:
+                self.action = payload['action']
+                self.title = "Confirm Borrow" if self.action == 'borrow' else "Confirm Return"
         self._build_item_buttons()
     
     def _build_item_buttons(self):
@@ -81,11 +94,11 @@ class BasketScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "← Back":
-            # Go back to QR scan screen
-            return ("qr_scan", {'user_info': self.user_info, 'action': self.action})
+            # Pop back to QR scan screen
+            self.screen_manager.pop()
         elif button.text == "Confirm":
             # Process basket
-            return self.process_basket()
+            self.process_basket()
         return None
     
     def handle_event(self, event):
@@ -116,7 +129,10 @@ class BasketScreen(BaseScreen):
     def process_basket(self):
         """Process the basket (borrow or return items)"""
         if not self.basket:
-            return "main"
+            # Pop back to main menu
+            self.screen_manager.pop()
+            self.screen_manager.pop()
+            return
         
         # Process each item in basket
         for item in self.basket:
@@ -126,8 +142,10 @@ class BasketScreen(BaseScreen):
                 else:  # return
                     self.ui.db.return_item(self.user_info['id'], item['qr_code'])
         
-        # Go to thank you screen
-        return ("thank_you", {
+        # Push thank you screen
+        from .thank_you import ThankYouScreen
+        thank_you_screen = ThankYouScreen(self.ui, self.screen_manager, self.user_info, self.basket, self.action)
+        self.screen_manager.push(thank_you_screen, payload={
             'user_info': self.user_info,
             'basket': self.basket,
             'action': self.action

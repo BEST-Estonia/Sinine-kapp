@@ -10,8 +10,8 @@ from ui.buttons import Button
 class AdminUsersScreen(BaseScreen):
     """Screen showing all registered users"""
     
-    def __init__(self, ui_manager, user_info):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.users = self.ui.db.get_all_users()
         self.scroll_offset = 0
@@ -52,7 +52,7 @@ class AdminUsersScreen(BaseScreen):
     
     def on_button_click(self, button):
         if button.text == "← Back":
-            return ("admin_main", {'user_info': self.user_info})
+            self.screen_manager.pop()
         return None
     
     def handle_event(self, event):
@@ -61,11 +61,19 @@ class AdminUsersScreen(BaseScreen):
             pos = event.pos
             for btn in self.user_buttons:
                 if btn.contains(pos):
-                    # Go to user details screen
-                    return ("admin_user_details", {
+                    # Push user details screen
+                    from .admin_user_details import AdminUserDetailsScreen
+                    details_screen = AdminUserDetailsScreen(
+                        self.ui, 
+                        self.screen_manager, 
+                        self.user_info, 
+                        btn.user_id
+                    )
+                    self.screen_manager.push(details_screen, payload={
                         'admin_info': self.user_info,
                         'user_id': btn.user_id
                     })
+                    return None
         
         return super().handle_event(event)
     

@@ -10,8 +10,8 @@ from ui.buttons import Button
 class QRScanScreen(BaseScreen):
     """Screen for scanning QR codes with multi-item basket support"""
     
-    def __init__(self, ui_manager, user_info, action='borrow'):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info, action='borrow'):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         self.action = action  # 'borrow' or 'return'
         self.basket = []  # List of {'qr_code': str, 'name': str, 'quantity': int}
@@ -51,14 +51,32 @@ class QRScanScreen(BaseScreen):
         
         self.buttons = [back_btn, scan_btn, done_btn]
     
+    def on_enter(self, payload=None):
+        """Initialize from payload"""
+        super().on_enter(payload)
+        if payload:
+            if 'user_info' in payload:
+                self.user_info = payload['user_info']
+            if 'action' in payload:
+                self.action = payload['action']
+                self.title = "Borrow Items" if self.action == 'borrow' else "Return Items"
+    
     def on_button_click(self, button):
         if button.text == "← Back":
-            return "main"
+            # Pop back to previous screen
+            self.screen_manager.pop()
         elif button.text == "Scan Item":
             self.scan_item()
         elif button.text == "Done":
             if self.basket:
-                return ("basket", {'user_info': self.user_info, 'basket': self.basket, 'action': self.action})
+                # Push basket confirmation screen
+                from .basket import BasketScreen
+                basket_screen = BasketScreen(self.ui, self.screen_manager, self.user_info, self.basket, self.action)
+                self.screen_manager.push(basket_screen, payload={
+                    'user_info': self.user_info, 
+                    'basket': self.basket, 
+                    'action': self.action
+                })
             else:
                 self.status = "Basket is empty. Scan items first."
         return None

@@ -10,15 +10,13 @@ from ui.buttons import Button
 class AdminMainScreen(BaseScreen):
     """Admin panel main screen with options"""
     
-    def __init__(self, ui_manager, user_info):
-        super().__init__(ui_manager)
+    def __init__(self, ui_manager, screen_manager, user_info):
+        super().__init__(ui_manager, screen_manager)
         self.user_info = user_info
         
-        # Verify admin access
-        if not user_info.get('is_admin'):
-            self.access_denied = True
-        else:
-            self.access_denied = False
+        # Verify admin access - should already be checked in CardScanScreen
+        # but double-check here
+        self.access_denied = False
         
         # Buttons
         padding = 30
@@ -34,27 +32,34 @@ class AdminMainScreen(BaseScreen):
                 Button((padding, start_y + (btn_h + spacing) * 2, btn_w, btn_h), "System Logs", TEAL, WHITE),
                 Button((padding, self.ui.height - 200, 200, 70), "← Back", SECONDARY, WHITE),
             ]
-            
-            self.button_actions = [
-                "admin_users",
-                "admin_inventory",
-                "admin_logs",
-                "main"
-            ]
         else:
             self.buttons = [
                 Button((padding, self.ui.height - 200, 200, 70), "← Back", SECONDARY, WHITE),
             ]
-            self.button_actions = ["main"]
+    
+    def on_enter(self, payload=None):
+        """Initialize from payload"""
+        super().on_enter(payload)
+        if payload and 'user_info' in payload:
+            self.user_info = payload['user_info']
     
     def on_button_click(self, button):
-        idx = self.buttons.index(button)
-        action = self.button_actions[idx]
-        
-        # Pass user_info to admin subscreens
-        if action.startswith("admin_") and action != "main":
-            return (action, {'user_info': self.user_info})
-        return action
+        if button.text == "← Back":
+            # Pop back to previous screen
+            self.screen_manager.pop()
+        elif button.text == "Users List":
+            from .admin_users import AdminUsersScreen
+            users_screen = AdminUsersScreen(self.ui, self.screen_manager, self.user_info)
+            self.screen_manager.push(users_screen, payload={'user_info': self.user_info})
+        elif button.text == "Inventory Manager":
+            from .admin_inventory import AdminInventoryScreen
+            inventory_screen = AdminInventoryScreen(self.ui, self.screen_manager, self.user_info)
+            self.screen_manager.push(inventory_screen, payload={'user_info': self.user_info})
+        elif button.text == "System Logs":
+            from .admin_logs import AdminLogsScreen
+            logs_screen = AdminLogsScreen(self.ui, self.screen_manager, self.user_info)
+            self.screen_manager.push(logs_screen, payload={'user_info': self.user_info})
+        return None
     
     def draw(self, surface):
         # Draw common elements
