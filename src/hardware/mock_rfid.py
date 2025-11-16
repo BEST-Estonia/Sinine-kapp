@@ -31,6 +31,7 @@ class MockRFIDReader:
         """Show input dialog and wait for result"""
         import pygame
         from screens.input_dialog import InputDialogScreen
+        from ui.character_sprite import get_character_manager
         
         self._pending_result = None
         self._waiting_for_input = True
@@ -56,6 +57,8 @@ class MockRFIDReader:
         
         # Wait for user input by running event loop
         clock = pygame.time.Clock()
+        character_mgr = get_character_manager()
+        
         while self._waiting_for_input:
             dt = clock.tick(30) / 1000.0
             
@@ -67,9 +70,22 @@ class MockRFIDReader:
                     break
                 self.screen_manager.handle_event(event)
             
-            # Update and render
+            # Update
             self.screen_manager.update(dt)
+            
+            # Update character animation
+            character = character_mgr.get_character()
+            if character:
+                character.update(dt)
+            
+            # Render
             self.screen_manager.render(self.ui_manager.screen)
+            
+            # Render character on top
+            character = character_mgr.get_character()
+            if character:
+                character.draw(self.ui_manager.screen)
+            
             pygame.display.flip()
         
         # Return the result (could be None if cancelled)
