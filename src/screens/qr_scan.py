@@ -18,6 +18,7 @@ WHITE = (255, 255, 255)
 TEAL = (0, 128, 128)
 GREEN = (0, 200, 0)
 SECONDARY = (50, 50, 50)
+GRAY = (20 ,20, 20)
 
 
 class QRScanScreen(BaseScreen):
