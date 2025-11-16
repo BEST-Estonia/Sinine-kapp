@@ -16,6 +16,7 @@ from .admin_users import AdminUsersScreen
 from .admin_user_details import AdminUserDetailsScreen
 from .admin_inventory import AdminInventoryScreen
 from .admin_logs import AdminLogsScreen
+from .input_dialog import InputDialogScreen
 
 __all__ = [
     'BaseScreen',
@@ -33,4 +34,5 @@ __all__ = [
     'AdminUserDetailsScreen',
     'AdminInventoryScreen',
     'AdminLogsScreen',
+    'InputDialogScreen',
 ]

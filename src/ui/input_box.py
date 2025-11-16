@@ -57,7 +57,7 @@ class InputBox:
             cursor_x = min(txt_rect.right + 3, self.rect.right - 15)
             cursor_y1 = self.rect.centery - self.font_size // 2
             cursor_y2 = self.rect.centery + self.font_size // 2
-            pygame.draw.line(surface, TEXT_COLOR, (cursor_x, cursor_y1), (cursor_x, cursor_y2), 2)
+            pygame.draw.line(surface, TEXT_PRIMARY, (cursor_x, cursor_y1), (cursor_x, cursor_y2), 2)
     
     def update(self):
         """Update cursor blink"""
