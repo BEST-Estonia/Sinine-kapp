@@ -72,9 +72,9 @@ class CardScanScreen(BaseScreen):
             if user:
                 # Check admin access if required
                 if self.action == "admin":
-                    # Only user_id == 1 can access admin panel
-                    if user.get('id') != 1:
-                        self.status = f"Access Denied! Only admin (user ID 1) can access."
+                    # Only users with is_admin flag can access admin panel
+                    if not user.get('is_admin'):
+                        self.status = f"Access Denied! Admin privileges required."
                         self.user_info = None
                         self.scanned = True
                         self.scanning = False
