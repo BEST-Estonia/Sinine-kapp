@@ -5,10 +5,11 @@ Card scan screen for RFID authentication
 import pygame
 from .base_screen import BaseScreen
 from ui.buttons import Button
+from ui.character_sprite import get_character_manager
 from ui.theme import (
     PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
     PADDING_SM, BUTTON_HEIGHT_SM, get_font, FONT_SIZE_TITLE, FONT_SIZE_HEADING, 
-    FONT_SIZE_BODY, RADIUS_MD
+    FONT_SIZE_BODY, FONT_SIZE_BUTTON, RADIUS_MD
 )
 
 
@@ -32,6 +33,9 @@ class CardScanScreen(BaseScreen):
         self.user_info = None
         self.scanning = False
         self.scanned = False
+        
+        # Get character manager
+        self.character_mgr = get_character_manager()
         
         # Cache fonts
         self._title_font = get_font(FONT_SIZE_TITLE, bold=True)
@@ -65,6 +69,8 @@ class CardScanScreen(BaseScreen):
         self.scanned = False
         self.user_info = None
         self.status = "Please scan your card..."
+        # Set character to confused (waiting for card scan)
+        self.character_mgr.set_confused()
     
     def scan_card(self):
         """Initiate card scanning"""
@@ -92,6 +98,8 @@ class CardScanScreen(BaseScreen):
                         self.user_info = None
                         self.scanned = True
                         self.scanning = False
+                        # Set character to sad (access denied)
+                        self.character_mgr.set_sad()
                         # Wait a moment to show message
                         pygame.time.wait(2000)
                         # Pop back to main menu
@@ -103,6 +111,9 @@ class CardScanScreen(BaseScreen):
                 self.status = f"Welcome, {user['name']}!"
                 self.scanned = True
                 self.scanning = False
+                
+                # Set character to happy (successful authentication)
+                self.character_mgr.set_happy()
                 
                 # Wait a moment then proceed to next screen
                 pygame.time.wait(800)
@@ -123,6 +134,9 @@ class CardScanScreen(BaseScreen):
                 self.status = f"Card {card_id} not registered."
                 self.scanned = True
                 self.scanning = False
+                
+                # Set character to surprised (card not found)
+                self.character_mgr.set_surprised()
                 
                 # Wait a moment to show message
                 pygame.time.wait(800)
