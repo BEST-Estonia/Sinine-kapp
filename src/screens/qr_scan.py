@@ -50,6 +50,34 @@ class QRScanScreen(BaseScreen):
         )
         
         self.buttons = [back_btn, scan_btn, done_btn]
+        
+        # Item delete buttons
+        self.item_buttons = []
+        self._build_item_buttons()
+    
+    def _build_item_buttons(self):
+        """Build delete buttons for each basket item"""
+        self.item_buttons = []
+        basket_y = 220
+        item_y = basket_y + 50
+        
+        for i, item in enumerate(self.basket):
+            # Delete button (small red X)
+            delete_btn = Button(
+                (self.ui.width - 80, item_y + 10, 50, 40),
+                "✕",
+                (255, 80, 80),  # RED
+                WHITE,
+                shadow=False,
+                font_size=28
+            )
+            delete_btn.item_index = i
+            self.item_buttons.append(delete_btn)
+            item_y += 70
+            
+            # Don't create buttons for items that won't be visible
+            if item_y > self.ui.height - 400:
+                break
     
     def on_enter(self, payload=None):
         """Initialize from payload"""
@@ -60,6 +88,8 @@ class QRScanScreen(BaseScreen):
             if 'action' in payload:
                 self.action = payload['action']
                 self.title = "Borrow Items" if self.action == 'borrow' else "Return Items"
+        # Rebuild item buttons when entering
+        self._build_item_buttons()
     
     def on_button_click(self, button):
         if button.text == "← Back":
@@ -69,10 +99,10 @@ class QRScanScreen(BaseScreen):
             self.scan_item()
         elif button.text == "Done":
             if self.basket:
-                # Push basket confirmation screen
-                from .basket import BasketScreen
-                basket_screen = BasketScreen(self.ui, self.screen_manager, self.user_info, self.basket, self.action)
-                self.screen_manager.push(basket_screen, payload={
+                # Push finalize/confirmation screen
+                from .finalize import FinalizeScreen
+                finalize_screen = FinalizeScreen(self.ui, self.screen_manager, self.user_info, self.basket, self.action)
+                self.screen_manager.push(finalize_screen, payload={
                     'user_info': self.user_info, 
                     'basket': self.basket, 
                     'action': self.action
@@ -80,6 +110,23 @@ class QRScanScreen(BaseScreen):
             else:
                 self.status = "Basket is empty. Scan items first."
         return None
+    
+    def handle_event(self, event):
+        """Handle events including item delete button clicks"""
+        # Check item delete buttons first
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = event.pos
+            for btn in self.item_buttons:
+                if btn.contains(pos):
+                    # Remove item from basket
+                    if btn.item_index < len(self.basket):
+                        self.basket.pop(btn.item_index)
+                        self._build_item_buttons()
+                        self.status = "Item removed from basket"
+                    return None
+        
+        # Handle main button clicks
+        return super().handle_event(event)
     
     def scan_item(self):
         """Scan a QR code and add to basket"""
@@ -120,6 +167,7 @@ class QRScanScreen(BaseScreen):
             
             self.status = f"Added: {item['name']}"
             self.scanning = False
+            self._build_item_buttons()  # Rebuild buttons after adding item
     
     def draw(self, surface):
         # Draw common elements
@@ -154,7 +202,7 @@ class QRScanScreen(BaseScreen):
             item_y = basket_y + 50
             item_font = pygame.font.SysFont('Arial', 28)
             
-            for item in self.basket:
+            for i, item in enumerate(self.basket):
                 # Create item box
                 item_box = pygame.Rect(30, item_y, self.ui.width - 60, 60)
                 pygame.draw.rect(surface, WHITE, item_box, border_radius=10)
@@ -166,14 +214,20 @@ class QRScanScreen(BaseScreen):
                 
                 # Draw quantity
                 qty_txt = item_font.render(f"x{item['quantity']}", True, TEAL)
-                qty_rect = qty_txt.get_rect(right=item_box.right - 15, centery=item_box.centery)
+                qty_rect = qty_txt.get_rect(right=item_box.right - 100, centery=item_box.centery)
                 surface.blit(qty_txt, qty_rect)
+                
+                # Draw delete button for this item
+                for btn in self.item_buttons:
+                    if btn.item_index == i:
+                        btn_font = pygame.font.SysFont('Arial', btn.font_size, bold=True)
+                        btn.draw(surface, btn_font)
                 
                 item_y += 70
                 
                 # Don't draw too many items (leave room for buttons and Sneaky)
                 if item_y > self.ui.height - 400:
-                    remaining = len(self.basket) - self.basket.index(item) - 1
+                    remaining = len(self.basket) - i - 1
                     if remaining > 0:
                         more_txt = item_font.render(f"...and {remaining} more", True, GRAY)
                         surface.blit(more_txt, (30, item_y))
