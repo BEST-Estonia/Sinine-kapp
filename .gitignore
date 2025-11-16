@@ -20,5 +20,7 @@ build/
 
 # Screenshots (local only)
 screenshots/
-screenshots/
-*.db
+screenshot_*.png
+
+# Test/development scripts
+capture_screenshot.py
