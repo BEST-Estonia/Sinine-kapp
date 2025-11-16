@@ -4,6 +4,7 @@ QR scan screen for borrowing/returning items with basket
 """
 import pygame
 from .base_screen import BaseScreen
+from ui.character_sprite import get_character_manager
 from ui.theme import (
     PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
     PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
@@ -19,6 +20,8 @@ class QRScanScreen(BaseScreen):
     def __init__(self, ui_manager, screen_manager, user_info, action='borrow'):
         super().__init__(ui_manager, screen_manager)
 
+        # Get character manager
+        self.character_mgr = get_character_manager()
         
         # Cache fonts
         self._font_44_bold = get_font(44, bold=True)
@@ -104,6 +107,8 @@ class QRScanScreen(BaseScreen):
                 self.title = "Borrow Items" if self.action == 'borrow' else "Return Items"
         # Rebuild item buttons when entering
         self._build_item_buttons()
+        # Set character to neutral (ready to scan)
+        self.character_mgr.set_neutral()
     
     def on_button_click(self, button):
         if button.text == "← Back":
@@ -162,6 +167,8 @@ class QRScanScreen(BaseScreen):
             if not item:
                 self.status = f"Unknown item: {qr_code}"
                 self.scanning = False
+                # Set character to confused (item not found)
+                self.character_mgr.set_confused()
                 return
             
             # Check if item already in basket
@@ -182,6 +189,8 @@ class QRScanScreen(BaseScreen):
             self.status = f"Added: {item['name']}"
             self.scanning = False
             self._build_item_buttons()  # Rebuild buttons after adding item
+            # Set character to happy (item added successfully)
+            self.character_mgr.set_happy()
     
     def draw(self, surface):
         # Draw common elements

@@ -5,6 +5,7 @@ Registration prompt screen - asks if user wants to register unrecognized card
 import pygame
 from .base_screen import BaseScreen
 from ui.buttons import Button
+from ui.character_sprite import get_character_manager
 from ui.theme import (
     PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS,
     get_font, FONT_SIZE_TITLE, FONT_SIZE_BODY, FONT_SIZE_BUTTON
@@ -18,6 +19,9 @@ class RegisterPromptScreen(BaseScreen):
         super().__init__(ui_manager, screen_manager)
         self.card_id = card_id
         self.next_action = next_action  # 'borrow', 'return', or 'admin'
+        
+        # Get character manager
+        self.character_mgr = get_character_manager()
         
         # Buttons
         btn_width = (self.ui.width - 90) // 2
@@ -54,6 +58,8 @@ class RegisterPromptScreen(BaseScreen):
                 self.card_id = payload['card_id']
             if 'next_action' in payload:
                 self.next_action = payload['next_action']
+        # Set character to confused (card not registered)
+        self.character_mgr.set_confused()
     
     def on_button_click(self, button):
         if button.text == "No":

@@ -4,6 +4,7 @@ Thank you screen after completing transaction
 """
 import pygame
 from .base_screen import BaseScreen
+from ui.character_sprite import get_character_manager
 from ui.theme import (
     PRIMARY, SECONDARY, TEXT_ON_PRIMARY, TEXT_PRIMARY, WHITE, SUCCESS, ERROR,
     PADDING_SM, PADDING_MD, SPACING_MD, BUTTON_HEIGHT, BUTTON_HEIGHT_SM,
@@ -19,6 +20,8 @@ class ThankYouScreen(BaseScreen):
     def __init__(self, ui_manager, screen_manager, user_info, basket, action='borrow'):
         super().__init__(ui_manager, screen_manager)
 
+        # Get character manager
+        self.character_mgr = get_character_manager()
         
         # Cache fonts
         self._font_48_bold = get_font(48, bold=True)
@@ -57,6 +60,8 @@ class ThankYouScreen(BaseScreen):
                 self.action = payload['action']
         # Reset auto-return timer when entering
         self.auto_return_timer = 0
+        # Set character to happy (transaction successful)
+        self.character_mgr.set_happy()
     
     def on_button_click(self, button):
         # Pop all screens and go back to main menu
