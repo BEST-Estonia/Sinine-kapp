@@ -44,6 +44,7 @@ from screens import (
     AdminUserDetailsScreen,
     AdminInventoryScreen,
     AdminLogsScreen,
+    InputDialogScreen,
 )
 
 
@@ -88,6 +89,12 @@ class SmartCupboardUI:
         
         # Screen management with stack-based ScreenManager
         self.screen_manager = ScreenManager()
+        
+        # Set managers for mock hardware (enables on-screen dialogs)
+        if hasattr(self.rfid, 'set_managers'):
+            self.rfid.set_managers(self, self.screen_manager)
+        if hasattr(self.qr, 'set_managers'):
+            self.qr.set_managers(self, self.screen_manager)
         
         # Create and load main menu as root screen
         main_screen = MainMenuScreen(self, self.screen_manager)
