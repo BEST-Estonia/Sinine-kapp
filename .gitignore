@@ -17,3 +17,6 @@ config.ini
 # Build and distribution
 dist/
 build/
+
+# Screenshots (local only)
+screenshots/
