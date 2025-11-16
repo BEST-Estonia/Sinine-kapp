@@ -63,11 +63,15 @@ class AssetManager:
             if scale:
                 img = pygame.transform.scale(img, scale)
             
-            # Convert for better performance
-            if convert_alpha:
-                img = img.convert_alpha()
-            else:
-                img = img.convert()
+            # Convert for better performance (only if display is initialized)
+            try:
+                if convert_alpha:
+                    img = img.convert_alpha()
+                else:
+                    img = img.convert()
+            except pygame.error:
+                # Display not initialized yet, skip conversion
+                pass
             
             # Cache and return
             self._images[cache_key] = img
