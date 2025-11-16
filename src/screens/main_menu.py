@@ -5,6 +5,8 @@ Main menu screen with 4 options
 import pygame
 from .base_screen import BaseScreen, TEAL, WHITE, TEXT_COLOR
 from ui.buttons import Button
+from .card_scan import CardScanScreen
+from .admin_inventory import AdminInventoryScreen
 
 
 class MainMenuScreen(BaseScreen):
