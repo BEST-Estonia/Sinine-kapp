@@ -4,13 +4,27 @@ A Python-based touchscreen UI application for managing a smart drink cupboard wi
 
 ## Features
 
-- **Touch-friendly Pygame UI**: Optimized for 800×480 touchscreen displays
-- **Mock Hardware Support**: Develop and test without physical hardware
-- **RFID Authentication**: User identification via RFID cards
+- **Touch-friendly Pygame UI**: Optimized for 800×480 touchscreen displays with multi-screen navigation
+- **User Database**: SQLite database for RFID card → user name mapping
+- **RFID Authentication**: User identification and verification via RFID cards
 - **QR Code Scanning**: Track drink returns with QR codes
 - **Weight Monitoring**: Dual-scale system for top and bottom shelves
+- **Admin Panel**: View and manage registered users
+- **Stock Inventory**: Visual inventory management with quantity indicators
+- **Mock Hardware Support**: Develop and test without physical hardware
 - **Automated Deployment**: GitHub Actions CI/CD for seamless updates
 - **Character Mascot**: Meet "Cupby", your friendly cupboard assistant!
+
+## New UI Implementation
+
+This repository now includes a completely redesigned Pygame UI with:
+- **Full-screen separate windows** for each function (not just status updates)
+- **4 main options**: Open doors, Return drink, Admin, Stock/Inventory
+- **Card verification** with registered/denied messages
+- **Navigation buttons** on all screens to return to main menu
+- **Visual inventory display** with color-coded quantity bars
+
+For detailed documentation on the new UI, see **[PYGAME_GUIDE.md](PYGAME_GUIDE.md)**.
 
 ## File Structure
 
@@ -19,15 +33,32 @@ smart-cupboard/
 ├── requirements.txt              # Python dependencies
 ├── deploy.sh                    # Deployment script for Raspberry Pi
 ├── README.md                    # This file
+├── PYGAME_GUIDE.md              # Detailed UI implementation guide
+├── MANUAL_TEST_GUIDE.txt        # Manual testing instructions
+├── assets/                      # Images and resources
+│   └── character.png            # Character mascot image
 ├── src/                         # Main application code
 │   ├── main.py                 # Entry point
 │   ├── app/
-│   │   └── ui_pygame.py        # Pygame touchscreen UI
+│   │   ├── ui_pygame.py        # Main UI manager
+│   │   └── screens.py          # Screen classes
+│   ├── database/               # Database layer
+│   │   ├── __init__.py
+│   │   ├── user_db.py          # User database manager
+│   │   └── users.db            # SQLite database (auto-generated)
 │   └── hardware/               # Hardware abstraction layer
 │       ├── mock_rfid.py        # Mock RFID reader
 │       ├── mock_qr.py          # Mock QR scanner
 │       ├── mock_scales.py      # Mock weight scales
 │       └── mock_camera.py      # Mock camera
+├── tests/                       # Test suite
+│   └── test_integration.py     # Integration tests
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions deployment workflow
+└── linux/
+    └── smart-cupboard.service  # Systemd service file
+```
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml          # GitHub Actions deployment workflow
@@ -95,12 +126,11 @@ To use real hardware, replace the mock classes with actual hardware drivers whil
    ```
 
 5. **Testing the UI**:
-   - Click buttons with your mouse or use keyboard shortcuts:
-     - `1` - Open cupboard
-     - `2` - Return drink
-     - `3` - Register user
-     - `4` - Admin panel
-   - When prompted in the console, enter mock RFID/QR values
+   - The main screen will show 4 options with a character mascot
+   - When prompted in console for RFID, enter: `1`, `2`, or `3` for registered users
+   - For QR codes, enter any text
+   - See [MANUAL_TEST_GUIDE.txt](MANUAL_TEST_GUIDE.txt) for complete testing instructions
+   - Run integration tests: `python tests/test_integration.py`
 
 ### Raspberry Pi Setup
 

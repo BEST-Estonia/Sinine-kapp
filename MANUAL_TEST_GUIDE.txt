@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""
+Manual test guide for the Pygame UI
+This script demonstrates the complete workflow
+"""
+
+print("""
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    PYGAME UI MANUAL TEST GUIDE                               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+This guide explains how to manually test the Pygame UI application.
+
+PREREQUISITES:
+--------------
+1. Install dependencies: pip install -r requirements.txt
+2. Navigate to src directory: cd src
+3. Run the application: python main.py
+
+MAIN SCREEN:
+------------
+You should see:
+- A blue cupboard character mascot (top-left)
+- Text: "Please pick an option:"
+- 4 blue buttons in a 2x2 grid:
+  • Open doors (top-left)
+  • Return drink (top-right)
+  • Admin (bottom-left)
+  • Stock/Inventory (bottom-right)
+
+TEST 1: OPEN DOORS (Card Required)
+-----------------------------------
+1. Click "Open doors" button
+2. You'll see "Open Doors - Scan Card" screen
+3. Console will prompt: "MOCK: enter RFID UID (or blank to cancel):"
+   
+   TEST 1A: Registered User
+   - Enter: 1
+   - Expected: "Welcome, Alice Johnson!"
+   - Screen shows: Door unlocked message with weight readings
+   - Click "← Back" to return to main menu
+   
+   TEST 1B: Unregistered User
+   - Click "Open doors" again
+   - Enter: 999
+   - Expected: "Access denied! Card 999 not registered." (in red)
+   - Click "← Back" to return to main menu
+   
+   TEST 1C: Cancel
+   - Click "Open doors" again
+   - Press Enter without typing
+   - Expected: "Card scan cancelled"
+   - Click "← Back" to return to main menu
+
+TEST 2: RETURN DRINK (Card Required)
+------------------------------------
+1. Click "Return drink" button
+2. Console prompts for RFID UID
+   - Enter: 2
+   - Expected: "Welcome, Bob Smith!"
+3. Console prompts: "MOCK: enter QR code (or blank to cancel):"
+   - Enter: DRINK123
+   - Expected: "Return registered! QR: DRINK123" (in green)
+4. Click "← Back" to return to main menu
+
+TEST 3: ADMIN PANEL (Card Required)
+-----------------------------------
+1. Click "Admin" button
+2. Console prompts for RFID UID
+   - Enter: 3
+   - Expected: "Welcome, Charlie Brown!"
+3. Admin panel shows:
+   - "Admin: Charlie Brown"
+   - List of registered users:
+     • Card 1: Alice Johnson
+     • Card 2: Bob Smith
+     • Card 3: Charlie Brown
+4. Click "← Back" to return to main menu
+
+TEST 4: STOCK/INVENTORY (No Card Required)
+------------------------------------------
+1. Click "Stock/Inventory" button
+2. Screen shows immediately (no card scan needed)
+3. Inventory list with visual bars:
+   - Coca Cola: 12 units (green bar)
+   - Sprite: 8 units (green bar)
+   - Orange Juice: 5 units (red bar - low stock)
+   - Water: 20 units (green bar - full)
+   - Energy Drink: 3 units (red bar - low stock)
+4. Click "← Back" to return to main menu
+
+TEST 5: MOUSE INTERACTIONS
+--------------------------
+- Hover over buttons to see highlight effect
+- All buttons should respond to mouse clicks
+- Back buttons work on all screens
+
+TEST 6: DATABASE PERSISTENCE
+----------------------------
+1. Exit the application (close window or Ctrl+C)
+2. Run again: python main.py
+3. All user data should persist (cards 1, 2, 3 still registered)
+
+SAMPLE RFID CARDS:
+-----------------
+Card 1: Alice Johnson
+Card 2: Bob Smith
+Card 3: Charlie Brown
+Card 999: Not registered (test denial)
+
+NOTES:
+------
+- ALSA audio warnings can be ignored (no audio used)
+- Database file is created at: src/database/users.db
+- Screenshots can be taken by modifying the test scripts in tests/
+- To add new users, use the database API (see PYGAME_GUIDE.md)
+
+TROUBLESHOOTING:
+---------------
+If the application doesn't start:
+1. Check Python version: python3 --version (requires 3.7+)
+2. Verify pygame installed: pip list | grep pygame
+3. Check for error messages in console
+4. Ensure you're in the src/ directory when running
+
+For more information, see PYGAME_GUIDE.md
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         HAPPY TESTING! 🎮                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+""")
