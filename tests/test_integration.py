@@ -78,8 +78,8 @@ def test_ui_initialization():
     ui = TouchUI(rfid=rfid, qr=qr, camera=cam, scale_top=scale_top, scale_bottom=scale_bottom)
     
     # Verify UI properties
-    assert ui.width == 800, "Width should be 800"
-    assert ui.height == 480, "Height should be 480"
+    assert ui.width == 480, "Width should be 480"
+    assert ui.height == 800, "Height should be 800"
     assert ui.screen is not None, "Screen should be initialized"
     assert ui.db is not None, "Database should be initialized"
     print("  ✓ UI initialized with correct dimensions")
