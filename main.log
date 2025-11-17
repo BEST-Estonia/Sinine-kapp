@@ -1,0 +1,10 @@
+2025-11-17 16:22:38,315 - INFO - Successfully logged 9 items for user 1 (11111111)
+2025-11-17 16:24:56,481 - INFO - Successfully logged 2 items for user 1 (11111111)
+2025-11-17 16:31:28,757 - ERROR - (DB Handler) log_user_returned_drinks: Database error. Error: database is locked
+2025-11-17 16:34:04,323 - WARNING - (DB Handler) log_user_returned_drinks: No unreturned item found for user 1 with barcode 12345678. Aborting transaction.
+2025-11-17 16:44:57,639 - INFO - Successfully returned 8 items for user 1 (11111111)
+2025-11-17 17:31:51,816 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 7 taken items for user 1 (11111111)
+2025-11-17 17:33:20,252 - INFO - (DB Handler) create_new_user: Created user 'Karl Registreerija' with NFC 1111
+2025-11-17 17:34:10,579 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 2 (1111)
+2025-11-17 17:35:04,034 - INFO - Successfully processed 7 returned items for user 2 (1111)
+2025-11-17 17:50:30,348 - INFO - Started GUI default screen process

@@ -4,12 +4,58 @@ import drawer
 import hardware_handler
 import database_handler
 import lcd
+import logging
+import multiprocessing
 
+
+# Set up logging (kasutus: logging.debug .info .warning .error .critical)
+logging.basicConfig(
+    filename='main.log',  # Log file name
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 
 #DEFAULT SCREEN
+# We start the drawer.Default_screen in a separate process so the GUI remains
+# active while the main loop continues. All process-management changes are
+# contained inside this function per your request.
+_gui_proc = None
+_gui_stop_event = None
+
 def GUI_default():
-    drawer.Default_screen()
+    """
+    Ensure the default GUI screen is running in a separate process.
+    If the GUI process is already running, return immediately.
+    Otherwise, start a multiprocessing.Process that runs drawer.Default_screen(stop_event).
+    """
+    global _gui_proc, _gui_stop_event
+
+    # If already running and alive, do nothing
+    if _gui_proc is not None and _gui_proc.is_alive():
+        return
+
+    # Create a stop Event that can be shared with the child process
+    _gui_stop_event = multiprocessing.Event()
+
+    # Start the GUI process. Pass the stop event so the GUI can exit when we set it.
+    _gui_proc = multiprocessing.Process(target=drawer.Default_screen, args=(_gui_stop_event, None), daemon=True)
+    _gui_proc.start()
+    logging.info("Started GUI default screen process")
+
+def GUI_stop_default(timeout=3):
+    """Signal the GUI default process to stop and wait up to `timeout` seconds."""
+    global _gui_proc, _gui_stop_event
+    try:
+        if _gui_stop_event is not None:
+            _gui_stop_event.set()
+        if _gui_proc is not None:
+            _gui_proc.join(timeout)
+            if _gui_proc.is_alive():
+                _gui_proc.terminate()
+                logging.warning("Terminated GUI default process after timeout")
+    except Exception as e:
+        logging.error(f"Error stopping GUI process: {e}")
 
 #Ekraanivaade, kus kuvatakse Tere ""NIMI" valik(võtan joogi/tagastan) 
 # Võtab inputiks kasutaja nime et nimeliselt terviatada
@@ -85,9 +131,6 @@ def GUI_pinn_vale():
 
 
 
-
-
-
 #Main loop käivitab drfault ekraani vaate, jääb nfc inputi ootama ja otsustab kas minna edasi
 #valiku vüi regamis ekraanile
 #!!!!!!!! Iga print fn selles plokis on debuggimiseks ja ei tohiks kõppkoodis olla.
@@ -102,7 +145,7 @@ def main_loop():
         print(f"DEBUG: Loetud NFC tag {nfc_input}")
         #Db handler kontrollib kas uid on andmebaasis ´, tagast yvõi n kui pole
         IsinDB, nimi = database_handler.checkuser(nfc_input)
-        if IsinDB == "Y":
+        if IsinDB == True:
             valik = GUI_valikuvaade(nimi)
             
             #Tagastab mis valisid antud juhul 1 Võtan kapist alksi 2 tagastan. 
@@ -123,9 +166,11 @@ def main_loop():
             # GUi väljastab kasutaja pinkoodi ja if statement laseb db_ghandleril luua uues kasutaja kui pinn olemas
             #kui pin ei matchi prompti pini uuesti
             vastus, pinnkood = GUI_registreerimise_küsimine()
+           
             if vastus == "y":
+                pinnkood = int(pinnkood)
                 is_pin_in_dict =  database_handler.check_pin_code_dict(pinnkood) #kontrollib kas pin on valid
-                if is_pin_in_dict == "y":
+                if is_pin_in_dict == True:
                     print("DEBUG ",  is_pin_in_dict)
                     database_handler.create_new_user(nfc_input, pinnkood)
                     GUI_kasutaja_registreeritud()
@@ -139,12 +184,11 @@ def main_loop():
                 continue
             
 
-
 #Joogi väljastuse plokk
-def joogi_väljastus(user_id):
+def joogi_väljastus(nfc_input):
 
     #kasutja id 
-    user_id = user_id
+    nfc_input = nfc_input
 
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
@@ -182,7 +226,7 @@ def joogi_väljastus(user_id):
             
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
-            if is_in_db == "n":
+            if is_in_db == False:
                 lcd.show_message("Toodet pole nimekirjas")
                 continue #hüppab tagasi loop algusse
 
@@ -203,8 +247,8 @@ def joogi_väljastus(user_id):
     print("Uks suletud. Lõpetan sessiooni...")
 
     # 4. Salvesta andmed andmebaasi
-    # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
-    database_handler.log_user_taken_drinks(user_id, scanned_barcodes)
+    # Anna kogu 'scanned_items' list ja 'nfc_input' andmebaasile
+    database_handler.log_user_taken_drinks(nfc_input, scanned_barcodes)
     
     # 5. Arvuta uus kaal (valikuline, aga hea varguse tuvastamiseks)
     lõpp_kaal = hardware_handler.get_wheight()
@@ -228,11 +272,11 @@ def joogi_väljastus(user_id):
     main_loop()
 
 
-def joogi_tagastus(user_id):
+def joogi_tagastus(nfc_input):
     GUI_tagastamine()
 
     #kasutja id 
-    user_id = user_id
+    nfc_input = nfc_input
 
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
@@ -265,7 +309,7 @@ def joogi_tagastus(user_id):
             
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
-            if is_in_db == "n":
+            if is_in_db == False:
                 lcd.show_message("Toodet pole nimekirjas")
                 continue #hüppab tagasi loop algusse
 
@@ -287,7 +331,7 @@ def joogi_tagastus(user_id):
 
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
-    database_handler.log_user_returned_drinks(user_id, scanned_barcodes)
+    database_handler.log_user_returned_drinks(nfc_input, scanned_barcodes)
     
     # 5. Arvuta uus kaal (valikuline, aga hea varguse tuvastamiseks)
     lõpp_kaal = hardware_handler.get_wheight()
@@ -324,13 +368,20 @@ def joogi_tagastus(user_id):
 
 
 
-#KOOOD ALGAB SIIT
+#KOOOD ALGAB SIIT 
+#Järgnev süntaks on vajalik selleks et drawer saask töötada eraldi protsessina 
+# ja ei takistaks main programmi tööd
 
 
-#Käivitab main loopi. Kuvab default screeni ja lõpuks saab tagais väärtuse valik. 
-#VALIK = Kas klient võtab jooki või tagastab
-#user_id kaardi number millega kasutajat tuvastada
-valik, user_id = main_loop()
+if __name__ == "__main__":
+    try:
+        main_loop()
+    finally:
+        # Ensure GUI process is stopped when program exits
+        try:
+            GUI_stop_default()
+        except Exception:
+            pass
 
 #KUi valitud võtmine siis kõivitub plokk joogi väljastuse jaoks
 

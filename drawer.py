@@ -1,13 +1,108 @@
 import time
 
+try:
+    import pygame
+except Exception:
+    pygame = None
 
-#KUVAB DEFAULT TERVITUS EKRAANI
-def Default_screen():
-    print("---Praegu on kuvatud default ekraan\n Viipa nfc kaarti---")
+"""
+DRAWER.PY - GUI Management
+
+This module handles all visual output for the Sinine-kapp kiosk.
+
+Key Architecture:
+-----------------
+• gui_handler(): Central controller running in a separate process. DO NOT call directly.
+• Individual screen functions (Default_screen, Valiku_vaade, etc.) are called by gui_handler.
+• main.py communicates with gui_handler via multiprocessing.Queue (commands & replies).
+
+Adding a New Screen:
+--------------------
+1. Create a draw_my_screen(screen, data) function that renders your screen.
+2. Add a case in gui_handler's event loop to handle "show_my_screen" commands.
+3. From main.py, send: cmd_queue.put({"cmd": "show_my_screen", "data": {...}})
+4. When user interacts, gui_handler sends a reply back via reply_queue.
+
+DO NOT:
+- Block inside screen functions (no long sleeps, no infinite loops).
+- Create pygame surfaces outside gui_handler (processes can't share GUI objects).
+- Call pygame directly from main.py.
+"""
+
+
+def Default_screen(stop_event=None, display_time_ms=None):
+    """
+    Show a pygame welcome window.
+    - If `stop_event` (a multiprocessing.Event or threading.Event) is provided,
+      the window stays open until the event is set.
+    - Otherwise, if `display_time_ms` is provided, show for that duration (ms).
+    If pygame is not available, falls back to printing a message.
+    """
+    if not pygame:
+        print("---Praegu on kuvatud default ekraan\n Viipa nfc kaarti---")
+        return
+
+    try:
+        pygame.init()
+        screen = pygame.display.set_mode((640, 240))
+        pygame.display.set_caption("Sinine-kapp - Welcome")
+
+        # Colors
+        BG = (30, 30, 60)
+        TEXT = (240, 240, 240)
+
+        # Font (use default if SysFont not available)
+        try:
+            font_large = pygame.font.SysFont(None, 48)
+            font_small = pygame.font.SysFont(None, 28)
+        except Exception:
+            font_large = pygame.font.Font(None, 48)
+            font_small = pygame.font.Font(None, 28)
+
+        title_surf = font_large.render("Welcome to the kiosk", True, TEXT)
+        instr_surf = font_small.render("Feel free to scan your NFC card.", True, TEXT)
+
+        title_rect = title_surf.get_rect(center=(320, 80))
+        instr_rect = instr_surf.get_rect(center=(320, 140))
+
+        start = pygame.time.get_ticks()
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            # Stop if stop_event is set
+            if stop_event is not None:
+                try:
+                    if stop_event.is_set():
+                        running = False
+                except Exception:
+                    # If the passed stop_event is not usable, ignore
+                    pass
+
+            # Or stop after display_time_ms if provided
+            if display_time_ms is not None and (pygame.time.get_ticks() - start) >= display_time_ms:
+                running = False
+
+            screen.fill(BG)
+            screen.blit(title_surf, title_rect)
+            screen.blit(instr_surf, instr_rect)
+            pygame.display.flip()
+            pygame.time.delay(30)
+
+    except Exception as e:
+        print("---Praegu on kuvatud default ekraan\n Viipa nfc kaarti---")
+        print(f"(drawer.Default_screen) pygame error: {e}")
+    finally:
+        try:
+            pygame.quit()
+        except Exception:
+            pass
    
 
 
-#KUI kasutaja on sisse logitud siis kuvab valikut (VÕTAN JOOGI või TAGASTAN)
+# KUI kasutaja on sisse logitud siis kuvab valikut (VÕTAN JOOGI või TAGASTAN)
 #Funktsioon returnib väärtuse vastavaöt kasutaja inputile 
 def Valiku_vaade(nimi):
     time.sleep(4)
