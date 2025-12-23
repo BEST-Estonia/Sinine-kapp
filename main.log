@@ -8,3 +8,177 @@
 2025-11-17 17:34:10,579 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 2 (1111)
 2025-11-17 17:35:04,034 - INFO - Successfully processed 7 returned items for user 2 (1111)
 2025-11-17 17:50:30,348 - INFO - Started GUI default screen process
+2025-11-17 21:17:07,070 - INFO - Started GUI default screen process
+2025-11-17 21:19:05,929 - INFO - Started GUI default screen process
+2025-11-17 21:20:12,269 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 1 taken items for user 1 (11111111)
+2025-11-18 14:18:25,515 - INFO - Started GUI default screen process
+2025-11-18 14:19:18,194 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 3 taken items for user 1 (11111111)
+2025-11-18 14:28:14,153 - INFO - Started GUI default screen process
+2025-11-27 18:26:38,029 - INFO - Started GUI handler process
+2025-11-27 18:26:38,031 - INFO - Sent 'show_default' command to GUI
+2025-11-27 18:26:39,501 - ERROR - GUI handler error: Default_screen() got an unexpected keyword argument 'screen'
+2025-11-27 18:28:27,130 - INFO - Started GUI handler process
+2025-11-27 18:28:27,132 - INFO - Sent 'show_default' command to GUI
+2025-11-27 18:28:28,536 - INFO - Switched to default screen
+2025-11-27 18:32:46,267 - INFO - Started GUI handler process
+2025-11-27 18:32:46,268 - INFO - Sent 'show_default' command to GUI
+2025-11-27 18:32:47,695 - INFO - Switched to default screen
+2025-11-27 18:32:54,892 - INFO - Sent 'show_choice' command for user: Peeter Termomeeter
+2025-11-27 18:33:24,893 - WARNING - Choice screen timed out, no user response
+2025-11-27 18:33:24,894 - INFO - Sent 'show_default' command to GUI
+2025-11-27 18:33:24,919 - INFO - Switched to default screen
+2025-11-27 18:58:58,970 - INFO - Started GUI handler process
+2025-11-27 18:58:58,971 - INFO - Sent 'show_default' command to GUI
+2025-11-27 18:59:00,367 - INFO - Switched to default screen
+2025-11-27 18:59:13,047 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:30:49,670 - INFO - Started GUI handler process
+2025-11-27 19:30:49,671 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:30:50,872 - WARNING - Unknown command: show_default
+2025-11-27 19:30:57,928 - WARNING - Unknown command: show_choice
+2025-11-27 19:33:55,781 - INFO - Started GUI handler process
+2025-11-27 19:33:55,782 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:33:57,023 - INFO - Switched to screen: default_screen
+2025-11-27 19:34:02,187 - WARNING - Unknown command: valiku_vaade
+2025-11-27 19:34:22,583 - INFO - Started GUI handler process
+2025-11-27 19:34:22,584 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:34:23,805 - INFO - Switched to screen: default_screen
+2025-11-27 19:34:31,628 - INFO - Switched to screen: valikuvaade
+2025-11-27 19:35:01,610 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:35:01,629 - INFO - Switched to screen: default_screen
+2025-11-27 19:35:59,613 - INFO - Started GUI handler process
+2025-11-27 19:35:59,615 - INFO - Sent 'show_default' command to GUI
+2025-11-27 19:36:00,851 - INFO - Switched to screen: default_screen
+2025-11-27 19:36:07,427 - INFO - Switched to screen: valikuvaade
+2025-11-27 19:36:09,680 - INFO - User clicked VÕTAN
+2025-11-27 19:36:09,680 - INFO - Screen valikuvaade returned result: {'result': '1'}
+2025-11-27 19:36:09,681 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 19:36:09,681 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 20:49:11,842 - INFO - Started GUI handler process
+2025-11-27 20:49:11,844 - INFO - Sent 'show_default' command to GUI
+2025-11-27 20:49:13,701 - INFO - Switched to screen: default_screen
+2025-11-27 20:49:18,578 - INFO - Switched to screen: valikuvaade
+2025-11-27 20:49:48,560 - INFO - Sent 'show_default' command to GUI
+2025-11-27 20:56:24,171 - INFO - Started GUI handler process
+2025-11-27 20:56:24,175 - INFO - Sent 'show_default' command to GUI
+2025-11-27 20:56:25,999 - INFO - Switched to screen: default_screen
+2025-11-27 20:56:30,536 - INFO - Switched to screen: valikuvaade
+2025-11-27 20:56:32,825 - INFO - User clicked VÕTAN
+2025-11-27 20:56:32,826 - INFO - Screen valikuvaade returned result: {'result': '1'}
+2025-11-27 20:56:32,827 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 20:56:32,827 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 21:02:45,326 - INFO - Started GUI handler process
+2025-11-27 21:02:45,333 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:02:47,098 - INFO - Switched to screen: default_screen
+2025-11-27 21:02:48,595 - INFO - Switched to screen: valikuvaade
+2025-11-27 21:02:50,849 - INFO - User clicked VÕTAN
+2025-11-27 21:02:50,849 - INFO - Screen valikuvaade returned result: {'result': '1'}
+2025-11-27 21:02:50,850 - INFO - Sent reply: {'reply_id': 'choice_1764270168.5747666', 'result': '1', 'data': {'result': '1'}}
+2025-11-27 21:02:50,851 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 21:02:50,851 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 21:03:33,117 - INFO - Started GUI handler process
+2025-11-27 21:03:33,119 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:03:34,869 - INFO - Switched to screen: default_screen
+2025-11-27 21:03:35,288 - INFO - Switched to screen: valikuvaade
+2025-11-27 21:03:39,717 - INFO - User clicked TAGASTAN
+2025-11-27 21:03:39,718 - INFO - Screen valikuvaade returned result: {'result': '2'}
+2025-11-27 21:03:39,719 - INFO - Sent reply: {'reply_id': 'choice_1764270215.2792284', 'result': '2', 'data': {'result': '2'}}
+2025-11-27 21:03:39,720 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 21:03:39,720 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 21:20:13,426 - INFO - Started GUI handler process
+2025-11-27 21:20:13,429 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:20:15,166 - INFO - Switched to screen: default_screen
+2025-11-27 21:20:19,046 - INFO - Switched to screen: valikuvaade
+2025-11-27 21:20:25,719 - INFO - User clicked VÕTAN
+2025-11-27 21:20:49,026 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:24:52,858 - INFO - Started GUI handler process
+2025-11-27 21:24:52,860 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:24:54,686 - INFO - Switched to screen: default_screen
+2025-11-27 21:24:54,837 - INFO - Switched to screen: valikuvaade
+2025-11-27 21:24:57,537 - INFO - User clicked VÕTAN
+2025-11-27 21:24:57,538 - INFO - Screen valikuvaade returned result: {'result': '1'}
+2025-11-27 21:24:57,539 - INFO - Sent reply: {'reply_id': 'choice_1764271494.8279254', 'result': '1', 'data': {'result': '1'}}
+2025-11-27 21:24:57,539 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 21:24:57,540 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 21:26:27,063 - INFO - Started GUI handler process
+2025-11-27 21:26:27,068 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:26:28,872 - INFO - Switched to screen: default_screen
+2025-11-27 21:26:32,785 - INFO - Switched to screen: valikuvaade
+2025-11-27 21:26:35,125 - INFO - User clicked VÕTAN
+2025-11-27 21:26:39,126 - INFO - Screen valikuvaade returned result: {'result': '1'}
+2025-11-27 21:26:39,128 - INFO - Sent reply: {'reply_id': 'choice_1764271592.7555923', 'result': '1', 'data': {'result': '1'}}
+2025-11-27 21:26:39,128 - ERROR - Handler error in show_default: 'show_default'
+2025-11-27 21:26:39,129 - ERROR - GUI handler fatal error: 'show_error'
+2025-11-27 21:34:45,585 - INFO - Started GUI handler process
+2025-11-27 21:34:45,587 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:34:47,401 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:34:49,052 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:34:51,370 - INFO - User clicked VÕTAN
+2025-11-27 21:35:19,050 - INFO - Sent 'show_default' command to GUI
+2025-11-27 21:37:46,350 - INFO - Started GUI handler process
+2025-11-27 21:37:46,352 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:37:48,150 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:37:49,008 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:37:50,875 - INFO - User clicked VÕTAN
+2025-11-27 21:38:19,005 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:40:19,995 - INFO - Started GUI handler process
+2025-11-27 21:40:19,997 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:40:21,709 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:40:22,341 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:40:24,459 - INFO - User clicked VÕTAN
+2025-11-27 21:40:52,351 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:40:52,375 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:41:33,187 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:41:35,441 - INFO - User clicked VÕTAN
+2025-11-27 21:42:03,179 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:42:03,205 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:43:23,240 - INFO - Started GUI handler process
+2025-11-27 21:43:23,243 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:43:24,514 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:43:25,701 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:43:28,626 - INFO - User clicked VÕTAN
+2025-11-27 21:43:55,683 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:44:15,727 - INFO - Started GUI handler process
+2025-11-27 21:44:15,729 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:44:17,456 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:44:18,177 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:44:21,097 - INFO - User clicked VÕTAN
+2025-11-27 21:44:48,154 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:46:20,234 - INFO - Started GUI handler process
+2025-11-27 21:46:20,236 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:46:22,041 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:46:22,866 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:46:27,837 - INFO - User clicked VÕTAN
+2025-11-27 21:46:52,861 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:53:04,632 - INFO - Started GUI handler process
+2025-11-27 21:53:04,635 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:53:06,339 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 21:53:07,667 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 21:53:10,544 - INFO - User clicked TAGASTAN
+2025-11-27 21:53:37,643 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 21:53:37,673 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:03:03,735 - INFO - Started GUI handler process
+2025-11-27 22:03:03,737 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:03:05,434 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:03:12,361 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 22:03:13,674 - INFO - User clicked VÕTAN
+2025-11-27 22:03:42,353 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:06:58,499 - INFO - Started GUI handler process
+2025-11-27 22:06:58,502 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:07:00,249 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:07:06,290 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:07:06,294 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:07:09,041 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 22:07:12,646 - INFO - User clicked VÕTAN
+2025-11-27 22:07:39,042 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:14:26,633 - INFO - Started GUI handler process
+2025-11-27 22:14:26,635 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:14:28,515 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:14:29,539 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 22:19:23,624 - INFO - Started GUI handler process
+2025-11-27 22:19:23,627 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:19:25,416 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:19:25,531 - INFO - Switched to screen: kuva_valikuvaade
+2025-11-27 22:20:27,386 - INFO - Started GUI handler process
+2025-11-27 22:20:27,388 - INFO - Sent 'kuva_default_screen' command to GUI
+2025-11-27 22:20:29,055 - INFO - Switched to screen: kuva_default_screen
+2025-11-27 22:20:29,405 - INFO - Switched to screen: kuva_valikuvaade

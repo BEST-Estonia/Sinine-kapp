@@ -1,3 +1,11 @@
+"""
+See fail tegeleb riistvara suhtlusega.
+get_nfc() loeb nfc lugejat ja returnib saadud vastuse
+Mai viitsi rohkem edasi kirjutada
+
+"""
+
+
 import time
 
 #küsib nfc tagi
@@ -28,7 +36,7 @@ def get_barcode_scan():
 
 #muutujad simuleerimaks kaua uks lahti on
 _door_timer_start = None
-_DOOR_DURATION = 20
+_DOOR_DURATION = 8
 
 def is_door_open():
     """
