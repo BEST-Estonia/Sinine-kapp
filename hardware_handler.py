@@ -5,14 +5,18 @@ Mai viitsi rohkem edasi kirjutada
 
 """
 
-
 import time
+import sys
+try:
+    import msvcrt
+except ImportError:
+    msvcrt = None
 
 #küsib nfc tagi
 def get_nfc():
    
     print("")
-    ID = input("DEBUG SISesta klaviatuuril nfc---")
+    ID = input(" SISesta klaviatuuril nfc---")
     return ID
 
 #Küsib kaalu näitu
@@ -29,7 +33,9 @@ def Ukse_avaja():
 
 #Sebib barcodei
 def get_barcode_scan():
-    barcode = input("---SISESTA TRIIPKOOD--- →→→ ")
+   
+    barcode = input("DEBUG SISesta klaviatuuril barcode---")
+    print() # Newline on timeout
     return barcode
 
 

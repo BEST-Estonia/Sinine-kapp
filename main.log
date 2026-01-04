@@ -1,184 +1,338 @@
-2025-11-17 16:22:38,315 - INFO - Successfully logged 9 items for user 1 (11111111)
-2025-11-17 16:24:56,481 - INFO - Successfully logged 2 items for user 1 (11111111)
-2025-11-17 16:31:28,757 - ERROR - (DB Handler) log_user_returned_drinks: Database error. Error: database is locked
-2025-11-17 16:34:04,323 - WARNING - (DB Handler) log_user_returned_drinks: No unreturned item found for user 1 with barcode 12345678. Aborting transaction.
-2025-11-17 16:44:57,639 - INFO - Successfully returned 8 items for user 1 (11111111)
-2025-11-17 17:31:51,816 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 7 taken items for user 1 (11111111)
-2025-11-17 17:33:20,252 - INFO - (DB Handler) create_new_user: Created user 'Karl Registreerija' with NFC 1111
-2025-11-17 17:34:10,579 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 2 (1111)
-2025-11-17 17:35:04,034 - INFO - Successfully processed 7 returned items for user 2 (1111)
-2025-11-17 17:50:30,348 - INFO - Started GUI default screen process
-2025-11-17 21:17:07,070 - INFO - Started GUI default screen process
-2025-11-17 21:19:05,929 - INFO - Started GUI default screen process
-2025-11-17 21:20:12,269 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 1 taken items for user 1 (11111111)
-2025-11-18 14:18:25,515 - INFO - Started GUI default screen process
-2025-11-18 14:19:18,194 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 3 taken items for user 1 (11111111)
-2025-11-18 14:28:14,153 - INFO - Started GUI default screen process
-2025-11-27 18:26:38,029 - INFO - Started GUI handler process
-2025-11-27 18:26:38,031 - INFO - Sent 'show_default' command to GUI
-2025-11-27 18:26:39,501 - ERROR - GUI handler error: Default_screen() got an unexpected keyword argument 'screen'
-2025-11-27 18:28:27,130 - INFO - Started GUI handler process
-2025-11-27 18:28:27,132 - INFO - Sent 'show_default' command to GUI
-2025-11-27 18:28:28,536 - INFO - Switched to default screen
-2025-11-27 18:32:46,267 - INFO - Started GUI handler process
-2025-11-27 18:32:46,268 - INFO - Sent 'show_default' command to GUI
-2025-11-27 18:32:47,695 - INFO - Switched to default screen
-2025-11-27 18:32:54,892 - INFO - Sent 'show_choice' command for user: Peeter Termomeeter
-2025-11-27 18:33:24,893 - WARNING - Choice screen timed out, no user response
-2025-11-27 18:33:24,894 - INFO - Sent 'show_default' command to GUI
-2025-11-27 18:33:24,919 - INFO - Switched to default screen
-2025-11-27 18:58:58,970 - INFO - Started GUI handler process
-2025-11-27 18:58:58,971 - INFO - Sent 'show_default' command to GUI
-2025-11-27 18:59:00,367 - INFO - Switched to default screen
-2025-11-27 18:59:13,047 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:30:49,670 - INFO - Started GUI handler process
-2025-11-27 19:30:49,671 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:30:50,872 - WARNING - Unknown command: show_default
-2025-11-27 19:30:57,928 - WARNING - Unknown command: show_choice
-2025-11-27 19:33:55,781 - INFO - Started GUI handler process
-2025-11-27 19:33:55,782 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:33:57,023 - INFO - Switched to screen: default_screen
-2025-11-27 19:34:02,187 - WARNING - Unknown command: valiku_vaade
-2025-11-27 19:34:22,583 - INFO - Started GUI handler process
-2025-11-27 19:34:22,584 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:34:23,805 - INFO - Switched to screen: default_screen
-2025-11-27 19:34:31,628 - INFO - Switched to screen: valikuvaade
-2025-11-27 19:35:01,610 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:35:01,629 - INFO - Switched to screen: default_screen
-2025-11-27 19:35:59,613 - INFO - Started GUI handler process
-2025-11-27 19:35:59,615 - INFO - Sent 'show_default' command to GUI
-2025-11-27 19:36:00,851 - INFO - Switched to screen: default_screen
-2025-11-27 19:36:07,427 - INFO - Switched to screen: valikuvaade
-2025-11-27 19:36:09,680 - INFO - User clicked VÕTAN
-2025-11-27 19:36:09,680 - INFO - Screen valikuvaade returned result: {'result': '1'}
-2025-11-27 19:36:09,681 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 19:36:09,681 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 20:49:11,842 - INFO - Started GUI handler process
-2025-11-27 20:49:11,844 - INFO - Sent 'show_default' command to GUI
-2025-11-27 20:49:13,701 - INFO - Switched to screen: default_screen
-2025-11-27 20:49:18,578 - INFO - Switched to screen: valikuvaade
-2025-11-27 20:49:48,560 - INFO - Sent 'show_default' command to GUI
-2025-11-27 20:56:24,171 - INFO - Started GUI handler process
-2025-11-27 20:56:24,175 - INFO - Sent 'show_default' command to GUI
-2025-11-27 20:56:25,999 - INFO - Switched to screen: default_screen
-2025-11-27 20:56:30,536 - INFO - Switched to screen: valikuvaade
-2025-11-27 20:56:32,825 - INFO - User clicked VÕTAN
-2025-11-27 20:56:32,826 - INFO - Screen valikuvaade returned result: {'result': '1'}
-2025-11-27 20:56:32,827 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 20:56:32,827 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 21:02:45,326 - INFO - Started GUI handler process
-2025-11-27 21:02:45,333 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:02:47,098 - INFO - Switched to screen: default_screen
-2025-11-27 21:02:48,595 - INFO - Switched to screen: valikuvaade
-2025-11-27 21:02:50,849 - INFO - User clicked VÕTAN
-2025-11-27 21:02:50,849 - INFO - Screen valikuvaade returned result: {'result': '1'}
-2025-11-27 21:02:50,850 - INFO - Sent reply: {'reply_id': 'choice_1764270168.5747666', 'result': '1', 'data': {'result': '1'}}
-2025-11-27 21:02:50,851 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 21:02:50,851 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 21:03:33,117 - INFO - Started GUI handler process
-2025-11-27 21:03:33,119 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:03:34,869 - INFO - Switched to screen: default_screen
-2025-11-27 21:03:35,288 - INFO - Switched to screen: valikuvaade
-2025-11-27 21:03:39,717 - INFO - User clicked TAGASTAN
-2025-11-27 21:03:39,718 - INFO - Screen valikuvaade returned result: {'result': '2'}
-2025-11-27 21:03:39,719 - INFO - Sent reply: {'reply_id': 'choice_1764270215.2792284', 'result': '2', 'data': {'result': '2'}}
-2025-11-27 21:03:39,720 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 21:03:39,720 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 21:20:13,426 - INFO - Started GUI handler process
-2025-11-27 21:20:13,429 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:20:15,166 - INFO - Switched to screen: default_screen
-2025-11-27 21:20:19,046 - INFO - Switched to screen: valikuvaade
-2025-11-27 21:20:25,719 - INFO - User clicked VÕTAN
-2025-11-27 21:20:49,026 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:24:52,858 - INFO - Started GUI handler process
-2025-11-27 21:24:52,860 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:24:54,686 - INFO - Switched to screen: default_screen
-2025-11-27 21:24:54,837 - INFO - Switched to screen: valikuvaade
-2025-11-27 21:24:57,537 - INFO - User clicked VÕTAN
-2025-11-27 21:24:57,538 - INFO - Screen valikuvaade returned result: {'result': '1'}
-2025-11-27 21:24:57,539 - INFO - Sent reply: {'reply_id': 'choice_1764271494.8279254', 'result': '1', 'data': {'result': '1'}}
-2025-11-27 21:24:57,539 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 21:24:57,540 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 21:26:27,063 - INFO - Started GUI handler process
-2025-11-27 21:26:27,068 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:26:28,872 - INFO - Switched to screen: default_screen
-2025-11-27 21:26:32,785 - INFO - Switched to screen: valikuvaade
-2025-11-27 21:26:35,125 - INFO - User clicked VÕTAN
-2025-11-27 21:26:39,126 - INFO - Screen valikuvaade returned result: {'result': '1'}
-2025-11-27 21:26:39,128 - INFO - Sent reply: {'reply_id': 'choice_1764271592.7555923', 'result': '1', 'data': {'result': '1'}}
-2025-11-27 21:26:39,128 - ERROR - Handler error in show_default: 'show_default'
-2025-11-27 21:26:39,129 - ERROR - GUI handler fatal error: 'show_error'
-2025-11-27 21:34:45,585 - INFO - Started GUI handler process
-2025-11-27 21:34:45,587 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:34:47,401 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:34:49,052 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:34:51,370 - INFO - User clicked VÕTAN
-2025-11-27 21:35:19,050 - INFO - Sent 'show_default' command to GUI
-2025-11-27 21:37:46,350 - INFO - Started GUI handler process
-2025-11-27 21:37:46,352 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:37:48,150 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:37:49,008 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:37:50,875 - INFO - User clicked VÕTAN
-2025-11-27 21:38:19,005 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:40:19,995 - INFO - Started GUI handler process
-2025-11-27 21:40:19,997 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:40:21,709 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:40:22,341 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:40:24,459 - INFO - User clicked VÕTAN
-2025-11-27 21:40:52,351 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:40:52,375 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:41:33,187 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:41:35,441 - INFO - User clicked VÕTAN
-2025-11-27 21:42:03,179 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:42:03,205 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:43:23,240 - INFO - Started GUI handler process
-2025-11-27 21:43:23,243 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:43:24,514 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:43:25,701 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:43:28,626 - INFO - User clicked VÕTAN
-2025-11-27 21:43:55,683 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:44:15,727 - INFO - Started GUI handler process
-2025-11-27 21:44:15,729 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:44:17,456 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:44:18,177 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:44:21,097 - INFO - User clicked VÕTAN
-2025-11-27 21:44:48,154 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:46:20,234 - INFO - Started GUI handler process
-2025-11-27 21:46:20,236 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:46:22,041 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:46:22,866 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:46:27,837 - INFO - User clicked VÕTAN
-2025-11-27 21:46:52,861 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:53:04,632 - INFO - Started GUI handler process
-2025-11-27 21:53:04,635 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:53:06,339 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 21:53:07,667 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 21:53:10,544 - INFO - User clicked TAGASTAN
-2025-11-27 21:53:37,643 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 21:53:37,673 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:03:03,735 - INFO - Started GUI handler process
-2025-11-27 22:03:03,737 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:03:05,434 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:03:12,361 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 22:03:13,674 - INFO - User clicked VÕTAN
-2025-11-27 22:03:42,353 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:06:58,499 - INFO - Started GUI handler process
-2025-11-27 22:06:58,502 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:07:00,249 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:07:06,290 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:07:06,294 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:07:09,041 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 22:07:12,646 - INFO - User clicked VÕTAN
-2025-11-27 22:07:39,042 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:14:26,633 - INFO - Started GUI handler process
-2025-11-27 22:14:26,635 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:14:28,515 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:14:29,539 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 22:19:23,624 - INFO - Started GUI handler process
-2025-11-27 22:19:23,627 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:19:25,416 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:19:25,531 - INFO - Switched to screen: kuva_valikuvaade
-2025-11-27 22:20:27,386 - INFO - Started GUI handler process
-2025-11-27 22:20:27,388 - INFO - Sent 'kuva_default_screen' command to GUI
-2025-11-27 22:20:29,055 - INFO - Switched to screen: kuva_default_screen
-2025-11-27 22:20:29,405 - INFO - Switched to screen: kuva_valikuvaade
+2026-01-04 19:26:38,912 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:26:40,813 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:28:21,071 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:28:22,900 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:28:33,041 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:28:34,842 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:29:18,238 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:29:20,124 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:29:21,937 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:29:21,937 - INFO - UUS_KAART command received
+2026-01-04 19:29:21,939 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:29:21,939 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:29:49,795 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:29:51,804 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:29:53,434 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:29:53,434 - INFO - UUS_KAART command received
+2026-01-04 19:29:53,436 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:29:53,436 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:29:55,845 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code 67 not found in Pintable
+2026-01-04 19:29:55,846 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:29:55,849 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:31:24,519 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:31:26,654 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:31:29,283 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:31:29,283 - INFO - UUS_KAART command received
+2026-01-04 19:31:29,285 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:31:29,285 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:31:30,888 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code 67 not found in Pintable
+2026-01-04 19:31:30,892 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-04 19:31:30,892 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:31:31,912 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:31:31,913 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:31:33,235 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:31:33,236 - INFO - UUS_KAART command received
+2026-01-04 19:31:33,237 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:31:33,237 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:31:37,307 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:31:37,307 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:31:40,204 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja (True, 'Registreerija 2\r\n') registreerimiseks.
+2026-01-04 19:31:40,204 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:33:07,557 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 2
+
+' with NFC 2
+2026-01-04 19:33:07,558 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:33:07,561 - INFO - Router received: MESSAGE with payload: Kasutaja (True, 'Registreerija 2\r\n') registreeritud! proosit!
+2026-01-04 19:33:07,562 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:33:07,564 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:36:33,306 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:36:35,241 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:36:40,415 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:36:40,415 - INFO - UUS_KAART command received
+2026-01-04 19:36:40,416 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:36:40,416 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:36:47,964 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-04 19:36:47,967 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-04 19:36:47,967 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:36:49,003 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:36:49,006 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:36:50,838 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:36:50,839 - INFO - UUS_KAART command received
+2026-01-04 19:36:50,840 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:36:50,840 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:36:52,988 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:36:52,988 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:36:55,645 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:36:55,645 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:36:57,901 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:36:57,901 - INFO - UUS_KAART command received
+2026-01-04 19:36:57,902 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:36:57,902 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:37:00,400 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:37:00,401 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:37:02,246 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-04 19:37:02,247 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:37:09,864 - WARNING - (DB Handler) create_new_user: NFC ID already exists: 1
+2026-01-04 19:37:09,867 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 registreeritud! proosit!
+2026-01-04 19:37:09,868 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:37:12,891 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:37:12,893 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:37:44,629 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:37:44,630 - INFO - UUS_KAART command received
+2026-01-04 19:37:44,632 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:37:44,632 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:37:49,830 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:37:49,831 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:37:51,478 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-04 19:37:51,478 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:38:00,010 - WARNING - (DB Handler) create_new_user: NFC ID already exists: 1
+2026-01-04 19:38:00,012 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 registreeritud! proosit!
+2026-01-04 19:38:00,012 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:38:01,742 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:38:01,743 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:43:45,795 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:43:47,917 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:43:49,940 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:43:49,941 - INFO - UUS_KAART command received
+2026-01-04 19:43:49,942 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:43:49,943 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:43:52,072 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:43:52,072 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:43:54,176 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:43:54,177 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:43:55,403 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:43:55,403 - INFO - UUS_KAART command received
+2026-01-04 19:43:55,404 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:43:55,404 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:43:57,255 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:43:57,255 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:43:58,361 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-04 19:43:58,361 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:44:07,143 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:44:07,144 - INFO - Router received: MESSAGE with payload: Kaart on juba registreeritud mï¿½nele kasutajale
+2026-01-04 19:44:07,144 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:44:07,145 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:44:42,860 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:44:45,087 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:44:50,195 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:44:50,196 - INFO - UUS_KAART command received
+2026-01-04 19:44:50,199 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:44:50,200 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:44:53,114 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:44:53,115 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:44:53,780 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-04 19:44:53,781 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:44:56,605 - INFO - Router received: MESSAGE with payload: Kaart on juba registreeritud mï¿½nele kasutajale
+2026-01-04 19:44:56,606 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:45:00,027 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:45:00,029 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:45:01,924 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 19:45:01,924 - INFO - UUS_KAART command received
+2026-01-04 19:45:01,927 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 19:45:01,927 - INFO - KAOTATUD_KAART command received
+2026-01-04 19:45:21,076 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 19:45:21,076 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 19:45:22,196 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-04 19:45:22,196 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:45:25,547 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 1' with NFC 2
+2026-01-04 19:45:25,552 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 registreeritud! proosit!
+2026-01-04 19:45:25,553 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:45:28,883 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:45:28,885 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:45:30,097 - INFO - SAADAN LOGI_SISSE Kï¿½SU
+2026-01-04 19:45:32,046 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-04 19:45:34,155 - INFO - Sent door opening screen command: 1
+2026-01-04 19:45:34,157 - INFO - Router received: UKSE_AVAMINE_Vï¿½TMINE with payload: None
+2026-01-04 19:45:34,158 - INFO - UKSE_AVAMINE_Vï¿½TMINE command received with payload: None
+2026-01-04 19:45:34,160 - INFO - UKSEAVAJA JOOKIDE Vï¿½TMINE
+2026-01-04 19:45:39,158 - INFO - Router received: REKLAAM with payload: None
+2026-01-04 19:45:39,158 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-04 19:45:47,512 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 2 (2)
+2026-01-04 19:45:47,527 - INFO - (DB Handler) keep_stock: Updated stock for 9 items. Action: taken
+2026-01-04 19:45:48,531 - INFO - Router received: Vï¿½LJASTATUD_JOOGID with payload: Counter({'Saku kuld 0.33': 7, 'Somersby 0.33': 1, 'LAUDUR 10000L': 1})
+2026-01-04 19:45:52,773 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:45:52,775 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:46:07,565 - INFO - (DB Handler) get_unreturned_drinks: Found 9 unreturned items for user 2 (2)
+2026-01-04 19:46:07,568 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Somersby 0.33', 2, '2026-01-04 19:45:47'), ('LAUDUR 10000L', 3, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47')])
+2026-01-04 19:46:07,568 - INFO - KONTOHALDUS command received
+2026-01-04 19:46:44,480 - INFO - Router received: UUS_KAART with payload: (True, 'Registreerija 1', '2')
+2026-01-04 19:46:44,481 - INFO - UUS_KAART command received
+2026-01-04 19:46:49,682 - INFO - (DB Handler) update_user_nfc: Updated NFC ID from 2 to 7
+2026-01-04 19:46:49,683 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 registreeritud
+2026-01-04 19:46:49,684 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:46:53,045 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:46:53,046 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:46:57,708 - INFO - Router received: MESSAGE with payload: Kaarti ei leitud
+2026-01-04 19:46:57,709 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:46:59,901 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:46:59,903 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:47:08,231 - INFO - (DB Handler) get_unreturned_drinks: Found 9 unreturned items for user 2 (7)
+2026-01-04 19:47:08,233 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Somersby 0.33', 2, '2026-01-04 19:45:47'), ('LAUDUR 10000L', 3, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47')])
+2026-01-04 19:47:08,234 - INFO - KONTOHALDUS command received
+2026-01-04 19:47:11,303 - INFO - Router received: UUS_KAART with payload: (True, 'Registreerija 1', '7')
+2026-01-04 19:47:11,304 - INFO - UUS_KAART command received
+2026-01-04 19:47:12,968 - WARNING - (DB Handler) update_user_nfc: New NFC ID 1 is already in use.
+2026-01-04 19:47:12,972 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 registreeritud
+2026-01-04 19:47:12,972 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:47:15,223 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:47:15,225 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:47:16,893 - INFO - SAADAN LOGI_SISSE Kï¿½SU
+2026-01-04 19:47:21,113 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-04 19:47:21,114 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-04 19:47:24,400 - INFO - Router received: MESSAGE with payload: Tagasi avaekraanile.
+2026-01-04 19:47:24,400 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:47:25,149 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:47:25,150 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:47:26,428 - INFO - Router received: MESSAGE with payload: Kaarti ei leitud
+2026-01-04 19:47:26,428 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:47:28,382 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:47:28,382 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:47:32,530 - INFO - (DB Handler) get_unreturned_drinks: Found 9 unreturned items for user 2 (7)
+2026-01-04 19:47:32,532 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Somersby 0.33', 2, '2026-01-04 19:45:47'), ('LAUDUR 10000L', 3, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47')])
+2026-01-04 19:47:32,532 - INFO - KONTOHALDUS command received
+2026-01-04 19:47:34,652 - INFO - Router received: UUS_KAART with payload: (True, 'Registreerija 1', '7')
+2026-01-04 19:47:34,652 - INFO - UUS_KAART command received
+2026-01-04 19:47:37,701 - INFO - (DB Handler) update_user_nfc: Updated NFC ID from 7 to 2
+2026-01-04 19:47:37,702 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 registreeritud
+2026-01-04 19:47:37,702 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 19:47:38,990 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:47:38,992 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:47:39,558 - INFO - SAADAN LOGI_SISSE Kï¿½SU
+2026-01-04 19:47:41,870 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-04 19:47:44,850 - INFO - (DB Handler) get_unreturned_drinks: Found 9 unreturned items for user 2 (2)
+2026-01-04 19:47:44,851 - INFO - Sent door opening screen command: 2
+2026-01-04 19:47:44,851 - INFO - Router received: UKSE_AVAMINE_TAGASTAMINE with payload: [('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Somersby 0.33', 2, '2026-01-04 19:45:47'), ('LAUDUR 10000L', 3, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47')]
+2026-01-04 19:47:44,852 - INFO - UKSE_AVAMINE_TAGASTAMINE command received with payload: [('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Somersby 0.33', 2, '2026-01-04 19:45:47'), ('LAUDUR 10000L', 3, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47'), ('Saku kuld 0.33', 1, '2026-01-04 19:45:47')]
+2026-01-04 19:47:50,074 - INFO - Router received: REKLAAM with payload: None
+2026-01-04 19:47:50,075 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-04 19:48:02,323 - INFO - Successfully processed 9 returned items for user 2 (2)
+2026-01-04 19:48:02,341 - INFO - (DB Handler) keep_stock: Updated stock for 9 items. Action: returned
+2026-01-04 19:48:03,344 - INFO - Router received: TAGASTATUD_JOOGID with payload: Counter({'Saku kuld 0.33': 7, 'Somersby 0.33': 1, 'LAUDUR 10000L': 1})
+2026-01-04 19:48:03,345 - INFO - TAGASTATUD_JOOGID command received - switching to TAGASTATUD_JOOGID screen
+2026-01-04 19:48:06,337 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:48:06,339 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:48:11,353 - INFO - (DB Handler) get_unreturned_drinks: No unreturned items found for user 2 (2)
+2026-01-04 19:48:11,355 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [])
+2026-01-04 19:48:11,356 - INFO - KONTOHALDUS command received
+2026-01-04 19:48:17,439 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:48:17,440 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:49:05,484 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:49:07,557 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:57:10,748 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:57:12,980 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:57:48,386 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:57:50,167 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:57:53,250 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 19:57:54,975 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 19:57:58,364 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-04 19:57:58,365 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-04 20:09:32,738 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:09:33,913 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:09:37,816 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:09:37,817 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:10:41,334 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:10:42,635 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:10:44,001 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:10:44,001 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:12:36,313 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:12:37,383 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:12:37,562 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-04 20:12:52,917 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:12:53,538 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:12:54,861 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:12:54,861 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:16:09,511 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:16:10,590 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:16:12,363 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:16:12,363 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:16:14,331 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 1! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-04 20:16:14,332 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:16:22,623 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 1' with NFC 2
+2026-01-04 20:16:22,626 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 1
+2026-01-04 20:16:22,626 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-04 20:16:24,715 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:16:24,716 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:16:27,163 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-04 20:16:32,058 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-04 20:16:33,851 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:16:33,853 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:16:35,251 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 20:16:35,252 - INFO - UUS_KAART command received
+2026-01-04 20:16:35,255 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 20:16:35,255 - INFO - KAOTATUD_KAART command received
+2026-01-04 20:16:38,380 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-04 20:16:38,382 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-04 20:16:38,382 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:16:44,490 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:16:45,234 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:16:48,530 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-04 20:16:50,504 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-04 20:16:50,505 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-04 20:17:07,534 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-04 20:17:07,534 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:17:09,643 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:17:09,644 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:17:12,709 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 20:17:12,709 - INFO - UUS_KAART command received
+2026-01-04 20:17:12,709 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 20:17:12,710 - INFO - KAOTATUD_KAART command received
+2026-01-04 20:18:41,182 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:18:42,290 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:18:47,477 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-04 20:18:49,921 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-04 20:18:49,922 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-04 20:18:59,713 - INFO - Kasutaja üritas registreerida juba registreeritud PIN-koodi.
+2026-01-04 20:18:59,714 - INFO - Router received: MESSAGE with payload: See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt
+2026-01-04 20:18:59,715 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:19:12,519 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:12,520 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:19:14,856 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:19:14,856 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:19:22,089 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:22,090 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:19:23,553 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:19:23,553 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:19:24,962 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-04 20:19:24,963 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:19:26,311 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:26,311 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:19:28,186 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-04 20:19:28,186 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-04 20:19:30,203 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 2
+! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-04 20:19:30,203 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:19:37,286 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 2
+' with NFC 3
+2026-01-04 20:19:37,289 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 2
+
+2026-01-04 20:19:37,290 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-04 20:19:38,457 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:38,458 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:19:39,754 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 20:19:39,755 - INFO - UUS_KAART command received
+2026-01-04 20:19:39,757 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 20:19:39,757 - INFO - KAOTATUD_KAART command received
+2026-01-04 20:19:43,212 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-04 20:19:43,212 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-04 20:19:43,212 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-04 20:19:44,432 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:44,434 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:19:50,296 - INFO - (DB Handler) get_unreturned_drinks: No unreturned items found for user 4 (3)
+2026-01-04 20:19:50,309 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [])
+2026-01-04 20:19:50,309 - INFO - KONTOHALDUS command received
+2026-01-04 20:19:53,960 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:19:53,961 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:21:46,359 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:21:47,504 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:21:57,047 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-04 20:21:57,048 - INFO - UUS_KAART command received
+2026-01-04 20:21:57,050 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-04 20:21:57,050 - INFO - KAOTATUD_KAART command received
+2026-01-04 20:22:04,962 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-04 20:22:04,963 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-04 20:22:06,132 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:22:06,133 - INFO - Router received: DEFAULT with payload: None
+2026-01-04 20:22:07,260 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-04 20:22:10,143 - INFO - Router received: VALIKUVAADE with payload: OG Testkasutaja
+2026-01-04 20:22:12,750 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-04 20:22:12,752 - INFO - Router received: DEFAULT with payload: None

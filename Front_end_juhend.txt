@@ -1,0 +1,127 @@
+================================================================================
+PROJECT KIOSK - GUI DOCUMENTATION & DEVELOPER GUIDE
+================================================================================
+
+1. SYSTEM ARCHITECTURE (THE "DRAWER")
+--------------------------------------------------------------------------------
+The UI runs in a separate process (multiprocessing) to ensure the interface 
+never freezes, even if the backend (database/hardware) is busy.
+
+Files:
+  - drawer.py         -> The "Manager". Runs the main loop and listens for commands.
+  - ui_components.py  -> The "Toolbox". Contains Button class, etc.
+  - styles.py         -> The "Look". Contains Colors and Fonts.
+
+How it works (The Router Pattern):
+  1. main.py puts a command tuple into `command_queue`.
+     Example: ("SHOW_CHOICE", "Marten")
+  2. drawer.py picks up the command.
+  3. drawer.py initializes the specific Screen Class (defined in drawer.py).
+  4. The Screen Class draws itself and checks for button clicks.
+  5. If a button is clicked, the Screen Class returns a Result ID.
+  6. drawer.py puts that ID into `reply_queue`.
+  7. main.py reads the ID and decides what to do next.
+
+
+2. USING STYLES (styles.py)
+--------------------------------------------------------------------------------
+We use a centralized Style Manager to avoid "Magic Numbers" and inconsistent fonts.
+
+Usage:
+  1. Import the manager: 
+     from styles import Colors, FontManager
+
+  2. Inside `drawer.py`, initialize it ONCE:
+     fonts = FontManager()
+
+  3. Accessing Colors:
+     pygame.draw.rect(screen, Colors.RED, rect)
+     
+  4. Accessing Fonts (Dot Notation):
+     text = fonts.header.render("Hello", True, Colors.WHITE)
+     text = fonts.small.render("Footer", True, Colors.GREY)
+
+Available Fonts:
+  - fonts.header  (Big, Bold)
+  - fonts.body    (Medium, Bold)
+  - fonts.small   (Small, Normal)
+
+
+3. USING BUTTONS (ui_components.py)
+--------------------------------------------------------------------------------
+Buttons are objects that handle their own drawing and clicking logic.
+
+Creating a Button:
+  my_btn = Button(x, y, width, height, text, font, color, command_id, border_radius=15)
+
+  Arguments:
+    - x, y: Position on screen
+    - width, height: Size
+    - text: String to display
+    - font: A font object (e.g., fonts.body)
+    - color: A color tuple (e.g., Colors.GREEN)
+    - command_id: The VALUE sent back to main.py when clicked (String or Int).
+    - border_radius: (Optional) Roundness of corners. Default is 15.
+
+Example:
+  # Creates a green button that sends "YES" when clicked
+  self.btn_yes = Button(100, 300, 200, 50, "JAH", fonts.body, Colors.GREEN, "YES")
+
+
+4. HOW TO ADD A NEW SCREEN (STEP-BY-STEP)
+--------------------------------------------------------------------------------
+
+STEP A: Create the Class in `drawer.py`
+----------------------------------------
+Define how the screen looks and behaves. Add this class definition before `run_touchscreen`.
+
+class MyNewScreen:
+    def __init__(self, payload_data, fonts):
+        self.buttons = []
+        self.font = fonts.header
+        
+        # Add a button
+        btn = Button(10, 10, 100, 50, "BACK", fonts.small, Colors.RED, "GO_BACK")
+        self.buttons.append(btn)
+
+    def draw(self, screen):
+        screen.fill(Colors.BACKGROUND)
+        
+        # Draw text
+        title = self.font.render("My New Screen", True, Colors.WHITE)
+        screen.blit(title, (300, 50))
+        
+        # Draw buttons
+        for btn in self.buttons:
+            btn.draw(screen)
+
+    def handle_input(self, event):
+        # Check all buttons
+        for btn in self.buttons:
+            result = btn.check_input(event)
+            if result:
+                return result # Returns "GO_BACK"
+        return None
+
+
+STEP B: Register the Screen in `drawer.py`
+------------------------------------------
+Tell the router (run_touchscreen function) about your new screen.
+
+    # ... inside the while running loop ...
+    elif command == "SHOW_MY_SCREEN":
+        current_screen_object = MyNewScreen(payload, fonts)
+
+
+STEP C: Call it from `main.py`
+------------------------------------------
+Send the command to the GUI process.
+
+    # Send command
+    command_queue.put( ("SHOW_MY_SCREEN", None) )
+
+    # Wait for reply
+    result = reply_queue.get()
+    
+    if result == "GO_BACK":
+        print("User went back")

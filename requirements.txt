@@ -1,1 +1,12 @@
-﻿pyserial>=3.5
+﻿INSTALLIDA
+1. python 13 versioon netist
+2. kontrolli kas pythoin sai installid terminalis käsuga
+   python --version
+Vajadule taaskäivita masin või terminali aken
+3. installi pip (python package manager) käsuga
+   python -m ensurepip --upgrade
+4. Installi vajalikud paketid käsuga
+   py -m pip install pyserial pygame
+Vajadusel installi paketid ühekaupa
+
+Porjekti loomise hetkel ei tööta pygame pakett uuemate python versioonidega (14+), seega kasuta python 13 versiooni.
