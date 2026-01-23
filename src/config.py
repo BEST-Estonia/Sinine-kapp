@@ -1,6 +1,6 @@
 # src/config.py
 """
-Central configuration for the Smart Cupboard application.
+Central configuration for the Simple Camera application.
 Contains window dimensions, FPS, and other application-wide settings.
 """
 
@@ -12,13 +12,3 @@ FPS = 30
 # Window settings
 FULLSCREEN = True  # Full screen mode (set to False for development/debugging)
 NOFRAME = True  # Borderless window
-
-# Hardware configuration
-MOCK_HARDWARE = True  # Use mock hardware for development/testing
-
-# Database configuration
-DB_PATH = "database/users.db"
-
-# Asset paths
-ASSETS_DIR = "assets"
-SNEAKY_IMAGE = "sneaky.png"

@@ -1,8 +1,6 @@
 # src/ui/__init__.py
-"""UI components for the Smart Cupboard application"""
+"""UI components for the Simple Camera application"""
 
 from .buttons import Button
-from .input_box import InputBox
-from .keyboard import OnScreenKeyboard
 
-__all__ = ['Button', 'InputBox', 'OnScreenKeyboard']
+__all__ = ['Button']

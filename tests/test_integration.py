@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Integration test for the Pygame UI
-Tests the complete workflow without requiring user interaction
+Integration test for the Simple Camera UI
+Tests the application initialization and button functionality
 """
 import os
 os.environ['SDL_VIDEODRIVER'] = 'dummy'  # Use dummy video driver for testing
@@ -13,157 +13,106 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from app.ui_pygame import TouchUI
-from app.screens import (
-    MainScreen, CardScanScreen, OpenDoorsScreen, 
-    ReturnDrinkScreen, AdminScreen, StockInventoryScreen
-)
-from database import UserDatabase
-from hardware.mock_rfid import MockRFIDReader
-from hardware.mock_scales import MockScale
-from hardware.mock_qr import MockQRScanner
+from screen_manager import ScreenManager
+from screens import MainMenuScreen
 from hardware.mock_camera import MockCamera
 
 
-def test_database():
-    """Test database operations"""
-    print("Testing database...")
-    db = UserDatabase()
+class MockUIManager:
+    """Mock UI manager for testing"""
+    def __init__(self):
+        self.width = 600
+        self.height = 1024
+        self.camera = MockCamera()
+        self.quit_called = False
     
-    # Test getting users
-    users = db.get_all_users()
-    assert len(users) == 3, f"Expected 3 users, got {len(users)}"
-    print(f"  ✓ Found {len(users)} users")
-    
-    # Test getting specific user
-    user = db.get_user_by_rfid("1")
-    assert user is not None, "User 1 should exist"
-    assert user['name'] == "Alice Johnson", f"Expected Alice Johnson, got {user['name']}"
-    print(f"  ✓ User 1: {user['name']}")
-    
-    # Test non-existent user
-    user = db.get_user_by_rfid("999")
-    assert user is None, "User 999 should not exist"
-    print("  ✓ Non-existent user returns None")
-    
-    # Test adding user
-    result = db.add_user("999", "Test User")
-    assert result is True, "Should be able to add new user"
-    print("  ✓ Added new user")
-    
-    # Verify user was added
-    user = db.get_user_by_rfid("999")
-    assert user is not None, "User 999 should now exist"
-    assert user['name'] == "Test User"
-    print("  ✓ Verified new user")
-    
-    # Clean up
-    db.delete_user("999")
-    db.close()
-    print("✓ Database tests passed\n")
+    def quit(self):
+        self.quit_called = True
 
 
-def test_ui_initialization():
-    """Test UI initialization"""
-    print("Testing UI initialization...")
+def test_main_menu_creation():
+    """Test main menu screen creation"""
+    print("Testing main menu creation...")
     
-    # Initialize hardware
-    rfid = MockRFIDReader()
-    qr = MockQRScanner()
-    cam = MockCamera()
-    scale_top = MockScale(level="top")
-    scale_bottom = MockScale(level="bottom")
+    pygame.init()
+    pygame.font.init()
     
-    # Create UI
-    ui = TouchUI(rfid=rfid, qr=qr, camera=cam, scale_top=scale_top, scale_bottom=scale_bottom)
+    ui = MockUIManager()
+    sm = ScreenManager()
+    screen = MainMenuScreen(ui, sm)
     
-    # Verify UI properties
-    assert ui.width == 480, "Width should be 480"
-    assert ui.height == 800, "Height should be 800"
-    assert ui.screen is not None, "Screen should be initialized"
-    assert ui.db is not None, "Database should be initialized"
-    print("  ✓ UI initialized with correct dimensions")
+    # Verify buttons
+    assert len(screen.buttons) == 2, f"Expected 2 buttons, got {len(screen.buttons)}"
+    assert screen.buttons[0].text == "Open Camera", f"First button should be 'Open Camera'"
+    assert screen.buttons[1].text == "Close Program", f"Second button should be 'Close Program'"
+    print("  ✓ Main menu has 2 buttons: 'Open Camera' and 'Close Program'")
     
-    # Verify initial screen
-    assert isinstance(ui.current_screen, MainScreen), "Initial screen should be MainScreen"
-    print("  ✓ Main screen loaded")
-    
-    ui.db.close()
     pygame.quit()
-    print("✓ UI initialization tests passed\n")
+    print("✓ Main menu creation tests passed\n")
 
 
-def test_screens():
-    """Test screen creation and drawing"""
-    print("Testing screen creation...")
+def test_open_camera_button():
+    """Test Open Camera button"""
+    print("Testing Open Camera button...")
     
-    # Initialize hardware
-    rfid = MockRFIDReader()
-    qr = MockQRScanner()
-    cam = MockCamera()
-    scale_top = MockScale(level="top")
-    scale_bottom = MockScale(level="bottom")
+    pygame.init()
+    pygame.font.init()
     
-    # Create UI
-    ui = TouchUI(rfid=rfid, qr=qr, camera=cam, scale_top=scale_top, scale_bottom=scale_bottom)
+    ui = MockUIManager()
+    sm = ScreenManager()
+    screen = MainMenuScreen(ui, sm)
     
-    # Test MainScreen
-    main_screen = MainScreen(ui)
-    assert len(main_screen.buttons) == 4, "Main screen should have 4 buttons"
-    main_screen.draw(ui.screen)
-    print("  ✓ MainScreen renders")
+    # Find and click Open Camera button
+    camera_btn = screen.buttons[0]
+    assert camera_btn.text == "Open Camera"
     
-    # Test CardScanScreen
-    card_screen = CardScanScreen(ui, "Test", "main")
-    assert len(card_screen.buttons) == 1, "Card scan screen should have 1 button (back)"
-    card_screen.draw(ui.screen)
-    print("  ✓ CardScanScreen renders")
+    # Simulate button click
+    screen.on_button_click(camera_btn)
+    print("  ✓ Open Camera button clicked successfully")
     
-    # Test StockInventoryScreen
-    stock_screen = StockInventoryScreen(ui)
-    assert len(stock_screen.inventory) == 5, "Should have 5 inventory items"
-    stock_screen.draw(ui.screen)
-    print("  ✓ StockInventoryScreen renders")
-    
-    # Test AdminScreen
-    user_info = {"rfid_number": "1", "name": "Alice Johnson"}
-    admin_screen = AdminScreen(ui, user_info)
-    admin_screen.draw(ui.screen)
-    print("  ✓ AdminScreen renders")
-    
-    # Test OpenDoorsScreen
-    open_screen = OpenDoorsScreen(ui, user_info)
-    open_screen.draw(ui.screen)
-    print("  ✓ OpenDoorsScreen renders")
-    
-    # Test ReturnDrinkScreen
-    return_screen = ReturnDrinkScreen(ui, user_info)
-    return_screen.draw(ui.screen)
-    print("  ✓ ReturnDrinkScreen renders")
-    
-    ui.db.close()
     pygame.quit()
-    print("✓ Screen creation tests passed\n")
+    print("✓ Open Camera button tests passed\n")
+
+
+def test_close_program_button():
+    """Test Close Program button"""
+    print("Testing Close Program button...")
+    
+    pygame.init()
+    pygame.font.init()
+    
+    ui = MockUIManager()
+    sm = ScreenManager()
+    screen = MainMenuScreen(ui, sm)
+    
+    # Find and click Close Program button
+    close_btn = screen.buttons[1]
+    assert close_btn.text == "Close Program"
+    
+    # Simulate button click
+    screen.on_button_click(close_btn)
+    
+    # Verify quit was called
+    assert ui.quit_called, "quit() should be called when Close Program is clicked"
+    print("  ✓ Close Program button triggers quit")
+    
+    pygame.quit()
+    print("✓ Close Program button tests passed\n")
 
 
 def test_button_interactions():
     """Test button click detection"""
     print("Testing button interactions...")
     
-    # Initialize hardware
-    rfid = MockRFIDReader()
-    qr = MockQRScanner()
-    cam = MockCamera()
-    scale_top = MockScale(level="top")
-    scale_bottom = MockScale(level="bottom")
+    pygame.init()
+    pygame.font.init()
     
-    # Create UI
-    ui = TouchUI(rfid=rfid, qr=qr, camera=cam, scale_top=scale_top, scale_bottom=scale_bottom)
-    
-    main_screen = MainScreen(ui)
+    ui = MockUIManager()
+    sm = ScreenManager()
+    screen = MainMenuScreen(ui, sm)
     
     # Test button contains
-    btn = main_screen.buttons[0]
+    btn = screen.buttons[0]
     assert btn.contains((btn.rect.centerx, btn.rect.centery)), "Button should contain its center"
     assert not btn.contains((0, 0)), "Button should not contain (0,0)"
     print("  ✓ Button collision detection works")
@@ -175,7 +124,6 @@ def test_button_interactions():
     assert not btn.is_hovered, "Button should not be hovered"
     print("  ✓ Button hover detection works")
     
-    ui.db.close()
     pygame.quit()
     print("✓ Button interaction tests passed\n")
 
@@ -183,13 +131,13 @@ def test_button_interactions():
 def main():
     """Run all tests"""
     print("=" * 60)
-    print("Running Pygame UI Integration Tests")
+    print("Running Simple Camera UI Integration Tests")
     print("=" * 60 + "\n")
     
     try:
-        test_database()
-        test_ui_initialization()
-        test_screens()
+        test_main_menu_creation()
+        test_open_camera_button()
+        test_close_program_button()
         test_button_interactions()
         
         print("=" * 60)

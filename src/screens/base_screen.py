@@ -3,32 +3,15 @@
 Base screen class and common utilities
 """
 import pygame
-from pathlib import Path
 from typing import Optional
 
 from ui.theme import (
-    PRIMARY, TEXT_PRIMARY, TEXT_ON_PRIMARY, WHITE, SUCCESS, ERROR,
-    BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM, SHADOW,
-    get_font, draw_gradient_background, create_shadow_surface,
+    PRIMARY, TEXT_PRIMARY, TEXT_ON_PRIMARY, WHITE,
+    BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM,
+    get_font, draw_gradient_background,
     FONT_SIZE_TITLE, FONT_SIZE_HEADING, FONT_SIZE_BODY,
-    PADDING_MD, RADIUS_LG
+    PADDING_MD
 )
-from assets import get_asset_manager
-
-
-def load_sneaky_image(scale=(120, 120)) -> Optional[pygame.Surface]:
-    """Load the Sneaky character PNG from asset manager"""
-    assets = get_asset_manager()
-    return assets.get_sneaky_image(scale=scale)
-
-
-def draw_sneaky_bottom(surface: pygame.Surface, sneaky_img: pygame.Surface, width: int):
-    """Draw Sneaky anchored at the bottom center of the screen"""
-    if sneaky_img:
-        img_rect = sneaky_img.get_rect()
-        img_rect.centerx = width // 2
-        img_rect.bottom = surface.get_height() - 10
-        surface.blit(sneaky_img, img_rect)
 
 
 class BaseScreen:
@@ -39,7 +22,6 @@ class BaseScreen:
         self.screen_manager = screen_manager
         self.buttons = []
         self.pressed_button = None
-        self.sneaky_img = load_sneaky_image()
         self.payload = None  # Store payload from on_enter
         # Cache commonly used fonts
         self._title_font = get_font(FONT_SIZE_TITLE, bold=True)
@@ -102,5 +84,3 @@ class BaseScreen:
         """Draw common elements like background"""
         # Draw gradient background
         draw_gradient_background(surface, BG_GRADIENT_TOP, BG_GRADIENT_BOTTOM)
-        
-        # Note: Character is now drawn globally by the main loop, not here
