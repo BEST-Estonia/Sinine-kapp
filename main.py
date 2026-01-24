@@ -4,9 +4,9 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
 from kivy.uix.camera import Camera
 from kivy.core.window import Window
-import sys
 
 # Set the window to full screen for kiosk mode
+# 'auto' enables fullscreen on mobile/embedded devices while windowed on desktop
 Window.fullscreen = 'auto'
 
 class SinineKapp(MDApp):
@@ -49,8 +49,8 @@ class SinineKapp(MDApp):
         return layout
 
     def close_app(self, instance):
-        # Stop the app and close the window
-        sys.exit()
+        # Stop the app and close the window properly
+        self.stop()
 
 if __name__ == '__main__':
     SinineKapp().run()
