@@ -142,6 +142,10 @@ def GUI_tagastatud(scanned_items_info):
     print(f"DEBUG: Kokkuvõte saadetud drawerisse: {drink_counts}")
     command_queue.put( ("TAGASTATUD_JOOGID", drink_counts) )
 
+def GUI_live_cart(scanned_items_info):
+    drink_counts = Counter(scanned_items_info)
+    command_queue.put( ("LIVE_CART", drink_counts) )
+
 def GUI_kasutaja_registreeritud(nimi):
     command_queue.put( ("KASUTAJA_REGISTREERITUD", nimi) )
     
@@ -367,7 +371,7 @@ def joogi_väljastus(nfc_input):
     
 
     #Reklaam samal ajal kui uks lahti
-    GUI_reklaam()
+    GUI_live_cart([])
 
      #Siia salvestub list jookidest mis skännitakse.
     scanned_items_info = []
@@ -378,7 +382,7 @@ def joogi_väljastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        GUI_reklaam()    
+        # GUI_reklaam() eemaldatud, et hoida live cart vaadet
         barcode = hardware_handler.get_barcode()
         
        #Kui barcode loetud
@@ -386,7 +390,6 @@ def joogi_väljastus(nfc_input):
 
             #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
             is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            GUI_message('skannitud', show_button=False)
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
             if is_in_db == False:
@@ -396,10 +399,12 @@ def joogi_väljastus(nfc_input):
             else:
                 scanned_barcodes.append(barcode) 
                 scanned_items_info.append(drink_info)
+                GUI_live_cart(scanned_items_info)
                 print(f"DEBUG: {scanned_items_info}")
             # D. Uuenda LCD-ekraani
             
-            lcd.show_message(drink_info) 
+            count = scanned_items_info.count(drink_info)
+            lcd.show_message(f"{drink_info} X{count}")
             
         # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(2)
@@ -451,7 +456,7 @@ def joogi_tagastus(nfc_input):
     hardware_handler.Ukse_avaja()
 
     #Reklaam samal ajal kui uks lahti
-    GUI_reklaam()
+    GUI_live_cart([])
 
      #Siia salvestub jookide nimikiri mis skännitakse. See on list jookdie NIMEDEST
     scanned_items_info = []
@@ -462,7 +467,7 @@ def joogi_tagastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        GUI_reklaam()
+        # GUI_reklaam() eemaldatud
         barcode = hardware_handler.get_barcode()
         
        #Kui barcode loetud
@@ -470,7 +475,6 @@ def joogi_tagastus(nfc_input):
 
             #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
             is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            GUI_message('skannitud', show_button=False)
             
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
@@ -481,10 +485,12 @@ def joogi_tagastus(nfc_input):
             else:
                 scanned_barcodes.append(barcode) 
                 scanned_items_info.append(drink_info)
+                GUI_live_cart(scanned_items_info)
                 print(f"DEBUG: {scanned_items_info}")
             # D. Uuenda LCD-ekraani
             
-            lcd.show_message(drink_info) 
+            count = scanned_items_info.count(drink_info)
+            lcd.show_message(f"{drink_info} X{count}")
             
         # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(2)

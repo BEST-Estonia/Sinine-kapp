@@ -1137,6 +1137,44 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
         
         return None
 
+class LIVE_CART:
+    def __init__(self, payload_data, fonts):
+        self.fonts = fonts
+        # payload_data is expected to be a dict: {"Drink Name": count, ...}
+        self.items = payload_data if isinstance(payload_data, dict) else {}
+        self.buttons = []
+
+    def draw(self, screen):
+        screen.fill(Colors.BACKGROUND)
+        
+        # Title
+        title_surf = self.fonts.header.render("Hetkel skaneeritud:", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(512, 50))
+        screen.blit(title_surf, title_rect)
+        
+        # List items
+        start_y = 150
+        line_h = 38
+        if not self.items:
+            empty_surf = self.fonts.body.render("Skaneeri tooteid...", True, Colors.GREY)
+            screen.blit(empty_surf, (100, start_y))
+        else:
+            x_name = 100
+            x_count = 850
+            for i, (name, count) in enumerate(self.items.items()):
+                y = start_y + i * line_h
+                if y > 700: break
+                name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
+                count_surf = self.fonts.body.render(f"x{count}", True, Colors.TEXT_PRIMARY)
+                screen.blit(name_surf, (x_name, y))
+                screen.blit(count_surf, (x_count, y))
+                
+        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+
+    def handle_input(self, event):
+        return None
+
 def run_touchscreen(command_q, reply_q):
     pygame.init()
     screen = pygame.display.set_mode((1024, 768))
@@ -1213,6 +1251,10 @@ def run_touchscreen(command_q, reply_q):
             elif command == "MESSAGE":
                 logging.info("MESSAGE command received - switching to MESSAGE screen")
                 current_screen_object = MESSAGE(payload, fonts)
+                
+            elif command == "LIVE_CART":
+                logging.info("LIVE_CART command received")
+                current_screen_object = LIVE_CART(payload, fonts)
 
             elif command == "STOP":
                 running = False
