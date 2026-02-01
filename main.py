@@ -149,8 +149,8 @@ def GUI_kasutaja_registreeritud(nimi):
 def GUI_pinn_vale():
     drawer.Vale_pinnkood()
 
-def GUI_message(message):
-    command_queue.put( ("MESSAGE", message) )
+def GUI_message(message, show_button=True):
+    command_queue.put( ("MESSAGE", (message, show_button)) )
 
 def kontohaldus(): 
     nfc_input = hardware_handler.get_nfc()
@@ -187,7 +187,7 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
         found, nimi = database_handler.nime_kaeve_pintabelist(pinnkood)
 
         if is_pin_in_pintable == True and is_user_registered == True:
-            GUI_message(f"Kasutaja {nimi} leitud. Viipa uut kaarti registreerimiseks")
+            GUI_message(f"Kasutaja {nimi} leitud. Viipa uut kaarti registreerimiseks", show_button=False)
             uus_nfc = hardware_handler.get_nfc()
             database_handler.register_new_card(uus_nfc, nimi)
             GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
@@ -196,7 +196,7 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
             command_queue.put(("REGISTREERI_PINNKOODI_ALUSEL", None))
             vastus = reply_queue.get(60)
             if vastus == True:
-                GUI_message(f"Viipa kiipkaarti kasutaja {nimi} registreerimiseks.")
+                GUI_message(f"Viipa kiipkaarti kasutaja {nimi} registreerimiseks.", show_button=False)
                 nfc_input = hardware_handler.get_nfc()
                 IsinDB, kasutu_muutuja = database_handler.checkuser(nfc_input)
                 Empty_reply_queue()
@@ -331,7 +331,7 @@ def main_loop():
                         continue 
                     else:
                         found, nimi = database_handler.nime_kaeve_pintabelist(pinnkood) #kaevab pintabelist nime mis vastab pinnkoodile
-                        GUI_message(f"Tere, {nimi}! Viipa kiipkaarti kasutaja registreerimiseks")
+                        GUI_message(f"Tere, {nimi}! Viipa kiipkaarti kasutaja registreerimiseks", show_button=False)
                         nfc_input = hardware_handler.get_nfc()
                         database_handler.create_new_user(nfc_input, pinnkood) #annab funktsioonile sisse nfc uid ja sisestatud pinnkoodi ja loob uue kasutaja
                         
@@ -386,7 +386,7 @@ def joogi_väljastus(nfc_input):
 
             #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
             is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            GUI_message('skannitud')
+            GUI_message('skannitud', show_button=False)
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
             if is_in_db == False:
@@ -462,6 +462,7 @@ def joogi_tagastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
+        GUI_reklaam()
         barcode = hardware_handler.get_barcode()
         
        #Kui barcode loetud
@@ -469,6 +470,7 @@ def joogi_tagastus(nfc_input):
 
             #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
             is_in_db, drink_info = database_handler.get_drink_info(barcode)
+            GUI_message('skannitud', show_button=False)
             
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
@@ -485,7 +487,8 @@ def joogi_tagastus(nfc_input):
             lcd.show_message(drink_info) 
             
         # Väike paus, et tsükkel ei koormaks protsessorit
-        time.sleep(0.05) 
+        time.sleep(2)
+        lcd.clear()
 
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False

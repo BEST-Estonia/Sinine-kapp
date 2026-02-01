@@ -559,14 +559,21 @@ class REGISTREERIMINE:
         return None
 
 class MESSAGE:
-    def __init__(self, text, fonts):
+    def __init__(self, payload, fonts):
         self.fonts = fonts
-        self.text = str(text) if text else ""
+        
+        if isinstance(payload, tuple):
+            self.text = str(payload[0]) if payload[0] else ""
+            show_button = payload[1]
+        else:
+            self.text = str(payload) if payload else ""
+            show_button = True
         
         self.buttons = []
-        # Button returns True (boolean) which will be put in reply_queue
-        btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
-        self.buttons.append(btn)
+        if show_button:
+            # Button returns True (boolean) which will be put in reply_queue
+            btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
+            self.buttons.append(btn)
         
         # Wrap text to fit screen width (900px safe area)
         self.lines = self._wrap_text(self.text, self.fonts.body, 900)
