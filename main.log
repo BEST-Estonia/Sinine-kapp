@@ -2573,3 +2573,79 @@
 2026-02-01 20:07:31,515 - INFO - drawer DEFAULT uploaded tagasi
 2026-02-01 20:07:31,785 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-01 20:07:31,787 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:29,237 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:29,741 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:31,615 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:31,617 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:31,617 - INFO - ADMIN command received
+2026-02-01 20:48:31,621 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:32,258 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:32,261 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:32,261 - INFO - ADMIN command received
+2026-02-01 20:48:32,264 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:32,612 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:32,614 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:32,614 - INFO - ADMIN command received
+2026-02-01 20:48:32,618 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:33,005 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:33,008 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:33,008 - INFO - ADMIN command received
+2026-02-01 20:48:33,012 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:33,837 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:33,839 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:33,839 - INFO - ADMIN command received
+2026-02-01 20:48:33,843 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:34,022 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:34,024 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:34,024 - INFO - ADMIN command received
+2026-02-01 20:48:34,028 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:34,228 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:34,229 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:34,229 - INFO - ADMIN command received
+2026-02-01 20:48:34,234 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:34,398 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:34,401 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:34,401 - INFO - ADMIN command received
+2026-02-01 20:48:34,405 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:34,563 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:34,566 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:34,566 - INFO - ADMIN command received
+2026-02-01 20:48:34,570 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:34,854 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:34,856 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:34,856 - INFO - ADMIN command received
+2026-02-01 20:48:34,860 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:35,134 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:35,137 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:35,137 - INFO - ADMIN command received
+2026-02-01 20:48:35,142 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:35,655 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:35,656 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:35,656 - INFO - ADMIN command received
+2026-02-01 20:48:35,660 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:36,234 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:36,237 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:36,237 - INFO - ADMIN command received
+2026-02-01 20:48:36,241 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:36,556 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:36,558 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:36,558 - INFO - ADMIN command received
+2026-02-01 20:48:36,562 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:54,450 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:48:54,966 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:48:55,419 - INFO - Router received: ADMIN with payload: None
+2026-02-01 20:48:55,419 - INFO - ADMIN command received
+2026-02-01 20:51:47,286 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:51:47,796 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:51:51,744 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-02-01 20:51:51,745 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-02-01 20:51:55,426 - INFO - Router received: MESSAGE with payload: ('Tere, ADMIN! Viipa kiipkaarti kasutaja registreerimiseks', False)
+2026-02-01 20:51:55,426 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 20:51:59,335 - INFO - (DB Handler) create_new_user: Created user 'ADMIN' with NFC 836305420740
+2026-02-01 20:51:59,337 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: ADMIN
+2026-02-01 20:51:59,337 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-02-01 20:52:03,104 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:52:03,106 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 20:52:11,422 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 20:52:11,425 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 20:52:11,427 - INFO - Router received: DEFAULT with payload: None

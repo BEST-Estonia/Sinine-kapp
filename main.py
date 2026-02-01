@@ -390,6 +390,9 @@ def main_loop():
                     Oota_kasutaja_kinnitust(20)
                     continue
 
+        elif valik == "ADMIN":
+            command_queue.put(("ADMIN", None))
+
 
 #Joogi väljastuse plokk
 def joogi_väljastus(nfc_input):

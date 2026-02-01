@@ -236,6 +236,8 @@ class DEFAULT_SCREEN:
         
         self.btn_kontohaldus = Button(650, 650, 300, 80, "KONTOHALDUS", fonts.small, Colors.BLUE, "GOTO_OPTIONS")
         
+        self.btn_ADMIN = Button(20, 650, 240, 80, "ADMIN", fonts.small, Colors.RED, "GOTO_ADMIN")
+
         # Options menu buttons
         self.btn_login_settings = Button(200, 350, 300, 100, "Logi sisse seadetesse", fonts.small, Colors.BLUE, "LOGIN_SEADED")
         self.btn_new_card = Button(524, 350, 300, 100, "Kaotasin kaardi", fonts.small, Colors.GREEN, "KAOTATUD_KAART")
@@ -254,6 +256,7 @@ class DEFAULT_SCREEN:
             
             self.btn_drink.draw(screen)
             self.btn_kontohaldus.draw(screen)
+            self.btn_ADMIN.draw(screen)
             
             
         elif self.state == "viipa":
@@ -281,7 +284,10 @@ class DEFAULT_SCREEN:
                 logging.info("SAADAN LOGI_SISSE KÄSU")
                 return "LOGI_SISSE"
 
-                
+            res = self.btn_ADMIN.check_input(event)
+            if res == "GOTO_ADMIN":
+                return "ADMIN"
+
             res = self.btn_kontohaldus.check_input(event)
             if res == "GOTO_OPTIONS":
                 self.state = "options"
@@ -1283,6 +1289,69 @@ class CART_REVIEW:
                     return None
         return None
 
+class ADMIN:
+    def __init__(self, fonts):
+        self.fonts = fonts
+        self.state = "main" # main, products
+        
+        # Main state buttons
+        self.btn_products = Button(312, 300, 400, 100, "Lisa/Eemalda toode", fonts.body, Colors.BLUE, "GOTO_PRODUCTS")
+        self.btn_debtors = Button(312, 450, 400, 100, "Võlglased", fonts.body, Colors.BLUE, "SHOW_DEBTORS")
+        self.btn_back = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK")
+        
+        # Products state buttons
+        self.btn_add = Button(312, 300, 400, 100, "Lisa", fonts.body, Colors.GREEN, "ADD_PRODUCT")
+        self.btn_remove = Button(312, 450, 400, 100, "Eemalda", fonts.body, Colors.RED, "REMOVE_PRODUCT")
+        self.btn_back_products = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_MAIN")
+
+    def draw(self, screen):
+        screen.fill(Colors.DARK_BG)
+        rect = screen.get_rect()
+        
+        if self.state == "main":
+            title = self.fonts.header.render("Admin paneel", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(rect.centerx, 100)))
+            
+            self.btn_products.draw(screen)
+            self.btn_debtors.draw(screen)
+            self.btn_back.draw(screen)
+            
+        elif self.state == "products":
+            title = self.fonts.header.render("Toodete haldus", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(rect.centerx, 100)))
+            
+            self.btn_add.draw(screen)
+            self.btn_remove.draw(screen)
+            self.btn_back_products.draw(screen)
+            
+        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+
+    def handle_input(self, event):
+        if self.state == "main":
+            res = self.btn_products.check_input(event)
+            if res == "GOTO_PRODUCTS":
+                self.state = "products"
+                return None
+            
+            res = self.btn_debtors.check_input(event)
+            if res: return res
+                
+            res = self.btn_back.check_input(event)
+            if res: return res
+        
+        elif self.state == "products":
+            for btn in [self.btn_add, self.btn_remove]:
+                res = btn.check_input(event)
+                if res: return res
+            
+            res = self.btn_back_products.check_input(event)
+            if res == "BACK_TO_MAIN":
+                self.state = "main"
+                return None
+        
+        return None
+
 def run_touchscreen(command_q, reply_q):
     pygame.init()
     screen = pygame.display.set_mode((1024, 768))
@@ -1367,6 +1436,10 @@ def run_touchscreen(command_q, reply_q):
             elif command == "CART_REVIEW":
                 logging.info("CART_REVIEW command received")
                 current_screen_object = CART_REVIEW(payload, fonts)
+            
+            elif command == "ADMIN":
+                logging.info("ADMIN command received")
+                current_screen_object = ADMIN(fonts)
 
             elif command == "STOP":
                 running = False
