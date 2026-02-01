@@ -1289,10 +1289,75 @@ class CART_REVIEW:
                     return None
         return None
 
+class REMOVE_PRODUCT_LIST:
+    def __init__(self, products, fonts):
+        self.fonts = fonts
+        self.products = products # list of (id, name, barcode)
+        self.scroll_index = 0
+        self.selected_id = None
+        
+        self.btn_up = Button(850, 150, 100, 80, "ÜLES", fonts.small, Colors.BLUE, "SCROLL_UP")
+        self.btn_down = Button(850, 500, 100, 80, "ALLA", fonts.small, Colors.BLUE, "SCROLL_DOWN")
+        self.btn_delete = Button(312, 650, 200, 60, "KUSTUTA", fonts.body, Colors.RED, "DELETE")
+        self.btn_back = Button(50, 650, 200, 60, "TAGASI", fonts.body, Colors.GREY, "BACK")
+        
+        self.buttons = [self.btn_up, self.btn_down, self.btn_delete, self.btn_back]
+
+    def draw(self, screen):
+        screen.fill(Colors.DARK_BG)
+        title = self.fonts.header.render("Vali toode eemaldamiseks", True, Colors.TEXT_PRIMARY)
+        screen.blit(title, title.get_rect(center=(512, 50)))
+        
+        start_y = 120
+        line_h = 50
+        max_y = 600
+        
+        visible_products = self.products[self.scroll_index:]
+        
+        for i, prod in enumerate(visible_products):
+            pid, name, barcode = prod
+            y = start_y + i * line_h
+            if y > max_y: break
+            
+            # Highlight selected
+            color = Colors.GREEN if pid == self.selected_id else Colors.TEXT_PRIMARY
+            
+            text = f"{name} ({barcode})"
+            surf = self.fonts.body.render(text, True, color)
+            screen.blit(surf, (100, y))
+
+        for btn in self.buttons:
+            # Only draw delete if selected
+            if btn == self.btn_delete and self.selected_id is None:
+                continue
+            btn.draw(screen)
+            
+    def handle_input(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mx, my = pygame.mouse.get_pos()
+            if 100 <= mx <= 800 and 120 <= my <= 600:
+                idx = (my - 120) // 50
+                real_idx = self.scroll_index + idx
+                if 0 <= real_idx < len(self.products):
+                    self.selected_id = self.products[real_idx][0]
+        
+        for btn in self.buttons:
+            if btn == self.btn_delete and self.selected_id is None: continue
+            res = btn.check_input(event)
+            if res == "DELETE": return ("DELETE_PRODUCT", self.selected_id)
+            elif res: return res
+            
+            if res == "SCROLL_UP": self.scroll_index = max(0, self.scroll_index - 5)
+            elif res == "SCROLL_DOWN": 
+                if self.scroll_index + 5 < len(self.products): self.scroll_index += 5
+        return None
+
 class ADMIN:
     def __init__(self, fonts):
         self.fonts = fonts
         self.state = "main" # main, products
+        self.input_text = ""
+        self.keyboard_buttons = []
         
         # Main state buttons
         self.btn_products = Button(312, 300, 400, 100, "Lisa/Eemalda toode", fonts.body, Colors.BLUE, "GOTO_PRODUCTS")
@@ -1302,7 +1367,49 @@ class ADMIN:
         # Products state buttons
         self.btn_add = Button(312, 300, 400, 100, "Lisa", fonts.body, Colors.GREEN, "ADD_PRODUCT")
         self.btn_remove = Button(312, 450, 400, 100, "Eemalda", fonts.body, Colors.RED, "REMOVE_PRODUCT")
-        self.btn_back_products = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_MAIN")
+        self.btn_back_products = Button(50, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_MAIN")
+        
+        self._create_keyboard()
+
+    def _create_keyboard(self):
+        self.keyboard_buttons = []
+        # Layout
+        rows = [
+            "1234567890",
+            "QWERTYUIOP",
+            "ASDFGHJKL",
+            "ZXCVBNM"
+        ]
+        
+        start_y = 250
+        key_size = 60
+        spacing = 10
+        
+        # Letters
+        for r, row_keys in enumerate(rows):
+            row_width = len(row_keys) * (key_size + spacing) - spacing
+            start_x = (1024 - row_width) // 2
+            
+            for c, char in enumerate(row_keys):
+                x = start_x + c * (key_size + spacing)
+                y = start_y + r * (key_size + spacing)
+                btn = Button(x, y, key_size, key_size, char, self.fonts.body, Colors.DK_BLUE, f"KEY_{char}")
+                self.keyboard_buttons.append(btn)
+        
+        # Special keys
+        y_special = start_y + 4 * (key_size + spacing)
+        
+        # Space
+        btn_space = Button(202, y_special, 400, key_size, "SPACE", self.fonts.body, Colors.DK_BLUE, "KEY_SPACE")
+        self.keyboard_buttons.append(btn_space)
+        
+        # Backspace
+        btn_back = Button(612, y_special, 100, key_size, "<--", self.fonts.body, Colors.RED, "KEY_BACKSPACE")
+        self.keyboard_buttons.append(btn_back)
+        
+        # Enter
+        btn_enter = Button(722, y_special, 100, key_size, "OK", self.fonts.body, Colors.GREEN, "KEY_ENTER")
+        self.keyboard_buttons.append(btn_enter)
 
     def draw(self, screen):
         screen.fill(Colors.DARK_BG)
@@ -1324,6 +1431,21 @@ class ADMIN:
             self.btn_remove.draw(screen)
             self.btn_back_products.draw(screen)
             
+        elif self.state == "enter_name":
+            title = self.fonts.header.render("SISESTA toote nimi", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(rect.centerx, 80)))
+            
+            # Input box visualization
+            pygame.draw.rect(screen, Colors.GREY, (212, 150, 600, 80), 2)
+            text_surf = self.fonts.header.render(self.input_text, True, Colors.TEXT_PRIMARY)
+            screen.blit(text_surf, text_surf.get_rect(center=(rect.centerx, 190)))
+            
+            for btn in self.keyboard_buttons:
+                btn.draw(screen)
+                
+            # Cancel button for input mode
+            self.btn_back_products.draw(screen)
+            
         debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
         screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
 
@@ -1341,14 +1463,42 @@ class ADMIN:
             if res: return res
         
         elif self.state == "products":
-            for btn in [self.btn_add, self.btn_remove]:
-                res = btn.check_input(event)
-                if res: return res
+            res = self.btn_add.check_input(event)
+            if res == "ADD_PRODUCT":
+                self.state = "enter_name"
+                self.input_text = ""
+                return None
+                
+            res = self.btn_remove.check_input(event)
+            if res: return res
             
             res = self.btn_back_products.check_input(event)
             if res == "BACK_TO_MAIN":
                 self.state = "main"
                 return None
+                
+        elif self.state == "enter_name":
+            res = self.btn_back_products.check_input(event)
+            if res == "BACK_TO_MAIN":
+                self.state = "products"
+                return None
+                
+            for btn in self.keyboard_buttons:
+                res = btn.check_input(event)
+                if res:
+                    if res.startswith("KEY_"):
+                        key = res[4:]
+                        if key == "SPACE":
+                            self.input_text += " "
+                        elif key == "BACKSPACE":
+                            self.input_text = self.input_text[:-1]
+                        elif key == "ENTER":
+                            if self.input_text:
+                                return ("PRODUCT_NAME", self.input_text)
+                        else:
+                            if len(self.input_text) < 20:
+                                self.input_text += key
+                    return None
         
         return None
 
@@ -1440,6 +1590,10 @@ def run_touchscreen(command_q, reply_q):
             elif command == "ADMIN":
                 logging.info("ADMIN command received")
                 current_screen_object = ADMIN(fonts)
+            
+            elif command == "REMOVE_PRODUCT_LIST":
+                logging.info("REMOVE_PRODUCT_LIST command received")
+                current_screen_object = REMOVE_PRODUCT_LIST(payload, fonts)
 
             elif command == "STOP":
                 running = False

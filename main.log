@@ -2649,3 +2649,169 @@
 2026-02-01 20:52:11,422 - INFO - drawer DEFAULT uploaded tagasi
 2026-02-01 20:52:11,425 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-01 20:52:11,427 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:01:45,446 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:01:45,961 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:01:47,362 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:01:47,362 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:01:50,768 - ERROR - AUTH ERROR!!
+2026-02-01 21:01:50,769 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:01:50,872 - INFO - Router received: MESSAGE with payload: ('Vale kaart', False)
+2026-02-01 21:01:50,872 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:02:41,190 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:02:41,698 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:02:42,359 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:02:42,360 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:02:43,929 - ERROR - AUTH ERROR!!
+2026-02-01 21:02:43,929 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:02:44,032 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-02-01 21:02:44,032 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:02:44,764 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:02:44,766 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:02:45,669 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:02:45,669 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:02:46,976 - ERROR - AUTH ERROR!!
+2026-02-01 21:02:46,976 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:02:47,086 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-02-01 21:02:47,087 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:04:31,609 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:04:31,611 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:04:32,224 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:04:32,224 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:04:33,791 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:04:33,791 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:04:33,791 - INFO - ADMIN command received
+2026-02-01 21:04:33,795 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:06:36,359 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:06:36,359 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:06:38,300 - ERROR - AUTH ERROR!!
+2026-02-01 21:06:38,301 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:06:38,407 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-02-01 21:06:38,407 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:06:48,125 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:06:48,638 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:06:49,463 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:06:49,463 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:06:50,307 - ERROR - AUTH ERROR!!
+2026-02-01 21:06:50,308 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:06:50,412 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-02-01 21:06:50,412 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:06:53,414 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:06:53,417 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:07:05,921 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:07:05,921 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:07:07,279 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:07:07,282 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:07:07,283 - INFO - ADMIN command received
+2026-02-01 21:07:07,287 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:26:17,297 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:26:17,802 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:26:19,197 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:26:19,197 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:26:21,391 - ERROR - AUTH ERROR!!
+2026-02-01 21:26:21,392 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 21:26:21,501 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-02-01 21:26:21,501 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:26:24,502 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:26:24,502 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:26:25,697 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:26:25,697 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:26:28,890 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:26:28,891 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:26:30,213 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:26:30,214 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:26:32,231 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:26:32,231 - INFO - ADMIN command received
+2026-02-01 21:27:02,595 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-01 21:27:02,595 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:27:09,290 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-01 21:27:09,290 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:27:11,671 - ERROR - database_handler.add_product method missing
+2026-02-01 21:27:11,675 - INFO - Router received: MESSAGE with payload: ('Viga andmebaasiga suhtlemisel', True)
+2026-02-01 21:27:11,675 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:27:15,604 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:27:15,604 - INFO - ADMIN command received
+2026-02-01 21:27:41,414 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:27:41,417 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:27:42,890 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:27:42,890 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:27:44,229 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:27:44,237 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:27:45,745 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:27:45,745 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:27:46,642 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:27:46,643 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:33:58,007 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:33:58,516 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:33:59,924 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:33:59,925 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:34:01,113 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:34:01,114 - INFO - ADMIN command received
+2026-02-01 21:34:17,653 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-01 21:34:17,653 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:34:21,937 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-01 21:34:21,937 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:34:24,044 - ERROR - database_handler.add_product method missing
+2026-02-01 21:34:24,049 - INFO - Router received: MESSAGE with payload: ('Viga andmebaasiga suhtlemisel', True)
+2026-02-01 21:34:24,049 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:34:28,760 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:34:28,760 - INFO - ADMIN command received
+2026-02-01 21:34:29,423 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:34:29,426 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:36:07,174 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:36:07,175 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:36:09,708 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:36:09,708 - INFO - ADMIN command received
+2026-02-01 21:36:13,724 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:36:13,727 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:36:14,328 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:36:14,329 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:36:17,461 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:36:17,461 - INFO - ADMIN command received
+2026-02-01 21:49:33,625 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:49:34,136 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:49:36,102 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:49:36,103 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:49:38,445 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:49:38,446 - INFO - ADMIN command received
+2026-02-01 21:50:01,364 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-01 21:50:01,365 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:50:06,109 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-01 21:50:06,109 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:50:08,454 - INFO - Router received: MESSAGE with payload: ('JAFFA 15 on lisatud andmebaasi', True)
+2026-02-01 21:50:08,454 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:50:12,877 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:50:12,877 - INFO - ADMIN command received
+2026-02-01 21:50:29,943 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:50:30,452 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:50:32,173 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:50:32,174 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:50:33,150 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:50:33,150 - INFO - ADMIN command received
+2026-02-01 21:50:34,622 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:50:34,624 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:50:35,298 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:50:35,298 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:50:36,878 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:50:36,879 - INFO - ADMIN command received
+2026-02-01 21:53:35,221 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 21:53:35,729 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 21:53:37,366 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 21:53:37,366 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:53:38,350 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:53:38,351 - INFO - ADMIN command received
+2026-02-01 21:53:45,850 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-01 21:53:45,850 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:53:49,656 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-01 21:53:49,656 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:53:53,129 - INFO - Router received: MESSAGE with payload: ('JAFFA05 on lisatud andmebaasi', True)
+2026-02-01 21:53:53,129 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:53:57,510 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:53:57,510 - INFO - ADMIN command received
+2026-02-01 21:54:00,667 - INFO - Router received: REMOVE_PRODUCT_LIST with payload: [(5, 'Belief 0.5ml', 474443301911), (7, 'JAFFA05', 6413600002925), (3, 'LAUDUR 10000L', 3), (1, 'Saku kuld 0.33', 1), (2, 'Somersby 0.33', 2), (4, 'Vergi', 4742883015974), (6, 'coca cola 2L', 5000112678239)]
+2026-02-01 21:54:00,667 - INFO - REMOVE_PRODUCT_LIST command received
+2026-02-01 21:54:27,495 - INFO - Router received: MESSAGE with payload: ('Toode eemaldatud', False)
+2026-02-01 21:54:27,495 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 21:54:28,496 - INFO - Router received: REMOVE_PRODUCT_LIST with payload: [(5, 'Belief 0.5ml', 474443301911), (3, 'LAUDUR 10000L', 3), (1, 'Saku kuld 0.33', 1), (2, 'Somersby 0.33', 2), (4, 'Vergi', 4742883015974), (6, 'coca cola 2L', 5000112678239)]
+2026-02-01 21:54:28,496 - INFO - REMOVE_PRODUCT_LIST command received
+2026-02-01 21:54:30,550 - INFO - Router received: ADMIN with payload: None
+2026-02-01 21:54:30,551 - INFO - ADMIN command received

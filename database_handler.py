@@ -627,3 +627,37 @@ def register_new_card(uus_nfc, nimi):
     finally:
         if conn:
             conn.close()
+
+def add_product(name, barcode):
+    db_file = 'database.db'
+    conn = sqlite3.connect(db_file) 
+    c = conn.cursor()
+    try:
+        # Defaulting stock to 0 and weight to 0.0 as they are required/implied
+        c.execute('INSERT INTO Products (barcode, name, stock, weight) VALUES (?, ?, ?, ?)', (barcode, name, 0, 0.0))
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    except Exception as e:
+        print(f"Error adding product: {e}")
+        return False
+    finally:
+        conn.close()
+
+def get_all_products():
+    db_file = 'database.db'
+    conn = sqlite3.connect(db_file) 
+    c = conn.cursor()
+    c.execute('SELECT productid, name, barcode FROM Products ORDER BY name')
+    data = c.fetchall()
+    conn.close()
+    return data # Returns list of tuples: (productid, name, barcode)
+
+def remove_product(product_id):
+    db_file = 'database.db'
+    conn = sqlite3.connect(db_file) 
+    c = conn.cursor()
+    c.execute('DELETE FROM Products WHERE productid = ?', (product_id,))
+    conn.commit()
+    conn.close()

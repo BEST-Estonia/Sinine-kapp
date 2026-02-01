@@ -37,7 +37,7 @@ def Empty_command_queue():
 
 def Oota_kasutaja_kinnitust(timeout):
     try:
-        response = reply_queue.get(timeout)
+        response = reply_queue.get(timeout=timeout)
         if response == True: 
             pass
     except queue.Empty:
@@ -47,6 +47,8 @@ def check_for_cancel():
     try:
         msg = reply_queue.get_nowait()
         if msg == "tagasi":
+            return True
+        if msg is True: # Handle "Jätka" button from MESSAGE screen as cancel
             return True
     except queue.Empty:
         pass
@@ -164,6 +166,82 @@ def GUI_pinn_vale():
 
 def GUI_message(message, show_button=True):
     command_queue.put( ("MESSAGE", (message, show_button)) )
+
+def admin_loop():
+    """
+    Handles the admin screen logic loop.
+    """
+    command_queue.put(("ADMIN", None))
+    
+    while True:
+        try:
+            valik = reply_queue.get()
+            
+            if valik == "BACK":
+                return # Exit to main loop
+            
+            elif isinstance(valik, tuple) and valik[0] == "PRODUCT_NAME":
+                product_name = valik[1]
+                
+                # Scanning flow
+                while True:
+                    GUI_message(f"Skänni uue toote triipkood", show_button=False)
+                    code1 = hardware_handler.get_barcode(timeout=20)
+                    if not code1:
+                        GUI_message("Triipkoodi ei leitud. Proovi uuesti.", show_button=True)
+                        Oota_kasutaja_kinnitust(10)
+                        break # Back to admin menu
+                    
+                    GUI_message("Skänni uuesti kontrolliks", show_button=False)
+                    time.sleep(2) # Wait to prevent immediate re-read
+                    code2 = hardware_handler.get_barcode(timeout=20)
+                    
+                    if code1 == code2:
+                        # Assuming database_handler has this method
+                        try:
+                            database_handler.add_product(product_name, code1)
+                            GUI_message(f"{product_name} on lisatud andmebaasi", show_button=True)
+                        except AttributeError:
+                            logging.error("database_handler.add_product method missing")
+                            GUI_message("Viga andmebaasiga suhtlemisel", show_button=True)
+                        
+                        Oota_kasutaja_kinnitust(10)
+                        break
+                    else:
+                        GUI_message("Koodid ei ühti. Proovi uuesti.", show_button=True)
+                        Oota_kasutaja_kinnitust(10)
+                        # Loop continues to retry scanning
+                
+                # Return to admin screen
+                command_queue.put(("ADMIN", None))
+                
+            elif valik == "REMOVE_PRODUCT":
+                while True:
+                    try:
+                        products = database_handler.get_all_products()
+                    except AttributeError:
+                        logging.error("database_handler.get_all_products missing")
+                        products = []
+                        
+                    command_queue.put(("REMOVE_PRODUCT_LIST", products))
+                    
+                    resp = reply_queue.get()
+                    if resp == "BACK":
+                        command_queue.put(("ADMIN", None))
+                        break
+                    elif isinstance(resp, tuple) and resp[0] == "DELETE_PRODUCT":
+                        pid = resp[1]
+                        try:
+                            database_handler.remove_product(pid)
+                            GUI_message("Toode eemaldatud", show_button=False)
+                            time.sleep(1)
+                        except AttributeError:
+                            GUI_message("Viga andmebaasiga", show_button=True)
+                            Oota_kasutaja_kinnitust(5)
+                        # Loop continues to refresh list
+                
+        except queue.Empty:
+            pass
 
 def kontohaldus(): 
     nfc_input = hardware_handler.get_nfc(check_for_cancel)
@@ -391,7 +469,17 @@ def main_loop():
                     continue
 
         elif valik == "ADMIN":
-            command_queue.put(("ADMIN", None))
+            GUI_message("Viipa admin kiipi", show_button=True)
+            nfc_input = hardware_handler.get_nfc(check_for_cancel)
+            
+            if nfc_input:
+                is_in_db, name = database_handler.checkuser(nfc_input)
+                if is_in_db and name == "ADMIN":
+                    admin_loop()
+                else:
+                    GUI_message("Vale kaart")
+                    Oota_kasutaja_kinnitust(3)
+            # If nfc_input is None (cancelled via button), loop restarts automatically
 
 
 #Joogi väljastuse plokk
