@@ -24,33 +24,33 @@ class VALIKUVAADE:
         self.name_line = f"Tere {nimi}"
         self.question_line = "Tahad jooki võtta või tagasi tuua?"
         
-      
-        btn_take = Button(100, 350, 350, 200, "VÕTA JOOK", fonts.body, Colors.GREEN, "1")
+        # Vertical layout with larger buttons
+        btn_take = Button(140, 900, 800, 200, "VÕTA JOOK", fonts.title, Colors.SUCCESS, "1")
         self.buttons.append(btn_take)
         
-        btn_return = Button(574, 350, 350, 200, "TOO TAGASI", fonts.body, Colors.BLUE, "2")
+        btn_return = Button(140, 1150, 800, 200, "TOO TAGASI", fonts.title, Colors.PRIMARY, "2")
         self.buttons.append(btn_return)
         
-        btn_cancel = Button(412, 650, 200, 60, "TÜHISTA", fonts.body, Colors.RED, False)
+        btn_cancel = Button(290, 1700, 500, 120, "TÜHISTA", fonts.body, Colors.DANGER, False)
         self.buttons.append(btn_cancel)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         # Render greeting on two lines
-        line1_surf = self.fonts.header.render(self.name_line, True, Colors.TEXT_PRIMARY)
-        line1_rect = line1_surf.get_rect(center=(512, 130))
+        line1_surf = self.fonts.huge.render(self.name_line, True, Colors.TEXT_PRIMARY)
+        line1_rect = line1_surf.get_rect(center=(540, 300))
         screen.blit(line1_surf, line1_rect)
         
-        line2_surf = self.fonts.body.render(self.question_line, True, Colors.TEXT_PRIMARY)
-        line2_rect = line2_surf.get_rect(center=(512, 200))
+        line2_surf = self.fonts.body.render(self.question_line, True, Colors.TEXT_SECONDARY)
+        line2_rect = line2_surf.get_rect(center=(540, 600))
         screen.blit(line2_surf, line2_rect)
         
         for btn in self.buttons:
             btn.draw(screen)
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.TEXT_SECONDARY)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         for btn in self.buttons:
@@ -230,48 +230,72 @@ class DEFAULT_SCREEN:
         self.fonts = fonts
         self.state = "default" # default, viipa, options
         
-        # Buttons
-     
-        self.btn_drink = Button(262, 300, 500, 150, "Login sisse, tahan juua", fonts.body, Colors.GREEN, "START_LOGIN")
+        # Buttons adjusted for 1080x1920 vertical screen
+        # Main action button - large and centered
+        self.btn_drink = Button(140, 800, 800, 200, "Login sisse, tahan juua", fonts.title, Colors.SUCCESS, "START_LOGIN")
         
-        self.btn_kontohaldus = Button(750, 650, 220, 60, "KONTOHALDUS", fonts.small, Colors.BLUE, "GOTO_OPTIONS")
+        # Settings button at bottom
+        self.btn_kontohaldus = Button(140, 1750, 800, 120, "KONTOHALDUS", fonts.body, Colors.PRIMARY, "GOTO_OPTIONS")
         
-        # Options menu buttons
-        self.btn_login_settings = Button(200, 350, 300, 100, "Logi sisse seadetesse", fonts.small, Colors.BLUE, "LOGIN_SEADED")
-        self.btn_new_card = Button(524, 350, 300, 100, "Kaotasin kaardi", fonts.small, Colors.GREEN, "KAOTATUD_KAART")
-        self.btn_new_account = Button(362, 480, 300, 80, "Loo uus kasutaja", fonts.small, Colors.BLUE, "UUS_KONTO")
+        # Options menu buttons - stacked vertically
+        self.btn_login_settings = Button(140, 700, 800, 150, "Logi sisse seadetesse", fonts.body, Colors.PRIMARY, "LOGIN_SEADED")
+        self.btn_new_card = Button(140, 900, 800, 150, "Kaotasin kaardi", fonts.body, Colors.WARNING, "KAOTATUD_KAART")
+        self.btn_new_account = Button(140, 1100, 800, 150, "Loo uus kasutaja", fonts.body, Colors.INFO, "UUS_KONTO")
         
-        self.btn_back = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK")
+        self.btn_back = Button(290, 1700, 500, 120, "Tagasi", fonts.body, Colors.LIGHT_GREY, "BACK", text_color=Colors.TEXT_PRIMARY)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         rect = screen.get_rect()
         
         if self.state == "default":
-            line1 = self.fonts.header.render("Tere tulemast, külaline!", True, Colors.TEXT_PRIMARY)
+            # Welcome header at top
+            line1 = self.fonts.huge.render("Tere tulemast!", True, Colors.TEXT_PRIMARY)
+            line2 = self.fonts.header.render("Sinine Kapp", True, Colors.PRIMARY)
             
-            screen.blit(line1, line1.get_rect(center=(rect.centerx, rect.centery - 200)))
+            screen.blit(line1, line1.get_rect(center=(rect.centerx, 300)))
+            screen.blit(line2, line2.get_rect(center=(rect.centerx, 450)))
             
             self.btn_drink.draw(screen)
             self.btn_kontohaldus.draw(screen)
             
+            # Footer info
+            info_text = self.fonts.small.render("Puuduta ekraani alustamiseks", True, Colors.TEXT_SECONDARY)
+            screen.blit(info_text, info_text.get_rect(center=(rect.centerx, 1600)))
             
         elif self.state == "viipa":
-            line = self.fonts.header.render("Viipa kaarti logimiseks", True, Colors.TEXT_PRIMARY)
-            screen.blit(line, line.get_rect(center=(rect.centerx, rect.centery)))
+            # Large clear instruction
+            line = self.fonts.header.render("Viipa kaarti", True, Colors.TEXT_PRIMARY)
+            line2 = self.fonts.title.render("logimiseks", True, Colors.TEXT_PRIMARY)
+            screen.blit(line, line.get_rect(center=(rect.centerx, 800)))
+            screen.blit(line2, line2.get_rect(center=(rect.centerx, 920)))
+            
+            # Visual indicator - large card icon area
+            card_rect = pygame.Rect(340, 1000, 400, 300)
+            pygame.draw.rect(screen, Colors.CARD_BG, card_rect, border_radius=30)
+            pygame.draw.rect(screen, Colors.PRIMARY, card_rect, 5, border_radius=30)
+            
+            icon_text = self.fonts.huge.render("💳", True, Colors.PRIMARY)
+            screen.blit(icon_text, icon_text.get_rect(center=card_rect.center))
+            
             self.btn_back.draw(screen)
             
         elif self.state == "options":
-            line = self.fonts.header.render("Vali toiming", True, Colors.TEXT_PRIMARY)
-            screen.blit(line, line.get_rect(center=(rect.centerx, 100)))
+            # Options menu header
+            line = self.fonts.huge.render("Kontohaldus", True, Colors.TEXT_PRIMARY)
+            screen.blit(line, line.get_rect(center=(rect.centerx, 300)))
+            
+            line2 = self.fonts.body.render("Vali toiming", True, Colors.TEXT_SECONDARY)
+            screen.blit(line2, line2.get_rect(center=(rect.centerx, 500)))
             
             self.btn_login_settings.draw(screen)
             self.btn_new_card.draw(screen)
             self.btn_new_account.draw(screen)
             self.btn_back.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        # Debug info in corner
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.TEXT_SECONDARY)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         if self.state == "default":
@@ -1177,9 +1201,11 @@ class LIVE_CART:
 
 def run_touchscreen(command_q, reply_q):
     pygame.init()
-    screen = pygame.display.set_mode((1024, 768))
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    #pygame.display.set_caption("Sinine_kapp")
+    # Vertical screen for kiosk: 1080x1920 (portrait mode)
+    screen = pygame.display.set_mode((1080, 1920))
+    # Uncomment the line below for fullscreen on actual hardware:
+    # screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    pygame.display.set_caption("Sinine Kapp - Smart Beverage Cabinet")
     
     # 1. INITIALIZE STYLE MANAGER
     # Laeb fondid 
