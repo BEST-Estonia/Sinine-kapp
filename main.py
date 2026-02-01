@@ -43,6 +43,15 @@ def Oota_kasutaja_kinnitust(timeout):
     except queue.Empty:
         pass
 
+def check_for_cancel():
+    try:
+        msg = reply_queue.get_nowait()
+        if msg == "tagasi":
+            return True
+    except queue.Empty:
+        pass
+    return False
+
 #Funktsioonid GUI protsessi käivitamiseks ja käsitlemiseks
 
 def GUI_default():
@@ -157,7 +166,9 @@ def GUI_message(message, show_button=True):
     command_queue.put( ("MESSAGE", (message, show_button)) )
 
 def kontohaldus(): 
-    nfc_input = hardware_handler.get_nfc()
+    nfc_input = hardware_handler.get_nfc(check_for_cancel)
+    if nfc_input is None:
+        return None, None
     print(f"DEBUG: Loetud NFC tag {nfc_input}")
     #Db handler kontrollib kas nfc uid on andmebaasis. kui jah tagastab IsinDB = True, kui ei False ja nimi
     IsinDB, nimi = database_handler.checkuser(nfc_input)
@@ -239,7 +250,9 @@ def main_loop():
             
         if valik == "LOGI_SISSE":
             #Ootab  handlerilt nfc inputi
-            nfc_input = hardware_handler.get_nfc()
+            nfc_input = hardware_handler.get_nfc(check_for_cancel)
+            if nfc_input is None:
+                continue
             print(f"DEBUG: Loetud NFC tag {nfc_input}")
             #Db handler kontrollib kas nfc uid on andmebaasis. kui jah tagastab IsinDB = True, kui ei False ja nimi
             IsinDB, nimi = database_handler.checkuser(nfc_input)
@@ -309,6 +322,8 @@ def main_loop():
 
         elif valik == "LOGIN_SEADED":  
             nfc_input, nimi = kontohaldus() #funktsioon handleb sisse logimist kui ebaõnnestub algab mainloop uuesti
+            if nfc_input is None:
+                continue
             vastus = reply_queue.get()
             if vastus == "UUS_KAART": #kui kasutaja tahab uuendada kaarti ja on juba regatud
                 uus_kaart(True, nimi, nfc_input)

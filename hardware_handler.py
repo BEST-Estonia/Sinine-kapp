@@ -125,15 +125,21 @@ def cleanup_camera():
     camera_service.stop()
 
 #küsib nfc tagi
-def get_nfc():
+def get_nfc(cancel_check_callback=None):
     """
     Waits until a card is tapped, then returns the UID as a number.
+    If cancel_check_callback is provided, it is called periodically.
+    If callback returns True, function returns None.
     """
     reader = SimpleMFRC522()
     try:
-        # reader.read() blocks (pauses) execution until a card is detected
-        id, text = reader.read()
-        return id
+        while True:
+            id, text = reader.read_no_block()
+            if id:
+                return id
+            if cancel_check_callback and cancel_check_callback():
+                return None
+            time.sleep(0.1)
     finally:
         # Good practice to clean up pins, though strict cleanup 
         # depends on if you have other sensors running.

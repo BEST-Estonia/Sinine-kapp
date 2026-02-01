@@ -293,7 +293,8 @@ class DEFAULT_SCREEN:
             res = self.btn_back.check_input(event)
             if res == "BACK":
                 self.state = "default"
-                return None
+                logging.info("drawer DEFAULT uploaded tagasi")
+                return "tagasi"
         
         elif self.state == "options":
             res = self.btn_login_settings.check_input(event)
@@ -316,7 +317,8 @@ class DEFAULT_SCREEN:
             res = self.btn_back.check_input(event)
             if res == "BACK":
                 self.state = "default"
-                return None
+                logging.info("drawer DEFAULT uploaded tagasi")
+                return "tagasi"
                 
         return None
 

@@ -2173,3 +2173,39 @@
 2026-02-01 18:26:49,531 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-01 18:26:49,535 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
 2026-02-01 18:26:49,539 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:41:17,045 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:41:17,555 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:43:12,918 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:48:09,267 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:48:09,797 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:48:11,595 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 18:48:11,598 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:48:11,600 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:48:12,063 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:48:12,757 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 19:01:03,645 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 19:01:04,162 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 19:01:07,373 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 19:01:07,584 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 19:01:07,585 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 19:01:08,779 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-02-01 19:01:08,779 - INFO - UUS_KAART command received
+2026-02-01 19:01:08,782 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-02-01 19:01:08,783 - INFO - KAOTATUD_KAART command received
+2026-02-01 19:01:09,411 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-02-01 19:01:09,411 - INFO - Router received: MESSAGE with payload: ('Pinnkoodi ei leitud.', True)
+2026-02-01 19:01:09,412 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 19:01:09,836 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 19:01:09,838 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 19:01:10,822 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-02-01 19:01:10,822 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-02-01 19:01:11,299 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 19:01:11,301 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 19:01:11,649 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 19:01:12,126 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 19:01:12,310 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 19:01:12,313 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 19:01:14,359 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 19:01:14,900 - ERROR - AUTH ERROR!!
+2026-02-01 19:01:14,900 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 19:01:15,009 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
