@@ -1,0 +1,32 @@
+# Sinine Kapp - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core GUI framework
+pygame>=2.5.0
+
+# Image processing (for easter egg GIF)
+Pillow>=10.0.0
+
+# Database (included in Python standard library)
+# sqlite3
+
+# ========================================
+# LAPTOP/DEVELOPMENT MODE ONLY
+# ========================================
+# These are NOT needed when MOCK_MODE = True:
+# pyserial
+# opencv-python
+# pyzbar
+
+# ========================================
+# RASPBERRY PI HARDWARE MODE ONLY
+# ========================================
+# These are needed when running on Raspberry Pi with MOCK_MODE = False:
+# RPi.GPIO (install via: sudo apt install python3-rpi-lgpio python3-spidev)
+# mfrc522
+# opencv-python
+# pyzbar
+# pyserial (for serial communication if needed)
+
+# For hardware mode, install these after setting up the Pi:
+# pip install mfrc522 opencv-python pyzbar pyserial
