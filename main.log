@@ -1608,3 +1608,15 @@
 2026-02-01 15:15:33,925 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
 2026-02-01 15:15:41,026 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-01 15:15:41,028 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:48:16,925 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 15:48:17,444 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:48:18,798 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 15:48:32,525 - ERROR - AUTH ERROR!!
+2026-02-01 15:48:32,525 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 15:48:32,629 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 15:48:32,629 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 15:48:32,634 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:48:37,224 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-02-01 15:48:37,224 - INFO - UUS_KAART command received
+2026-02-01 15:48:37,228 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-02-01 15:48:37,228 - INFO - KAOTATUD_KAART command received
