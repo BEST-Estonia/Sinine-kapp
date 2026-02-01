@@ -48,10 +48,8 @@ class FontManager:
         self.tiny   = pygame.font.SysFont("arial", 28)              # Tiny text
 
     # Helper to make text rendering cleaner
-    def render(self, font_type, text, color=None):
+    def render(self, font_type, text, color=Colors.TEXT_PRIMARY):
         """
         Usage: fonts.render(fonts.header, "Hello")
         """
-        if color is None:
-            color = Colors.TEXT_PRIMARY
         return font_type.render(text, True, color)

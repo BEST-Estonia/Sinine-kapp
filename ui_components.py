@@ -22,10 +22,11 @@ class Button:
             # Simple way to make color lighter: limit at 255
             draw_color = (min(self.color[0]+30, 255), min(self.color[1]+30, 255), min(self.color[2]+30, 255))
         
-        # Draw subtle shadow for depth
+        # Draw subtle shadow for depth (using a darker shade of the button color)
         shadow_rect = self.rect.copy()
         shadow_rect.y += 4
-        pygame.draw.rect(screen, (0, 0, 0, 30), shadow_rect, border_radius=self.border_radius)
+        shadow_color = (max(self.color[0]-60, 0), max(self.color[1]-60, 0), max(self.color[2]-60, 0))
+        pygame.draw.rect(screen, shadow_color, shadow_rect, border_radius=self.border_radius)
         
         # Draw main button
         pygame.draw.rect(screen, draw_color, self.rect, border_radius=self.border_radius)

@@ -21,7 +21,7 @@ except ImportError:
     decode = None
 
 # MOCK MODE TOGGLE - Set to True for laptop/development, False for Raspberry Pi
-MOCK_MODE = False
+MOCK_MODE = True
 
 # Only import hardware libraries if NOT in mock mode
 if not MOCK_MODE:

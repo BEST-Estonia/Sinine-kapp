@@ -18,10 +18,9 @@ This allows the application to run without Raspberry Pi hardware (NFC reader, ca
 
 ```bash
 # Install Python dependencies
-pip install pygame
+pip install pygame Pillow
 
-# Optional: For database management
-pip install sqlite3
+# Note: sqlite3 is included in Python's standard library - no need to install
 ```
 
 **Note**: You don't need RPi.GPIO, mfrc522, opencv, or pyzbar when MOCK_MODE is enabled.
