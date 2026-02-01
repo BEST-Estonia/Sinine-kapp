@@ -3,16 +3,40 @@ See fail tegeleb riistvara suhtlusega.
 get_nfc() loeb nfc lugejat ja returnib saadud vastuse
 Mai viitsi rohkem edasi kirjutada
 
+MOCK MODE: Set MOCK_MODE = True to use keyboard input instead of real hardware
+  - NFC: Type user ID and press Enter (e.g., "12345")
+  - Barcode: Type barcode and press Enter (e.g., "4740098000334")
 """
-import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
 import time
 import sys
 import subprocess
 import threading
-import numpy as np
-import cv2
-from pyzbar.pyzbar import decode
+try:
+    import numpy as np
+    import cv2
+    from pyzbar.pyzbar import decode
+except ImportError:
+    print("WARNING: OpenCV/pyzbar not available - barcode scanning disabled")
+    cv2 = None
+    decode = None
+
+# MOCK MODE TOGGLE - Set to True for laptop/development, False for Raspberry Pi
+MOCK_MODE = True
+
+# Only import hardware libraries if NOT in mock mode
+if not MOCK_MODE:
+    try:
+        import RPi.GPIO as GPIO
+        from mfrc522 import SimpleMFRC522
+    except ImportError:
+        print("WARNING: Raspberry Pi GPIO libraries not available - using MOCK_MODE")
+        MOCK_MODE = True
+        GPIO = None
+        SimpleMFRC522 = None
+else:
+    GPIO = None
+    SimpleMFRC522 = None
+
 try:
     import msvcrt
 except ImportError:
@@ -82,12 +106,33 @@ camera_service = CameraStream()
 def get_barcode(timeout=10):
     """
     Scans for a barcode for up to 'timeout' seconds.
+    In MOCK_MODE: Waits for keyboard input.
     
     Returns:
         str: The barcode data if found.
         int: 0 if timed out.
     """
+    if MOCK_MODE:
+        print("\n=== MOCK BARCODE SCANNER ===")
+        print(f"Enter barcode and press Enter (timeout: {timeout}s):")
+        print("Example: 4740098000334")
+        print("Press Enter without typing to skip")
+        
+        # Use a simple input with timeout simulation
+        try:
+            barcode_input = input("> ").strip()
+            if barcode_input:
+                return barcode_input
+            else:
+                return 0  # No input = timeout
+        except (EOFError, KeyboardInterrupt):
+            return 0
     
+    # Real hardware mode
+    if cv2 is None or decode is None:
+        print("ERROR: OpenCV/pyzbar not available for barcode scanning")
+        return 0
+        
     # 1. Auto-start camera if it's not running
     if not camera_service.running:
         camera_service.start()
@@ -128,16 +173,29 @@ def cleanup_camera():
 def get_nfc():
     """
     Waits until a card is tapped, then returns the UID as a number.
+    In MOCK_MODE: Waits for keyboard input and converts to integer.
     """
-    reader = SimpleMFRC522()
-    try:
-        # reader.read() blocks (pauses) execution until a card is detected
-        id, text = reader.read()
-        return id
-    finally:
-        # Good practice to clean up pins, though strict cleanup 
-        # depends on if you have other sensors running.
-        GPIO.cleanup()
+    if MOCK_MODE:
+        print("\n=== MOCK NFC READER ===")
+        print("Enter NFC card ID (numbers only) and press Enter:")
+        print("Example: 12345 or 67890")
+        try:
+            nfc_input = input("> ").strip()
+            # Convert to integer to match real NFC behavior
+            return int(nfc_input)
+        except ValueError:
+            print("Invalid input! Using default ID: 12345")
+            return 12345
+    else:
+        reader = SimpleMFRC522()
+        try:
+            # reader.read() blocks (pauses) execution until a card is detected
+            id, text = reader.read()
+            return id
+        finally:
+            # Good practice to clean up pins, though strict cleanup 
+            # depends on if you have other sensors running.
+            GPIO.cleanup()
 
 #Küsib kaalu näitu
 def get_wheight():
