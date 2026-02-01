@@ -681,6 +681,7 @@ class KONTOHALDUS:
         self.unreturned_drinks = payload[1] if payload and len(payload) > 1 else []
         
         self.state = "main" # main, balance, dates
+        self.dates_scroll_index = 0
         
         # --- Buttons for MAIN state ---
         self.btn_new_card = Button(200, 350, 300, 100, "Vaheta kiipkaarti", fonts.body, Colors.BLUE, "UUS_KAART")
@@ -693,6 +694,10 @@ class KONTOHALDUS:
         
         # --- Buttons for DATES state ---
         self.btn_dates_back = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_BALANCE")
+        
+        # --- Scroll Buttons ---
+        self.btn_scroll_up = Button(850, 150, 100, 80, "ÜLES", fonts.small, Colors.BLUE, "SCROLL_UP")
+        self.btn_scroll_down = Button(850, 500, 100, 80, "ALLA", fonts.small, Colors.BLUE, "SCROLL_DOWN")
 
     def draw(self, screen):
         screen.fill(Colors.DARK_BG)
@@ -737,20 +742,31 @@ class KONTOHALDUS:
             screen.blit(title, title.get_rect(center=(rect.centerx, 50)))
             
             start_y = 100
+            line_height = 30
+            max_y = 600
+            
             if not self.unreturned_drinks:
                 msg = self.fonts.body.render("Võlgnevusi pole!", True, Colors.GREEN)
                 screen.blit(msg, msg.get_rect(center=(rect.centerx, start_y)))
             else:
-                for i, item in enumerate(self.unreturned_drinks):
+                visible_items = self.unreturned_drinks[self.dates_scroll_index:]
+                for i, item in enumerate(visible_items):
                     # item: (name, barcode, date)
                     name = item[0]
                     date_str = str(item[2])
-                    y = start_y + i * 30
-                    if y > 600: break
+                    y = start_y + i * line_height
+                    if y > max_y: break
                     
                     row_text = f"{name} - {date_str}"
                     surf = self.fonts.small.render(row_text, True, Colors.TEXT_PRIMARY)
                     screen.blit(surf, (50, y))
+                
+                if self.dates_scroll_index > 0:
+                    self.btn_scroll_up.draw(screen)
+                
+                items_per_page = (max_y - start_y) // line_height
+                if self.dates_scroll_index + items_per_page < len(self.unreturned_drinks):
+                    self.btn_scroll_down.draw(screen)
             
             self.btn_dates_back.draw(screen)
             
@@ -785,6 +801,17 @@ class KONTOHALDUS:
             res = self.btn_dates_back.check_input(event)
             if res == "BACK_TO_BALANCE":
                 self.state = "balance"
+                return None
+            
+            res = self.btn_scroll_up.check_input(event)
+            if res == "SCROLL_UP":
+                self.dates_scroll_index = max(0, self.dates_scroll_index - 5)
+                return None
+                
+            res = self.btn_scroll_down.check_input(event)
+            if res == "SCROLL_DOWN":
+                if self.dates_scroll_index + 16 < len(self.unreturned_drinks):
+                    self.dates_scroll_index += 5
                 return None
         
         return None
@@ -1175,6 +1202,86 @@ class LIVE_CART:
     def handle_input(self, event):
         return None
 
+class CART_REVIEW:
+    def __init__(self, payload_data, fonts):
+        self.fonts = fonts
+        # payload_data: {"Drink Name": count, ...}
+        self.items = payload_data if isinstance(payload_data, dict) else {}
+        self.buttons = []
+        self._create_ui()
+
+    def _create_ui(self):
+        self.buttons = []
+        start_y = 150
+        line_h = 50
+        
+        # Confirm button
+        btn_confirm = Button(412, 680, 200, 60, "Kinnita", self.fonts.body, Colors.GREEN, "CONFIRM")
+        self.buttons.append(btn_confirm)
+
+        # Item rows
+        for i, (name, count) in enumerate(self.items.items()):
+            y = start_y + i * line_h
+            if y > 650: break 
+            
+            # Minus button
+            btn_minus = Button(600, y, 40, 40, "-", self.fonts.body, Colors.RED, f"MINUS_{name}")
+            self.buttons.append(btn_minus)
+            
+            # Plus button
+            btn_plus = Button(750, y, 40, 40, "+", self.fonts.body, Colors.GREEN, f"PLUS_{name}")
+            self.buttons.append(btn_plus)
+
+    def draw(self, screen):
+        screen.fill(Colors.BACKGROUND)
+        
+        title_surf = self.fonts.header.render("Kontrolli koguseid", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(512, 50))
+        screen.blit(title_surf, title_rect)
+        
+        start_y = 150
+        line_h = 50
+        
+        for i, (name, count) in enumerate(self.items.items()):
+            y = start_y + i * line_h
+            if y > 650: break
+            
+            name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
+            screen.blit(name_surf, (100, y + 5)) 
+            
+            count_surf = self.fonts.body.render(str(count), True, Colors.TEXT_PRIMARY)
+            screen.blit(count_surf, (670, y + 5))
+
+        for btn in self.buttons:
+            btn.draw(screen)
+            
+        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+
+    def handle_input(self, event):
+        for btn in self.buttons:
+            res = btn.check_input(event)
+            if res == "CONFIRM":
+                return self.items 
+            
+            if res and isinstance(res, str):
+                if res.startswith("MINUS_"):
+                    name = res[6:]
+                    if name in self.items:
+                        self.items[name] -= 1
+                        if self.items[name] <= 0:
+                            del self.items[name]
+                        self._create_ui() 
+                    return None
+                
+                if res.startswith("PLUS_"):
+                    name = res[5:]
+                    if name in self.items:
+                        self.items[name] += 1
+                        self._create_ui()
+                    return None
+        return None
+
 def run_touchscreen(command_q, reply_q):
     pygame.init()
     screen = pygame.display.set_mode((1024, 768))
@@ -1255,6 +1362,10 @@ def run_touchscreen(command_q, reply_q):
             elif command == "LIVE_CART":
                 logging.info("LIVE_CART command received")
                 current_screen_object = LIVE_CART(payload, fonts)
+
+            elif command == "CART_REVIEW":
+                logging.info("CART_REVIEW command received")
+                current_screen_object = CART_REVIEW(payload, fonts)
 
             elif command == "STOP":
                 running = False

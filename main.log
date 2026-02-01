@@ -2013,3 +2013,163 @@
 2026-02-01 17:40:07,714 - INFO - MESSAGE command received - switching to MESSAGE screen
 2026-02-01 17:40:08,450 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-01 17:40:08,452 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 17:59:47,281 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 17:59:47,788 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 17:59:49,142 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 17:59:56,983 - ERROR - AUTH ERROR!!
+2026-02-01 17:59:56,984 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 17:59:57,089 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 17:59:57,818 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 17:59:57,820 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 17:59:58,759 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 17:59:59,699 - ERROR - AUTH ERROR!!
+2026-02-01 17:59:59,700 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 17:59:59,804 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:00:00,452 - INFO - Sent door opening screen command: 1
+2026-02-01 18:00:00,454 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-01 18:00:00,454 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-01 18:00:00,454 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-01 18:00:04,454 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-01 18:00:04,455 - INFO - LIVE_CART command received
+2026-02-01 18:00:09,275 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-01 18:00:09,275 - INFO - LIVE_CART command received
+2026-02-01 18:00:11,420 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-01 18:00:11,421 - INFO - LIVE_CART command received
+2026-02-01 18:00:13,571 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-01 18:00:13,571 - INFO - LIVE_CART command received
+2026-02-01 18:00:15,722 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-01 18:00:15,722 - INFO - LIVE_CART command received
+2026-02-01 18:00:18,020 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-01 18:00:18,020 - INFO - LIVE_CART command received
+2026-02-01 18:00:20,090 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 5 taken items for user 4 (584183079146)
+2026-02-01 18:00:20,100 - INFO - (DB Handler) keep_stock: Updated stock for 5 items. Action: taken
+2026-02-01 18:00:21,128 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 5})
+2026-02-01 18:00:26,846 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:00:26,849 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:08:06,342 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:08:06,862 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:08:08,391 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:08:09,290 - ERROR - AUTH ERROR!!
+2026-02-01 18:08:09,292 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:08:09,397 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:08:10,272 - INFO - Sent door opening screen command: 1
+2026-02-01 18:08:10,273 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-01 18:08:10,273 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-01 18:08:10,273 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-01 18:08:14,274 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-01 18:08:14,275 - INFO - LIVE_CART command received
+2026-02-01 18:08:17,771 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-01 18:08:17,772 - INFO - LIVE_CART command received
+2026-02-01 18:08:19,968 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-01 18:08:19,968 - INFO - LIVE_CART command received
+2026-02-01 18:08:22,122 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-01 18:08:22,122 - INFO - LIVE_CART command received
+2026-02-01 18:08:25,132 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-01 18:08:25,133 - INFO - LIVE_CART command received
+2026-02-01 18:08:27,292 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-01 18:08:27,292 - INFO - LIVE_CART command received
+2026-02-01 18:08:29,365 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 5 taken items for user 4 (584183079146)
+2026-02-01 18:08:29,376 - INFO - (DB Handler) keep_stock: Updated stock for 5 items. Action: taken
+2026-02-01 18:08:30,405 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 5})
+2026-02-01 18:08:40,573 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:08:40,575 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:17:10,169 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:17:10,680 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:17:11,999 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:17:18,378 - ERROR - AUTH ERROR!!
+2026-02-01 18:17:18,379 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:17:18,486 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:17:20,197 - INFO - Sent door opening screen command: 1
+2026-02-01 18:17:20,199 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-01 18:17:20,199 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-01 18:17:20,199 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-01 18:17:24,203 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-01 18:17:24,204 - INFO - LIVE_CART command received
+2026-02-01 18:17:25,877 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-01 18:17:25,877 - INFO - LIVE_CART command received
+2026-02-01 18:17:28,036 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-01 18:17:28,037 - INFO - LIVE_CART command received
+2026-02-01 18:17:42,140 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 2}
+2026-02-01 18:17:42,140 - INFO - CART_REVIEW command received
+2026-02-01 18:18:46,143 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 10 taken items for user 4 (584183079146)
+2026-02-01 18:18:46,155 - INFO - (DB Handler) keep_stock: Updated stock for 10 items. Action: taken
+2026-02-01 18:18:47,183 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:18:47,186 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:18:58,553 - ERROR - AUTH ERROR!!
+2026-02-01 18:18:58,555 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:18:58,662 - INFO - Router received: MESSAGE with payload: ('Kaarti ei leitud', True)
+2026-02-01 18:18:58,662 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 18:19:00,181 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:19:00,184 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:19:02,774 - ERROR - AUTH ERROR!!
+2026-02-01 18:19:02,775 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:19:02,878 - INFO - (DB Handler) get_unreturned_drinks: Found 48 unreturned items for user 4 (584183079146)
+2026-02-01 18:19:02,883 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:33'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46')])
+2026-02-01 18:19:02,883 - INFO - KONTOHALDUS command received
+2026-02-01 18:21:28,446 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:21:28,448 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:23:59,011 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:23:59,520 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:24:05,431 - ERROR - AUTH ERROR!!
+2026-02-01 18:24:05,433 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:24:05,536 - INFO - (DB Handler) get_unreturned_drinks: Found 48 unreturned items for user 4 (584183079146)
+2026-02-01 18:24:05,540 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:33'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46')])
+2026-02-01 18:24:05,540 - INFO - KONTOHALDUS command received
+2026-02-01 18:25:00,529 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:25:01,031 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:25:07,722 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:25:09,182 - ERROR - AUTH ERROR!!
+2026-02-01 18:25:09,183 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:25:09,288 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:25:11,042 - INFO - (DB Handler) get_unreturned_drinks: Found 48 unreturned items for user 4 (584183079146)
+2026-02-01 18:25:11,042 - INFO - Sent door opening screen command: 2
+2026-02-01 18:25:11,045 - INFO - Router received: UKSE_AVAMINE_TAGASTAMINE with payload: [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:33'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46')]
+2026-02-01 18:25:11,045 - INFO - UKSE_AVAMINE_TAGASTAMINE command received with payload: [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:21:09'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:06'), ('Vergi', 4742883015974, '2026-02-01 17:29:33'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 17:39:09'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:00:20'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:08:29'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46'), ('Vergi', 4742883015974, '2026-02-01 18:18:46')]
+2026-02-01 18:25:14,058 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-01 18:25:14,058 - INFO - LIVE_CART command received
+2026-02-01 18:25:18,928 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-01 18:25:18,928 - INFO - LIVE_CART command received
+2026-02-01 18:25:21,679 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-01 18:25:21,680 - INFO - LIVE_CART command received
+2026-02-01 18:25:23,957 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-01 18:25:23,958 - INFO - LIVE_CART command received
+2026-02-01 18:25:26,277 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-01 18:25:26,277 - INFO - LIVE_CART command received
+2026-02-01 18:25:28,438 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-01 18:25:28,438 - INFO - LIVE_CART command received
+2026-02-01 18:25:30,491 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 5}
+2026-02-01 18:25:30,491 - INFO - CART_REVIEW command received
+2026-02-01 18:25:43,762 - INFO - Successfully processed 31 returned items for user 4 (584183079146)
+2026-02-01 18:25:43,773 - INFO - (DB Handler) keep_stock: Updated stock for 31 items. Action: returned
+2026-02-01 18:25:44,799 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:25:44,802 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:25:53,263 - ERROR - AUTH ERROR!!
+2026-02-01 18:25:53,264 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:25:53,372 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-02-01 18:25:53,379 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-02-01 18:25:53,380 - INFO - KONTOHALDUS command received
+2026-02-01 18:26:11,106 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:26:11,108 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:26:17,193 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:26:17,760 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:26:32,741 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:26:36,122 - ERROR - AUTH ERROR!!
+2026-02-01 18:26:36,123 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:26:36,227 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:26:36,231 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:26:36,236 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:26:37,977 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-02-01 18:26:37,978 - INFO - UUS_KAART command received
+2026-02-01 18:26:37,981 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-02-01 18:26:37,982 - INFO - KAOTATUD_KAART command received
+2026-02-01 18:26:39,161 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-02-01 18:26:39,162 - INFO - Router received: MESSAGE with payload: ('Pinnkoodi ei leitud.', True)
+2026-02-01 18:26:39,162 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 18:26:40,132 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:26:40,134 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 18:26:40,736 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 18:26:49,425 - ERROR - AUTH ERROR!!
+2026-02-01 18:26:49,427 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 18:26:49,531 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 18:26:49,535 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 18:26:49,539 - INFO - Router received: DEFAULT with payload: None

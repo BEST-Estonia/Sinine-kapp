@@ -415,6 +415,35 @@ def joogi_väljastus(nfc_input):
     
     print("Uks suletud. Lõpetan sessiooni...")
     hardware_handler.cleanup_camera()
+    
+    # --- CART REVIEW LOGIC START ---
+    # 1. Map names to barcodes so we can reconstruct the list later
+    name_to_barcode = {}
+    for name, code in zip(scanned_items_info, scanned_barcodes):
+        name_to_barcode[name] = code
+        
+    # 2. Send data to review screen
+    drink_counts = Counter(scanned_items_info)
+    command_queue.put(("CART_REVIEW", dict(drink_counts)))
+    
+    # 3. Wait for user confirmation (modified counts)
+    try:
+        final_counts = reply_queue.get(timeout=300) # 5 min timeout
+    except queue.Empty:
+        final_counts = drink_counts
+        
+    # 4. Reconstruct scanned lists based on final counts
+    scanned_barcodes = []
+    scanned_items_info = []
+    if isinstance(final_counts, dict):
+        for name, count in final_counts.items():
+            if count > 0:
+                code = name_to_barcode.get(name)
+                if code:
+                    scanned_barcodes.extend([code] * count)
+                    scanned_items_info.extend([name] * count)
+    # --- CART REVIEW LOGIC END ---
+
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'nfc_input' andmebaasile
     database_handler.log_user_taken_drinks(nfc_input, scanned_barcodes)
@@ -427,12 +456,6 @@ def joogi_väljastus(nfc_input):
     # Tühjenda LCD uueks kasutajaks
     lcd.clear()
     
-    # Annab GUI_Võetud funktsioonile ette scannitud joogid. 
-    # GUI_võetud() loendab üle mitu korda mis jooki võeti ja annab sõnastiku üle drawer.pyle
-    # ja annab parameetrid ette drawer failile
-    GUI_võetud(scanned_items_info)
-    #Ootab, et kasutaja vajutaks jätka. timeout kui ei vajuta siis kood jätkub.
-    Oota_kasutaja_kinnitust(30)
     # (Funktsioon lõppeb ja main_loop läheb tagasi algusesse, ootama uut NFC-d)   
     Empty_reply_queue()
     Empty_command_queue()
@@ -501,6 +524,35 @@ def joogi_tagastus(nfc_input):
     
     print("DEBUG: Uks suletud. Lõpetan sessiooni...---")
     hardware_handler.cleanup_camera()
+    
+    # --- CART REVIEW LOGIC START ---
+    # 1. Map names to barcodes
+    name_to_barcode = {}
+    for name, code in zip(scanned_items_info, scanned_barcodes):
+        name_to_barcode[name] = code
+        
+    # 2. Send data to review screen
+    drink_counts = Counter(scanned_items_info)
+    command_queue.put(("CART_REVIEW", dict(drink_counts)))
+    
+    # 3. Wait for user confirmation
+    try:
+        final_counts = reply_queue.get(timeout=300)
+    except queue.Empty:
+        final_counts = drink_counts
+        
+    # 4. Reconstruct scanned lists
+    scanned_barcodes = []
+    scanned_items_info = []
+    if isinstance(final_counts, dict):
+        for name, count in final_counts.items():
+            if count > 0:
+                code = name_to_barcode.get(name)
+                if code:
+                    scanned_barcodes.extend([code] * count)
+                    scanned_items_info.extend([name] * count)
+    # --- CART REVIEW LOGIC END ---
+
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
     database_handler.log_user_returned_drinks(nfc_input, scanned_barcodes)
@@ -515,17 +567,6 @@ def joogi_tagastus(nfc_input):
     # Tühjenda LCD uueks kasutajaks
     lcd.clear()
     
-    # Annab GUI_Võetud funktsioonile ette scannitud joogid. 
-    # GUI_võetud() loendab üle mitu korda mis jooki võeti ja annab sõnastiku üle drawer.pyle
-    # ja annab parameetrid ette drawer failile
-    GUI_tagastatud(scanned_items_info)
-    
-    try:
-        response = reply_queue.get(timeout=30)
-        if response == True: 
-            pass
-    except queue.Empty:
-        pass
     Empty_reply_queue()
     # (Funktsioon lõppeb ja taastab kontrolli main_loopile)
     return
