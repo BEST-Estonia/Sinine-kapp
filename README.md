@@ -79,4 +79,34 @@ Sisaldab stiilide definitsioone ("The Look").
 Tegeleb riistvaralise LCD ekraaniga suhtlemisega.
 
     Kasutatakse `main.py` poolt, et kuvada kasutajale jooksvat infot (nt "Skaneeri tooted..." või toote nime), samal ajal kui puuteekraan näitab reklaami või muud staatilist pilti.
+
+
+# Hardware Pinout Configuration
+# Device: Raspberry Pi 5
+# Peripherals: 1.9" ST7789 TFT LCD & RC522 NFC Reader
+
+-----------------------------------------------------------------------
+|   SIGNAL    |  RPI PIN (Physical) |   GPIO #  |  DEVICE CONNECTION  |
+-----------------------------------------------------------------------
+| 3.3V Power  |      Pin 01         |    N/A    |  Shared (Both)      |
+| Ground      |      Pin 06         |    N/A    |  Shared (Both)      |
+-----------------------------------------------------------------------
+| SPI SCLK    |      Pin 23         |  GPIO 11  |  Shared (Both)      |
+| SPI MOSI    |      Pin 19         |  GPIO 10  |  Shared (Both)      |
+| SPI MISO    |      Pin 21         |  GPIO 09  |  RC522 Only         |
+-----------------------------------------------------------------------
+| NFC SDA     |      Pin 24         |  GPIO 08  |  NFC "SDA" (SS)     |
+| NFC RST     |      Pin 22         |  GPIO 25  |  NFC "RST"          |
+-----------------------------------------------------------------------
+| LCD CS      |      Pin 18         |  GPIO 24  |  LCD "CS"           |
+| LCD DC      |      Pin 13         |  GPIO 27  |  LCD "DC"           |
+| LCD RST     |      Pin 15         |  GPIO 22  |  LCD "RES"          |
+| LCD BLK     |      (Optional)     |    N/A    |  3.3V or Empty      |
+-----------------------------------------------------------------------
+
+**Critical Setup Notes for Raspberry Pi 5:**
+1. **SPI Mismatch:** The NFC Reader uses the standard Kernel SPI pins (CE0), while the LCD uses a generic GPIO (Pin 18) for Chip Select to prevent "GPIO Busy" errors.
+2. **Library Requirement:** You must install `python3-rpi-lgpio` to allow the legacy NFC library to function on the Pi 5 architecture.
+   Command: `sudo apt install python3-rpi-lgpio python3-spidev`
+
     

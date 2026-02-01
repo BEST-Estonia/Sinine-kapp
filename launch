@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /home/pi/Sinine-kapp
+
+sleep 10
+
+
+git pull origin main
+
+./venv/bin/python main.py

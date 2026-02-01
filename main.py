@@ -3,11 +3,11 @@ import time
 import drawer
 import hardware_handler
 import database_handler
-import lcd
+from lcd import LCD
 import logging
 import multiprocessing
 import queue
-
+lcd = LCD()
 # QUEUES initialization
 _gui_proc = None
 command_queue = None
@@ -357,7 +357,7 @@ def main_loop():
 def joogi_väljastus(nfc_input):
     nfc_input = nfc_input
     GUI_ukse_avamine("1")
-    time.sleep(4)  # Näita ukse avamise ekraani 4 sekundit
+    time.sleep(3)  # Näita ukse avamise ekraani 4 sekundit
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
     
@@ -378,15 +378,15 @@ def joogi_väljastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-            
-        barcode = hardware_handler.get_barcode_scan()
+        GUI_reklaam()    
+        barcode = hardware_handler.get_barcode()
         
        #Kui barcode loetud
         if barcode:
 
             #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
             is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            
+            GUI_message('skannitud')
             # kui toode pole andmebaasis siis....
             #Kui toode on andmebaasis siis loop jätkub
             if is_in_db == False:
@@ -402,13 +402,14 @@ def joogi_väljastus(nfc_input):
             lcd.show_message(drink_info) 
             
         # Väike paus, et tsükkel ei koormaks protsessorit
-        time.sleep(0.05) 
+        time.sleep(2)
+        lcd.clear()
 
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
     
     print("Uks suletud. Lõpetan sessiooni...")
-
+    hardware_handler.cleanup_camera()
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'nfc_input' andmebaasile
     database_handler.log_user_taken_drinks(nfc_input, scanned_barcodes)
@@ -461,7 +462,7 @@ def joogi_tagastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        barcode = hardware_handler.get_barcode_scan()
+        barcode = hardware_handler.get_barcode()
         
        #Kui barcode loetud
         if barcode:
@@ -490,7 +491,7 @@ def joogi_tagastus(nfc_input):
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
     
     print("DEBUG: Uks suletud. Lõpetan sessiooni...---")
-
+    hardware_handler.cleanup_camera()
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
     database_handler.log_user_returned_drinks(nfc_input, scanned_barcodes)

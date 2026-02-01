@@ -336,3 +336,1275 @@
 2026-01-04 20:22:10,143 - INFO - Router received: VALIKUVAADE with payload: OG Testkasutaja
 2026-01-04 20:22:12,750 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-01-04 20:22:12,752 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:03:15,849 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 18:03:16,421 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:03:18,913 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 18:03:23,379 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 18:04:17,024 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 18:08:54,695 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 18:08:55,442 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:09:09,994 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-24 18:09:09,994 - INFO - UUS_KAART command received
+2026-01-24 18:09:10,007 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-24 18:09:10,007 - INFO - KAOTATUD_KAART command received
+2026-01-24 18:09:11,086 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-24 18:09:11,093 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-24 18:09:11,093 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 18:09:12,138 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 18:09:12,150 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:09:41,616 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-24 18:09:41,616 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-24 18:09:55,136 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 18:09:55,146 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:12:04,145 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 18:12:04,940 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 18:12:07,300 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-24 18:12:07,301 - INFO - UUS_KAART command received
+2026-01-24 18:12:07,303 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-24 18:12:07,303 - INFO - KAOTATUD_KAART command received
+2026-01-24 18:12:17,143 - INFO - Router received: REGISTREERI_PINNKOODI_ALUSEL with payload: None
+2026-01-24 18:12:17,143 - INFO - REGISTREERI_PINNKOODI_ALUSEL command received
+2026-01-24 18:12:19,689 - INFO - Router received: MESSAGE with payload: Viipa kiipkaarti kasutaja Registreerija 1 registreerimiseks.
+2026-01-24 18:12:19,689 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 19:18:00,303 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 19:18:00,883 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 19:18:13,612 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-24 19:18:13,612 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-24 19:18:16,580 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 1! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-24 19:18:16,581 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 19:18:18,612 - ERROR - AUTH ERROR!!
+2026-01-24 19:18:18,613 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 19:18:18,729 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 1' with NFC 584183079146
+2026-01-24 19:18:18,730 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 1
+2026-01-24 19:18:18,730 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-24 19:18:21,500 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 19:18:21,501 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 19:18:22,489 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 19:18:23,819 - ERROR - AUTH ERROR!!
+2026-01-24 19:18:23,820 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 19:18:23,924 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 19:18:26,636 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 19:18:26,637 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 19:18:27,628 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 19:18:28,849 - ERROR - AUTH ERROR!!
+2026-01-24 19:18:28,849 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 19:18:28,953 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 19:18:31,415 - INFO - (DB Handler) get_unreturned_drinks: No unreturned items found for user 5 (584183079146)
+2026-01-24 19:18:31,415 - INFO - Sent door opening screen command: 2
+2026-01-24 19:18:31,417 - INFO - Router received: UKSE_AVAMINE_TAGASTAMINE with payload: []
+2026-01-24 19:18:31,417 - INFO - UKSE_AVAMINE_TAGASTAMINE command received with payload: []
+2026-01-24 19:18:31,420 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 19:18:31,420 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 19:19:33,560 - INFO - Successfully processed 0 returned items for user 5 (584183079146)
+2026-01-24 19:19:34,561 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:16:51,026 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:16:51,619 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:16:55,989 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-24 20:16:55,989 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-24 20:16:58,909 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 1! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-24 20:16:58,909 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 20:17:00,961 - ERROR - AUTH ERROR!!
+2026-01-24 20:17:00,965 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 20:17:01,078 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 1' with NFC 584183079146
+2026-01-24 20:17:01,080 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 1
+2026-01-24 20:17:01,080 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-24 20:17:02,805 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:17:02,806 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:17:03,776 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 20:17:05,355 - ERROR - AUTH ERROR!!
+2026-01-24 20:17:05,357 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 20:17:05,462 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 20:17:08,036 - INFO - Sent door opening screen command: 1
+2026-01-24 20:17:08,036 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 20:17:08,036 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 20:17:08,036 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 20:17:13,039 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 20:17:13,039 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 20:17:21,650 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 4 taken items for user 2 (584183079146)
+2026-01-24 20:17:21,660 - INFO - (DB Handler) keep_stock: Updated stock for 4 items. Action: taken
+2026-01-24 20:17:22,664 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 4})
+2026-01-24 20:17:36,500 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:17:36,501 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:17:41,575 - ERROR - AUTH ERROR!!
+2026-01-24 20:17:41,578 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 20:17:41,682 - INFO - (DB Handler) get_unreturned_drinks: Found 4 unreturned items for user 2 (584183079146)
+2026-01-24 20:17:41,684 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21')])
+2026-01-24 20:17:41,684 - INFO - KONTOHALDUS command received
+2026-01-24 20:18:26,134 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:18:26,135 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:18:31,233 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 20:18:34,391 - ERROR - AUTH ERROR!!
+2026-01-24 20:18:34,392 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 20:18:34,499 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 20:18:39,131 - INFO - Sent door opening screen command: 1
+2026-01-24 20:18:39,134 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 20:18:39,134 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 20:18:39,134 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 20:18:44,135 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 20:18:44,135 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 20:18:55,732 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 2 (584183079146)
+2026-01-24 20:18:56,736 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-01-24 20:19:01,799 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:19:01,801 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:19:27,326 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:19:27,888 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 20:19:30,457 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 20:19:32,665 - ERROR - AUTH ERROR!!
+2026-01-24 20:19:32,669 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 20:19:32,773 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 20:19:35,709 - INFO - (DB Handler) get_unreturned_drinks: Found 4 unreturned items for user 2 (584183079146)
+2026-01-24 20:19:35,710 - INFO - Sent door opening screen command: 2
+2026-01-24 20:19:35,711 - INFO - Router received: UKSE_AVAMINE_TAGASTAMINE with payload: [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21')]
+2026-01-24 20:19:35,711 - INFO - UKSE_AVAMINE_TAGASTAMINE command received with payload: [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21')]
+2026-01-24 20:19:35,716 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 20:19:35,716 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 20:19:47,417 - INFO - Successfully processed 0 returned items for user 2 (584183079146)
+2026-01-24 20:19:48,422 - INFO - Router received: TAGASTATUD_JOOGID with payload: Counter()
+2026-01-24 20:19:48,422 - INFO - TAGASTATUD_JOOGID command received - switching to TAGASTATUD_JOOGID screen
+2026-01-24 20:20:04,779 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 20:20:04,781 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:00:53,863 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:00:54,433 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:00:56,303 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:01:01,985 - ERROR - AUTH ERROR!!
+2026-01-24 21:01:01,987 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:01:02,093 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-24 21:01:02,094 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-24 21:01:07,791 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 2
+' with NFC 584208331966
+2026-01-24 21:01:07,795 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 2
+
+2026-01-24 21:01:07,795 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-24 21:01:11,247 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:01:11,249 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:01:13,562 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:01:19,744 - ERROR - AUTH ERROR!!
+2026-01-24 21:01:19,744 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:01:19,850 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 21:01:22,085 - INFO - Sent door opening screen command: 1
+2026-01-24 21:01:22,086 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 21:01:22,086 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 21:01:22,087 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 21:01:27,089 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 21:01:27,089 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 21:01:37,636 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 1 taken items for user 3 (584208331966)
+2026-01-24 21:01:37,647 - INFO - (DB Handler) keep_stock: Updated stock for 1 items. Action: taken
+2026-01-24 21:01:38,651 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 1})
+2026-01-24 21:01:42,114 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:01:42,116 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:01:59,907 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:02:02,260 - ERROR - AUTH ERROR!!
+2026-01-24 21:02:02,263 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:02:02,367 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 21:02:03,698 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:02:03,699 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:02:10,490 - ERROR - AUTH ERROR!!
+2026-01-24 21:02:10,492 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:02:10,596 - INFO - (DB Handler) get_unreturned_drinks: Found 1 unreturned items for user 3 (584208331966)
+2026-01-24 21:02:10,598 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [('Vergi', 4742883015974, '2026-01-24 21:01:37')])
+2026-01-24 21:02:10,599 - INFO - KONTOHALDUS command received
+2026-01-24 21:02:21,230 - INFO - Router received: UUS_KAART with payload: (True, 'Registreerija 2\r\n', 584208331966)
+2026-01-24 21:02:21,230 - INFO - UUS_KAART command received
+2026-01-24 21:02:24,621 - INFO - (DB Handler) update_user_nfc: Updated NFC ID from 584208331966 to 1058915878193
+2026-01-24 21:02:24,622 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 2
+ registreeritud
+2026-01-24 21:02:24,622 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 21:02:26,360 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:02:26,362 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:02:28,867 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:02:43,903 - ERROR - AUTH ERROR!!
+2026-01-24 21:02:43,904 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:02:44,010 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-24 21:02:44,010 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-24 21:02:45,880 - INFO - Router received: MESSAGE with payload: Tagasi avaekraanile.
+2026-01-24 21:02:45,880 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 21:02:47,474 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:02:47,476 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:02:48,491 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:02:52,002 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 21:02:58,816 - ERROR - AUTH ERROR!!
+2026-01-24 21:02:58,818 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:02:58,922 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-24 21:02:58,922 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-24 21:25:00,649 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 21:25:01,303 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 21:25:05,523 - ERROR - AUTH ERROR!!
+2026-01-24 21:25:05,527 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 21:25:05,635 - INFO - (DB Handler) get_unreturned_drinks: Found 4 unreturned items for user 2 (584183079146)
+2026-01-24 21:25:05,638 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21')])
+2026-01-24 21:25:05,638 - INFO - KONTOHALDUS command received
+2026-01-24 22:02:57,914 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:02:58,510 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:03:00,508 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:03:03,320 - ERROR - AUTH ERROR!!
+2026-01-24 22:03:03,324 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 22:03:03,433 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 22:03:05,214 - INFO - Sent door opening screen command: 1
+2026-01-24 22:03:05,214 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:03:05,214 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:03:05,214 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:03:10,217 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:03:10,218 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:03:56,884 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:03:57,394 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:03:58,333 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:04:00,194 - ERROR - AUTH ERROR!!
+2026-01-24 22:04:00,197 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-24 22:04:00,300 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-24 22:04:02,448 - INFO - Sent door opening screen command: 1
+2026-01-24 22:04:02,449 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:04:02,449 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:04:02,449 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:04:07,451 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:04:07,451 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:04:09,070 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:09,071 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:09,485 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:09,486 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:22,548 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:22,548 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:23,581 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:23,581 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:23,705 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:23,705 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:29,805 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:29,805 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:29,943 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:29,944 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:30,096 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:30,096 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:30,243 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:04:30,243 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:04:40,420 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 2 (584183079146)
+2026-01-24 22:04:40,429 - INFO - (DB Handler) keep_stock: Updated stock for 9 items. Action: taken
+2026-01-24 22:04:41,430 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:05:17,668 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:05:18,226 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:05:18,899 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:05:21,373 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 22:05:23,541 - INFO - Sent door opening screen command: 1
+2026-01-24 22:05:23,542 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:05:23,542 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:05:23,542 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:05:28,542 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:28,542 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:32,445 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:32,445 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:32,448 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:05:32,448 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:05:42,554 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:42,554 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:43,230 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:43,230 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:43,233 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:05:43,233 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:05:43,621 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:43,621 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:43,624 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:05:43,625 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:05:43,814 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:43,814 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:43,818 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:05:43,818 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:05:53,898 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:05:53,898 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:05:53,901 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:05:53,901 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:05:53,967 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 5 taken items for user 3 (1058915878193)
+2026-01-24 22:05:53,978 - INFO - (DB Handler) keep_stock: Updated stock for 5 items. Action: taken
+2026-01-24 22:05:54,981 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:05:54,983 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:08:20,703 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:08:21,222 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:08:22,894 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:08:24,584 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 22:08:26,336 - INFO - Sent door opening screen command: 1
+2026-01-24 22:08:26,337 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:08:26,337 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:08:26,337 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:08:31,340 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:08:31,340 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:08:31,343 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:08:31,344 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:08:42,976 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:08:42,976 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:08:53,052 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:08:53,052 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:08:58,263 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:08:58,263 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:08:58,324 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 1 taken items for user 3 (1058915878193)
+2026-01-24 22:08:58,333 - INFO - (DB Handler) keep_stock: Updated stock for 1 items. Action: taken
+2026-01-24 22:08:59,337 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 1})
+2026-01-24 22:09:06,528 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:09:06,529 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:09:11,851 - INFO - (DB Handler) get_unreturned_drinks: Found 7 unreturned items for user 3 (1058915878193)
+2026-01-24 22:09:11,854 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [('Vergi', 4742883015974, '2026-01-24 21:01:37'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:08:58')])
+2026-01-24 22:09:11,854 - INFO - KONTOHALDUS command received
+2026-01-24 22:09:15,538 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:09:15,539 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:09:18,648 - INFO - (DB Handler) get_unreturned_drinks: Found 7 unreturned items for user 3 (1058915878193)
+2026-01-24 22:09:18,650 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [('Vergi', 4742883015974, '2026-01-24 21:01:37'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:08:58')])
+2026-01-24 22:09:18,650 - INFO - KONTOHALDUS command received
+2026-01-24 22:09:24,224 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:09:24,226 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:09:25,538 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:09:27,242 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 22:09:29,444 - INFO - Sent door opening screen command: 1
+2026-01-24 22:09:29,445 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:09:29,445 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:09:29,445 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:09:34,447 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:34,447 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:34,451 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:34,451 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:36,180 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:36,181 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:36,231 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:36,231 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:36,336 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:36,337 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:36,385 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:36,385 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:36,468 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:36,468 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:36,522 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:36,522 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:36,756 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:36,756 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:36,811 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:36,811 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,048 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,048 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,100 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,101 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,211 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,211 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,263 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,263 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,347 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,347 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,405 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,405 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,488 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,488 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,543 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,543 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,634 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,635 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,686 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,686 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,782 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,783 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,835 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,835 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:37,921 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:37,921 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:37,970 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:37,970 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,055 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,055 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,107 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,108 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,188 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,188 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,245 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,245 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,330 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,330 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,378 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,378 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,466 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,466 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,519 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,520 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,596 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,596 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,651 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,651 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,731 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,731 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,784 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,784 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:38,864 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:38,864 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:38,917 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:38,917 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:39,009 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:39,010 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:39,061 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:39,061 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:39,147 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:39,148 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:39,199 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:39,199 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:39,276 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:39,276 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:39,328 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:39,329 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:39,679 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:39,679 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:39,730 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:39,730 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:40,059 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:40,060 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:40,111 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:40,111 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:40,191 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:40,191 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:40,242 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:40,242 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:40,732 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:40,732 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:40,785 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:40,785 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:40,880 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:40,880 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:40,930 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:40,930 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,013 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,013 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:41,065 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:41,066 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,282 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,282 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:41,335 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:41,335 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,412 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,412 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:41,464 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:41,464 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,547 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,547 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:41,601 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:41,601 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,684 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,685 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:41,736 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:41,736 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:41,960 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:41,960 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:42,011 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:42,011 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:42,933 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:42,933 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:42,986 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:42,987 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:43,086 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:43,086 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:43,135 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:43,135 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:43,217 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:43,217 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:43,269 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:43,269 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:43,363 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:43,363 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:43,415 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:43,415 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:43,795 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:43,796 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:43,848 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:43,848 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:43,945 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:43,945 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:43,999 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:43,999 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:44,631 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:44,631 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:44,681 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:44,682 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:46,156 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:46,156 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:46,206 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:46,207 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:48,905 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:48,905 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:48,957 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:48,958 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:51,246 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:51,246 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:51,299 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:51,299 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:51,546 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:51,546 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:51,597 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:51,598 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:51,825 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:51,825 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:51,876 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:51,876 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:52,261 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:52,261 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:52,315 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:52,315 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:55,077 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:55,077 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:55,127 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:55,127 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:56,659 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:56,659 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:56,711 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:56,711 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:09:57,860 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:09:57,861 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:09:57,912 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:09:57,912 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:10:01,885 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:10:01,885 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:10:01,956 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 49 taken items for user 3 (1058915878193)
+2026-01-24 22:10:01,966 - INFO - (DB Handler) keep_stock: Updated stock for 49 items. Action: taken
+2026-01-24 22:10:02,969 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 49})
+2026-01-24 22:10:28,630 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:10:28,632 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:11:31,685 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:11:32,231 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:12:02,165 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:12:04,980 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 22:12:07,873 - INFO - Sent door opening screen command: 1
+2026-01-24 22:12:07,875 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:12:07,875 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:12:07,875 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:12:12,875 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:12:12,875 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:12:12,879 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:12:12,879 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:12:25,457 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:12:25,457 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:12:25,705 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:12:25,705 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:12:26,706 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:12:26,706 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:12:27,397 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:12:27,397 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:12:28,412 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 2 taken items for user 3 (1058915878193)
+2026-01-24 22:12:28,422 - INFO - (DB Handler) keep_stock: Updated stock for 2 items. Action: taken
+2026-01-24 22:12:29,424 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 2})
+2026-01-24 22:12:34,198 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:12:34,199 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:12:42,382 - INFO - (DB Handler) get_unreturned_drinks: Found 58 unreturned items for user 3 (1058915878193)
+2026-01-24 22:12:42,385 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [('Vergi', 4742883015974, '2026-01-24 21:01:37'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:08:58'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:12:28'), ('Vergi', 4742883015974, '2026-01-24 22:12:28')])
+2026-01-24 22:12:42,386 - INFO - KONTOHALDUS command received
+2026-01-24 22:12:56,377 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:12:56,379 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:13:47,797 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-24 22:13:50,708 - INFO - Router received: VALIKUVAADE with payload: Registreerija 2
+
+2026-01-24 22:13:54,538 - INFO - Sent door opening screen command: 1
+2026-01-24 22:13:54,539 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-24 22:13:54,539 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-24 22:13:54,539 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-24 22:13:59,540 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:13:59,540 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:13:59,544 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:13:59,544 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:14:10,129 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:14:10,130 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:14:11,129 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:14:11,129 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:14:12,603 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:14:12,603 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:14:13,605 - INFO - Router received: REKLAAM with payload: None
+2026-01-24 22:14:13,605 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-24 22:14:15,423 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-24 22:14:15,423 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-24 22:14:16,441 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 3 taken items for user 3 (1058915878193)
+2026-01-24 22:14:16,455 - INFO - (DB Handler) keep_stock: Updated stock for 3 items. Action: taken
+2026-01-24 22:14:17,457 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 3})
+2026-01-24 22:14:21,101 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:14:21,103 - INFO - Router received: DEFAULT with payload: None
+2026-01-24 22:14:27,209 - INFO - (DB Handler) get_unreturned_drinks: Found 61 unreturned items for user 3 (1058915878193)
+2026-01-24 22:14:27,212 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 2\r\n', [('Vergi', 4742883015974, '2026-01-24 21:01:37'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:05:53'), ('Vergi', 4742883015974, '2026-01-24 22:08:58'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:10:01'), ('Vergi', 4742883015974, '2026-01-24 22:12:28'), ('Vergi', 4742883015974, '2026-01-24 22:12:28'), ('Vergi', 4742883015974, '2026-01-24 22:14:16'), ('Vergi', 4742883015974, '2026-01-24 22:14:16'), ('Vergi', 4742883015974, '2026-01-24 22:14:16')])
+2026-01-24 22:14:27,212 - INFO - KONTOHALDUS command received
+2026-01-24 22:14:40,806 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-24 22:14:40,807 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:08:47,045 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 17:08:47,675 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:08:49,726 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 17:19:16,767 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 17:19:17,314 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:19:25,029 - ERROR - AUTH ERROR!!
+2026-01-25 17:19:25,030 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 17:19:25,136 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584183079146)
+2026-01-25 17:19:25,138 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 17:19:25,138 - INFO - KONTOHALDUS command received
+2026-01-25 17:19:40,848 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 17:19:40,850 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:19:41,406 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 17:21:50,381 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 17:21:50,899 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:21:54,898 - ERROR - AUTH ERROR!!
+2026-01-25 17:21:54,899 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 17:21:55,001 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584183079146)
+2026-01-25 17:21:55,004 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 17:21:55,005 - INFO - KONTOHALDUS command received
+2026-01-25 17:27:26,499 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 17:27:27,017 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 17:27:42,019 - ERROR - AUTH ERROR!!
+2026-01-25 17:27:42,019 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 17:27:42,123 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584183079146)
+2026-01-25 17:27:42,124 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 17:27:42,124 - INFO - KONTOHALDUS command received
+2026-01-25 19:41:42,287 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 19:41:43,070 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 19:41:45,359 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 19:41:46,975 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 19:41:52,541 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 19:41:53,048 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 19:42:28,889 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 19:42:28,889 - INFO - UUS_KAART command received
+2026-01-25 19:42:28,893 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 19:42:28,893 - INFO - KAOTATUD_KAART command received
+2026-01-25 19:42:32,044 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 leitud. Viipa uut kaarti registreerimiseks
+2026-01-25 19:42:32,044 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 20:45:10,883 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:11,413 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:14,828 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:14,831 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:14,936 - INFO - Router received: MESSAGE with payload: Kaarti ei leitud
+2026-01-25 20:45:14,936 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 20:45:17,239 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:17,241 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:23,034 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 20:45:23,034 - INFO - UUS_KAART command received
+2026-01-25 20:45:23,039 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 20:45:23,039 - INFO - KAOTATUD_KAART command received
+2026-01-25 20:45:24,866 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 leitud. Viipa uut kaarti registreerimiseks
+2026-01-25 20:45:24,866 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 20:45:28,629 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:28,630 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:28,744 - INFO - (DB Handler) register_new_card: Assigned new NFC 584196409493 to user Registreerija 1
+2026-01-25 20:45:28,745 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:28,748 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 on edukalt registreeritud.
+2026-01-25 20:45:28,748 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 20:45:28,752 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:30,712 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 20:45:35,382 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:35,384 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:35,488 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:35,489 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 20:45:35,494 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:38,256 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:38,258 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:38,363 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584196409493)
+2026-01-25 20:45:38,366 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 20:45:38,366 - INFO - KONTOHALDUS command received
+2026-01-25 20:45:39,673 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:39,676 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:46,878 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:46,881 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:46,987 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584196409493)
+2026-01-25 20:45:46,991 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 20:45:46,992 - INFO - KONTOHALDUS command received
+2026-01-25 20:45:54,630 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:45:54,632 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:45:56,770 - ERROR - AUTH ERROR!!
+2026-01-25 20:45:56,772 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:45:56,875 - INFO - (DB Handler) get_unreturned_drinks: Found 13 unreturned items for user 2 (584196409493)
+2026-01-25 20:45:56,878 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 20:17:21'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40'), ('Vergi', 4742883015974, '2026-01-24 22:04:40')])
+2026-01-25 20:45:56,878 - INFO - KONTOHALDUS command received
+2026-01-25 20:46:02,577 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:46:02,580 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:55:23,857 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:55:24,399 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:55:26,786 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 20:55:30,966 - ERROR - AUTH ERROR!!
+2026-01-25 20:55:30,969 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:55:31,075 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 20:55:33,334 - INFO - Sent door opening screen command: 1
+2026-01-25 20:55:33,336 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 20:55:33,336 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 20:55:33,336 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 20:55:38,337 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 20:55:38,337 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 20:56:17,323 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:56:17,856 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:56:18,852 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 20:56:20,873 - ERROR - AUTH ERROR!!
+2026-01-25 20:56:20,877 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:56:20,982 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 20:56:22,680 - INFO - Sent door opening screen command: 1
+2026-01-25 20:56:22,681 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 20:56:22,682 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 20:56:22,682 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 20:56:27,685 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 20:56:27,685 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 20:59:06,495 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 20:59:07,042 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 20:59:07,998 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 20:59:09,589 - ERROR - AUTH ERROR!!
+2026-01-25 20:59:09,593 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 20:59:09,699 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 20:59:11,635 - INFO - Sent door opening screen command: 1
+2026-01-25 20:59:11,636 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 20:59:11,636 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 20:59:11,636 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 20:59:15,637 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 20:59:15,638 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 20:59:15,693 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 20:59:15,694 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 20:59:28,258 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 20:59:28,259 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:02:10,853 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:02:11,378 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:02:14,454 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:02:41,811 - ERROR - AUTH ERROR!!
+2026-01-25 21:02:41,814 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:02:41,919 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-25 21:02:41,919 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-25 21:02:47,688 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:02:48,244 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:02:51,234 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:02:51,234 - INFO - UUS_KAART command received
+2026-01-25 21:02:51,238 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:02:51,238 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:02:52,687 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 21:02:52,692 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 21:02:52,692 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:02:53,811 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:02:53,813 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:02:55,648 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:02:55,648 - INFO - UUS_KAART command received
+2026-01-25 21:02:55,652 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:02:55,652 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:03:07,620 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 21:03:07,621 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 21:03:07,621 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:03:08,409 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:03:08,411 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:03:09,659 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:10,614 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:11,452 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:12,228 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:14,404 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:15,736 - ERROR - AUTH ERROR!!
+2026-01-25 21:03:15,739 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:03:15,846 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-25 21:03:15,846 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-25 21:03:20,691 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:03:21,246 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:03:22,117 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:03:23,978 - ERROR - AUTH ERROR!!
+2026-01-25 21:03:23,983 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:03:24,090 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-25 21:03:24,090 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-25 21:03:42,444 - INFO - Kasutaja üritas registreerida juba registreeritud PIN-koodi.
+2026-01-25 21:03:42,444 - INFO - Router received: MESSAGE with payload: See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt
+2026-01-25 21:03:42,445 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:03:45,416 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:03:45,419 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:03:46,287 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:05:48,525 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:05:49,068 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:05:51,225 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:05:51,225 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:05:52,070 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:05:52,072 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:05:53,422 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:05:53,423 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:05:54,095 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:05:54,097 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:05:56,241 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:05:56,241 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:05:56,738 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:05:56,739 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:05:57,558 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:05:57,558 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:05:58,077 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:05:58,078 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:06:01,394 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:06:01,394 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:06:09,780 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 1! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-25 21:06:09,781 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:06:11,469 - ERROR - AUTH ERROR!!
+2026-01-25 21:06:11,472 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:06:11,587 - INFO - (DB Handler) create_new_user: Created user 'Registreerija 1' with NFC 584183079146
+2026-01-25 21:06:11,589 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 1
+2026-01-25 21:06:11,589 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-25 21:06:12,987 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:06:12,989 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:06:14,270 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:06:16,395 - ERROR - AUTH ERROR!!
+2026-01-25 21:06:16,396 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:06:16,501 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:06:19,188 - INFO - Sent door opening screen command: 1
+2026-01-25 21:06:19,189 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 21:06:19,189 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 21:06:19,189 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 21:06:23,192 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:06:23,192 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:06:23,246 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:06:23,246 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:06:35,759 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:06:35,759 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:06:46,815 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 4 (584183079146)
+2026-01-25 21:06:47,843 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-01-25 21:06:52,399 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:06:52,402 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:06:53,527 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:06:56,941 - ERROR - AUTH ERROR!!
+2026-01-25 21:06:56,942 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:06:57,046 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:06:59,808 - INFO - Sent door opening screen command: 1
+2026-01-25 21:06:59,809 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 21:06:59,810 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 21:06:59,810 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 21:07:03,810 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:07:03,810 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:07:03,864 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:07:03,864 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:07:16,424 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:07:16,425 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:07:27,427 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 4 (584183079146)
+2026-01-25 21:07:28,460 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-01-25 21:09:34,097 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:09:34,653 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:09:35,827 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:09:37,522 - ERROR - AUTH ERROR!!
+2026-01-25 21:09:37,527 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:09:37,634 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:09:38,693 - INFO - Sent door opening screen command: 1
+2026-01-25 21:09:38,695 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 21:09:38,695 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 21:09:38,695 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 21:09:42,695 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:42,695 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:42,757 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:42,757 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:45,998 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:45,998 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:47,025 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:47,025 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:47,925 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:47,926 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:48,952 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:48,952 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:50,240 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:50,240 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:51,272 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:51,272 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:51,485 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:51,486 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:52,513 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:52,514 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:52,611 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:52,612 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:53,639 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:53,639 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:53,737 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:53,738 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:54,778 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:54,778 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:54,876 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:54,876 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:55,903 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:55,903 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:56,389 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:56,389 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:57,418 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:09:57,418 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:09:57,495 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:09:57,495 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:09:58,538 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 9 taken items for user 4 (584183079146)
+2026-01-25 21:09:58,549 - INFO - (DB Handler) keep_stock: Updated stock for 9 items. Action: taken
+2026-01-25 21:09:59,578 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'coca cola 2L': 9})
+2026-01-25 21:10:06,177 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:10:06,177 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:12:15,142 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:12:15,695 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:12:17,861 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:12:19,452 - ERROR - AUTH ERROR!!
+2026-01-25 21:12:19,455 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:12:19,559 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:12:23,187 - INFO - Sent door opening screen command: 1
+2026-01-25 21:12:23,190 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 21:12:23,191 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 21:12:23,191 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 21:12:27,194 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:27,194 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:27,251 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:27,251 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:29,768 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:12:29,769 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:12:31,824 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:31,824 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:33,031 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:12:33,032 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:12:35,096 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:35,097 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:35,920 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:12:35,920 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:12:37,976 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:37,976 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:38,836 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:12:38,836 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:12:40,887 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:12:40,888 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:12:42,453 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:12:42,454 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:12:44,528 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 5 taken items for user 4 (584183079146)
+2026-01-25 21:12:44,538 - INFO - (DB Handler) keep_stock: Updated stock for 5 items. Action: taken
+2026-01-25 21:12:45,574 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'coca cola 2L': 5})
+2026-01-25 21:12:55,785 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:12:55,789 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:12:59,173 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:13:11,542 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:13:20,721 - ERROR - AUTH ERROR!!
+2026-01-25 21:13:20,724 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:13:20,830 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:13:20,831 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:13:20,834 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:13:22,733 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:13:25,291 - ERROR - AUTH ERROR!!
+2026-01-25 21:13:25,292 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:13:25,396 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:13:27,321 - INFO - Sent door opening screen command: 1
+2026-01-25 21:13:27,322 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-01-25 21:13:27,322 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-01-25 21:13:27,322 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-01-25 21:13:31,322 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:13:31,322 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:13:31,376 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:13:31,377 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:13:36,374 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:13:36,375 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:13:38,436 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:13:38,436 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:13:40,520 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:13:40,520 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:13:42,579 - INFO - Router received: REKLAAM with payload: None
+2026-01-25 21:13:42,579 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-01-25 21:13:45,336 - INFO - Router received: MESSAGE with payload: skannitud
+2026-01-25 21:13:45,336 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:13:47,409 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 3 taken items for user 4 (584183079146)
+2026-01-25 21:13:47,419 - INFO - (DB Handler) keep_stock: Updated stock for 3 items. Action: taken
+2026-01-25 21:13:48,451 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'coca cola 2L': 3})
+2026-01-25 21:14:00,146 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:14:00,148 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:14:42,314 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:14:44,649 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:14:50,870 - ERROR - AUTH ERROR!!
+2026-01-25 21:14:50,872 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:14:50,980 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:14:50,981 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:14:50,985 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:14:53,516 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:14:53,516 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:14:54,382 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:14:54,384 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:14:56,014 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:14:56,014 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:14:56,821 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:14:56,823 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:04,091 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:15:04,091 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:15:12,196 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-25 21:15:12,196 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:15:14,971 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:15:14,973 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:16,132 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:15:16,132 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:15:17,689 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-25 21:15:17,689 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:15:18,278 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:15:18,280 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:19,398 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:15:19,398 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:15:20,334 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-25 21:15:20,334 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:15:20,775 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:15:20,777 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:22,572 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:15:22,572 - INFO - UUS_KAART command received
+2026-01-25 21:15:22,575 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:15:22,575 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:15:23,961 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 21:15:23,962 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 21:15:23,962 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:15:24,873 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:15:24,875 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:25,776 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:15:25,776 - INFO - UUS_KAART command received
+2026-01-25 21:15:25,779 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:15:25,780 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:15:26,440 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 21:15:26,441 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 21:15:26,441 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:15:26,799 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:15:26,801 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:15:30,035 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:29:15,605 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:29:19,103 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:29:22,454 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:29:22,454 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:29:25,512 - INFO - Kasutaja üritas registreerida juba registreeritud PIN-koodi.
+2026-01-25 21:29:25,516 - INFO - Router received: MESSAGE with payload: See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt
+2026-01-25 21:29:25,516 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:29,104 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:29:29,105 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:29:32,910 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:29:32,910 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:29:35,223 - INFO - Kasutaja üritas registreerida juba registreeritud PIN-koodi.
+2026-01-25 21:29:35,223 - INFO - Router received: MESSAGE with payload: See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt
+2026-01-25 21:29:35,223 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:36,662 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:29:36,664 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:29:38,033 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:29:38,034 - INFO - UUS_KAART command received
+2026-01-25 21:29:38,037 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:29:38,037 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:29:41,885 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 leitud. Viipa uut kaarti registreerimiseks
+2026-01-25 21:29:41,885 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:44,072 - ERROR - AUTH ERROR!!
+2026-01-25 21:29:44,075 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:29:44,177 - WARNING - (DB Handler) register_new_card: New NFC ID 584183079146 is already in use.
+2026-01-25 21:29:44,177 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:29:44,181 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 on edukalt registreeritud.
+2026-01-25 21:29:44,181 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:44,184 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:29:49,525 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:29:49,526 - INFO - UUS_KAART command received
+2026-01-25 21:29:49,529 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:29:49,529 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:29:51,208 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 leitud. Viipa uut kaarti registreerimiseks
+2026-01-25 21:29:51,208 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:55,951 - ERROR - AUTH ERROR!!
+2026-01-25 21:29:55,952 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:29:56,055 - WARNING - (DB Handler) register_new_card: New NFC ID 584183079146 is already in use.
+2026-01-25 21:29:56,056 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:29:56,057 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 on edukalt registreeritud.
+2026-01-25 21:29:56,058 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:29:56,060 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:29:58,159 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:29:58,159 - INFO - UUS_KAART command received
+2026-01-25 21:29:58,162 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:29:58,162 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:30:00,029 - INFO - Router received: MESSAGE with payload: Kasutaja Registreerija 1 leitud. Viipa uut kaarti registreerimiseks
+2026-01-25 21:30:00,029 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:30:01,052 - ERROR - AUTH ERROR!!
+2026-01-25 21:30:01,053 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:30:01,162 - WARNING - (DB Handler) register_new_card: New NFC ID 584183079146 is already in use.
+2026-01-25 21:30:01,163 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:30:01,163 - INFO - Router received: MESSAGE with payload: Uus kaart nimele Registreerija 1 on edukalt registreeritud.
+2026-01-25 21:30:01,163 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:30:01,166 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:30:04,334 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 21:30:06,526 - ERROR - AUTH ERROR!!
+2026-01-25 21:30:06,534 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 21:30:06,639 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 21:30:33,651 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:30:33,652 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:55:32,079 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:55:32,609 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:55:39,574 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 21:55:39,574 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 21:55:40,372 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:55:40,373 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:55:42,477 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 21:55:42,477 - INFO - UUS_KAART command received
+2026-01-25 21:55:42,480 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 21:55:42,480 - INFO - KAOTATUD_KAART command received
+2026-01-25 21:55:43,024 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 21:55:43,028 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 21:55:43,028 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 21:55:43,613 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 21:55:43,615 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 21:57:28,773 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:07:16,888 - ERROR - AUTH ERROR!!
+2026-01-25 22:07:16,892 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:07:16,998 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:16,999 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 22:07:17,003 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:20,592 - ERROR - AUTH ERROR!!
+2026-01-25 22:07:20,594 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:07:20,700 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:07:20,703 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:07:20,703 - INFO - KONTOHALDUS command received
+2026-01-25 22:07:21,752 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:21,753 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:22,989 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:07:22,990 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:07:23,713 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:23,715 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:33,585 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:07:33,585 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:07:34,217 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:34,218 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:35,555 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 22:07:35,555 - INFO - UUS_KAART command received
+2026-01-25 22:07:35,557 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 22:07:35,558 - INFO - KAOTATUD_KAART command received
+2026-01-25 22:07:37,638 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 22:07:37,641 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 22:07:37,641 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:07:38,631 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:38,632 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:39,649 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 22:07:39,650 - INFO - UUS_KAART command received
+2026-01-25 22:07:39,652 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 22:07:39,652 - INFO - KAOTATUD_KAART command received
+2026-01-25 22:07:40,416 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 22:07:40,420 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 22:07:40,420 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:07:40,858 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:40,859 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:41,702 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:07:41,702 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:07:42,218 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:42,219 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:44,146 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 22:07:44,147 - INFO - UUS_KAART command received
+2026-01-25 22:07:44,149 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 22:07:44,150 - INFO - KAOTATUD_KAART command received
+2026-01-25 22:07:45,567 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 22:07:45,571 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 22:07:45,571 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:07:46,800 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:46,802 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:48,209 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:07:48,209 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:07:48,697 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:48,698 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:07:51,123 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 22:07:51,123 - INFO - UUS_KAART command received
+2026-01-25 22:07:51,126 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 22:07:51,126 - INFO - KAOTATUD_KAART command received
+2026-01-25 22:07:55,966 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code 2225 not found in Pintable
+2026-01-25 22:07:55,970 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 22:07:55,970 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:07:56,678 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:07:56,680 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:08:20,201 - ERROR - AUTH ERROR!!
+2026-01-25 22:08:20,203 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:08:20,308 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:08:20,309 - INFO - Router received: MESSAGE with payload: Kaarti ei leitud
+2026-01-25 22:08:20,309 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:08:20,312 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:08:23,314 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:08:23,314 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:08:24,309 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:08:24,310 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:08:24,887 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:08:37,778 - ERROR - AUTH ERROR!!
+2026-01-25 22:08:37,779 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:08:37,885 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-01-25 22:08:37,885 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-01-25 22:09:57,672 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:09:58,206 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:10:15,994 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:10:16,524 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:10:19,989 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:10:19,990 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:10:27,088 - INFO - Router received: MESSAGE with payload: Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.
+2026-01-25 22:10:27,089 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:10:28,679 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:10:28,680 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:10:31,177 - ERROR - AUTH ERROR!!
+2026-01-25 22:10:31,180 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:10:31,283 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:10:31,285 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:10:31,286 - INFO - KONTOHALDUS command received
+2026-01-25 22:11:35,613 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:11:36,133 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:13:27,893 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:13:28,425 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:13:50,838 - ERROR - AUTH ERROR!!
+2026-01-25 22:13:50,841 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:13:50,945 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:13:50,946 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:13:50,946 - INFO - KONTOHALDUS command received
+2026-01-25 22:13:53,707 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:13:53,708 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:14:30,462 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:14:31,776 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:14:35,882 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:14:38,704 - ERROR - AUTH ERROR!!
+2026-01-25 22:14:38,705 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:14:38,809 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:14:38,812 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:14:38,812 - INFO - KONTOHALDUS command received
+2026-01-25 22:14:41,584 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:14:41,585 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:14:42,973 - INFO - Router received: UUS_KAART with payload: (False, None, None)
+2026-01-25 22:14:42,973 - INFO - UUS_KAART command received
+2026-01-25 22:14:42,976 - INFO - Router received: KAOTATUD_KAART with payload: None
+2026-01-25 22:14:42,976 - INFO - KAOTATUD_KAART command received
+2026-01-25 22:14:44,501 - WARNING - (DB Handler) nime_kaeve_pintabelist: PIN code CANCEL not found in Pintable
+2026-01-25 22:14:44,503 - INFO - Router received: MESSAGE with payload: Pinnkoodi ei leitud.
+2026-01-25 22:14:44,503 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:14:45,636 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:14:45,638 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:14:46,955 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:14:46,956 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:14:54,423 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 2
+! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-25 22:14:54,423 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:15:27,235 - ERROR - AUTH ERROR!!
+2026-01-25 22:15:27,236 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:15:27,339 - WARNING - (DB Handler) create_new_user: NFC ID already exists: 584183079146
+2026-01-25 22:15:27,341 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 2
+
+2026-01-25 22:15:27,341 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-25 22:15:31,764 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:15:31,766 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:15:36,777 - ERROR - AUTH ERROR!!
+2026-01-25 22:15:36,780 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:15:36,886 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:15:36,889 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:15:36,889 - INFO - KONTOHALDUS command received
+2026-01-25 22:15:40,937 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:15:40,938 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:15:43,188 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-01-25 22:15:43,188 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-01-25 22:15:45,172 - INFO - Router received: MESSAGE with payload: Tere, Registreerija 2
+! Viipa kiipkaarti kasutaja registreerimiseks
+2026-01-25 22:15:45,172 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-01-25 22:15:49,892 - ERROR - AUTH ERROR!!
+2026-01-25 22:15:49,894 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:15:49,997 - WARNING - (DB Handler) create_new_user: NFC ID already exists: 584183079146
+2026-01-25 22:15:50,000 - INFO - Router received: KASUTAJA_REGISTREERITUD with payload: Registreerija 2
+
+2026-01-25 22:15:50,000 - INFO - KASUTAJA_REGISTREERITUD command received - switching to KASUTAJA_REGISTREERITUD screen
+2026-01-25 22:15:55,817 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:15:55,819 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:15:56,948 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-01-25 22:15:59,534 - ERROR - AUTH ERROR!!
+2026-01-25 22:15:59,536 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:15:59,642 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-01-25 22:16:02,624 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:16:02,624 - INFO - Router received: DEFAULT with payload: None
+2026-01-25 22:16:08,342 - ERROR - AUTH ERROR!!
+2026-01-25 22:16:08,344 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-01-25 22:16:08,448 - INFO - (DB Handler) get_unreturned_drinks: Found 17 unreturned items for user 4 (584183079146)
+2026-01-25 22:16:08,451 - INFO - Router received: KONTOHALDUS with payload: ('Registreerija 1', [('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:09:58'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:12:44'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47'), ('coca cola 2L', 5000112678239, '2026-01-25 21:13:47')])
+2026-01-25 22:16:08,451 - INFO - KONTOHALDUS command received
+2026-01-25 22:16:10,606 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-01-25 22:16:10,608 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:13:11,761 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 15:13:12,579 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:13:24,973 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 15:14:55,743 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 15:14:56,237 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 15:14:57,916 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-01 15:14:59,680 - ERROR - AUTH ERROR!!
+2026-02-01 15:14:59,681 - ERROR - AUTH ERROR(status2reg & 0x08) != 0
+2026-02-01 15:14:59,788 - INFO - Router received: VALIKUVAADE with payload: Registreerija 1
+2026-02-01 15:15:03,194 - INFO - Sent door opening screen command: 1
+2026-02-01 15:15:03,196 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-01 15:15:03,196 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-01 15:15:03,197 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-01 15:15:07,200 - INFO - Router received: REKLAAM with payload: None
+2026-02-01 15:15:07,200 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-02-01 15:15:07,254 - INFO - Router received: REKLAAM with payload: None
+2026-02-01 15:15:07,254 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-02-01 15:15:20,862 - INFO - Router received: REKLAAM with payload: None
+2026-02-01 15:15:20,863 - INFO - REKLAAM command received - switching to REKLAAM screen
+2026-02-01 15:15:32,896 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 4 (584183079146)
+2026-02-01 15:15:33,925 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-01 15:15:41,026 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 15:15:41,028 - INFO - Router received: DEFAULT with payload: None

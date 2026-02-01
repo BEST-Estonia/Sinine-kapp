@@ -1088,8 +1088,8 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
 def run_touchscreen(command_q, reply_q):
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
-    #screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    pygame.display.set_caption("Sinine_kapp")
+    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    #pygame.display.set_caption("Sinine_kapp")
     
     # 1. INITIALIZE STYLE MANAGER
     # Laeb fondid 
