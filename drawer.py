@@ -232,9 +232,9 @@ class DEFAULT_SCREEN:
         
         # Buttons
      
-        self.btn_drink = Button(262, 300, 500, 150, "Login sisse, tahan juua", fonts.body, Colors.GREEN, "START_LOGIN")
+        self.btn_drink = Button(262, 300, 500, 150, "Joogi väljastus/tagastus", fonts.body, Colors.GREEN, "START_LOGIN")
         
-        self.btn_kontohaldus = Button(750, 650, 220, 60, "KONTOHALDUS", fonts.small, Colors.BLUE, "GOTO_OPTIONS")
+        self.btn_kontohaldus = Button(650, 650, 300, 80, "KONTOHALDUS", fonts.small, Colors.BLUE, "GOTO_OPTIONS")
         
         # Options menu buttons
         self.btn_login_settings = Button(200, 350, 300, 100, "Logi sisse seadetesse", fonts.small, Colors.BLUE, "LOGIN_SEADED")
@@ -1270,9 +1270,8 @@ class CART_REVIEW:
                 if res.startswith("MINUS_"):
                     name = res[6:]
                     if name in self.items:
-                        self.items[name] -= 1
-                        if self.items[name] <= 0:
-                            del self.items[name]
+                        if self.items[name] > 0:
+                            self.items[name] -= 1
                         self._create_ui() 
                     return None
                 

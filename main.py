@@ -191,6 +191,13 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
     command_queue.put( ("UUS_KAART", payload) )
     if LOGITUD == True:
         nfc_uus = hardware_handler.get_nfc()
+        
+        is_card_registered, existing_owner = database_handler.checkuser(nfc_uus)
+        if is_card_registered:
+            GUI_message(f"Kaart juba registreeritud kasutajale {existing_owner}!")
+            Oota_kasutaja_kinnitust(10)
+            return
+        
         database_handler.update_user_nfc(nfc_input, nfc_uus)
         GUI_message(f"Uus kaart nimele {nimi} registreeritud")
         Oota_kasutaja_kinnitust(10)
@@ -204,6 +211,18 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
         if is_pin_in_pintable == True and is_user_registered == True:
             GUI_message(f"Kasutaja {nimi} leitud. Viipa uut kaarti registreerimiseks", show_button=False)
             uus_nfc = hardware_handler.get_nfc()
+            # Kontrollime, kas kaart on juba kellegi teise nimel
+            is_card_registered, existing_owner = database_handler.checkuser(uus_nfc)
+            
+            if is_card_registered:
+                GUI_message(f"Kaart juba registreeritud kasutajale {existing_owner}!")
+                Oota_kasutaja_kinnitust(10)
+                return
+            # --- FIX END ---
+
+            database_handler.register_new_card(uus_nfc, nimi)
+            GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
+            return
             database_handler.register_new_card(uus_nfc, nimi)
             GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
             return
@@ -376,7 +395,7 @@ def main_loop():
 def joogi_väljastus(nfc_input):
     nfc_input = nfc_input
     GUI_ukse_avamine("1")
-    time.sleep(3)  # Näita ukse avamise ekraani 4 sekundit
+    time.sleep(1)  # Näita ukse avamise ekraani 4 sekundit
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
     
@@ -428,7 +447,6 @@ def joogi_väljastus(nfc_input):
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
     
-    print("Uks suletud. Lõpetan sessiooni...")
     hardware_handler.cleanup_camera()
     
     # --- CART REVIEW LOGIC START ---
@@ -458,7 +476,8 @@ def joogi_väljastus(nfc_input):
                     scanned_barcodes.extend([code] * count)
                     scanned_items_info.extend([name] * count)
     # --- CART REVIEW LOGIC END ---
-
+    GUI_võetud(scanned_items_info)
+    time.sleep(6)
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'nfc_input' andmebaasile
     database_handler.log_user_taken_drinks(nfc_input, scanned_barcodes)
@@ -567,7 +586,8 @@ def joogi_tagastus(nfc_input):
                     scanned_barcodes.extend([code] * count)
                     scanned_items_info.extend([name] * count)
     # --- CART REVIEW LOGIC END ---
-
+    GUI_tagastatud(scanned_items_info) #Kuvab mis joogid kasutaja võttis
+    time.sleep(6)
     # 4. Salvesta andmed andmebaasi
     # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
     database_handler.log_user_returned_drinks(nfc_input, scanned_barcodes)
