@@ -64,34 +64,35 @@ class VÄLJASTATUD_JOOGID:
         # payload_data is expected to be a dict: {"Drink Name": count, ...}
         self.items = payload_data if isinstance(payload_data, dict) else {}
 
-        # Create a confirm button (placeholder for future functionality)
+        # Create a confirm button
         self.buttons = []
-        btn = Button(412, 650, 200, 60, "Kinnita", fonts.body, Colors.GREEN, True)
+        btn = Button(140, 1700, 800, 150, "Kinnita", fonts.title, Colors.SUCCESS, True)
         self.buttons.append(btn)
 
     def draw(self, screen):
         screen.fill(Colors.BACKGROUND)
 
         # Title
-        title_surf = self.fonts.header.render("Väljastatud joogid", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
+        title_surf = self.fonts.huge.render("Väljastatud joogid", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(540, 250))
         screen.blit(title_surf, title_rect)
 
         # List items
-        start_y = 150
-        line_h = 38
+        start_y = 500
+        line_h = 80
         if not self.items:
-            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
+            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.TEXT_SECONDARY)
+            empty_rect = empty_surf.get_rect(center=(540, start_y))
+            screen.blit(empty_surf, empty_rect)
         else:
-            x_name = 100
-            x_count = 850
+            x_name = 140
+            x_count = 880
             for i, (name, count) in enumerate(self.items.items()):
                 y = start_y + i * line_h
                 # Limit drawing to screen height
-                if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
+                if y > 1400:
+                    more_surf = self.fonts.body.render("... rohkem tooteid", True, Colors.TEXT_SECONDARY)
+                    screen.blit(more_surf, (140, y))
                     break
                 name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
                 count_surf = self.fonts.body.render(f"x{count}", True, Colors.TEXT_PRIMARY)
@@ -102,8 +103,8 @@ class VÄLJASTATUD_JOOGID:
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         # Let buttons process hover/clicks
@@ -133,31 +134,32 @@ class UKSE_AVAMINE_TAGASTAMINE:
         
         # Create continue button
         self.buttons = []
-        btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
+        btn = Button(140, 1700, 800, 150, "Jätka", fonts.title, Colors.SUCCESS, True)
         self.buttons.append(btn)
     
     def draw(self, screen):
         screen.fill(Colors.BACKGROUND)
         
         # Title
-        title_surf = self.fonts.header.render("Tagastamist ootavad joogid:", True, Colors.YELLOW)
-        title_rect = title_surf.get_rect(center=(512, 50))
+        title_surf = self.fonts.huge.render("Tagastamist ootavad joogid", True, Colors.WARNING)
+        title_rect = title_surf.get_rect(center=(540, 250))
         screen.blit(title_surf, title_rect)
         
         # List items
-        start_y = 150
-        line_h = 50
+        start_y = 500
+        line_h = 80
         
         if not self.drink_counts:
-            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
+            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.TEXT_SECONDARY)
+            empty_rect = empty_surf.get_rect(center=(540, start_y))
+            screen.blit(empty_surf, empty_rect)
         else:
             for i, (drink_name, count) in enumerate(self.drink_counts.items()):
                 y = start_y + i * line_h
                 # Limit drawing to screen height
-                if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
+                if y > 1400:
+                    more_surf = self.fonts.body.render("... rohkem tooteid", True, Colors.TEXT_SECONDARY)
+                    screen.blit(more_surf, (140, y))
                     break
                 
                 # Format: "Drink Name 6X" (show count with X)
@@ -167,14 +169,14 @@ class UKSE_AVAMINE_TAGASTAMINE:
                     display_text = drink_name
                 
                 drink_surf = self.fonts.body.render(display_text, True, Colors.TEXT_PRIMARY)
-                screen.blit(drink_surf, (100, y))
+                screen.blit(drink_surf, (140, y))
         
         # Draw buttons
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
     
     def handle_input(self, event):
         # Let buttons process hover/clicks
@@ -193,30 +195,30 @@ class KASUTAJA_REGISTREERITUD:
         self.fonts = fonts
         
         # Create continue button
-        btn_continue = Button(412, 550, 200, 80, "Jätka", fonts.body, Colors.GREEN, True)
+        btn_continue = Button(140, 1700, 800, 150, "Jätka", fonts.title, Colors.SUCCESS, True)
         self.buttons = [btn_continue]
     
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         # Success message - split into two lines
         line1 = f"Kasutaja {self.nimi}"
         line2 = f" on edukalt registreeritud."
         
-        line1_surf = self.fonts.header.render(line1, True, Colors.GREEN)
-        line1_rect = line1_surf.get_rect(center=(512, 200))
+        line1_surf = self.fonts.huge.render(line1, True, Colors.SUCCESS)
+        line1_rect = line1_surf.get_rect(center=(540, 700))
         screen.blit(line1_surf, line1_rect)
         
-        line2_surf = self.fonts.header.render(line2, True, Colors.GREEN)
-        line2_rect = line2_surf.get_rect(center=(512, 260))
+        line2_surf = self.fonts.header.render(line2, True, Colors.SUCCESS)
+        line2_rect = line2_surf.get_rect(center=(540, 900))
         screen.blit(line2_surf, line2_rect)
         
         # Draw continue button
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
     
     def handle_input(self, event):
         for btn in self.buttons:
@@ -356,15 +358,14 @@ class UKSE_AVAMINE_VÕTMINE:
         
         screen.fill(Colors.BACKGROUND)
         
-        line1 = self.fonts.header.render(self.line1_text, True, Colors.TEXT_PRIMARY)
-        line2 = self.fonts.body.render(self.line2_text, True, Colors.TEXT_PRIMARY)
+        line1 = self.fonts.huge.render(self.line1_text, True, Colors.SUCCESS)
+        line2 = self.fonts.header.render(self.line2_text, True, Colors.TEXT_PRIMARY)
         
-        rect = screen.get_rect()
-        screen.blit(line1, line1.get_rect(center=(rect.centerx, rect.centery - 40)))
-        screen.blit(line2, line2.get_rect(center=(rect.centerx, rect.centery + 40)))
+        screen.blit(line1, line1.get_rect(center=(540, 800)))
+        screen.blit(line2, line2.get_rect(center=(540, 1000)))
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
     
     def handle_input(self, event):
         # No interaction on door screen
@@ -377,12 +378,14 @@ class REKLAAM:
         
     def draw(self, screen):
         screen.fill(Colors.BACKGROUND)
-        line1 = self.fonts.header.render("UKS AVATUD, TEGUTSE", True, Colors.TEXT_PRIMARY)
-        rect = screen.get_rect()
-        screen.blit(line1, line1.get_rect(center=(rect.centerx, rect.centery - 40)))
+        line1 = self.fonts.huge.render("UKS AVATUD", True, Colors.WARNING)
+        line2 = self.fonts.header.render("TEGUTSE", True, Colors.TEXT_PRIMARY)
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        screen.blit(line1, line1.get_rect(center=(540, 800)))
+        screen.blit(line2, line2.get_rect(center=(540, 1000)))
+        
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
         
     def handle_input(self, event):
         # No interaction on reklaam screen
@@ -408,8 +411,8 @@ class REGISTREERIMINE:
         
         # Create Yes/No buttons for first stage
         self.buttons = []
-        btn_yes = Button(150, 450, 250, 100, "JAH", fonts.header, Colors.GREEN, "yes")
-        btn_no = Button(624, 450, 250, 100, "EI", fonts.header, Colors.RED, "no")
+        btn_yes = Button(140, 1100, 380, 200, "JAH", fonts.huge, Colors.SUCCESS, "yes")
+        btn_no = Button(560, 1100, 380, 200, "EI", fonts.huge, Colors.DANGER, "no")
         self.buttons.append(btn_yes)
         self.buttons.append(btn_no)
         
@@ -426,11 +429,11 @@ class REGISTREERIMINE:
         # C 0 E (Clear, 0, Enter)
         
         self.pinpad_buttons = []
-        start_x = 382
-        start_y = 250
-        btn_width = 80
-        btn_height = 80
-        spacing = 10
+        start_x = 240
+        start_y = 700
+        btn_width = 180
+        btn_height = 180
+        spacing = 20
         
         # Buttons 1-9
         labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -439,7 +442,7 @@ class REGISTREERIMINE:
             col = i % 3
             x = start_x + col * (btn_width + spacing)
             y = start_y + row * (btn_height + spacing)
-            btn = Button(x, y, btn_width, btn_height, label, self.fonts.body, Colors.DK_BLUE, label)
+            btn = Button(x, y, btn_width, btn_height, label, self.fonts.header, Colors.PRIMARY, label)
             self.pinpad_buttons.append(btn)
         
         # Bottom row: Clear, 0, Enter
@@ -447,17 +450,17 @@ class REGISTREERIMINE:
         
         # Clear button
         btn_clear = Button(start_x, start_y + row * (btn_height + spacing), btn_width, btn_height, 
-                          "C", self.fonts.body, Colors.RED, "clear")
+                          "C", self.fonts.header, Colors.DANGER, "clear")
         self.pinpad_buttons.append(btn_clear)
         
         # 0 button
         btn_zero = Button(start_x + (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                         btn_width, btn_height, "0", self.fonts.body, Colors.BLUE, "0")
+                         btn_width, btn_height, "0", self.fonts.header, Colors.PRIMARY, "0")
         self.pinpad_buttons.append(btn_zero)
         
         # Enter button
         btn_enter = Button(start_x + 2 * (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                          btn_width, btn_height, "E", self.fonts.body, Colors.GREEN, "enter")
+                          btn_width, btn_height, "E", self.fonts.header, Colors.SUCCESS, "enter")
         self.pinpad_buttons.append(btn_enter)
     
     def _load_gif(self):
@@ -489,12 +492,12 @@ class REGISTREERIMINE:
 
         idx = int((now - self.easter_egg_start) * 10) % len(self.gif_frames)
         frame = self.gif_frames[idx]
-        rect = frame.get_rect(center=(512, 384))
+        rect = frame.get_rect(center=(540, 960))
         screen.fill((0, 0, 0))
         screen.blit(frame, rect)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         if self.stage == "question":
             self._draw_question_stage(screen)
@@ -503,19 +506,19 @@ class REGISTREERIMINE:
         elif self.stage == "easter_egg":
             self._draw_easter_egg(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
     
     def _draw_question_stage(self, screen):
         """Draw the Yes/No question screen"""
         # Title
-        title_surf = self.fonts.header.render("Kiipkaardile ei vasta kasutajat!", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 100))
+        title_surf = self.fonts.huge.render("Kiipkaardile ei vasta kasutajat!", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(540, 400))
         screen.blit(title_surf, title_rect)
         
         # Additional text line
-        subtitle_surf = self.fonts.body.render("Kas soovid registreerida?", True, Colors.GREY)
-        subtitle_rect = subtitle_surf.get_rect(center=(512, 180))
+        subtitle_surf = self.fonts.header.render("Kas soovid registreerida?", True, Colors.TEXT_SECONDARY)
+        subtitle_rect = subtitle_surf.get_rect(center=(540, 700))
         screen.blit(subtitle_surf, subtitle_rect)
         
         # Draw buttons
@@ -525,14 +528,14 @@ class REGISTREERIMINE:
     def _draw_pinpad_stage(self, screen):
         """Draw the PIN pad entry screen"""
         # Title
-        title_surf = self.fonts.header.render("Sisesta PIN-kood", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 100))
+        title_surf = self.fonts.huge.render("Sisesta PIN-kood", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(540, 300))
         screen.blit(title_surf, title_rect)
         
         # Display entered PIN with asterisks
         pin_display = self.pincode if self.pincode else "_ _ _ _"
-        pin_surf = self.fonts.body.render(pin_display, True, Colors.TEXT_PRIMARY)
-        pin_rect = pin_surf.get_rect(center=(512, 180))
+        pin_surf = self.fonts.header.render(pin_display, True, Colors.TEXT_PRIMARY)
+        pin_rect = pin_surf.get_rect(center=(540, 500))
         screen.blit(pin_surf, pin_rect)
         
         # Draw PIN pad buttons
@@ -596,11 +599,11 @@ class MESSAGE:
         self.buttons = []
         if show_button:
             # Button returns True (boolean) which will be put in reply_queue
-            btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
+            btn = Button(140, 1700, 800, 150, "Jätka", fonts.title, Colors.SUCCESS, True)
             self.buttons.append(btn)
         
-        # Wrap text to fit screen width (900px safe area)
-        self.lines = self._wrap_text(self.text, self.fonts.body, 900)
+        # Wrap text to fit screen width (800px safe area)
+        self.lines = self._wrap_text(self.text, self.fonts.body, 800)
 
     def _wrap_text(self, text, font, max_width):
         words = text.split(' ')
@@ -620,21 +623,21 @@ class MESSAGE:
         return lines
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         # Draw text lines centered
-        start_y = 200
-        line_h = 40
+        start_y = 600
+        line_h = 80
         for i, line in enumerate(self.lines):
             surf = self.fonts.body.render(line, True, Colors.TEXT_PRIMARY)
-            rect = surf.get_rect(center=(512, start_y + i * line_h))
+            rect = surf.get_rect(center=(540, start_y + i * line_h))
             screen.blit(surf, rect)
         
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         for btn in self.buttons:
@@ -650,32 +653,33 @@ class TAGASTATUD_JOOGID:
 
         # Create a continue button
         self.buttons = []
-        btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
+        btn = Button(140, 1700, 800, 150, "Jätka", fonts.title, Colors.SUCCESS, True)
         self.buttons.append(btn)
 
     def draw(self, screen):
         screen.fill(Colors.BACKGROUND)
 
         # Title
-        title_surf = self.fonts.header.render("Tagastasid:", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
+        title_surf = self.fonts.huge.render("Tagastasid:", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(540, 250))
         screen.blit(title_surf, title_rect)
 
         # List items
-        start_y = 150
-        line_h = 38
+        start_y = 500
+        line_h = 80
         if not self.items:
-            empty_surf = self.fonts.body.render("Ei tuvastatud tagastusi", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
+            empty_surf = self.fonts.body.render("Ei tuvastatud tagastusi", True, Colors.TEXT_SECONDARY)
+            empty_rect = empty_surf.get_rect(center=(540, start_y))
+            screen.blit(empty_surf, empty_rect)
         else:
-            x_name = 100
-            x_count = 850
+            x_name = 140
+            x_count = 880
             for i, (name, count) in enumerate(self.items.items()):
                 y = start_y + i * line_h
                 # Limit drawing to screen height
-                if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
+                if y > 1400:
+                    more_surf = self.fonts.body.render("... rohkem tooteid", True, Colors.TEXT_SECONDARY)
+                    screen.blit(more_surf, (140, y))
                     break
                 name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
                 count_surf = self.fonts.body.render(f"{count}x", True, Colors.TEXT_PRIMARY)
@@ -686,8 +690,8 @@ class TAGASTATUD_JOOGID:
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         # Let buttons process hover/clicks
@@ -707,33 +711,32 @@ class KONTOHALDUS:
         self.state = "main" # main, balance, dates
         
         # --- Buttons for MAIN state ---
-        self.btn_new_card = Button(200, 350, 300, 100, "Vaheta kiipkaarti", fonts.body, Colors.BLUE, "UUS_KAART")
-        self.btn_balance = Button(524, 350, 300, 100, "Vaata konto seisu", fonts.body, Colors.GREEN, "SHOW_BALANCE")
-        self.btn_main_back = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.RED, True)
+        self.btn_new_card = Button(140, 900, 800, 200, "Vaheta kiipkaarti", fonts.title, Colors.PRIMARY, "UUS_KAART")
+        self.btn_balance = Button(140, 1150, 800, 200, "Vaata konto seisu", fonts.title, Colors.SUCCESS, "SHOW_BALANCE")
+        self.btn_main_back = Button(290, 1700, 500, 120, "Tagasi", fonts.body, Colors.DANGER, True)
         
         # --- Buttons for BALANCE state ---
-        self.btn_dates = Button(750, 650, 200, 60, "Kuupäevad", fonts.small, Colors.BLUE, "SHOW_DATES")
-        self.btn_balance_back = Button(100, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_MAIN")
+        self.btn_dates = Button(590, 1700, 350, 120, "Kuupäevad", fonts.body, Colors.PRIMARY, "SHOW_DATES")
+        self.btn_balance_back = Button(140, 1700, 350, 120, "Tagasi", fonts.body, Colors.TEXT_SECONDARY, "BACK_TO_MAIN")
         
         # --- Buttons for DATES state ---
-        self.btn_dates_back = Button(412, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_BALANCE")
+        self.btn_dates_back = Button(290, 1700, 500, 120, "Tagasi", fonts.body, Colors.TEXT_SECONDARY, "BACK_TO_BALANCE")
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
-        rect = screen.get_rect()
+        screen.fill(Colors.BACKGROUND)
         
         if self.state == "main":
             # Title
-            title = self.fonts.header.render(f"Konto: {self.nimi}", True, Colors.TEXT_PRIMARY)
-            screen.blit(title, title.get_rect(center=(rect.centerx, 100)))
+            title = self.fonts.huge.render(f"Konto: {self.nimi}", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(540, 300)))
             
             self.btn_new_card.draw(screen)
             self.btn_balance.draw(screen)
             self.btn_main_back.draw(screen)
             
         elif self.state == "balance":
-            title = self.fonts.header.render("Sinu jookide seis", True, Colors.TEXT_PRIMARY)
-            screen.blit(title, title.get_rect(center=(rect.centerx, 50)))
+            title = self.fonts.huge.render("Sinu jookide seis", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(540, 250)))
             
             # Group drinks
             counts = {}
@@ -741,45 +744,45 @@ class KONTOHALDUS:
                 name = item[0]
                 counts[name] = counts.get(name, 0) + 1
             
-            start_y = 120
+            start_y = 500
             if not counts:
-                msg = self.fonts.body.render("Võlgnevusi pole!", True, Colors.GREEN)
-                screen.blit(msg, msg.get_rect(center=(rect.centerx, start_y)))
+                msg = self.fonts.header.render("Võlgnevusi pole!", True, Colors.SUCCESS)
+                screen.blit(msg, msg.get_rect(center=(540, start_y)))
             else:
                 for i, (name, count) in enumerate(counts.items()):
-                    y = start_y + i * 40
-                    if y > 600: break
+                    y = start_y + i * 80
+                    if y > 1400: break
                     row_text = f"{name}: {count} tk"
                     surf = self.fonts.body.render(row_text, True, Colors.TEXT_PRIMARY)
-                    screen.blit(surf, (100, y))
+                    screen.blit(surf, (140, y))
             
             self.btn_dates.draw(screen)
             self.btn_balance_back.draw(screen)
             
         elif self.state == "dates":
-            title = self.fonts.header.render("Võtmise ajad", True, Colors.TEXT_PRIMARY)
-            screen.blit(title, title.get_rect(center=(rect.centerx, 50)))
+            title = self.fonts.huge.render("Võtmise ajad", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(540, 250)))
             
-            start_y = 100
+            start_y = 500
             if not self.unreturned_drinks:
-                msg = self.fonts.body.render("Võlgnevusi pole!", True, Colors.GREEN)
-                screen.blit(msg, msg.get_rect(center=(rect.centerx, start_y)))
+                msg = self.fonts.header.render("Võlgnevusi pole!", True, Colors.SUCCESS)
+                screen.blit(msg, msg.get_rect(center=(540, start_y)))
             else:
                 for i, item in enumerate(self.unreturned_drinks):
                     # item: (name, barcode, date)
                     name = item[0]
                     date_str = str(item[2])
-                    y = start_y + i * 30
-                    if y > 600: break
+                    y = start_y + i * 60
+                    if y > 1400: break
                     
                     row_text = f"{name} - {date_str}"
                     surf = self.fonts.small.render(row_text, True, Colors.TEXT_PRIMARY)
-                    screen.blit(surf, (50, y))
+                    screen.blit(surf, (140, y))
             
             self.btn_dates_back.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         if self.state == "main":
@@ -818,21 +821,21 @@ class UUS_KAART:
         self.fonts = fonts
         
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         line1 = "Viipa oma uut kaarti"
         line2 = "registreerimiseks."
         
-        surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
-        rect1 = surf1.get_rect(center=(512, 300))
+        surf1 = self.fonts.huge.render(line1, True, Colors.TEXT_PRIMARY)
+        rect1 = surf1.get_rect(center=(540, 800))
         screen.blit(surf1, rect1)
         
-        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_PRIMARY)
-        rect2 = surf2.get_rect(center=(512, 370))
+        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_SECONDARY)
+        rect2 = surf2.get_rect(center=(540, 1000))
         screen.blit(surf2, rect2)
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         return None
@@ -844,7 +847,7 @@ class KAOTATUD_KAART:
         self.pinpad_buttons = []
         self._create_pinpad()
         
-        self.btn_cancel = Button(100, 650, 200, 60, "Tühista", fonts.body, Colors.RED, "CANCEL")
+        self.btn_cancel = Button(290, 1700, 500, 120, "Tühista", fonts.body, Colors.DANGER, "CANCEL")
         
         self.gif_frames = []
         self.easter_egg_start = 0
@@ -879,17 +882,17 @@ class KAOTATUD_KAART:
 
         idx = int((now - self.easter_egg_start) * 10) % len(self.gif_frames)
         frame = self.gif_frames[idx]
-        rect = frame.get_rect(center=(512, 384))
+        rect = frame.get_rect(center=(540, 960))
         screen.fill((0, 0, 0))
         screen.blit(frame, rect)
 
     def _create_pinpad(self):
         self.pinpad_buttons = []
-        start_x = 382
-        start_y = 250
-        btn_width = 80
-        btn_height = 80
-        spacing = 10
+        start_x = 240
+        start_y = 700
+        btn_width = 180
+        btn_height = 180
+        spacing = 20
         
         # Buttons 1-9
         labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -898,22 +901,22 @@ class KAOTATUD_KAART:
             col = i % 3
             x = start_x + col * (btn_width + spacing)
             y = start_y + row * (btn_height + spacing)
-            btn = Button(x, y, btn_width, btn_height, label, self.fonts.body, Colors.DK_BLUE, label)
+            btn = Button(x, y, btn_width, btn_height, label, self.fonts.header, Colors.PRIMARY, label)
             self.pinpad_buttons.append(btn)
         
         # Bottom row: Clear, 0, Enter
         row = 3
         
         btn_clear = Button(start_x, start_y + row * (btn_height + spacing), btn_width, btn_height, 
-                          "C", self.fonts.body, Colors.RED, "clear")
+                          "C", self.fonts.header, Colors.DANGER, "clear")
         self.pinpad_buttons.append(btn_clear)
         
         btn_zero = Button(start_x + (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                         btn_width, btn_height, "0", self.fonts.body, Colors.BLUE, "0")
+                         btn_width, btn_height, "0", self.fonts.header, Colors.PRIMARY, "0")
         self.pinpad_buttons.append(btn_zero)
         
         btn_enter = Button(start_x + 2 * (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                          btn_width, btn_height, "E", self.fonts.body, Colors.GREEN, "enter")
+                          btn_width, btn_height, "E", self.fonts.header, Colors.SUCCESS, "enter")
         self.pinpad_buttons.append(btn_enter)
 
     def draw(self, screen):
@@ -921,22 +924,22 @@ class KAOTATUD_KAART:
             self._draw_easter_egg(screen)
             return
 
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         line1 = "Sisesta pinnkood uue kaardi"
         line2 = "registreerimiseks"
         
-        surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
-        rect1 = surf1.get_rect(center=(512, 100))
+        surf1 = self.fonts.huge.render(line1, True, Colors.TEXT_PRIMARY)
+        rect1 = surf1.get_rect(center=(540, 250))
         screen.blit(surf1, rect1)
         
-        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_PRIMARY)
-        rect2 = surf2.get_rect(center=(512, 150))
+        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_SECONDARY)
+        rect2 = surf2.get_rect(center=(540, 400))
         screen.blit(surf2, rect2)
         
         pin_display = self.pincode if self.pincode else "_ _ _ _"
-        pin_surf = self.fonts.body.render(pin_display, True, Colors.TEXT_PRIMARY)
-        pin_rect = pin_surf.get_rect(center=(512, 200))
+        pin_surf = self.fonts.header.render(pin_display, True, Colors.TEXT_PRIMARY)
+        pin_rect = pin_surf.get_rect(center=(540, 550))
         screen.blit(pin_surf, pin_rect)
         
         for btn in self.pinpad_buttons:
@@ -944,8 +947,8 @@ class KAOTATUD_KAART:
             
         self.btn_cancel.draw(screen)
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         res = self.btn_cancel.check_input(event)
@@ -983,36 +986,36 @@ class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida po
         self.buttons = []
         
         # Buttons return boolean values directly
-        btn_yes = Button(150, 500, 250, 100, "JAH", fonts.header, Colors.GREEN, True)
-        btn_no = Button(624, 500, 250, 100, "EI", fonts.header, Colors.RED, False)
+        btn_yes = Button(140, 1100, 380, 200, "JAH", fonts.huge, Colors.SUCCESS, True)
+        btn_no = Button(560, 1100, 380, 200, "EI", fonts.huge, Colors.DANGER, False)
         
         self.buttons.append(btn_yes)
         self.buttons.append(btn_no)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         line1 = "Pinnkoodile vastavat kasutajat"
         line2 = "pole registreeritud."
         line3 = "Kas soovid registreerida?"
         
-        surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
-        rect1 = surf1.get_rect(center=(512, 150))
+        surf1 = self.fonts.huge.render(line1, True, Colors.TEXT_PRIMARY)
+        rect1 = surf1.get_rect(center=(540, 400))
         screen.blit(surf1, rect1)
         
-        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_PRIMARY)
-        rect2 = surf2.get_rect(center=(512, 210))
+        surf2 = self.fonts.huge.render(line2, True, Colors.TEXT_PRIMARY)
+        rect2 = surf2.get_rect(center=(540, 550))
         screen.blit(surf2, rect2)
         
-        surf3 = self.fonts.header.render(line3, True, Colors.TEXT_PRIMARY)
-        rect3 = surf3.get_rect(center=(512, 300))
+        surf3 = self.fonts.header.render(line3, True, Colors.TEXT_SECONDARY)
+        rect3 = surf3.get_rect(center=(540, 800))
         screen.blit(surf3, rect3)
         
         for btn in self.buttons:
             btn.draw(screen)
             
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         for btn in self.buttons:
@@ -1028,7 +1031,7 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
         self.pinpad_buttons = []
         self._create_pinpad()
         
-        self.btn_cancel = Button(100, 650, 200, 60, "Tühista", fonts.body, Colors.RED, "CANCEL")
+        self.btn_cancel = Button(290, 1700, 500, 120, "Tühista", fonts.body, Colors.DANGER, "CANCEL")
         
         self.gif_frames = []
         self.easter_egg_start = 0
@@ -1063,17 +1066,17 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
 
         idx = int((now - self.easter_egg_start) * 10) % len(self.gif_frames)
         frame = self.gif_frames[idx]
-        rect = frame.get_rect(center=(512, 384))
+        rect = frame.get_rect(center=(540, 960))
         screen.fill((0, 0, 0))
         screen.blit(frame, rect)
 
     def _create_pinpad(self):
         self.pinpad_buttons = []
-        start_x = 382
-        start_y = 250
-        btn_width = 80
-        btn_height = 80
-        spacing = 10
+        start_x = 240
+        start_y = 700
+        btn_width = 180
+        btn_height = 180
+        spacing = 20
         
         # Buttons 1-9
         labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -1082,22 +1085,22 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
             col = i % 3
             x = start_x + col * (btn_width + spacing)
             y = start_y + row * (btn_height + spacing)
-            btn = Button(x, y, btn_width, btn_height, label, self.fonts.body, Colors.DK_BLUE, label)
+            btn = Button(x, y, btn_width, btn_height, label, self.fonts.header, Colors.PRIMARY, label)
             self.pinpad_buttons.append(btn)
         
         # Bottom row: Clear, 0, Enter
         row = 3
         
         btn_clear = Button(start_x, start_y + row * (btn_height + spacing), btn_width, btn_height, 
-                          "C", self.fonts.body, Colors.RED, "clear")
+                          "C", self.fonts.header, Colors.DANGER, "clear")
         self.pinpad_buttons.append(btn_clear)
         
         btn_zero = Button(start_x + (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                         btn_width, btn_height, "0", self.fonts.body, Colors.BLUE, "0")
+                         btn_width, btn_height, "0", self.fonts.header, Colors.PRIMARY, "0")
         self.pinpad_buttons.append(btn_zero)
         
         btn_enter = Button(start_x + 2 * (btn_width + spacing), start_y + row * (btn_height + spacing), 
-                          btn_width, btn_height, "E", self.fonts.body, Colors.GREEN, "enter")
+                          btn_width, btn_height, "E", self.fonts.header, Colors.SUCCESS, "enter")
         self.pinpad_buttons.append(btn_enter)
 
     def draw(self, screen):
@@ -1105,22 +1108,22 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
             self._draw_easter_egg(screen)
             return
 
-        screen.fill(Colors.DARK_BG)
+        screen.fill(Colors.BACKGROUND)
         
         line1 = "Kasutaja registreerimiseks"
         line2 = "sisesta pinnkood!"
         
-        surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
-        rect1 = surf1.get_rect(center=(512, 100))
+        surf1 = self.fonts.huge.render(line1, True, Colors.TEXT_PRIMARY)
+        rect1 = surf1.get_rect(center=(540, 250))
         screen.blit(surf1, rect1)
         
-        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_PRIMARY)
-        rect2 = surf2.get_rect(center=(512, 150))
+        surf2 = self.fonts.header.render(line2, True, Colors.TEXT_SECONDARY)
+        rect2 = surf2.get_rect(center=(540, 400))
         screen.blit(surf2, rect2)
         
         pin_display = self.pincode if self.pincode else "_ _ _ _"
-        pin_surf = self.fonts.body.render(pin_display, True, Colors.TEXT_PRIMARY)
-        pin_rect = pin_surf.get_rect(center=(512, 200))
+        pin_surf = self.fonts.header.render(pin_display, True, Colors.TEXT_PRIMARY)
+        pin_rect = pin_surf.get_rect(center=(540, 550))
         screen.blit(pin_surf, pin_rect)
         
         for btn in self.pinpad_buttons:
@@ -1128,8 +1131,8 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
             
         self.btn_cancel.draw(screen)
         
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         res = self.btn_cancel.check_input(event)
@@ -1172,29 +1175,30 @@ class LIVE_CART:
         screen.fill(Colors.BACKGROUND)
         
         # Title
-        title_surf = self.fonts.header.render("Hetkel skaneeritud:", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
+        title_surf = self.fonts.huge.render("Hetkel skaneeritud:", True, Colors.TEXT_PRIMARY)
+        title_rect = title_surf.get_rect(center=(540, 250))
         screen.blit(title_surf, title_rect)
         
         # List items
-        start_y = 150
-        line_h = 38
+        start_y = 500
+        line_h = 80
         if not self.items:
-            empty_surf = self.fonts.body.render("Skaneeri tooteid...", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
+            empty_surf = self.fonts.header.render("Skaneeri tooteid...", True, Colors.TEXT_SECONDARY)
+            empty_rect = empty_surf.get_rect(center=(540, start_y))
+            screen.blit(empty_surf, empty_rect)
         else:
-            x_name = 100
-            x_count = 850
+            x_name = 140
+            x_count = 880
             for i, (name, count) in enumerate(self.items.items()):
                 y = start_y + i * line_h
-                if y > 700: break
+                if y > 1500: break
                 name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
                 count_surf = self.fonts.body.render(f"x{count}", True, Colors.TEXT_PRIMARY)
                 screen.blit(name_surf, (x_name, y))
                 screen.blit(count_surf, (x_count, y))
                 
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        debug_surf = self.fonts.tiny.render(self.__class__.__name__, True, Colors.WARNING)
+        screen.blit(debug_surf, debug_surf.get_rect(topright=(1070, 10)))
 
     def handle_input(self, event):
         return None
