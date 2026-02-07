@@ -1507,20 +1507,32 @@ def run_touchscreen(command_q, reply_q):
     #screen = pygame.display.set_mode((1024, 768))
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     #pygame.display.set_caption("Sinine_kapp")
-    
-    # 1. INITIALIZE STYLE MANAGER
-    # Laeb fondid 
-    fonts = FontManager() 
 
-    current_screen_object = None 
+    # 1. INITIALIZE STYLE MANAGER
+    # Laeb fondid
+    fonts = FontManager()
+
+    current_screen_object = None
     current_screen_object = DEFAULT_SCREEN(fonts)
     running = True
     barcode_buffer = ""
+    barcode_scanning_enabled = False  # Control whether barcode scanning is active
 
     while running:
         try:
             command, payload = command_q.get_nowait()
             logging.info(f"Router received: {command} with payload: {payload}")
+
+            if command == "ENABLE_BARCODE_SCANNING":
+                barcode_scanning_enabled = True
+                logging.info("Barcode scanning ENABLED")
+                continue
+
+            elif command == "DISABLE_BARCODE_SCANNING":
+                barcode_scanning_enabled = False
+                barcode_buffer = ""  # Clear any partial barcode when disabling
+                logging.info("Barcode scanning DISABLED")
+                continue
 
             if command == "DEFAULT":
                 current_screen_object = None
@@ -1602,13 +1614,13 @@ def run_touchscreen(command_q, reply_q):
         except queue.Empty:
             pass 
 
-        # ... Input Handling 
+        # ... Input Handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            
+
             # --- BARCODE SCANNER LOGIC ---
-            if event.type == pygame.KEYDOWN:
+            if barcode_scanning_enabled and event.type == pygame.KEYDOWN:
                 # On enter, send buffer and clear it
                 if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                     if len(barcode_buffer) > 2: # Ignore accidental enter presses

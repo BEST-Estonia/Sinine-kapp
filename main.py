@@ -189,17 +189,23 @@ def admin_loop():
     Handles the admin screen logic loop.
     """
     command_queue.put(("ADMIN", None))
-    
+
     while True:
         try:
             valik = reply_queue.get()
-            
+
             if valik == "BACK":
+                logging.info("Admin loop: barcode scanning disabled")
+                command_queue.put(("DISABLE_BARCODE_SCANNING", None))
                 return # Exit to main loop
-            
+
             elif isinstance(valik, tuple) and valik[0] == "PRODUCT_NAME":
                 product_name = valik[1]
-                
+
+                # Enable barcode scanning for product addition
+                logging.info("Admin loop: enabling barcode scanning for product addition")
+                command_queue.put(("ENABLE_BARCODE_SCANNING", None))
+
                 # Scanning flow
                 while True:
                     GUI_message(f"Skänni uue toote triipkood", show_button=False)
@@ -208,12 +214,12 @@ def admin_loop():
                         GUI_message("Triipkoodi ei leitud. Proovi uuesti.", show_button=True)
                         Oota_kasutaja_kinnitust(10)
                         break # Back to admin menu
-                    
+
                     GUI_message("Skänni uuesti kontrolliks", show_button=False)
                     time.sleep(2) # Wait to prevent immediate re-read
                     Empty_reply_queue()
                     code2 = wait_for_barcode_from_queue(timeout=20)
-                    
+
                     if code1 == code2:
                         # Assuming database_handler has this method
                         try:
@@ -222,17 +228,20 @@ def admin_loop():
                         except AttributeError:
                             logging.error("database_handler.add_product method missing")
                             GUI_message("Viga andmebaasiga suhtlemisel", show_button=True)
-                        
+
                         Oota_kasutaja_kinnitust(10)
                         break
                     else:
                         GUI_message("Koodid ei ühti. Proovi uuesti.", show_button=True)
                         Oota_kasutaja_kinnitust(10)
                         # Loop continues to retry scanning
-                
+
+                # Disable barcode scanning after product addition
+                logging.info("Admin loop: disabling barcode scanning after product addition")
+                command_queue.put(("DISABLE_BARCODE_SCANNING", None))
                 # Return to admin screen
                 command_queue.put(("ADMIN", None))
-                
+
             elif valik == "REMOVE_PRODUCT":
                 while True:
                     try:
@@ -240,9 +249,9 @@ def admin_loop():
                     except AttributeError:
                         logging.error("database_handler.get_all_products missing")
                         products = []
-                        
+
                     command_queue.put(("REMOVE_PRODUCT_LIST", products))
-                    
+
                     resp = reply_queue.get()
                     if resp == "BACK":
                         command_queue.put(("ADMIN", None))
@@ -257,7 +266,7 @@ def admin_loop():
                             GUI_message("Viga andmebaasiga", show_button=True)
                             Oota_kasutaja_kinnitust(5)
                         # Loop continues to refresh list
-                
+
         except queue.Empty:
             pass
 
@@ -507,11 +516,14 @@ def joogi_väljastus(nfc_input):
     time.sleep(1)  # Näita ukse avamise ekraani 4 sekundit
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
-    
+
 
     #Avab ukse
     hardware_handler.Ukse_avaja()
-    
+
+    # Enable barcode scanning before door opens
+    logging.info("joogi_väljastus: enabling barcode scanning")
+    command_queue.put(("ENABLE_BARCODE_SCANNING", None))
 
     #poe ostukorvi vaade vmidagi. Ma ka ei tea enam
     GUI_live_cart([])
@@ -548,45 +560,49 @@ def joogi_väljastus(nfc_input):
                 lcd.clear()
                 lcd.show_message("Skaneeri tooted...")
                 continue # Skip to next loop iteration
-            
+
             # This part only runs for valid barcodes
-            scanned_barcodes.append(barcode_to_process) 
+            scanned_barcodes.append(barcode_to_process)
             scanned_items_info.append(drink_info)
             GUI_live_cart(scanned_items_info)
             print(f"DEBUG: {scanned_items_info}")
-            
+
             count = scanned_items_info.count(drink_info)
             lcd.show_message(f"{drink_info} X{count}")
             time.sleep(1) # Show message briefly
             lcd.clear()
             lcd.show_message("Skaneeri tooted...")
-            
+
         # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(0.05)
 
 
+    # Disable barcode scanning when door closes
+    logging.info("joogi_väljastus: disabling barcode scanning")
+    command_queue.put(("DISABLE_BARCODE_SCANNING", None))
+
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
-    
-    
+
+
     # --- CART REVIEW LOGIC START ---
     # 1. Map names to barcodes so we can reconstruct the list later
     name_to_barcode = {}
     for name, code in zip(scanned_items_info, scanned_barcodes):
         name_to_barcode[name] = code
-        
+
     # 2. Send data to review screen
     logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
     Empty_reply_queue()
     drink_counts = Counter(scanned_items_info)
     command_queue.put(("CART_REVIEW", dict(drink_counts)))
-    
+
     # 3. Wait for user confirmation (modified counts)
     try:
         final_counts = reply_queue.get(timeout=300) # 5 min timeout
     except queue.Empty:
         final_counts = drink_counts
-        
+
     # 4. Reconstruct scanned lists based on final counts
     scanned_barcodes = []
     scanned_items_info = []
@@ -608,11 +624,11 @@ def joogi_väljastus(nfc_input):
     lõpp_kaal = hardware_handler.get_wheight()
     kaalu_vahe = hetke_kaal - lõpp_kaal
     print(f"---Kaalu muutus: {kaalu_vahe}g----")
-    
+
     # Tühjenda LCD uueks kasutajaks
     lcd.clear()
-    
-    # (Funktsioon lõppeb ja main_loop läheb tagasi algusesse, ootama uut NFC-d)   
+
+    # (Funktsioon lõppeb ja main_loop läheb tagasi algusesse, ootama uut NFC-d)
     Empty_reply_queue()
     Empty_command_queue()
     return
@@ -620,19 +636,23 @@ def joogi_väljastus(nfc_input):
 
 def joogi_tagastus(nfc_input):
 
-    #kasutja id 
+    #kasutja id
     nfc_input = nfc_input
 
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
-    
+
     # Fetch unreturned drinks before opening the door
     unreturned_drinks = database_handler.get_unreturned_drinks(nfc_input)
-    
+
     GUI_ukse_avamine("2", unreturned_drinks)
     Oota_kasutaja_kinnitust(30)
-   
+
     hardware_handler.Ukse_avaja()
+
+    # Enable barcode scanning before door opens
+    logging.info("joogi_tagastus: enabling barcode scanning")
+    command_queue.put(("ENABLE_BARCODE_SCANNING", None))
 
     #Reklaam samal ajal kui uks lahti
     GUI_live_cart([])
@@ -669,45 +689,49 @@ def joogi_tagastus(nfc_input):
                 lcd.clear()
                 lcd.show_message("Skaneeri tooted...")
                 continue # Skip to next loop iteration
-            
+
             # This part only runs for valid barcodes
-            scanned_barcodes.append(barcode_to_process) 
+            scanned_barcodes.append(barcode_to_process)
             scanned_items_info.append(drink_info)
             GUI_live_cart(scanned_items_info)
             print(f"DEBUG: {scanned_items_info}")
-            
+
             count = scanned_items_info.count(drink_info)
             lcd.show_message(f"{drink_info} X{count}")
             time.sleep(1) # Show message briefly
             lcd.clear()
             lcd.show_message("Skaneeri tooted...")
-            
+
         # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(0.05)
 
+    # Disable barcode scanning when door closes
+    logging.info("joogi_tagastus: disabling barcode scanning")
+    command_queue.put(("DISABLE_BARCODE_SCANNING", None))
+
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
-    
+
     print("DEBUG: Uks suletud. Lõpetan sessiooni...---")
-    
+
     # --- CART REVIEW LOGIC START ---
     # 1. Map names to barcodes
     name_to_barcode = {}
     for name, code in zip(scanned_items_info, scanned_barcodes):
         name_to_barcode[name] = code
-        
+
     # 2. Send data to review screen
     logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
     Empty_reply_queue()
     drink_counts = Counter(scanned_items_info)
     command_queue.put(("CART_REVIEW", dict(drink_counts)))
-    
+
     # 3. Wait for user confirmation
     try:
         final_counts = reply_queue.get(timeout=300)
     except queue.Empty:
         final_counts = drink_counts
-        
+
     # 4. Reconstruct scanned lists
     scanned_barcodes = []
     scanned_items_info = []
@@ -729,12 +753,12 @@ def joogi_tagastus(nfc_input):
     lõpp_kaal = hardware_handler.get_wheight()
     kaalu_vahe = hetke_kaal - lõpp_kaal
     print(f"---Kaalu muutus: {kaalu_vahe}g----")
-    
+
     # 6. Korista ja lõpeta
-    
+
     # Tühjenda LCD uueks kasutajaks
     lcd.clear()
-    
+
     Empty_reply_queue()
     # (Funktsioon lõppeb ja taastab kontrolli main_loopile)
     return
