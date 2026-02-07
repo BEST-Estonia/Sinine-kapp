@@ -10,3 +10,8 @@ Vajadule taaskäivita masin või terminali aken
 Vajadusel installi paketid ühekaupa
 
 Porjekti loomise hetkel ei tööta pygame pakett uuemate python versioonidega (14+), seega kasuta python 13 versiooni.
+
+5. Kui kasutad portaali uhist MySQL andmebaasi, installi ka draiver:
+   py -m pip install mysql-connector-python
+   # voi
+   py -m pip install pymysql

@@ -1,4 +1,4 @@
-﻿# SININE KAPP - Smart Beverage Vending Cabinet
+# SININE KAPP - Smart Beverage Vending Cabinet
 A modular Python application for automated drink dispensing with NFC authentication, barcode scanning, door detection, and touchscreen UI. This project demonstrates enterprise-grade architecture patterns suitable for embedded systems and IoT applications.
 
 ## QUICK START
@@ -27,6 +27,25 @@ A modular Python application for automated drink dispensing with NFC authenticat
    python3 main.py
    ```
 
+### Shared Database Setup (Pi -> portaal MySQL)
+Use this when you want the Raspberry Pi app and `portaal` web app to read/write the same Sinine Kapp tables.
+
+1. Install one MySQL Python driver:
+   ```bash
+   pip install mysql-connector-python
+   # or
+   pip install pymysql
+   ```
+2. Create `Sinine-kapp/.env` (or set environment variables on the Pi):
+   ```env
+   DATABASE_URL=mysql://USER:PASSWORD@HOST:3306/laravel
+   SININE_KAPP_DB_BACKEND=mysql
+   ```
+3. Keep `SININE_KAPP_DB_BACKEND=auto` (default) if you want fallback to local `database.db` when `DATABASE_URL` is missing.
+
+`database_handler.py` now keeps the same function API for `main.py`, but chooses backend like this:
+- `mysql` when `SININE_KAPP_DB_BACKEND=mysql` or when `DATABASE_URL` exists in `auto` mode
+- `sqlite` when `SININE_KAPP_DB_BACKEND=sqlite` or when `DATABASE_URL` is missing in `auto` mode
 ## ARCHITECTURE OVERVIEW
 
 ### Design Philosophy
@@ -356,3 +375,4 @@ while True:
     time.sleep(0.5)
 GPIO.cleanup()
 ```
+

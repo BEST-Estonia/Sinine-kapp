@@ -1,663 +1,794 @@
-import sqlite3
-import logging
 import datetime
+import logging
+import os
+import sqlite3
+from pathlib import Path
+from typing import Any
+from urllib.parse import unquote, urlparse
+
+_DB_FILE = 'database.db'
+_BACKEND_CONFIG: dict[str, Any] | None = None
+_ENV_LOADED = False
+_MYSQL_DRIVER_NAME: str | None = None
 
 
-#Tsekib kas kasutaja on olemas databases. user tabelis. UID järgi. tabelis nfcid
+def _load_env_file(path: Path) -> None:
+    if not path.exists():
+        return
+
+    for raw_line in path.read_text(encoding='utf-8').splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+
+        key, value = line.split('=', 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+def _load_environment_once() -> None:
+    global _ENV_LOADED
+
+    if _ENV_LOADED:
+        return
+
+    repo_root = Path(__file__).resolve().parent
+    candidates = [
+        repo_root / '.env',
+        repo_root.parent / 'portaal' / '.env',
+    ]
+
+    for candidate in candidates:
+        _load_env_file(candidate)
+
+    _ENV_LOADED = True
+
+
+def _parse_database_url(database_url: str) -> dict[str, Any]:
+    parsed = urlparse(database_url)
+
+    if parsed.scheme not in {'mysql', 'mysql2'}:
+        raise ValueError(f'Unsupported DATABASE_URL scheme: {parsed.scheme}')
+
+    database = parsed.path.lstrip('/')
+    if not database:
+        raise ValueError('DATABASE_URL must include a database name')
+
+    return {
+        'host': parsed.hostname or 'localhost',
+        'port': parsed.port or 3306,
+        'user': unquote(parsed.username or 'root'),
+        'password': unquote(parsed.password or ''),
+        'database': database,
+    }
+
+
+def _connect_mysql(params: dict[str, Any]):
+    global _MYSQL_DRIVER_NAME
+
+    try:
+        import mysql.connector  # type: ignore
+
+        conn = mysql.connector.connect(
+            host=params['host'],
+            port=int(params['port']),
+            user=str(params['user']),
+            password=str(params['password']),
+            database=str(params['database']),
+            autocommit=False,
+        )
+        if _MYSQL_DRIVER_NAME is None:
+            _MYSQL_DRIVER_NAME = 'mysql-connector-python'
+        return conn
+    except ModuleNotFoundError:
+        pass
+
+    try:
+        import pymysql  # type: ignore
+
+        conn = pymysql.connect(
+            host=str(params['host']),
+            port=int(params['port']),
+            user=str(params['user']),
+            password=str(params['password']),
+            database=str(params['database']),
+            autocommit=False,
+            charset='utf8mb4',
+        )
+        if _MYSQL_DRIVER_NAME is None:
+            _MYSQL_DRIVER_NAME = 'pymysql'
+        return conn
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            'MySQL backend selected but no driver is installed. '
+            'Install one: pip install mysql-connector-python OR pip install pymysql'
+        ) from exc
+
+
+def _resolve_backend_config() -> dict[str, Any]:
+    _load_environment_once()
+
+    mode = os.environ.get('SININE_KAPP_DB_BACKEND', 'auto').strip().lower()
+    database_url = os.environ.get('DATABASE_URL', '').strip()
+    sqlite_path = str(Path(__file__).resolve().parent / _DB_FILE)
+
+    if mode not in {'auto', 'sqlite', 'mysql'}:
+        logging.warning(
+            "(DB Handler) Unknown SININE_KAPP_DB_BACKEND='%s'. Falling back to 'auto'.",
+            mode,
+        )
+        mode = 'auto'
+
+    if mode == 'sqlite':
+        return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
+
+    if mode == 'mysql' and not database_url:
+        raise RuntimeError('SININE_KAPP_DB_BACKEND=mysql but DATABASE_URL is missing.')
+
+    if mode == 'auto' and not database_url:
+        return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
+
+    mysql_params = _parse_database_url(database_url)
+    config: dict[str, Any] = {'kind': 'mysql', 'mysql_params': mysql_params}
+    if mode == 'auto':
+        config['auto_sqlite_fallback_path'] = sqlite_path
+    return config
+
+
+def _backend_config() -> dict[str, Any]:
+    global _BACKEND_CONFIG
+
+    if _BACKEND_CONFIG is None:
+        _BACKEND_CONFIG = _resolve_backend_config()
+
+        if _BACKEND_CONFIG['kind'] == 'mysql':
+            params = _BACKEND_CONFIG['mysql_params']
+            logging.info(
+                '(DB Handler) Using MySQL backend: %s@%s:%s/%s',
+                params['user'],
+                params['host'],
+                params['port'],
+                params['database'],
+            )
+        else:
+            logging.info('(DB Handler) Using SQLite backend: %s', _BACKEND_CONFIG['sqlite_path'])
+
+    return _BACKEND_CONFIG
+
+
+def _is_mysql_backend() -> bool:
+    return _backend_config()['kind'] == 'mysql'
+
+
+def _connect():
+    global _BACKEND_CONFIG
+    config = _backend_config()
+
+    if config['kind'] == 'mysql':
+        try:
+            return _connect_mysql(config['mysql_params'])
+        except Exception as exc:
+            fallback_path = config.get('auto_sqlite_fallback_path')
+            if fallback_path:
+                logging.warning(
+                    '(DB Handler) MySQL unavailable in auto mode (%s). Falling back to SQLite: %s',
+                    exc,
+                    fallback_path,
+                )
+                _BACKEND_CONFIG = {'kind': 'sqlite', 'sqlite_path': fallback_path}
+                return sqlite3.connect(fallback_path)
+            raise
+
+    return sqlite3.connect(config['sqlite_path'])
+
+
+def _sql(query: str) -> str:
+    if _is_mysql_backend():
+        return query.replace('?', '%s')
+    return query
+
+
+def _execute(cursor, query: str, params: tuple[Any, ...] = ()) -> None:
+    cursor.execute(_sql(query), params)
+
+
+def _fetchone(cursor, query: str, params: tuple[Any, ...] = ()):
+    _execute(cursor, query, params)
+    return cursor.fetchone()
+
+
+def _fetchall(cursor, query: str, params: tuple[Any, ...] = ()):
+    _execute(cursor, query, params)
+    return cursor.fetchall()
+
+
+def _rollback_safely(conn) -> None:
+    try:
+        conn.rollback()
+    except Exception:
+        pass
+
+
+def _now_sql_timestamp() -> str:
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+def _get_user_id(cursor, nfc_input: Any) -> int | None:
+    row = _fetchone(cursor, 'SELECT userid FROM `users` WHERE nfcid = ?', (str(nfc_input),))
+    if not row:
+        return None
+    return int(row[0])
+
+
+def _get_product_name(cursor, barcode: Any) -> str | None:
+    row = _fetchone(cursor, 'SELECT name FROM `Products` WHERE barcode = ?', (str(barcode),))
+    if not row:
+        return None
+    return str(row[0])
+
+
 def checkuser(UID):
     """
-    Connects to database.db and checks if the nfcid exists.
-    Returns (True, name) if found.
-    Returns (False, None) if not found.
-    Logs any errors.
+    Checks if user exists by nfcid.
+
+    Returns (True, name) if found, else (False, None).
     """
-    db_file = 'database.db'
     conn = None
-    
+
     try:
-        # Connect to the database
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        
-        # 1. The SQL Query: Select the 'name' based on the 'nfcid'
-        query = "SELECT name FROM users WHERE nfcid = ?"
-        
-        # 2. Execute the query
-        cursor.execute(query, (UID,))
-        
-        # 3. Get the result
-        # .fetchone() will return a tuple like ('john_doe',) if found
-        # Otherwise, it will return None.
-        result = cursor.fetchone()
-        
-        # 4. Check the result and return TWO values
-        if result:
-            user_name = result[0]  # Get the name from the tuple
-            return (True, user_name)
-        else:
-            return (False, None) # Return False and None for the name
-            
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) checkuser: Database error. Error: {e}")
-        return (False, None)  # Return a safe default
+        row = _fetchone(cursor, 'SELECT name FROM `users` WHERE nfcid = ?', (str(UID),))
+
+        if row:
+            return True, str(row[0])
+        return False, None
+
     except Exception as e:
-        logging.error(f"(DB Handler) checkuser: General error. Error: {e}")
-        return (False, None)  # Return a safe default
-        
+        logging.error(f'(DB Handler) checkuser: Error: {e}')
+        return False, None
+
     finally:
-        # 5. Always close the connection
         if conn:
             conn.close()
 
-#tsekib kas jook on adnmebaasis, kui ei siis tagastab False, None kui ja siis tgastab True, "joogi nimi"
+
 def get_drink_info(barcode):
     """
-    Connects to database.db and tries to find a product by its barcode.
-    
-    Returns (True, drink_name) if found.
-    Returns (False, None) if not found or an error occurs.
-    Logs any errors.
+    Tries to find product by barcode.
+
+    Returns (True, drink_name) if found, else (False, None).
     """
-    db_file = 'database.db'
     conn = None
-    
+
     try:
-        # Connect to the database
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        
-        # 1. The SQL Query: Select the 'name' based on the 'barcode'
-        # This is the line you wanted to fix.
-        query = "SELECT name FROM Products WHERE barcode = ?"
-        
-        # 2. Execute the query
-        cursor.execute(query, (barcode,))
-        
-        # 3. Get the result
-        # .fetchone() will return a tuple like ('Coke',) if found
-        # Otherwise, it will return None.
-        result = cursor.fetchone()
-        
-        # 4. Check the result and return the info
-        if result:
-            drink_name = result[0]  # Get the name (e.g., 'Coke') from the tuple
-            return (True, drink_name) # Found it!
-        else:
-            return (False, None) # Did not find it
-            
-    except sqlite3.Error as e:
-        # 5. Log the error
-        logging.error(f"(DB Handler) get_drink_info: Database error. Error: {e}")
-        return (False, None)  # Return a safe default
+        row = _fetchone(cursor, 'SELECT name FROM `Products` WHERE barcode = ?', (str(barcode),))
+
+        if row:
+            return True, str(row[0])
+        return False, None
+
     except Exception as e:
-        logging.error(f"(DB Handler) get_drink_info: General error. Error: {e}")
-        return (False, None)  # Return a safe default
-        
+        logging.error(f'(DB Handler) get_drink_info: Error: {e}')
+        return False, None
+
     finally:
-        # 6. Always close the connection
         if conn:
             conn.close()
 
 
-#tekitab listi kõikides barcodedest ja teades user_id logib need andmebaasi
 def log_user_returned_drinks(nfc_input, list_of_barcodes):
     """
-    Logs a list of scanned products as "returned" for a user.
-    
-    - Fetches the userid from the users table.
-    - For each barcode:
-        - Tries to find an unreturned item and UPDATE it.
-        - If no unreturned item is found, it INSERTS a new 
-          transaction with date_taken = NULL.
-    
-    Returns True if successful, False if any error occurs.
-    """
-    db_file = 'database.db'
-    conn = None
-    
-    try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-        
-        # --- Start a Database Transaction ---
-        cursor.execute("BEGIN TRANSACTION")
+    Logs returned products for a user.
 
-        # --- Step 1: Get the userid from the nfcid ---
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (nfc_input,))
-        user_result = cursor.fetchone()
-        
-        if not user_result:
-            logging.error(f"(DB Handler) log_user_returned_drinks: User not found with NFC ID {nfc_input}")
-            conn.rollback()
-            return False
-        
-        user_id = user_result[0]
-        
-        # --- Step 2: Get the current time for 'date_returned' ---
-        date_returned_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        # --- Step 3: Loop through barcodes and process each return ---
-        for barcode in list_of_barcodes:
-            
-            # A. Find the 'rental_id' of an item to return
-            find_query = """
-            SELECT rental_id FROM Transactions
-            WHERE userid = ? AND barcode = ? AND date_returned IS NULL
-            ORDER BY date_taken ASC
-            LIMIT 1 
-            """
-            cursor.execute(find_query, (user_id, barcode))
-            item_to_return = cursor.fetchone()
-
-            # B. Check if we found a matching item
-            if item_to_return:
-                # --- LOGIC A: Found an item to update ---
-                rental_id_to_update = item_to_return[0]
-                update_query = """
-                UPDATE Transactions
-                SET date_returned = ?
-                WHERE rental_id = ?
-                """
-                cursor.execute(update_query, (date_returned_str, rental_id_to_update))
-            
-            else:
-                # --- LOGIC B: (New) Did not find a match, so create a new record ---
-                
-                # We still need the productname to insert
-                cursor.execute("SELECT name FROM Products WHERE barcode = ?", (barcode,))
-                product_result = cursor.fetchone()
-                
-                if not product_result:
-                    # The barcode doesn't even exist in Products table.
-                    # This is a fatal error, must roll back.
-                    logging.warning(f"(DB Handler) log_user_returned_drinks: Product not found with barcode {barcode}. Aborting transaction.")
-                    conn.rollback()
-                    return False
-                
-                product_name = product_result[0]
-
-                # Insert a new record with NULL date_taken
-                insert_query = """
-                INSERT INTO Transactions (userid, productname, date_taken, date_returned, barcode)
-                VALUES (?, ?, NULL, ?, ?)
-                """
-                cursor.execute(insert_query, (user_id, product_name, date_returned_str, barcode))
-
-        # --- Step 4: If all loops succeeded, commit the changes ---
-        conn.commit()
-        logging.info(f"Successfully processed {len(list_of_barcodes)} returned items for user {user_id} ({nfc_input})")
-        return True
-
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) log_user_returned_drinks: Database error. Error: {e}")
-        if conn:
-            conn.rollback()
-        return False
-    except Exception as e:
-        logging.error(f"(DB Handler) log_user_returned_drinks: General error. Error: {e}")
-        if conn:
-            conn.rollback()
-        return False
-        
-    finally:
-        if conn:
-            conn.close()
-
-#Loob uue kasutaja andmebaasi pinnkoodi ja nfcinputist saadud nfc id järgi
-def create_new_user(nfc_input, pinnkood):
-    """
-    Create a new user row in the `users` table using the name associated
-    with `pinnkood` in the `Pintable` table.
+    For each barcode:
+    - If an open (unreturned) transaction exists, set date_returned.
+    - Otherwise insert a new transaction with date_taken = NULL.
 
     Returns True on success, False on failure.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        # Normalize pin: try to convert to int, but allow string fallback
+        conn = _connect()
+        cursor = conn.cursor()
+        _execute(cursor, 'BEGIN')
+
+        user_id = _get_user_id(cursor, nfc_input)
+        if user_id is None:
+            logging.error(
+                f'(DB Handler) log_user_returned_drinks: User not found with NFC ID {nfc_input}'
+            )
+            _rollback_safely(conn)
+            return False
+
+        date_returned_str = _now_sql_timestamp()
+
+        for barcode in list_of_barcodes:
+            row = _fetchone(
+                cursor,
+                '''
+                SELECT rental_id
+                FROM `Transactions`
+                WHERE userid = ? AND barcode = ? AND date_returned IS NULL
+                ORDER BY date_taken ASC
+                LIMIT 1
+                ''',
+                (user_id, str(barcode)),
+            )
+
+            if row:
+                rental_id = int(row[0])
+                _execute(
+                    cursor,
+                    'UPDATE `Transactions` SET date_returned = ? WHERE rental_id = ?',
+                    (date_returned_str, rental_id),
+                )
+                continue
+
+            product_name = _get_product_name(cursor, barcode)
+            if not product_name:
+                logging.warning(
+                    f'(DB Handler) log_user_returned_drinks: Product not found with barcode {barcode}. '
+                    'Aborting transaction.'
+                )
+                _rollback_safely(conn)
+                return False
+
+            _execute(
+                cursor,
+                '''
+                INSERT INTO `Transactions` (userid, productname, date_taken, date_returned, barcode)
+                VALUES (?, ?, NULL, ?, ?)
+                ''',
+                (user_id, product_name, date_returned_str, str(barcode)),
+            )
+
+        conn.commit()
+        logging.info(
+            f'(DB Handler) log_user_returned_drinks: Successfully processed {len(list_of_barcodes)} '
+            f'returned items for user {user_id} ({nfc_input})'
+        )
+        return True
+
+    except Exception as e:
+        logging.error(f'(DB Handler) log_user_returned_drinks: Error: {e}')
+        if conn:
+            _rollback_safely(conn)
+        return False
+
+    finally:
+        if conn:
+            conn.close()
+
+
+def create_new_user(nfc_input, pinnkood):
+    """
+    Creates a user in `users` using name from `Pintable` for given pin.
+
+    Returns True on success, False otherwise.
+    """
+    conn = None
+
+    try:
         try:
             pin_val = int(pinnkood)
         except (ValueError, TypeError):
             pin_val = pinnkood
 
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
 
-        # Look up the name associated with this pin in Pintable
-        cursor.execute("SELECT nimi FROM Pintable WHERE pinnkood = ?", (pin_val,))
-        row = cursor.fetchone()
-        if not row:
-            logging.error(f"(DB Handler) create_new_user: Pin not found in Pintable: {pinnkood}")
+        pin_row = _fetchone(cursor, 'SELECT nimi FROM `Pintable` WHERE pinnkood = ?', (pin_val,))
+        if not pin_row:
+            logging.error(f'(DB Handler) create_new_user: Pin not found in Pintable: {pinnkood}')
             return False
 
-        name = row[0]
+        name = str(pin_row[0])
 
-        # Ensure NFC ID isn't already present
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (nfc_input,))
-        if cursor.fetchone():
-            logging.warning(f"(DB Handler) create_new_user: NFC ID already exists: {nfc_input}")
+        existing_user = _fetchone(cursor, 'SELECT userid FROM `users` WHERE nfcid = ?', (str(nfc_input),))
+        if existing_user:
+            logging.warning(f'(DB Handler) create_new_user: NFC ID already exists: {nfc_input}')
             return False
 
-        # Insert the new user
-        cursor.execute("INSERT INTO users (nfcid, name) VALUES (?, ?)", (nfc_input, name))
-        
-        # Mark the PIN as registered
-        cursor.execute("UPDATE Pintable SET isregistered = 1 WHERE pinnkood = ?", (pin_val,))
-        
+        _execute(cursor, 'INSERT INTO `users` (nfcid, name) VALUES (?, ?)', (str(nfc_input), name))
+        _execute(cursor, 'UPDATE `Pintable` SET isregistered = 1 WHERE pinnkood = ?', (pin_val,))
+
         conn.commit()
         logging.info(f"(DB Handler) create_new_user: Created user '{name}' with NFC {nfc_input}")
         return True
 
-    except sqlite3.IntegrityError as e:
-        logging.error(f"(DB Handler) create_new_user: Integrity error: {e}")
-        if conn:
-            conn.rollback()
-        return False
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) create_new_user: Database error: {e}")
-        if conn:
-            conn.rollback()
-        return False
     except Exception as e:
-        logging.error(f"(DB Handler) create_new_user: General error: {e}")
+        logging.error(f'(DB Handler) create_new_user: Error: {e}')
         if conn:
-            conn.rollback()
+            _rollback_safely(conn)
         return False
+
     finally:
         if conn:
             conn.close()
 
 
-# Log taken drinks (Sisestab Transactions tabelisse kui kasutaja võtab jooke)
 def log_user_taken_drinks(nfc_input, list_of_barcodes):
     """
-    Logs a list of scanned products as "taken" for a user.
+    Logs taken products for a user (date_taken set, date_returned NULL).
 
-    - Fetches the userid from the users table using the provided `nfc_input`.
-    - For each barcode in `list_of_barcodes`:
-        - Looks up product name in `Products`.
-        - Inserts a new Transactions row with `date_taken` set and `date_returned` NULL.
-
-    Returns True on success, False on any failure.
+    Returns True on success, False on failure.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
+        _execute(cursor, 'BEGIN')
 
-        # Start a transaction so either all inserts succeed or none
-        cursor.execute("BEGIN TRANSACTION")
-
-        # Resolve userid from nfcid
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (nfc_input,))
-        user_result = cursor.fetchone()
-        if not user_result:
-            logging.error(f"(DB Handler) log_user_taken_drinks: User not found with NFC ID {nfc_input}")
-            conn.rollback()
+        user_id = _get_user_id(cursor, nfc_input)
+        if user_id is None:
+            logging.error(
+                f'(DB Handler) log_user_taken_drinks: User not found with NFC ID {nfc_input}'
+            )
+            _rollback_safely(conn)
             return False
 
-        user_id = user_result[0]
-        date_taken_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        date_taken_str = _now_sql_timestamp()
 
         for barcode in list_of_barcodes:
-            # Ensure product exists and get its name
-            cursor.execute("SELECT name FROM Products WHERE barcode = ?", (barcode,))
-            product_result = cursor.fetchone()
-            if not product_result:
-                logging.warning(f"(DB Handler) log_user_taken_drinks: Product not found with barcode {barcode}. Aborting transaction.")
-                conn.rollback()
+            product_name = _get_product_name(cursor, barcode)
+            if not product_name:
+                logging.warning(
+                    f'(DB Handler) log_user_taken_drinks: Product not found with barcode {barcode}. '
+                    'Aborting transaction.'
+                )
+                _rollback_safely(conn)
                 return False
 
-            product_name = product_result[0]
+            _execute(
+                cursor,
+                '''
+                INSERT INTO `Transactions` (userid, productname, date_taken, date_returned, barcode)
+                VALUES (?, ?, ?, NULL, ?)
+                ''',
+                (user_id, product_name, date_taken_str, str(barcode)),
+            )
 
-            # Insert transaction row
-            insert_query = """
-            INSERT INTO Transactions (userid, productname, date_taken, date_returned, barcode)
-            VALUES (?, ?, ?, NULL, ?)
-            """
-            cursor.execute(insert_query, (user_id, product_name, date_taken_str, barcode))
-
-        # All inserts succeeded
         conn.commit()
-        logging.info(f"(DB Handler) log_user_taken_drinks: Successfully logged {len(list_of_barcodes)} taken items for user {user_id} ({nfc_input})")
+        logging.info(
+            f'(DB Handler) log_user_taken_drinks: Successfully logged {len(list_of_barcodes)} '
+            f'taken items for user {user_id} ({nfc_input})'
+        )
         return True
 
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) log_user_taken_drinks: Database error. Error: {e}")
-        if conn:
-            conn.rollback()
-        return False
     except Exception as e:
-        logging.error(f"(DB Handler) log_user_taken_drinks: General error. Error: {e}")
+        logging.error(f'(DB Handler) log_user_taken_drinks: Error: {e}')
         if conn:
-            conn.rollback()
+            _rollback_safely(conn)
         return False
+
     finally:
         if conn:
             conn.close()
 
-#Kontrollib kas kasutaja sisestatud pinnkood on pinnkoodi andmebaasis
-#Võtab sisse kasutaja sisestatud pinnkoodi ja returnim True on andmebaasis False pole sellist adnmebaasis
+
 def check_pin_code_dict(pinnkood):
     """
-    Check whether a given `pinnkood` exists in the `Pintable` table of `database.db`.
-    Returns True if found, False otherwise. Logs errors on database failures.
+    Returns True if `pinnkood` exists in `Pintable`, else False.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT pinnkood FROM Pintable WHERE pinnkood = ?", (pinnkood,))
-        result = cursor.fetchone()
-        return bool(result)
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) check_pin_code_dict: Database error. Error: {e}")
-        return False
+        row = _fetchone(cursor, 'SELECT pinnkood FROM `Pintable` WHERE pinnkood = ?', (pinnkood,))
+        return bool(row)
+
     except Exception as e:
-        logging.error(f"(DB Handler) check_pin_code_dict: General error. Error: {e}")
+        logging.error(f'(DB Handler) check_pin_code_dict: Error: {e}')
         return False
+
     finally:
         if conn:
             conn.close()
+
 
 def is_user_registered(pinnkood):
     """
-    Checks if user with that pincode isregistered is 0 or 1.
-    Returns True if isregistered == 1.
-    Returns False if isregistered == 0 or error/not found.
+    Returns True when Pintable.isregistered == 1 for given pin.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        # Normalize pin: try to convert to int, but allow string fallback
         try:
             pin_val = int(pinnkood)
         except (ValueError, TypeError):
             pin_val = pinnkood
 
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT isregistered FROM Pintable WHERE pinnkood = ?", (pin_val,))
-        result = cursor.fetchone()
-        
-        if result:
-            return result[0] == 1
-        return False
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) is_user_registered: Database error. Error: {e}")
-        return False
+        row = _fetchone(cursor, 'SELECT isregistered FROM `Pintable` WHERE pinnkood = ?', (pin_val,))
+
+        if not row:
+            return False
+
+        return bool(row[0])
+
     except Exception as e:
-        logging.error(f"(DB Handler) is_user_registered: General error. Error: {e}")
+        logging.error(f'(DB Handler) is_user_registered: Error: {e}')
         return False
+
     finally:
         if conn:
             conn.close()
+
 
 def nime_kaeve_pintabelist(pinnkood):
     """
-    Searches the Pintable for a given pinnkood and returns the corresponding name.
-    
-    Args:
-        pinnkood: The PIN code to search for
-    
-    Returns:
-        (True, name) if pinnkood found in Pintable
-        (False, None) if pinnkood not found or error occurs
-    
-    Logs any errors.
+    Reads name (`nimi`) from Pintable by pin code.
+
+    Returns (True, name) if found else (False, None).
     """
-    db_file = 'database.db'
     conn = None
-    
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        
-        # Search Pintable for the pinnkood and get the name
-        query = "SELECT nimi FROM Pintable WHERE pinnkood = ?"
-        
-        cursor.execute(query, (pinnkood,))
-        result = cursor.fetchone()
-        
-        if result:
-            name = result[0]  # Get the name from the tuple
-            return (True, name)
-        else:
-            logging.warning(f"(DB Handler) nime_kaeve_pintabelist: PIN code {pinnkood} not found in Pintable")
-            return (False, None)
-    
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) nime_kaeve_pintabelist: Database error. Error: {e}")
-        return (False, None)
+        row = _fetchone(cursor, 'SELECT nimi FROM `Pintable` WHERE pinnkood = ?', (pinnkood,))
+
+        if row:
+            return True, str(row[0])
+
+        logging.warning(
+            f'(DB Handler) nime_kaeve_pintabelist: PIN code {pinnkood} not found in Pintable'
+        )
+        return False, None
+
     except Exception as e:
-        logging.error(f"(DB Handler) nime_kaeve_pintabelist: General error. Error: {e}")
-        return (False, None)
+        logging.error(f'(DB Handler) nime_kaeve_pintabelist: Error: {e}')
+        return False, None
+
     finally:
         if conn:
             conn.close()
+
 
 def get_unreturned_drinks(nfc_input):
     """
-    Skännib transaction tabelit ja otsib kõik kasutaja võetud joogid mis pole tagastatud.
-    Args:
-        nfc_input: nfc tag
-    
-    Returns:
-        A list of tuples: [(productname, barcode, date_taken), ...]
-        Returns an empty list if user not found or no unreturned items.
-        Logs any errors.
+    Returns all unreturned drinks for user NFC.
+
+    Output shape: [(productname, barcode, date_taken), ...]
     """
-    db_file = 'database.db'
     conn = None
-    
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        
-        # Step 1: Get userid from nfcid
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (nfc_input,))
-        user_result = cursor.fetchone()
-        
-        if not user_result:
-            logging.warning(f"(DB Handler) get_unreturned_drinks: User not found with NFC ID {nfc_input}")
+
+        user_id = _get_user_id(cursor, nfc_input)
+        if user_id is None:
+            logging.warning(
+                f'(DB Handler) get_unreturned_drinks: User not found with NFC ID {nfc_input}'
+            )
             return []
-        
-        user_id = user_result[0]
-        
-        # Step 2: Get all unreturned drinks for this user
-        # WHERE date_returned IS NULL means the drink hasn't been returned yet
-        query = """
-        SELECT productname, barcode, date_taken FROM Transactions
-        WHERE userid = ? AND date_returned IS NULL
-        ORDER BY date_taken ASC
-        """
-        cursor.execute(query, (user_id,))
-        unreturned_items = cursor.fetchall()
-        
-        if unreturned_items:
-            logging.info(f"(DB Handler) get_unreturned_drinks: Found {len(unreturned_items)} unreturned items for user {user_id} ({nfc_input})")
+
+        rows = _fetchall(
+            cursor,
+            '''
+            SELECT productname, barcode, date_taken
+            FROM `Transactions`
+            WHERE userid = ? AND date_returned IS NULL
+            ORDER BY date_taken ASC
+            ''',
+            (user_id,),
+        )
+
+        if rows:
+            logging.info(
+                f'(DB Handler) get_unreturned_drinks: Found {len(rows)} unreturned items '
+                f'for user {user_id} ({nfc_input})'
+            )
         else:
-            logging.info(f"(DB Handler) get_unreturned_drinks: No unreturned items found for user {user_id} ({nfc_input})")
-        
-        return unreturned_items
-    
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) get_unreturned_drinks: Database error. Error: {e}")
-        return []
+            logging.info(
+                f'(DB Handler) get_unreturned_drinks: No unreturned items found '
+                f'for user {user_id} ({nfc_input})'
+            )
+
+        return rows
+
     except Exception as e:
-        logging.error(f"(DB Handler) get_unreturned_drinks: General error. Error: {e}")
+        logging.error(f'(DB Handler) get_unreturned_drinks: Error: {e}')
         return []
+
     finally:
         if conn:
             conn.close()
 
+
 def keep_stock(scanned_barcodes, action_type):
     """
-    Updates the stock count for the provided barcodes.
-    
-    Args:
-        scanned_barcodes: List of barcodes (integers or strings).
-        action_type: String, either "taken" (decrements stock) or "returned" (increments stock).
-        
-    Returns:
-        True if successful, False otherwise.
+    Updates stock counts for scanned barcodes.
+
+    - action_type='taken'    -> decrement stock
+    - action_type='returned' -> increment stock
     """
-    db_file = 'database.db'
     conn = None
-    
-    # Determine the adjustment value
-    if action_type == "taken":
+
+    if action_type == 'taken':
         adjustment = -1
-    elif action_type == "returned":
+    elif action_type == 'returned':
         adjustment = 1
     else:
-        logging.error(f"(DB Handler) keep_stock: Invalid action_type '{action_type}'. Must be 'taken' or 'returned'.")
+        logging.error(
+            f"(DB Handler) keep_stock: Invalid action_type '{action_type}'. Must be 'taken' or 'returned'."
+        )
         return False
 
     if not scanned_barcodes:
         return True
 
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
-        
-        cursor.execute("BEGIN TRANSACTION")
-        
-        query = "UPDATE Products SET stock = stock + ? WHERE barcode = ?"
-        
+        _execute(cursor, 'BEGIN')
+
         for barcode in scanned_barcodes:
-            cursor.execute(query, (adjustment, barcode))
-            
+            _execute(
+                cursor,
+                'UPDATE `Products` SET stock = COALESCE(stock, 0) + ? WHERE barcode = ?',
+                (adjustment, str(barcode)),
+            )
+
         conn.commit()
-        logging.info(f"(DB Handler) keep_stock: Updated stock for {len(scanned_barcodes)} items. Action: {action_type}")
+        logging.info(
+            f'(DB Handler) keep_stock: Updated stock for {len(scanned_barcodes)} items. Action: {action_type}'
+        )
         return True
-        
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) keep_stock: Database error. Error: {e}")
-        if conn:
-            conn.rollback()
-        return False
+
     except Exception as e:
-        logging.error(f"(DB Handler) keep_stock: General error. Error: {e}")
+        logging.error(f'(DB Handler) keep_stock: Error: {e}')
         if conn:
-            conn.rollback()
+            _rollback_safely(conn)
         return False
+
     finally:
         if conn:
             conn.close()
 
-#Vahetab kasutaja nfc kaardi uue vastu
+
 def update_user_nfc(nfc_input, nfc_uus):
     """
-    Finds user with nfc_input and replaces that nfc uid with nfc_uus variable.
-    Returns True on success, False on failure.
+    Replaces a user's old NFC id with a new NFC id.
+
+    Returns True on success, False otherwise.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
 
-        # Check if new NFC ID is already in use
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (nfc_uus,))
-        if cursor.fetchone():
-            logging.warning(f"(DB Handler) update_user_nfc: New NFC ID {nfc_uus} is already in use.")
+        existing = _fetchone(cursor, 'SELECT userid FROM `users` WHERE nfcid = ?', (str(nfc_uus),))
+        if existing:
+            logging.warning(
+                f'(DB Handler) update_user_nfc: New NFC ID {nfc_uus} is already in use.'
+            )
             return False
 
-        # Update the user's NFC ID
-        cursor.execute("UPDATE users SET nfcid = ? WHERE nfcid = ?", (nfc_uus, nfc_input))
-        
+        _execute(cursor, 'UPDATE `users` SET nfcid = ? WHERE nfcid = ?', (str(nfc_uus), str(nfc_input)))
+
         if cursor.rowcount == 0:
-            logging.warning(f"(DB Handler) update_user_nfc: No user found with NFC ID {nfc_input}")
+            logging.warning(
+                f'(DB Handler) update_user_nfc: No user found with NFC ID {nfc_input}'
+            )
             return False
 
         conn.commit()
-        logging.info(f"(DB Handler) update_user_nfc: Updated NFC ID from {nfc_input} to {nfc_uus}")
+        logging.info(
+            f'(DB Handler) update_user_nfc: Updated NFC ID from {nfc_input} to {nfc_uus}'
+        )
         return True
 
-    except sqlite3.Error as e:
-        logging.error(f"(DB Handler) update_user_nfc: Database error: {e}")
-        if conn:
-            conn.rollback()
-        return False
     except Exception as e:
-        logging.error(f"(DB Handler) update_user_nfc: General error: {e}")
+        logging.error(f'(DB Handler) update_user_nfc: Error: {e}')
         if conn:
-            conn.rollback()
+            _rollback_safely(conn)
         return False
+
     finally:
         if conn:
             conn.close()
+
 
 def register_new_card(uus_nfc, nimi):
     """
-    Search user table for given name and assigns new nfcid to user.
+    Finds a user by name and assigns a new NFC ID.
+
     Returns True on success, False on failure.
     """
-    db_file = 'database.db'
     conn = None
+
     try:
-        conn = sqlite3.connect(db_file)
+        conn = _connect()
         cursor = conn.cursor()
 
-        # Check if new NFC ID is already in use
-        cursor.execute("SELECT userid FROM users WHERE nfcid = ?", (uus_nfc,))
-        if cursor.fetchone():
-            logging.warning(f"(DB Handler) register_new_card: New NFC ID {uus_nfc} is already in use.")
+        existing = _fetchone(cursor, 'SELECT userid FROM `users` WHERE nfcid = ?', (str(uus_nfc),))
+        if existing:
+            logging.warning(
+                f'(DB Handler) register_new_card: New NFC ID {uus_nfc} is already in use.'
+            )
             return False
 
-        # Update the user's NFC ID based on name
-        cursor.execute("UPDATE users SET nfcid = ? WHERE name = ?", (uus_nfc, nimi))
-        
+        _execute(cursor, 'UPDATE `users` SET nfcid = ? WHERE name = ?', (str(uus_nfc), str(nimi)))
+
         if cursor.rowcount == 0:
-            logging.warning(f"(DB Handler) register_new_card: No user found with name {nimi}")
+            logging.warning(f'(DB Handler) register_new_card: No user found with name {nimi}')
             return False
 
         conn.commit()
-        logging.info(f"(DB Handler) register_new_card: Assigned new NFC {uus_nfc} to user {nimi}")
+        logging.info(f'(DB Handler) register_new_card: Assigned new NFC {uus_nfc} to user {nimi}')
         return True
 
     except Exception as e:
-        logging.error(f"(DB Handler) register_new_card: Error: {e}")
+        logging.error(f'(DB Handler) register_new_card: Error: {e}')
         if conn:
-            conn.rollback()
+            _rollback_safely(conn)
         return False
+
     finally:
         if conn:
             conn.close()
 
+
 def add_product(name, barcode):
-    db_file = 'database.db'
-    conn = sqlite3.connect(db_file) 
-    c = conn.cursor()
+    conn = None
+
     try:
-        # Defaulting stock to 0 and weight to 0.0 as they are required/implied
-        c.execute('INSERT INTO Products (barcode, name, stock, weight) VALUES (?, ?, ?, ?)', (barcode, name, 0, 0.0))
+        conn = _connect()
+        cursor = conn.cursor()
+        _execute(
+            cursor,
+            'INSERT INTO `Products` (barcode, name, stock, weight) VALUES (?, ?, ?, ?)',
+            (str(barcode), str(name), 0, 0.0),
+        )
         conn.commit()
         return True
-    except sqlite3.IntegrityError:
-        return False
+
     except Exception as e:
-        print(f"Error adding product: {e}")
+        logging.error(f'(DB Handler) add_product: Error adding product: {e}')
+        if conn:
+            _rollback_safely(conn)
         return False
+
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_all_products():
+    conn = _connect()
+
+    try:
+        cursor = conn.cursor()
+        rows = _fetchall(
+            cursor,
+            'SELECT productid, name, barcode FROM `Products` ORDER BY name',
+        )
+        return rows
+
     finally:
         conn.close()
 
-def get_all_products():
-    db_file = 'database.db'
-    conn = sqlite3.connect(db_file) 
-    c = conn.cursor()
-    c.execute('SELECT productid, name, barcode FROM Products ORDER BY name')
-    data = c.fetchall()
-    conn.close()
-    return data # Returns list of tuples: (productid, name, barcode)
 
 def remove_product(product_id):
-    db_file = 'database.db'
-    conn = sqlite3.connect(db_file) 
-    c = conn.cursor()
-    c.execute('DELETE FROM Products WHERE productid = ?', (product_id,))
-    conn.commit()
-    conn.close()
+    conn = _connect()
+
+    try:
+        cursor = conn.cursor()
+        _execute(cursor, 'DELETE FROM `Products` WHERE productid = ?', (product_id,))
+        conn.commit()
+
+    finally:
+        conn.close()
