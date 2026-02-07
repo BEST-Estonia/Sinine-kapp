@@ -517,6 +517,7 @@ def joogi_väljastus(nfc_input):
     #Küsib handlerilt hetkekaalu
     hetke_kaal = hardware_handler.get_wheight()
 
+    lcd.set_backlight(True)
 
     #Avab ukse
     hardware_handler.Ukse_avaja()
@@ -577,6 +578,7 @@ def joogi_väljastus(nfc_input):
         time.sleep(0.05)
 
 
+    lcd.set_backlight(False)
     # Disable barcode scanning when door closes
     logging.info("joogi_väljastus: disabling barcode scanning")
     command_queue.put(("DISABLE_BARCODE_SCANNING", None))
@@ -648,6 +650,7 @@ def joogi_tagastus(nfc_input):
     GUI_ukse_avamine("2", unreturned_drinks)
     Oota_kasutaja_kinnitust(30)
 
+    lcd.set_backlight(True)
     hardware_handler.Ukse_avaja()
 
     # Enable barcode scanning before door opens
@@ -705,6 +708,7 @@ def joogi_tagastus(nfc_input):
         # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(0.05)
 
+    lcd.set_backlight(False)
     # Disable barcode scanning when door closes
     logging.info("joogi_tagastus: disabling barcode scanning")
     command_queue.put(("DISABLE_BARCODE_SCANNING", None))

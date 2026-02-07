@@ -19,6 +19,11 @@ class LCD:
         dc_pin = digitalio.DigitalInOut(board.D27)
         reset_pin = digitalio.DigitalInOut(board.D22)
         spi = board.SPI()
+        
+        # Backlight control on GPIO 26
+        self.backlight = digitalio.DigitalInOut(board.D26)
+        self.backlight.direction = digitalio.Direction.OUTPUT
+        self.backlight.value = False # Start with backlight OFF
 
         # --- Display Init ---
         self.disp = ST7789(
@@ -44,6 +49,9 @@ class LCD:
         # --- Start Background Timer ---
         self.thread = threading.Thread(target=self._auto_off_worker, daemon=True)
         self.thread.start()
+
+    def set_backlight(self, state):
+        self.backlight.value = state
 
     def show_message(self, text):
         """

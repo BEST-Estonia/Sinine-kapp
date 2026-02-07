@@ -3771,3 +3771,118 @@
 2026-02-07 16:31:25,497 - INFO - (DB Handler) keep_stock: Updated stock for 9 items. Action: taken
 2026-02-07 16:31:26,526 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-07 16:31:26,529 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 16:40:19,372 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 16:40:19,870 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 16:40:22,610 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 16:40:23,980 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 16:40:25,531 - INFO - Sent door opening screen command: 1
+2026-02-07 16:40:25,533 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 16:40:25,533 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 16:40:25,533 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 16:40:27,532 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 16:40:27,535 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 16:40:27,535 - INFO - Barcode scanning ENABLED
+2026-02-07 16:40:27,535 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 16:40:27,535 - INFO - LIVE_CART command received
+2026-02-07 16:40:29,628 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:40:29,651 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:40:29,652 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:40:29,655 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 16:40:29,655 - INFO - LIVE_CART command received
+2026-02-07 16:40:31,048 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:40:31,085 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:40:31,085 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:40:31,088 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 16:40:31,088 - INFO - LIVE_CART command received
+2026-02-07 16:40:32,115 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:40:32,222 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:40:32,222 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:40:32,228 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 16:40:32,228 - INFO - LIVE_CART command received
+2026-02-07 16:40:35,883 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:40:35,921 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:40:35,921 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:40:35,927 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 16:40:35,927 - INFO - LIVE_CART command received
+2026-02-07 16:40:36,616 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:40:37,059 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:40:37,059 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:40:37,065 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 16:40:37,065 - INFO - LIVE_CART command received
+2026-02-07 16:41:12,760 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 16:41:13,234 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 16:41:18,196 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 16:41:18,677 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 16:41:19,185 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 16:41:20,910 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 16:41:22,414 - INFO - (DB Handler) get_unreturned_drinks: Found 54 unreturned items for user 3 (836305420740)
+2026-02-07 16:41:22,415 - INFO - Sent door opening screen command: 2
+2026-02-07 16:41:22,415 - INFO - Router received: UKSE_AVAMINE_TAGASTAMINE with payload: [('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:20:32'), ('Vergi', 4742883015974, '2026-02-07 16:25:34'), ('Vergi', 4742883015974, '2026-02-07 16:25:34'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('MY', 6420256001349, '2026-02-07 16:31:25'), ('MY', 6420256001349, '2026-02-07 16:31:25')]
+2026-02-07 16:41:22,416 - INFO - UKSE_AVAMINE_TAGASTAMINE command received with payload: [('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 15:38:56'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:07:54'), ('Vergi', 4742883015974, '2026-02-07 16:20:32'), ('Vergi', 4742883015974, '2026-02-07 16:25:34'), ('Vergi', 4742883015974, '2026-02-07 16:25:34'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:30:41'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('Vergi', 4742883015974, '2026-02-07 16:31:25'), ('MY', 6420256001349, '2026-02-07 16:31:25'), ('MY', 6420256001349, '2026-02-07 16:31:25')]
+2026-02-07 16:41:25,352 - INFO - joogi_tagastus: enabling barcode scanning
+2026-02-07 16:41:25,355 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 16:41:25,355 - INFO - Barcode scanning ENABLED
+2026-02-07 16:41:25,355 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 16:41:25,355 - INFO - LIVE_CART command received
+2026-02-07 16:41:29,024 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:29,026 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:29,026 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:29,028 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 16:41:29,029 - INFO - LIVE_CART command received
+2026-02-07 16:41:29,695 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:30,167 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:30,167 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:30,172 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 16:41:30,172 - INFO - LIVE_CART command received
+2026-02-07 16:41:30,345 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:30,820 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:31,298 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:31,298 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:31,302 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 16:41:31,303 - INFO - LIVE_CART command received
+2026-02-07 16:41:31,452 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:32,430 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:32,430 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:32,432 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 16:41:32,433 - INFO - LIVE_CART command received
+2026-02-07 16:41:33,091 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:33,505 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:33,562 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:33,562 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:33,566 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 16:41:33,566 - INFO - LIVE_CART command received
+2026-02-07 16:41:34,549 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:34,695 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:34,696 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:34,699 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 6})
+2026-02-07 16:41:34,699 - INFO - LIVE_CART command received
+2026-02-07 16:41:35,360 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:35,828 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:35,828 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:35,832 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 7})
+2026-02-07 16:41:35,832 - INFO - LIVE_CART command received
+2026-02-07 16:41:36,958 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 16:41:36,962 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:36,962 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:36,966 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 8})
+2026-02-07 16:41:36,966 - INFO - LIVE_CART command received
+2026-02-07 16:41:38,094 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:38,094 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:38,099 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 9})
+2026-02-07 16:41:38,100 - INFO - LIVE_CART command received
+2026-02-07 16:41:39,225 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 16:41:39,225 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 16:41:39,231 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 10})
+2026-02-07 16:41:39,231 - INFO - LIVE_CART command received
+2026-02-07 16:41:40,457 - INFO - joogi_tagastus: disabling barcode scanning
+2026-02-07 16:41:40,458 - INFO - MAIN-LOOP: Final cart before review: ['Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi']
+2026-02-07 16:41:40,460 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 16:41:40,460 - INFO - Barcode scanning DISABLED
+2026-02-07 16:41:40,460 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 10}
+2026-02-07 16:41:40,460 - INFO - CART_REVIEW command received
+2026-02-07 16:41:54,672 - INFO - Router received: TAGASTATUD_JOOGID with payload: Counter({'Vergi': 10})
+2026-02-07 16:41:54,673 - INFO - TAGASTATUD_JOOGID command received - switching to TAGASTATUD_JOOGID screen
+2026-02-07 16:42:00,688 - INFO - Successfully processed 10 returned items for user 3 (836305420740)
+2026-02-07 16:42:00,699 - INFO - (DB Handler) keep_stock: Updated stock for 10 items. Action: returned
+2026-02-07 16:42:01,725 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 16:42:01,728 - INFO - Router received: DEFAULT with payload: None
