@@ -3886,3 +3886,782 @@
 2026-02-07 16:42:00,699 - INFO - (DB Handler) keep_stock: Updated stock for 10 items. Action: returned
 2026-02-07 16:42:01,725 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-02-07 16:42:01,728 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:03:04,708 - ERROR - Failed to initialize door sensor: Pin GPIO23 is not floating, but "active_state" is not None
+2026-02-07 17:03:04,709 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:03:05,194 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:03:06,690 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:03:19,046 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:03:20,032 - INFO - Sent door opening screen command: 1
+2026-02-07 17:03:20,033 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:03:20,034 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:03:20,034 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:03:22,033 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:03:22,035 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:03:22,036 - INFO - Barcode scanning ENABLED
+2026-02-07 17:03:22,036 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:03:22,036 - INFO - LIVE_CART command received
+2026-02-07 17:03:22,089 - ERROR - Door sensor not initialized
+2026-02-07 17:03:22,089 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:03:22,090 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:03:22,093 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:03:22,093 - INFO - Barcode scanning DISABLED
+2026-02-07 17:03:22,093 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:03:22,093 - INFO - CART_REVIEW command received
+2026-02-07 17:03:27,323 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:03:33,323 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:03:34,350 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:03:34,354 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:03:36,250 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:03:38,094 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:03:39,727 - INFO - Sent door opening screen command: 1
+2026-02-07 17:03:39,729 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:03:39,729 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:03:39,729 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:03:41,728 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:03:41,731 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:03:41,731 - INFO - Barcode scanning ENABLED
+2026-02-07 17:03:41,731 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:03:41,731 - INFO - LIVE_CART command received
+2026-02-07 17:03:41,783 - ERROR - Door sensor not initialized
+2026-02-07 17:03:41,783 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:03:41,783 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:03:41,784 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:03:41,784 - INFO - Barcode scanning DISABLED
+2026-02-07 17:03:41,784 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:03:41,784 - INFO - CART_REVIEW command received
+2026-02-07 17:05:16,320 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:05:22,319 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:05:23,366 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:05:23,369 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:05:23,894 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:05:25,286 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:05:27,281 - INFO - Sent door opening screen command: 1
+2026-02-07 17:05:27,284 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:05:27,284 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:05:27,284 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:05:29,283 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:05:29,286 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:05:29,286 - INFO - Barcode scanning ENABLED
+2026-02-07 17:05:29,286 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:05:29,287 - INFO - LIVE_CART command received
+2026-02-07 17:05:29,339 - ERROR - Door sensor not initialized
+2026-02-07 17:05:29,340 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:05:29,340 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:05:29,343 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:05:29,343 - INFO - Barcode scanning DISABLED
+2026-02-07 17:05:29,343 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:05:29,343 - INFO - CART_REVIEW command received
+2026-02-07 17:05:31,754 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:05:37,753 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:05:38,781 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:05:38,782 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:05:39,722 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:05:42,020 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:05:43,556 - INFO - Sent door opening screen command: 1
+2026-02-07 17:05:43,558 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:05:43,558 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:05:43,558 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:05:45,557 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:05:45,561 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:05:45,561 - INFO - Barcode scanning ENABLED
+2026-02-07 17:05:45,561 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:05:45,561 - INFO - LIVE_CART command received
+2026-02-07 17:05:45,613 - ERROR - Door sensor not initialized
+2026-02-07 17:05:45,614 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:05:45,614 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:05:45,618 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:05:45,618 - INFO - Barcode scanning DISABLED
+2026-02-07 17:05:45,618 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:05:45,618 - INFO - CART_REVIEW command received
+2026-02-07 17:05:50,371 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:05:56,370 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:05:57,397 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:05:57,398 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:07:53,157 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:07:56,679 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:07:57,628 - INFO - Sent door opening screen command: 1
+2026-02-07 17:07:57,630 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:07:57,630 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:07:57,630 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:07:59,630 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:07:59,632 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:07:59,632 - INFO - Barcode scanning ENABLED
+2026-02-07 17:07:59,633 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:07:59,633 - INFO - LIVE_CART command received
+2026-02-07 17:07:59,690 - ERROR - Door sensor not initialized
+2026-02-07 17:07:59,691 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:07:59,691 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:07:59,694 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:07:59,694 - INFO - Barcode scanning DISABLED
+2026-02-07 17:07:59,694 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:07:59,694 - INFO - CART_REVIEW command received
+2026-02-07 17:08:02,647 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:08:08,646 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:08:09,675 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:08:09,676 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:08:10,245 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:08:21,339 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:08:23,142 - INFO - Sent door opening screen command: 1
+2026-02-07 17:08:23,144 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:08:23,144 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:08:23,144 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:08:25,143 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:08:25,147 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:08:25,147 - INFO - Barcode scanning ENABLED
+2026-02-07 17:08:25,147 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:08:25,147 - INFO - LIVE_CART command received
+2026-02-07 17:08:25,201 - ERROR - Door sensor not initialized
+2026-02-07 17:08:25,201 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:08:25,202 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:08:25,205 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:08:25,205 - INFO - Barcode scanning DISABLED
+2026-02-07 17:08:25,205 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:08:25,206 - INFO - CART_REVIEW command received
+2026-02-07 17:10:12,786 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:10:18,787 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:10:19,814 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:10:19,815 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:10:56,832 - ERROR - Failed to initialize door sensor: Pin GPIO23 is not floating, but "active_state" is not None
+2026-02-07 17:10:56,833 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:10:57,326 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:11:01,265 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:11:03,288 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:11:05,005 - INFO - Sent door opening screen command: 1
+2026-02-07 17:11:05,007 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:11:05,008 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:11:05,008 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:11:07,006 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:11:07,013 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:11:07,013 - INFO - Barcode scanning ENABLED
+2026-02-07 17:11:07,013 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:11:07,014 - INFO - LIVE_CART command received
+2026-02-07 17:11:07,062 - ERROR - Door sensor not initialized
+2026-02-07 17:11:07,063 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:11:07,063 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:11:07,064 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:11:07,065 - INFO - Barcode scanning DISABLED
+2026-02-07 17:11:07,065 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:11:07,065 - INFO - CART_REVIEW command received
+2026-02-07 17:11:16,720 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:11:22,721 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:11:23,747 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:11:23,751 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:11:25,114 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:11:26,599 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:11:27,605 - INFO - Sent door opening screen command: 1
+2026-02-07 17:11:27,607 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:11:27,607 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:11:27,607 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:11:29,606 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:11:29,609 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:11:29,609 - INFO - Barcode scanning ENABLED
+2026-02-07 17:11:29,609 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:11:29,609 - INFO - LIVE_CART command received
+2026-02-07 17:11:29,664 - ERROR - Door sensor not initialized
+2026-02-07 17:11:29,665 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:11:29,665 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:11:29,668 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:11:29,668 - INFO - Barcode scanning DISABLED
+2026-02-07 17:11:29,668 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:11:29,668 - INFO - CART_REVIEW command received
+2026-02-07 17:12:22,075 - ERROR - Failed to initialize door sensor: Pin GPIO23 is not floating, but "active_state" is not None
+2026-02-07 17:12:22,076 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:12:22,555 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:12:30,100 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:12:34,095 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:12:35,212 - INFO - Sent door opening screen command: 1
+2026-02-07 17:12:35,213 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:12:35,213 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:12:35,213 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:12:37,212 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:12:37,215 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:12:37,215 - INFO - Barcode scanning ENABLED
+2026-02-07 17:12:37,215 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:12:37,215 - INFO - LIVE_CART command received
+2026-02-07 17:12:37,267 - ERROR - Door sensor not initialized
+2026-02-07 17:12:37,267 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:12:37,267 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:12:37,271 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:12:37,271 - INFO - Barcode scanning DISABLED
+2026-02-07 17:12:37,271 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:12:37,271 - INFO - CART_REVIEW command received
+2026-02-07 17:18:58,515 - ERROR - CRITICAL: Failed to initialize door sensor on GPIO 4: 'GPIO busy'
+2026-02-07 17:18:58,521 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:18:59,289 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:19:17,791 - ERROR - CRITICAL: Failed to initialize door sensor on GPIO 4: 'GPIO busy'
+2026-02-07 17:19:17,793 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:19:18,263 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:19:33,453 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:21:34,064 - ERROR - CRITICAL: Failed to initialize door sensor on GPIO 4: 'GPIO busy'
+2026-02-07 17:21:34,066 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:21:34,125 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:21:35,282 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:21:37,906 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:21:38,850 - INFO - Sent door opening screen command: 1
+2026-02-07 17:21:38,852 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:21:38,852 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:21:38,852 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:21:40,851 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:21:40,854 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:21:40,854 - INFO - Barcode scanning ENABLED
+2026-02-07 17:21:40,855 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:21:40,855 - INFO - LIVE_CART command received
+2026-02-07 17:21:40,911 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:21:40,911 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:21:40,912 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:21:40,913 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:21:40,913 - INFO - Barcode scanning DISABLED
+2026-02-07 17:21:40,913 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:21:40,913 - INFO - CART_REVIEW command received
+2026-02-07 17:21:53,831 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:21:59,830 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:22:00,859 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:22:00,860 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:22:01,499 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:22:02,759 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:22:03,668 - INFO - Sent door opening screen command: 1
+2026-02-07 17:22:03,670 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:22:03,670 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:22:03,670 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:22:05,669 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:22:05,672 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:22:05,672 - INFO - Barcode scanning ENABLED
+2026-02-07 17:22:05,672 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:22:05,673 - INFO - LIVE_CART command received
+2026-02-07 17:22:05,723 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:22:05,723 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:22:05,723 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:22:05,726 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:22:05,726 - INFO - Barcode scanning DISABLED
+2026-02-07 17:22:05,726 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:22:05,726 - INFO - CART_REVIEW command received
+2026-02-07 17:22:09,539 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:22:15,538 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:22:16,564 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:22:16,568 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:22:17,345 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:22:19,726 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:22:20,886 - INFO - Sent door opening screen command: 1
+2026-02-07 17:22:20,888 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:22:20,900 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:22:20,900 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:22:22,900 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:22:22,903 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:22:22,903 - INFO - Barcode scanning ENABLED
+2026-02-07 17:22:22,903 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:22:22,903 - INFO - LIVE_CART command received
+2026-02-07 17:22:22,952 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:22:22,952 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:22:22,952 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:22:22,953 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:22:22,953 - INFO - Barcode scanning DISABLED
+2026-02-07 17:22:22,953 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:22:22,953 - INFO - CART_REVIEW command received
+2026-02-07 17:23:21,317 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:23:27,319 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:23:28,359 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:23:28,360 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:28:26,816 - ERROR - CRITICAL: Failed to initialize door sensor on GPIO 4: 'GPIO busy'
+2026-02-07 17:28:26,817 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:28:27,296 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:28:40,053 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:28:41,887 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:28:42,909 - INFO - Sent door opening screen command: 1
+2026-02-07 17:28:42,911 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:28:42,912 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:28:42,912 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:28:44,910 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:28:44,911 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:44,912 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:28:44,913 - INFO - Barcode scanning ENABLED
+2026-02-07 17:28:45,012 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,113 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,213 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,314 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,415 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,515 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,616 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,717 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,817 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:45,918 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,018 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,119 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,219 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,320 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,420 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,521 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,621 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,722 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,823 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:46,923 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,024 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,124 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,225 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,325 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,426 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,526 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,627 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,727 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,828 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:47,929 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,029 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,130 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,230 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,331 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,431 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,532 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,633 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,733 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,834 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:48,934 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,035 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,135 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,236 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,336 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,437 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,538 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,638 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,739 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,840 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:49,941 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,041 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,142 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,242 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,343 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,443 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,544 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,644 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,745 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,846 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:50,946 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,047 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,148 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,248 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,349 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,452 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,553 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,653 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,754 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,855 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:51,956 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,006 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:28:52,056 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,157 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,257 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,358 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,459 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,559 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,660 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,760 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,861 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:52,962 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,062 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,163 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,264 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,364 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,465 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,565 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,666 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,767 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,867 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:53,968 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,069 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,169 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,270 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,370 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,471 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,572 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,673 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,776 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,876 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,977 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:54,979 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:28:54,979 - INFO - LIVE_CART command received
+2026-02-07 17:28:55,046 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:28:55,046 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:28:55,046 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:28:55,051 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:28:55,051 - INFO - Barcode scanning DISABLED
+2026-02-07 17:28:55,051 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:28:55,051 - INFO - CART_REVIEW command received
+2026-02-07 17:29:01,251 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 17:29:07,251 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 17:29:08,279 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:29:08,281 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:30:21,058 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:30:22,666 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:30:24,203 - INFO - Sent door opening screen command: 1
+2026-02-07 17:30:24,206 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:30:24,206 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:30:24,206 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:30:26,204 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:30:26,204 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,208 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:30:26,208 - INFO - Barcode scanning ENABLED
+2026-02-07 17:30:26,305 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,405 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,506 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,606 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,706 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,807 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:26,907 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,008 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,109 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,209 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,310 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,410 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,510 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,611 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,712 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,812 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:27,912 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,013 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,113 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,213 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,314 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,414 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,514 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,615 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,715 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,816 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:28,916 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,017 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,117 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,218 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,318 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,419 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,519 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,620 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,720 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,821 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:29,921 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,022 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,122 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,223 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,323 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,424 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,524 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,625 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,725 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,826 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:30,926 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,027 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,127 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,228 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,328 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,429 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,529 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,630 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,730 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,831 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:31,931 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,032 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,132 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,233 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,333 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,434 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,534 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,635 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,735 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,835 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:32,936 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,036 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,137 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,237 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,338 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,438 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,539 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,639 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,739 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,840 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:33,941 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,041 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,142 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,242 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,342 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,443 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,543 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,644 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,744 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,845 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:34,945 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,046 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,146 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,247 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,347 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,448 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,548 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,649 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,749 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,850 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:35,950 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:36,050 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:36,151 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:36,251 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:36,256 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:30:36,256 - INFO - LIVE_CART command received
+2026-02-07 17:30:36,308 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:36,309 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:30:36,309 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:30:36,312 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:30:36,312 - INFO - Barcode scanning DISABLED
+2026-02-07 17:30:36,312 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:30:36,312 - INFO - CART_REVIEW command received
+2026-02-07 17:30:41,999 - ERROR - CRITICAL: Failed to initialize door sensor on GPIO 4: 'GPIO busy'
+2026-02-07 17:30:42,000 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 17:30:42,464 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 17:30:45,897 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 17:30:49,014 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 17:30:52,300 - INFO - Sent door opening screen command: 1
+2026-02-07 17:30:52,302 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 17:30:52,302 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 17:30:52,302 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 17:30:54,301 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 17:30:54,301 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,302 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:30:54,303 - INFO - Barcode scanning ENABLED
+2026-02-07 17:30:54,402 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,502 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,603 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,703 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,804 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:54,904 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,005 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,106 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,206 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,306 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,407 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,507 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,608 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,708 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,809 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:55,909 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,010 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,110 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,210 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,311 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,411 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,512 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,612 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,713 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,813 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:56,913 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,014 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,114 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,215 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,315 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,416 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,417 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:30:57,516 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,617 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,717 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,818 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:57,918 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,019 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,119 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,219 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,320 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,420 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,521 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,620 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:30:58,621 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,722 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,822 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:58,923 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,023 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,124 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,224 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,325 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,425 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,486 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:30:59,526 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,626 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,727 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,827 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:30:59,927 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,003 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:00,028 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,128 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,229 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,316 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:00,329 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,430 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,530 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,552 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:00,631 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,731 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,809 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:00,832 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:00,932 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,028 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:01,033 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,133 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,203 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:01,234 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,334 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,435 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,535 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,598 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:01,636 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,736 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,837 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:01,937 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,038 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,138 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,238 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,339 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,367 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:02,439 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,540 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,606 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:02,640 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,740 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,841 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:02,900 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:02,942 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,043 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,138 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:03,143 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,244 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,344 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,396 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:03,445 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,545 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,646 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,746 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,827 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 17:31:03,846 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:03,947 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,047 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,148 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,248 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,349 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,351 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 17:31:04,352 - INFO - LIVE_CART command received
+2026-02-07 17:31:04,406 - ERROR - CRITICAL: Door sensor not initialized - returning False (door closed)
+2026-02-07 17:31:04,406 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 17:31:04,407 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 17:31:04,408 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 17:31:04,408 - INFO - Barcode scanning DISABLED
+2026-02-07 17:31:04,408 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 17:31:04,408 - INFO - CART_REVIEW command received
+2026-02-07 18:44:16,029 - INFO - Door sensor initialized successfully on GPIO 21
+2026-02-07 18:44:16,033 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 18:44:16,827 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 18:44:17,985 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 18:44:19,565 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 18:44:20,609 - INFO - Sent door opening screen command: 1
+2026-02-07 18:44:20,611 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 18:44:20,612 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 18:44:20,612 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 18:44:22,610 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 18:44:22,613 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 18:44:22,613 - INFO - Barcode scanning ENABLED
+2026-02-07 18:44:31,231 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 18:44:31,232 - INFO - LIVE_CART command received
+2026-02-07 18:44:31,387 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 18:44:31,387 - INFO - MAIN-LOOP: Final cart before review: []
+2026-02-07 18:44:31,389 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 18:44:31,389 - INFO - Barcode scanning DISABLED
+2026-02-07 18:44:31,389 - INFO - Router received: CART_REVIEW with payload: {}
+2026-02-07 18:44:31,389 - INFO - CART_REVIEW command received
+2026-02-07 18:49:08,430 - INFO - Door sensor initialized successfully on GPIO 21
+2026-02-07 18:49:08,431 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 18:49:08,923 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 18:49:09,746 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 18:49:11,173 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 18:49:12,412 - INFO - Sent door opening screen command: 1
+2026-02-07 18:49:12,414 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 18:49:12,414 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 18:49:12,414 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 18:49:14,413 - INFO - joogi_väljastus: enabling barcode scanning
+2026-02-07 18:49:14,417 - INFO - Router received: ENABLE_BARCODE_SCANNING with payload: None
+2026-02-07 18:49:14,417 - INFO - Barcode scanning ENABLED
+2026-02-07 18:49:18,765 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:20,030 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 18:49:20,030 - INFO - LIVE_CART command received
+2026-02-07 18:49:20,083 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:20,083 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:20,086 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 18:49:20,086 - INFO - LIVE_CART command received
+2026-02-07 18:49:25,841 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:25,890 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:25,891 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:25,892 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 18:49:25,893 - INFO - LIVE_CART command received
+2026-02-07 18:49:26,433 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:27,025 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:27,025 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:27,030 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 18:49:27,030 - INFO - LIVE_CART command received
+2026-02-07 18:49:27,932 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:28,160 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:28,161 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:28,163 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 18:49:28,164 - INFO - LIVE_CART command received
+2026-02-07 18:49:28,563 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:29,175 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:29,297 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:29,297 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:29,298 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 18:49:29,298 - INFO - LIVE_CART command received
+2026-02-07 18:49:29,786 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:30,418 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:30,431 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:30,431 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:30,436 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 6})
+2026-02-07 18:49:30,436 - INFO - LIVE_CART command received
+2026-02-07 18:49:30,968 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:31,562 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:31,563 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:31,568 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 7})
+2026-02-07 18:49:31,568 - INFO - LIVE_CART command received
+2026-02-07 18:49:32,700 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:32,700 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:32,710 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 8})
+2026-02-07 18:49:32,710 - INFO - LIVE_CART command received
+2026-02-07 18:49:33,838 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:33,838 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:33,843 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 9})
+2026-02-07 18:49:33,843 - INFO - LIVE_CART command received
+2026-02-07 18:49:34,737 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:34,972 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:34,972 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:34,976 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 10})
+2026-02-07 18:49:34,976 - INFO - LIVE_CART command received
+2026-02-07 18:49:35,958 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:36,108 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:36,109 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:36,114 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 11})
+2026-02-07 18:49:36,114 - INFO - LIVE_CART command received
+2026-02-07 18:49:36,648 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:37,243 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:37,244 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:37,247 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 12})
+2026-02-07 18:49:37,247 - INFO - LIVE_CART command received
+2026-02-07 18:49:37,457 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:38,376 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:38,376 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:38,379 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 13})
+2026-02-07 18:49:38,379 - INFO - LIVE_CART command received
+2026-02-07 18:49:38,620 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:39,514 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:39,515 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:39,520 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 14})
+2026-02-07 18:49:39,520 - INFO - LIVE_CART command received
+2026-02-07 18:49:42,995 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 18:49:43,014 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 18:49:43,015 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 18:49:43,020 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 15})
+2026-02-07 18:49:43,020 - INFO - LIVE_CART command received
+2026-02-07 18:49:44,180 - INFO - joogi_väljastus: disabling barcode scanning
+2026-02-07 18:49:44,181 - INFO - MAIN-LOOP: Final cart before review: ['Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi']
+2026-02-07 18:49:44,183 - INFO - Router received: DISABLE_BARCODE_SCANNING with payload: None
+2026-02-07 18:49:44,183 - INFO - Barcode scanning DISABLED
+2026-02-07 18:49:44,183 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 15}
+2026-02-07 18:49:44,183 - INFO - CART_REVIEW command received
+2026-02-07 18:49:47,438 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 15})
+2026-02-07 18:49:53,454 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 15 taken items for user 3 (836305420740)
+2026-02-07 18:49:53,466 - INFO - (DB Handler) keep_stock: Updated stock for 15 items. Action: taken
+2026-02-07 18:49:54,494 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 18:49:54,498 - INFO - Router received: DEFAULT with payload: None

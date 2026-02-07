@@ -35,9 +35,9 @@ def get_nfc(cancel_check_callback=None):
                 return None
             time.sleep(0.1)
     finally:
-        # Good practice to clean up pins, though strict cleanup 
+        # Good practice to clean up pins, though strict cleanup
         # depends on if you have other sensors running.
-        GPIO.cleanup()
+        pass
 
 #Küsib kaalu näitu
 def get_wheight():
@@ -52,33 +52,64 @@ def Ukse_avaja():
 
 
 
-#muutujad simuleerimaks kaua uks lahti on
-_door_timer_start = None
-_DOOR_DURATION = 15
+# --- DOOR STATE DETECTION ---
+# GPIO pin for door sensor using RPi.GPIO
+DOOR_SENSOR_PIN = 21
+
+# Flag to track GPIO setup
+_gpio_initialized = False
+
+def init_door_sensor():
+    """
+    Initialize the door sensor on GPIO21 using RPi.GPIO with built-in pull-up.
+
+    Circuit:
+    [GPIO 21]----[Pull-Up to 3.3V (built-in)]
+         |
+    [Push Button/Sensor]
+         |
+       [GND]
+
+    When sensor connected to GND: GPIO reads LOW (GPIO.LOW = 0) → door is CLOSED
+    When sensor floating (pulled up to 3.3V): GPIO reads HIGH (GPIO.HIGH = 1) → door is OPEN
+    """
+    global _gpio_initialized
+    try:
+        if not _gpio_initialized:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(DOOR_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            _gpio_initialized = True
+        logging.info(f"Door sensor initialized successfully on GPIO {DOOR_SENSOR_PIN}")
+    except Exception as e:
+        logging.error(f"CRITICAL: Failed to initialize door sensor on GPIO {DOOR_SENSOR_PIN}: {e}")
+        _gpio_initialized = False
 
 def is_door_open():
     """
-    Simuleerib ust. Esimesel käivitamisel "avab" ukse 10 sekundiks.
-    Järgnevatel kordadel kontrollib, kas aeg on täis.
-    """
-    global _door_timer_start
-    
-    # 1. Kui taimer ei jookse (on None), siis see on esimene kontroll.
-    #    Käivita taimer.
-    if _door_timer_start is None:
-    
-        _door_timer_start = time.time() # Salvesta algusaeg
-        return True # Ütleme tsüklile, et uks on lahti
+    Reads the door sensor state using RPi.GPIO.
 
-    # 2. Taimer juba jookseb. Kontrollime, kas aeg on täis.
-    elapsed_time = time.time() - _door_timer_start
-    
-    if elapsed_time < _DOOR_DURATION:
-        # 3. Aeg POLE veel täis. Uks on endiselt lahti.
-      
-        return True
-    else:
-        # 4. Aeg ON täis. "Sulgeme" ukse.
-      
-        _door_timer_start = None # Nullime taimeri järgmiseks korraks
+    With pull_up=True (GPIO.PUD_UP):
+    - Sensor connected to GND → GPIO reads LOW (0) → door is CLOSED → return False
+    - Sensor floating (pulled up to 3.3V) → GPIO reads HIGH (1) → door is OPEN → return True
+    """
+    if not _gpio_initialized:
+        logging.error("CRITICAL: Door sensor not initialized - returning False (door closed)")
+        return False
+
+    try:
+        door_state = GPIO.input(DOOR_SENSOR_PIN)
+        
+        if door_state == GPIO.LOW:
+            # Door is CLOSED (connected to ground)
+            is_open = False
+        else:
+            # Door is OPEN (floating/pulled up)
+            is_open = True
+        
+        logging.debug(f"Door sensor: GPIO state={door_state}, is_open={is_open}")
+        
+        return is_open
+
+    except Exception as e:
+        logging.error(f"Error reading door sensor: {e}")
         return False

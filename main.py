@@ -364,6 +364,9 @@ def main_loop():
     _gui_proc = multiprocessing.Process(target=drawer.run_touchscreen, args=(command_queue, reply_queue))
     _gui_proc.start()
 
+    # Initialize door sensor with button
+    hardware_handler.init_door_sensor()
+
     while True:
         Empty_reply_queue()
         GUI_default()
@@ -526,6 +529,13 @@ def joogi_väljastus(nfc_input):
     logging.info("joogi_väljastus: enabling barcode scanning")
     command_queue.put(("ENABLE_BARCODE_SCANNING", None))
 
+    # Oota kuni uks avaneb
+    wait_start = time.time()
+    while not hardware_handler.is_door_open():
+        if time.time() - wait_start > 10: # 10s timeout
+            break
+        time.sleep(0.1)
+
     #poe ostukorvi vaade vmidagi. Ma ka ei tea enam
     GUI_live_cart([])
 
@@ -656,6 +666,13 @@ def joogi_tagastus(nfc_input):
     # Enable barcode scanning before door opens
     logging.info("joogi_tagastus: enabling barcode scanning")
     command_queue.put(("ENABLE_BARCODE_SCANNING", None))
+
+    # Oota kuni uks avaneb
+    wait_start = time.time()
+    while not hardware_handler.is_door_open():
+        if time.time() - wait_start > 10: # 10s timeout
+            break
+        time.sleep(0.1)
 
     #Reklaam samal ajal kui uks lahti
     GUI_live_cart([])
