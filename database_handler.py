@@ -10,11 +10,14 @@ _DB_FILE = 'database.db'
 _BACKEND_CONFIG: dict[str, Any] | None = None
 _ENV_LOADED = False
 _MYSQL_DRIVER_NAME: str | None = None
+_SQLITE_CONNECT_TIMEOUT_SECONDS = 5
 
 
-def _load_env_file(path: Path) -> None:
+def _load_env_file(path: Path) -> bool:
     if not path.exists():
-        return
+        return False
+
+    loaded_any = False
 
     for raw_line in path.read_text(encoding='utf-8').splitlines():
         line = raw_line.strip()
@@ -27,6 +30,9 @@ def _load_env_file(path: Path) -> None:
 
         if key and key not in os.environ:
             os.environ[key] = value
+            loaded_any = True
+
+    return loaded_any
 
 
 def _load_environment_once() -> None:
@@ -42,7 +48,9 @@ def _load_environment_once() -> None:
     ]
 
     for candidate in candidates:
-        _load_env_file(candidate)
+        loaded = _load_env_file(candidate)
+        if loaded:
+            logging.info('(DB Handler) Loaded environment values from %s', candidate)
 
     _ENV_LOADED = True
 
@@ -84,7 +92,9 @@ def _connect_mysql(params: dict[str, Any]):
             _MYSQL_DRIVER_NAME = 'mysql-connector-python'
         return conn
     except ModuleNotFoundError:
-        pass
+        logging.warning(
+            '(DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.'
+        )
 
     try:
         import pymysql  # type: ignore
@@ -97,6 +107,9 @@ def _connect_mysql(params: dict[str, Any]):
             database=str(params['database']),
             autocommit=False,
             charset='utf8mb4',
+            connect_timeout=5,
+            read_timeout=10,
+            write_timeout=10,
         )
         if _MYSQL_DRIVER_NAME is None:
             _MYSQL_DRIVER_NAME = 'pymysql'
@@ -106,6 +119,16 @@ def _connect_mysql(params: dict[str, Any]):
             'MySQL backend selected but no driver is installed. '
             'Install one: pip install mysql-connector-python OR pip install pymysql'
         ) from exc
+
+
+def _connect_sqlite_existing(sqlite_path: str):
+    if not Path(sqlite_path).exists():
+        raise FileNotFoundError(
+            f'SQLite fallback file not found: {sqlite_path}. '
+            'Create it manually or use SININE_KAPP_DB_BACKEND=mysql with valid MySQL connectivity.'
+        )
+
+    return sqlite3.connect(sqlite_path, timeout=_SQLITE_CONNECT_TIMEOUT_SECONDS)
 
 
 def _resolve_backend_config() -> dict[str, Any]:
@@ -122,6 +145,12 @@ def _resolve_backend_config() -> dict[str, Any]:
         )
         mode = 'auto'
 
+    logging.info(
+        '(DB Handler) Backend mode: %s, DATABASE_URL present: %s',
+        mode,
+        bool(database_url),
+    )
+
     if mode == 'sqlite':
         return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
 
@@ -129,6 +158,10 @@ def _resolve_backend_config() -> dict[str, Any]:
         raise RuntimeError('SININE_KAPP_DB_BACKEND=mysql but DATABASE_URL is missing.')
 
     if mode == 'auto' and not database_url:
+        logging.warning(
+            '(DB Handler) DATABASE_URL is missing in auto mode; using SQLite fallback at %s',
+            sqlite_path,
+        )
         return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
 
     mysql_params = _parse_database_url(database_url)
@@ -147,7 +180,7 @@ def _backend_config() -> dict[str, Any]:
         if _BACKEND_CONFIG['kind'] == 'mysql':
             params = _BACKEND_CONFIG['mysql_params']
             logging.info(
-                '(DB Handler) Using MySQL backend: %s@%s:%s/%s',
+                '(DB Handler) Using MySQL backend target: %s@%s:%s/%s',
                 params['user'],
                 params['host'],
                 params['port'],
@@ -179,10 +212,10 @@ def _connect():
                     fallback_path,
                 )
                 _BACKEND_CONFIG = {'kind': 'sqlite', 'sqlite_path': fallback_path}
-                return sqlite3.connect(fallback_path)
+                return _connect_sqlite_existing(fallback_path)
             raise
 
-    return sqlite3.connect(config['sqlite_path'])
+    return _connect_sqlite_existing(config['sqlite_path'])
 
 
 def _sql(query: str) -> str:
@@ -195,12 +228,12 @@ def _execute(cursor, query: str, params: tuple[Any, ...] = ()) -> None:
     cursor.execute(_sql(query), params)
 
 
-def _fetchone(cursor, query: str, params: tuple[Any, ...] = ()):
+def _fetchone(cursor, query: str, params: tuple[Any, ...] = ()): 
     _execute(cursor, query, params)
     return cursor.fetchone()
 
 
-def _fetchall(cursor, query: str, params: tuple[Any, ...] = ()):
+def _fetchall(cursor, query: str, params: tuple[Any, ...] = ()): 
     _execute(cursor, query, params)
     return cursor.fetchall()
 
