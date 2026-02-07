@@ -2815,3 +2815,522 @@
 2026-02-01 21:54:28,496 - INFO - REMOVE_PRODUCT_LIST command received
 2026-02-01 21:54:30,550 - INFO - Router received: ADMIN with payload: None
 2026-02-01 21:54:30,551 - INFO - ADMIN command received
+2026-02-01 22:47:22,602 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:47:23,138 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:47:38,338 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:47:38,872 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:48:04,932 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:48:05,461 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:48:35,040 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:48:35,517 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:48:52,153 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:48:52,663 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:49:23,170 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:49:23,653 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:49:26,167 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-01 22:49:26,167 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-01 22:49:28,789 - INFO - Router received: ADMIN with payload: None
+2026-02-01 22:49:28,790 - INFO - ADMIN command received
+2026-02-01 22:49:30,848 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:49:30,850 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:49:34,138 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-01 22:49:34,141 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:49:34,143 - INFO - Router received: DEFAULT with payload: None
+2026-02-01 22:50:26,900 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-01 22:50:27,382 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:28:28,843 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:28:29,019 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:29:58,709 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:29:59,409 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:30:06,248 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-07 14:30:06,248 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 14:30:07,251 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:30:07,253 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:30:08,033 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 14:30:08,583 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-07 14:30:08,882 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:30:08,883 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:30:09,951 - INFO - drawer DEFAULT uploaded tagasi
+2026-02-07 14:30:09,954 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:30:09,955 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:30:20,306 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-07 14:30:20,306 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 14:30:21,784 - INFO - Router received: ADMIN with payload: None
+2026-02-07 14:30:21,785 - INFO - ADMIN command received
+2026-02-07 14:30:23,979 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:30:23,981 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:30:25,494 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-07 14:30:25,494 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 14:30:26,447 - INFO - Router received: ADMIN with payload: None
+2026-02-07 14:30:26,448 - INFO - ADMIN command received
+2026-02-07 14:30:29,190 - INFO - Router received: REMOVE_PRODUCT_LIST with payload: [(5, 'Belief 0.5ml', 474443301911), (3, 'LAUDUR 10000L', 3), (1, 'Saku kuld 0.33', 1), (2, 'Somersby 0.33', 2), (4, 'Vergi', 4742883015974), (6, 'coca cola 2L', 5000112678239)]
+2026-02-07 14:30:29,191 - INFO - REMOVE_PRODUCT_LIST command received
+2026-02-07 14:30:39,082 - INFO - Router received: ADMIN with payload: None
+2026-02-07 14:30:39,082 - INFO - ADMIN command received
+2026-02-07 14:30:43,670 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:30:43,673 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:43:12,021 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:43:12,510 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:43:14,484 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-07 14:43:14,484 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 14:43:16,798 - INFO - Router received: ADMIN with payload: None
+2026-02-07 14:43:16,799 - INFO - ADMIN command received
+2026-02-07 14:43:28,157 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-07 14:43:28,157 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 14:48:56,922 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:48:57,429 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:49:12,642 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 14:49:16,449 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 14:49:17,912 - INFO - Sent door opening screen command: 1
+2026-02-07 14:49:17,914 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 14:49:17,914 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 14:49:17,914 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 14:49:19,914 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 14:49:19,915 - INFO - LIVE_CART command received
+2026-02-07 14:59:19,869 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 14:59:20,361 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 14:59:21,359 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 14:59:24,260 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 14:59:25,547 - INFO - Sent door opening screen command: 1
+2026-02-07 14:59:25,549 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 14:59:25,549 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 14:59:25,549 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 14:59:27,552 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 14:59:27,552 - INFO - LIVE_CART command received
+2026-02-07 15:06:51,214 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:06:51,752 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:06:54,187 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-02-07 15:06:54,188 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:06:55,694 - INFO - Router received: ADMIN with payload: None
+2026-02-07 15:06:55,695 - INFO - ADMIN command received
+2026-02-07 15:07:00,879 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-07 15:07:00,879 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:03,825 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:03,830 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-07 15:07:03,830 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:05,673 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:07,304 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:07,308 - INFO - Router received: MESSAGE with payload: ('Koodid ei ühti. Proovi uuesti.', True)
+2026-02-07 15:07:07,308 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:09,260 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-07 15:07:09,260 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:10,332 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:10,336 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-07 15:07:10,336 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:11,217 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:11,908 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:12,792 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:12,796 - INFO - Router received: MESSAGE with payload: ('Koodid ei ühti. Proovi uuesti.', True)
+2026-02-07 15:07:12,796 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:13,008 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:13,013 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-07 15:07:13,013 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:13,658 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:13,662 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-07 15:07:13,662 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:13,915 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:14,799 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:15,958 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:15,962 - INFO - Router received: MESSAGE with payload: ('Koodid ei ühti. Proovi uuesti.', True)
+2026-02-07 15:07:15,962 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:17,656 - INFO - Router received: MESSAGE with payload: ('Skänni uue toote triipkood', False)
+2026-02-07 15:07:17,656 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:18,770 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:18,774 - INFO - Router received: MESSAGE with payload: ('Skänni uuesti kontrolliks', False)
+2026-02-07 15:07:18,774 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:20,169 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:22,234 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:22,252 - INFO - Router received: MESSAGE with payload: ('VESI on lisatud andmebaasi', True)
+2026-02-07 15:07:22,253 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-02-07 15:07:26,090 - INFO - Router received: ADMIN with payload: None
+2026-02-07 15:07:26,090 - INFO - ADMIN command received
+2026-02-07 15:07:29,316 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:07:29,318 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:07:30,269 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:07:32,705 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:07:34,327 - INFO - Sent door opening screen command: 1
+2026-02-07 15:07:34,329 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:07:34,329 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:07:34,329 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:07:36,331 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:07:36,331 - INFO - LIVE_CART command received
+2026-02-07 15:07:37,955 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:40,181 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:40,211 - INFO - Router received: LIVE_CART with payload: Counter({'VESI': 1})
+2026-02-07 15:07:40,211 - INFO - LIVE_CART command received
+2026-02-07 15:07:41,656 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:41,671 - INFO - Router received: LIVE_CART with payload: Counter({'VESI': 2})
+2026-02-07 15:07:41,671 - INFO - LIVE_CART command received
+2026-02-07 15:07:42,741 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:42,778 - INFO - Router received: LIVE_CART with payload: Counter({'VESI': 3})
+2026-02-07 15:07:42,778 - INFO - LIVE_CART command received
+2026-02-07 15:07:43,467 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:44,117 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:46,223 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:46,246 - INFO - Router received: LIVE_CART with payload: Counter({'VESI': 4})
+2026-02-07 15:07:46,247 - INFO - LIVE_CART command received
+2026-02-07 15:07:47,720 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:49,156 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:49,164 - INFO - Router received: LIVE_CART with payload: Counter({'VESI': 5})
+2026-02-07 15:07:49,164 - INFO - LIVE_CART command received
+2026-02-07 15:07:50,553 - INFO - Barcode captured: 4752050023626
+2026-02-07 15:07:51,519 - INFO - Barcode captured: 475205023626
+2026-02-07 15:07:51,676 - INFO - Router received: CART_REVIEW with payload: {'VESI': 5}
+2026-02-07 15:07:51,676 - INFO - CART_REVIEW command received
+2026-02-07 15:07:51,680 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:07:57,675 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:07:58,702 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:07:58,705 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:11:24,223 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:11:24,725 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:11:26,339 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:11:28,710 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:11:30,009 - INFO - Sent door opening screen command: 1
+2026-02-07 15:11:30,012 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:11:30,012 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:11:30,012 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:11:32,013 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:11:32,014 - INFO - LIVE_CART command received
+2026-02-07 15:11:33,479 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:36,589 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:11:36,605 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:11:36,605 - INFO - LIVE_CART command received
+2026-02-07 15:11:38,893 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:11:38,918 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:11:38,919 - INFO - LIVE_CART command received
+2026-02-07 15:11:39,917 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:40,586 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:41,868 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:43,483 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:44,530 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:45,826 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:47,010 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:47,937 - INFO - Barcode captured: 474283015974
+2026-02-07 15:11:48,125 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 2}
+2026-02-07 15:11:48,126 - INFO - CART_REVIEW command received
+2026-02-07 15:11:48,130 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:11:54,127 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:11:55,156 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:11:55,159 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:20:31,083 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:20:31,580 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:20:32,742 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:20:34,522 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:20:35,120 - INFO - Sent door opening screen command: 1
+2026-02-07 15:20:35,121 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:20:35,122 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:20:35,122 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:20:37,125 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:20:37,125 - INFO - LIVE_CART command received
+2026-02-07 15:20:38,074 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:40,674 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:42,130 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:42,177 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:20:42,177 - INFO - LIVE_CART command received
+2026-02-07 15:20:43,587 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:43,615 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:20:43,615 - INFO - LIVE_CART command received
+2026-02-07 15:20:44,022 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:44,744 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 15:20:44,744 - INFO - LIVE_CART command received
+2026-02-07 15:20:44,793 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:45,501 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:45,993 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:46,683 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:47,824 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:48,455 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:49,149 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 15:20:49,149 - INFO - LIVE_CART command received
+2026-02-07 15:20:49,281 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:20:50,284 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 15:20:50,284 - INFO - LIVE_CART command received
+2026-02-07 15:20:50,288 - INFO - Barcode captured: 474283015974
+2026-02-07 15:20:51,420 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 6})
+2026-02-07 15:20:51,421 - INFO - LIVE_CART command received
+2026-02-07 15:20:52,554 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 6}
+2026-02-07 15:20:52,555 - INFO - CART_REVIEW command received
+2026-02-07 15:20:52,559 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:20:58,553 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:20:59,584 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:20:59,588 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:28:52,201 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:28:52,693 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:28:55,489 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:28:56,663 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:28:57,556 - INFO - Sent door opening screen command: 1
+2026-02-07 15:28:57,559 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:28:57,559 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:28:57,559 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:28:59,560 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:28:59,560 - INFO - LIVE_CART command received
+2026-02-07 15:29:00,985 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:02,147 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:03,335 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:03,382 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:29:03,382 - INFO - LIVE_CART command received
+2026-02-07 15:29:04,867 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:04,880 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:29:04,881 - INFO - LIVE_CART command received
+2026-02-07 15:29:05,503 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:07,270 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:07,819 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:09,576 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:10,286 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:10,687 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 15:29:10,687 - INFO - LIVE_CART command received
+2026-02-07 15:29:10,875 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:11,311 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:11,822 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 15:29:11,822 - INFO - LIVE_CART command received
+2026-02-07 15:29:11,861 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:12,293 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:12,649 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:12,928 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:13,202 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:13,477 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:14,054 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 15:29:14,054 - INFO - LIVE_CART command received
+2026-02-07 15:29:14,265 - INFO - Barcode captured: 4742883015974
+2026-02-07 15:29:15,074 - INFO - Barcode captured: 474283015974
+2026-02-07 15:29:15,188 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 5}
+2026-02-07 15:29:15,188 - INFO - CART_REVIEW command received
+2026-02-07 15:29:15,192 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:29:21,189 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:29:22,218 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:29:22,221 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:32:33,610 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:32:34,123 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:32:34,885 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:32:36,861 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:32:37,555 - INFO - Sent door opening screen command: 1
+2026-02-07 15:32:37,557 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:32:37,557 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:32:37,557 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:32:39,562 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:32:39,562 - INFO - LIVE_CART command received
+2026-02-07 15:32:40,796 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:40,818 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:40,819 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:43,317 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:43,357 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:43,358 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:43,847 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:32:44,421 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:32:44,440 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:32:44,441 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:32:44,444 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:32:44,444 - INFO - LIVE_CART command received
+2026-02-07 15:32:44,873 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:32:45,324 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:45,570 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:32:45,570 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:32:45,575 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:32:45,576 - INFO - LIVE_CART command received
+2026-02-07 15:32:46,253 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:46,705 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:32:46,705 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:32:46,707 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 15:32:46,707 - INFO - LIVE_CART command received
+2026-02-07 15:32:47,316 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:32:47,838 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:47,838 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:48,321 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:32:48,920 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:48,920 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:49,384 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:50,003 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:32:50,003 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:32:50,005 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 15:32:50,005 - INFO - LIVE_CART command received
+2026-02-07 15:32:50,372 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:51,138 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:32:51,138 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:32:51,142 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 5})
+2026-02-07 15:32:51,143 - INFO - LIVE_CART command received
+2026-02-07 15:32:51,450 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:52,268 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:52,269 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:52,535 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:53,345 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:53,345 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:53,442 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:54,348 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:54,423 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:32:54,424 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:32:55,313 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:32:55,508 - INFO - MAIN-LOOP: Final cart before review: ['Vergi', 'Vergi', 'Vergi', 'Vergi', 'Vergi']
+2026-02-07 15:32:55,509 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 5}
+2026-02-07 15:32:55,509 - INFO - CART_REVIEW command received
+2026-02-07 15:32:55,513 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:33:01,509 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:33:02,536 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:33:02,539 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:37:10,883 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:37:11,370 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:37:12,270 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:37:14,102 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:37:14,721 - INFO - Sent door opening screen command: 1
+2026-02-07 15:37:14,723 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:37:14,723 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:37:14,723 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:37:16,703 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:16,731 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:37:16,731 - INFO - LIVE_CART command received
+2026-02-07 15:37:16,798 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:16,799 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:17,985 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:18,034 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:18,035 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:18,576 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:19,106 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:19,121 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:19,121 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:19,519 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:19,894 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:20,211 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:20,211 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:20,389 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:21,137 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:21,292 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:21,292 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:22,375 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:37:22,375 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:37:22,379 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:37:22,379 - INFO - LIVE_CART command received
+2026-02-07 15:37:22,790 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:23,345 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:23,511 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:23,511 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:23,913 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:24,487 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:24,624 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:24,625 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:25,056 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:25,712 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:37:25,712 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:37:25,717 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:37:25,718 - INFO - LIVE_CART command received
+2026-02-07 15:37:25,863 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:26,847 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:26,847 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:26,870 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:27,520 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:27,933 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:27,933 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:28,053 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:29,019 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:29,019 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:37:29,331 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:30,103 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:37:30,104 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:37:30,107 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 15:37:30,108 - INFO - LIVE_CART command received
+2026-02-07 15:37:30,575 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:31,238 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:37:31,238 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:37:31,245 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 4})
+2026-02-07 15:37:31,245 - INFO - LIVE_CART command received
+2026-02-07 15:37:31,600 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:32,071 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:32,392 - INFO - MAIN-LOOP: Final cart before review: ['Vergi', 'Vergi', 'Vergi', 'Vergi']
+2026-02-07 15:37:32,396 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 4}
+2026-02-07 15:37:32,396 - INFO - CART_REVIEW command received
+2026-02-07 15:37:32,700 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:32,706 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:37:34,121 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:34,731 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:38,704 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:37:39,727 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:37:46,160 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:37:46,649 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:37:51,095 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:37:53,100 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:37:54,090 - INFO - Sent door opening screen command: 1
+2026-02-07 15:37:54,096 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:37:54,097 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:37:54,097 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:37:56,099 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:37:56,099 - INFO - LIVE_CART command received
+2026-02-07 15:37:58,051 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:37:58,060 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:37:58,060 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:37:58,062 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:37:58,062 - INFO - LIVE_CART command received
+2026-02-07 15:37:59,708 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:37:59,745 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:37:59,745 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:01,599 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:38:01,631 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:38:01,631 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:38:01,639 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 2})
+2026-02-07 15:38:01,639 - INFO - LIVE_CART command received
+2026-02-07 15:38:02,999 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:03,015 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:03,015 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:04,400 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:04,403 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:04,403 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:05,540 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:05,585 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:05,586 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:06,549 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:06,669 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:06,669 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:08,342 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:08,355 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:08,355 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:10,055 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:38:10,090 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:38:10,090 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:38:10,092 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 3})
+2026-02-07 15:38:10,093 - INFO - LIVE_CART command received
+2026-02-07 15:38:11,222 - INFO - MAIN-LOOP: Final cart before review: ['Vergi', 'Vergi', 'Vergi']
+2026-02-07 15:38:11,224 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 3}
+2026-02-07 15:38:11,224 - INFO - CART_REVIEW command received
+2026-02-07 15:38:11,257 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:11,261 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter()
+2026-02-07 15:38:17,260 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 0 taken items for user 3 (836305420740)
+2026-02-07 15:38:18,287 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:38:18,290 - INFO - Router received: DEFAULT with payload: None
+2026-02-07 15:38:18,901 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-02-07 15:38:22,187 - INFO - Router received: VALIKUVAADE with payload: ADMIN
+2026-02-07 15:38:23,828 - INFO - Sent door opening screen command: 1
+2026-02-07 15:38:23,830 - INFO - Router received: UKSE_AVAMINE_VÕTMINE with payload: None
+2026-02-07 15:38:23,830 - INFO - UKSE_AVAMINE_VÕTMINE command received with payload: None
+2026-02-07 15:38:23,830 - INFO - UKSEAVAJA JOOKIDE VÕTMINE
+2026-02-07 15:38:25,832 - INFO - Router received: LIVE_CART with payload: Counter()
+2026-02-07 15:38:25,833 - INFO - LIVE_CART command received
+2026-02-07 15:38:28,761 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:28,796 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:28,797 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:30,730 - INFO - DRAWER: Barcode captured, sending to queue: 4742883015974
+2026-02-07 15:38:30,736 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:4742883015974
+2026-02-07 15:38:30,737 - INFO - MAIN-LOOP: Processing as barcode: 4742883015974
+2026-02-07 15:38:30,742 - INFO - Router received: LIVE_CART with payload: Counter({'Vergi': 1})
+2026-02-07 15:38:30,742 - INFO - LIVE_CART command received
+2026-02-07 15:38:32,269 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:32,272 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:32,273 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:32,821 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:33,358 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:33,359 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:33,372 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:34,102 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:34,447 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:34,448 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:35,531 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:35,531 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:36,681 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:36,715 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:36,716 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:40,113 - INFO - DRAWER: Barcode captured, sending to queue: 474283015974
+2026-02-07 15:38:40,159 - INFO - MAIN-LOOP: Got message from reply_q: BARCODE:474283015974
+2026-02-07 15:38:40,159 - INFO - MAIN-LOOP: Processing as barcode: 474283015974
+2026-02-07 15:38:41,243 - INFO - MAIN-LOOP: Final cart before review: ['Vergi']
+2026-02-07 15:38:41,245 - INFO - Router received: CART_REVIEW with payload: {'Vergi': 1}
+2026-02-07 15:38:41,245 - INFO - CART_REVIEW command received
+2026-02-07 15:38:50,140 - INFO - Router received: VÄLJASTATUD_JOOGID with payload: Counter({'Vergi': 11})
+2026-02-07 15:38:56,153 - INFO - (DB Handler) log_user_taken_drinks: Successfully logged 11 taken items for user 3 (836305420740)
+2026-02-07 15:38:56,165 - INFO - (DB Handler) keep_stock: Updated stock for 11 items. Action: taken
+2026-02-07 15:38:57,192 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-02-07 15:38:57,194 - INFO - Router received: DEFAULT with payload: None

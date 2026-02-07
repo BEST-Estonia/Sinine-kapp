@@ -1504,7 +1504,7 @@ class ADMIN:
 
 def run_touchscreen(command_q, reply_q):
     pygame.init()
-    screen = pygame.display.set_mode((1024, 768))
+    #screen = pygame.display.set_mode((1024, 768))
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     #pygame.display.set_caption("Sinine_kapp")
     
@@ -1515,6 +1515,7 @@ def run_touchscreen(command_q, reply_q):
     current_screen_object = None 
     current_screen_object = DEFAULT_SCREEN(fonts)
     running = True
+    barcode_buffer = ""
 
     while running:
         try:
@@ -1605,6 +1606,23 @@ def run_touchscreen(command_q, reply_q):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+            # --- BARCODE SCANNER LOGIC ---
+            if event.type == pygame.KEYDOWN:
+                # On enter, send buffer and clear it
+                if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
+                    if len(barcode_buffer) > 2: # Ignore accidental enter presses
+                        logging.info(f"DRAWER: Barcode captured, sending to queue: {barcode_buffer}")
+                        reply_q.put(f"BARCODE:{barcode_buffer}")
+                    barcode_buffer = ""
+                # On backspace, remove last char
+                elif event.key == pygame.K_BACKSPACE:
+                    barcode_buffer = barcode_buffer[:-1]
+                # Otherwise, add character to buffer
+                else:
+                    barcode_buffer += event.unicode
+            # --- END OF BARCODE SCANNER LOGIC ---
+
             if current_screen_object:
                 res = current_screen_object.handle_input(event)
                 if res is not None: reply_q.put(res)

@@ -7,122 +7,16 @@ Mai viitsi rohkem edasi kirjutada
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import time
-import sys
-import subprocess
-import threading
-import numpy as np
-import cv2
-from pyzbar.pyzbar import decode
-try:
-    import msvcrt
-except ImportError:
-    msvcrt = None
-
-
-# --- Configuration ---
-FRAME_WIDTH = 1280
-FRAME_HEIGHT = 720
-FRAME_LEN = int(FRAME_WIDTH * FRAME_HEIGHT * 1.5) # YUV420 buffer size
-
-class CameraStream:
-    """
-    Background service to keep the camera buffer clean and ready.
-    Runs silently.
-    """
-    def __init__(self):
-        self.cmd = [
-            'rpicam-vid', '-t', '0', '--inline',
-            '--width', str(FRAME_WIDTH), '--height', str(FRAME_HEIGHT),
-            '--codec', 'yuv420', '--nopreview', '-o', '-'
-        ]
-        self.process = None
-        self.thread = None
-        self.running = False
-        self.latest_frame = None
-
-    def start(self):
-        if self.running:
-            return
-        
-        try:
-            self.process = subprocess.Popen(self.cmd, stdout=subprocess.PIPE, bufsize=10**8)
-            self.running = True
-            self.thread = threading.Thread(target=self._update, daemon=True)
-            self.thread.start()
-        except:
-            # If camera fails, ensure running is False so we don't hang
-            self.running = False
-
-    def _update(self):
-        while self.running:
-            try:
-                raw_bytes = self.process.stdout.read(FRAME_LEN)
-                if len(raw_bytes) != FRAME_LEN:
-                    continue
-
-                yuv = np.frombuffer(raw_bytes, dtype=np.uint8).reshape((int(FRAME_HEIGHT * 1.5), FRAME_WIDTH))
-                self.latest_frame = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_I420)
-            except:
-                break
-
-    def read(self):
-        return self.latest_frame
-
-    def stop(self):
-        self.running = False
-        if self.process:
-            try:
-                self.process.terminate()
-            except:
-                pass
-
-# Create a single global instance of the camera
-camera_service = CameraStream()
+import logging
 
 def get_barcode(timeout=10):
     """
-    Scans for a barcode for up to 'timeout' seconds.
-    
-    Returns:
-        str: The barcode data if found.
-        int: 0 if timed out.
+    This function is deprecated. Barcode reading is now handled
+    in the main event loop (drawer.py) to avoid input conflicts.
+    This function remains for compatibility but will always time out.
     """
-    
-    # 1. Auto-start camera if it's not running
-    if not camera_service.running:
-        camera_service.start()
-        # Give it 1.5s to warm up and fill the buffer if we just started it
-        time.sleep(1.5)
-
-    start_time = time.time()
-
-    # 2. Loop until timeout
-    while (time.time() - start_time) < timeout:
-        frame = camera_service.read()
-        
-        if frame is None:
-            time.sleep(0.01)
-            continue
-
-        # Convert to grayscale for faster processing
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        
-        # Decode
-        barcodes = decode(gray)
-        
-        if barcodes:
-            # Return the first barcode found immediately
-            return barcodes[0].data.decode("utf-8")
-        
-        # Slight pause to prevent 100% CPU usage loop
-        time.sleep(0.05)
-
-    # 3. If we exit the loop, time is up
+    logging.warning("hardware_handler.get_barcode() is deprecated and should not be used.")
     return 0
-
-def cleanup_camera():
-    """Call this when your program is shutting down completely."""
-    camera_service.stop()
 
 #küsib nfc tagi
 def get_nfc(cancel_check_callback=None):
@@ -155,14 +49,6 @@ def get_wheight():
 #avab ukse
 def Ukse_avaja():
     return 0
-
-
-#Sebib barcodei
-def get_barcode_scan():
-   
-    barcode = input("DEBUG SISesta klaviatuuril barcode---")
-    print() # Newline on timeout
-    return barcode
 
 
 

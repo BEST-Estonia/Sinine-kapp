@@ -43,6 +43,23 @@ def Oota_kasutaja_kinnitust(timeout):
     except queue.Empty:
         pass
 
+def wait_for_barcode_from_queue(timeout):
+    """Waits for a barcode message from the reply_queue."""
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        remaining_time = timeout - (time.time() - start_time)
+        if remaining_time <= 0:
+            break
+        try:
+            # Wait for a short duration to be responsive
+            message = reply_queue.get(timeout=min(1, remaining_time))
+            if isinstance(message, str) and message.startswith("BARCODE:"):
+                return message.replace("BARCODE:", "", 1)
+            # else, it's a different UI event, ignore it and keep waiting
+        except queue.Empty:
+            continue
+    return None # Timeout
+
 def check_for_cancel():
     try:
         msg = reply_queue.get_nowait()
@@ -186,7 +203,7 @@ def admin_loop():
                 # Scanning flow
                 while True:
                     GUI_message(f"Skänni uue toote triipkood", show_button=False)
-                    code1 = hardware_handler.get_barcode(timeout=20)
+                    code1 = wait_for_barcode_from_queue(timeout=20)
                     if not code1:
                         GUI_message("Triipkoodi ei leitud. Proovi uuesti.", show_button=True)
                         Oota_kasutaja_kinnitust(10)
@@ -194,7 +211,8 @@ def admin_loop():
                     
                     GUI_message("Skänni uuesti kontrolliks", show_button=False)
                     time.sleep(2) # Wait to prevent immediate re-read
-                    code2 = hardware_handler.get_barcode(timeout=20)
+                    Empty_reply_queue()
+                    code2 = wait_for_barcode_from_queue(timeout=20)
                     
                     if code1 == code2:
                         # Assuming database_handler has this method
@@ -495,7 +513,7 @@ def joogi_väljastus(nfc_input):
     hardware_handler.Ukse_avaja()
     
 
-    #Reklaam samal ajal kui uks lahti
+    #poe ostukorvi vaade vmidagi. Ma ka ei tea enam
     GUI_live_cart([])
 
      #Siia salvestub list jookidest mis skännitakse.
@@ -507,38 +525,49 @@ def joogi_väljastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        # GUI_reklaam() eemaldatud, et hoida live cart vaadet
-        barcode = hardware_handler.get_barcode()
-        
-       #Kui barcode loetud
-        if barcode:
+        barcode_to_process = None
+        try:
+            # Check for messages from GUI (non-blocking)
+            message = reply_queue.get_nowait()
+            logging.info(f"MAIN-LOOP: Got message from reply_q: {message}")
 
-            #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
-            is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            # kui toode pole andmebaasis siis....
-            #Kui toode on andmebaasis siis loop jätkub
+            if isinstance(message, str) and message.startswith("BARCODE:"):
+                barcode_to_process = message.replace("BARCODE:", "", 1)
+
+        except queue.Empty:
+            # No message, do nothing
+            pass
+
+        if barcode_to_process:
+            logging.info(f"MAIN-LOOP: Processing as barcode: {barcode_to_process}")
+            is_in_db, drink_info = database_handler.get_drink_info(barcode_to_process)
+
             if is_in_db == False:
                 lcd.show_message("Toodet pole nimekirjas")
-                continue #hüppab tagasi loop algusse
-
-            else:
-                scanned_barcodes.append(barcode) 
-                scanned_items_info.append(drink_info)
-                GUI_live_cart(scanned_items_info)
-                print(f"DEBUG: {scanned_items_info}")
-            # D. Uuenda LCD-ekraani
+                time.sleep(1) # Show message briefly
+                lcd.clear()
+                lcd.show_message("Skaneeri tooted...")
+                continue # Skip to next loop iteration
+            
+            # This part only runs for valid barcodes
+            scanned_barcodes.append(barcode_to_process) 
+            scanned_items_info.append(drink_info)
+            GUI_live_cart(scanned_items_info)
+            print(f"DEBUG: {scanned_items_info}")
             
             count = scanned_items_info.count(drink_info)
             lcd.show_message(f"{drink_info} X{count}")
+            time.sleep(1) # Show message briefly
+            lcd.clear()
+            lcd.show_message("Skaneeri tooted...")
             
         # Väike paus, et tsükkel ei koormaks protsessorit
-        time.sleep(2)
-        lcd.clear()
+        time.sleep(0.05)
+
 
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
     
-    hardware_handler.cleanup_camera()
     
     # --- CART REVIEW LOGIC START ---
     # 1. Map names to barcodes so we can reconstruct the list later
@@ -547,6 +576,8 @@ def joogi_väljastus(nfc_input):
         name_to_barcode[name] = code
         
     # 2. Send data to review screen
+    logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
+    Empty_reply_queue()
     drink_counts = Counter(scanned_items_info)
     command_queue.put(("CART_REVIEW", dict(drink_counts)))
     
@@ -615,40 +646,49 @@ def joogi_tagastus(nfc_input):
 
     #LOOP mis käib nii kaua kuni kapi uks on lahti.
     while hardware_handler.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        # GUI_reklaam() eemaldatud
-        barcode = hardware_handler.get_barcode()
-        
-       #Kui barcode loetud
-        if barcode:
+        barcode_to_process = None
+        try:
+            # Check for messages from GUI (non-blocking)
+            message = reply_queue.get_nowait()
+            logging.info(f"MAIN-LOOP: Got message from reply_q: {message}")
 
-            #saame databse handlerilt "n/y" vastuse kas jook on andmebaasis ja joogi info
-            is_in_db, drink_info = database_handler.get_drink_info(barcode)
-            
-            # kui toode pole andmebaasis siis....
-            #Kui toode on andmebaasis siis loop jätkub
+            if isinstance(message, str) and message.startswith("BARCODE:"):
+                barcode_to_process = message.replace("BARCODE:", "", 1)
+
+        except queue.Empty:
+            # No message, do nothing
+            pass
+
+        if barcode_to_process:
+            logging.info(f"MAIN-LOOP: Processing as barcode: {barcode_to_process}")
+            is_in_db, drink_info = database_handler.get_drink_info(barcode_to_process)
+
             if is_in_db == False:
                 lcd.show_message("Toodet pole nimekirjas")
-                continue #hüppab tagasi loop algusse
-
-            else:
-                scanned_barcodes.append(barcode) 
-                scanned_items_info.append(drink_info)
-                GUI_live_cart(scanned_items_info)
-                print(f"DEBUG: {scanned_items_info}")
-            # D. Uuenda LCD-ekraani
+                time.sleep(1) # Show message briefly
+                lcd.clear()
+                lcd.show_message("Skaneeri tooted...")
+                continue # Skip to next loop iteration
+            
+            # This part only runs for valid barcodes
+            scanned_barcodes.append(barcode_to_process) 
+            scanned_items_info.append(drink_info)
+            GUI_live_cart(scanned_items_info)
+            print(f"DEBUG: {scanned_items_info}")
             
             count = scanned_items_info.count(drink_info)
             lcd.show_message(f"{drink_info} X{count}")
+            time.sleep(1) # Show message briefly
+            lcd.clear()
+            lcd.show_message("Skaneeri tooted...")
             
         # Väike paus, et tsükkel ei koormaks protsessorit
-        time.sleep(2)
-        lcd.clear()
+        time.sleep(0.05)
 
     # 3. Tsükkel lõppes (Uks pandi kinni)
     # Kood jõuab siia hetkel, kui hardware_handler.is_door_open() tagastab False
     
     print("DEBUG: Uks suletud. Lõpetan sessiooni...---")
-    hardware_handler.cleanup_camera()
     
     # --- CART REVIEW LOGIC START ---
     # 1. Map names to barcodes
@@ -657,6 +697,8 @@ def joogi_tagastus(nfc_input):
         name_to_barcode[name] = code
         
     # 2. Send data to review screen
+    logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
+    Empty_reply_queue()
     drink_counts = Counter(scanned_items_info)
     command_queue.put(("CART_REVIEW", dict(drink_counts)))
     
