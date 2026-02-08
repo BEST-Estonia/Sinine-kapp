@@ -122,14 +122,24 @@ class UKSE_AVAMINE_TAGASTAMINE:
         """
         self.fonts = fonts
         self.drink_counts = {}  # Will store {"drink_name": count}
-        
-        # Process the payload - group by product name and count
-        if isinstance(payload_data, list):
-            for product_name, barcode, date_taken in payload_data:
-                if product_name in self.drink_counts:
-                    self.drink_counts[product_name] += 1
-                else:
-                    self.drink_counts[product_name] = 1
+
+        # Accept both list and tuple payloads (different DB drivers may return either).
+        rows = payload_data if isinstance(payload_data, (list, tuple)) else []
+        if payload_data is not None and not isinstance(payload_data, (list, tuple)):
+            logging.warning(
+                f"UKSE_AVAMINE_TAGASTAMINE: unexpected payload type {type(payload_data).__name__}"
+            )
+
+        # Process payload: group by product name and count.
+        for row in rows:
+            if not isinstance(row, (list, tuple)) or len(row) < 1:
+                continue
+
+            product_name = row[0]
+            if product_name in self.drink_counts:
+                self.drink_counts[product_name] += 1
+            else:
+                self.drink_counts[product_name] = 1
         
         # Create continue button
         self.buttons = []

@@ -656,6 +656,9 @@ def joogi_tagastus(nfc_input):
 
     # Fetch unreturned drinks before opening the door
     unreturned_drinks = database_handler.get_unreturned_drinks(nfc_input)
+    logging.info(
+        f"joogi_tagastus: unreturned payload type={type(unreturned_drinks).__name__}, count={len(unreturned_drinks) if hasattr(unreturned_drinks, '__len__') else 'n/a'}"
+    )
 
     GUI_ukse_avamine("2", unreturned_drinks)
     Oota_kasutaja_kinnitust(30)
