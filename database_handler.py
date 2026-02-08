@@ -13,7 +13,7 @@ _MYSQL_DRIVER_NAME: str | None = None
 _SQLITE_CONNECT_TIMEOUT_SECONDS = 5
 
 
-def _load_env_file(path: Path) -> bool:
+def _load_env_file(path: Path, overwrite: bool = False) -> bool:
     if not path.exists():
         return False
 
@@ -25,10 +25,13 @@ def _load_env_file(path: Path) -> bool:
             continue
 
         key, value = line.split('=', 1)
-        key = key.strip()
+        key = key.strip().lstrip('\ufeff')
+        if not key:
+            continue
+
         value = value.strip().strip('"').strip("'")
 
-        if key and key not in os.environ:
+        if overwrite or key not in os.environ:
             os.environ[key] = value
             loaded_any = True
 
@@ -43,14 +46,18 @@ def _load_environment_once() -> None:
 
     repo_root = Path(__file__).resolve().parent
     candidates = [
-        repo_root / '.env',
-        repo_root.parent / 'portaal' / '.env',
+        (repo_root / '.env', True),
+        (repo_root.parent / 'portaal' / '.env', False),
     ]
 
-    for candidate in candidates:
-        loaded = _load_env_file(candidate)
+    for candidate, overwrite in candidates:
+        loaded = _load_env_file(candidate, overwrite=overwrite)
         if loaded:
-            logging.info('(DB Handler) Loaded environment values from %s', candidate)
+            logging.info(
+                '(DB Handler) Loaded environment values from %s (overwrite=%s)',
+                candidate,
+                overwrite,
+            )
 
     _ENV_LOADED = True
 
@@ -155,7 +162,7 @@ def _resolve_backend_config() -> dict[str, Any]:
         return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
 
     if mode == 'mysql' and not database_url:
-        raise RuntimeError('SININE_KAPP_DB_BACKEND=mysql but DATABASE_URL is missing.')
+        raise RuntimeError('SININE_KAPP_DB_BACKEND=mysql but DATABASE_URL is missing. Check .env encoding and key name (DATABASE_URL).')
 
     if mode == 'auto' and not database_url:
         logging.warning(
