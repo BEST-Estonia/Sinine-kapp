@@ -4,7 +4,10 @@ get_nfc() loeb nfc lugejat ja returnib saadud vastuse
 Mai viitsi rohkem edasi kirjutada
 
 """
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except ModuleNotFoundError:
+    from fake_rpi.RPi import GPIO
 from mfrc522 import SimpleMFRC522
 import time
 import logging
