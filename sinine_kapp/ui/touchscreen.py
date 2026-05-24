@@ -11,8 +11,40 @@ import time
 import logging
 import queue
 from PIL import Image, ImageSequence
-from ui_components import Button
-from styles import FontManager, Colors
+from ..paths import ASSETS_DIR
+from .components import Button, get_event_pos, is_press_event
+from .styles import FontManager, Colors
+
+
+APP_EXIT = "__APP_EXIT__"
+GIF_PATH = ASSETS_DIR / "67GIF.gif"
+EXIT_GESTURE_WINDOW_SECONDS = 4
+EXIT_GESTURE_TAP_COUNT = 5
+EXIT_GESTURE_SIZE = 120
+INPUT_DEBUG_ENABLED = False
+TOUCH_VISUALIZER_ENABLED = True
+
+
+def _configure_display_environment():
+    """
+    Make pygame prefer the Pi's local desktop session when started from SSH.
+    This keeps local launches working while giving remote shells a sane default.
+    """
+    if not os.environ.get("DISPLAY"):
+        os.environ["DISPLAY"] = ":0"
+
+    if not os.environ.get("XAUTHORITY"):
+        os.environ["XAUTHORITY"] = os.path.expanduser("~/.Xauthority")
+
+    if not os.environ.get("XDG_RUNTIME_DIR"):
+        os.environ["XDG_RUNTIME_DIR"] = f"/run/user/{os.getuid()}"
+
+    logging.info(
+        "Touchscreen display env: DISPLAY=%s XAUTHORITY=%s XDG_RUNTIME_DIR=%s",
+        os.environ.get("DISPLAY"),
+        os.environ.get("XAUTHORITY"),
+        os.environ.get("XDG_RUNTIME_DIR"),
+    )
 
 
 class VALIKUVAADE:
@@ -457,8 +489,8 @@ class REGISTREERIMINE:
     def _load_gif(self):
         if not self.gif_frames:
             try:
-                if os.path.exists("67GIF.gif"):
-                    pil_image = Image.open("67GIF.gif")
+                if GIF_PATH.exists():
+                    pil_image = Image.open(GIF_PATH)
                     for frame in ImageSequence.Iterator(pil_image):
                         frame = frame.convert('RGBA')
                         mode = frame.mode
@@ -874,8 +906,8 @@ class KAOTATUD_KAART:
     def _load_gif(self):
         if not self.gif_frames:
             try:
-                if os.path.exists("67GIF.gif"):
-                    pil_image = Image.open("67GIF.gif")
+                if GIF_PATH.exists():
+                    pil_image = Image.open(GIF_PATH)
                     for frame in ImageSequence.Iterator(pil_image):
                         frame = frame.convert('RGBA')
                         mode = frame.mode
@@ -1058,8 +1090,8 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
     def _load_gif(self):
         if not self.gif_frames:
             try:
-                if os.path.exists("67GIF.gif"):
-                    pil_image = Image.open("67GIF.gif")
+                if GIF_PATH.exists():
+                    pil_image = Image.open(GIF_PATH)
                     for frame in ImageSequence.Iterator(pil_image):
                         frame = frame.convert('RGBA')
                         mode = frame.mode
@@ -1343,8 +1375,11 @@ class REMOVE_PRODUCT_LIST:
             btn.draw(screen)
             
     def handle_input(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mx, my = pygame.mouse.get_pos()
+        if is_press_event(event):
+            pos = get_event_pos(event)
+            if pos is None:
+                return None
+            mx, my = pos
             if 100 <= mx <= 800 and 120 <= my <= 600:
                 idx = (my - 120) // 50
                 real_idx = self.scroll_index + idx
@@ -1513,9 +1548,16 @@ class ADMIN:
         return None
 
 def run_touchscreen(command_q, reply_q):
+    _configure_display_environment()
     pygame.init()
-    #screen = pygame.display.set_mode((1024, 768))
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+    try:
+        #screen = pygame.display.set_mode((1024, 768))
+        screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    except pygame.error as exc:
+        logging.exception("Failed to start touchscreen UI: %s", exc)
+        raise
+
     #pygame.display.set_caption("Sinine_kapp")
 
     # 1. INITIALIZE STYLE MANAGER
@@ -1527,6 +1569,8 @@ def run_touchscreen(command_q, reply_q):
     running = True
     barcode_buffer = ""
     barcode_scanning_enabled = False  # Control whether barcode scanning is active
+    exit_tap_times = []
+    last_input_debug = None
 
     while running:
         try:
@@ -1619,6 +1663,7 @@ def run_touchscreen(command_q, reply_q):
                 current_screen_object = REMOVE_PRODUCT_LIST(payload, fonts)
 
             elif command == "STOP":
+                reply_q.put(APP_EXIT)
                 running = False
 
         except queue.Empty:
@@ -1627,7 +1672,47 @@ def run_touchscreen(command_q, reply_q):
         # ... Input Handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                reply_q.put(APP_EXIT)
                 running = False
+
+            if event.type == pygame.KEYDOWN and event.key in (pygame.K_ESCAPE, pygame.K_q):
+                logging.info("Developer exit shortcut pressed")
+                reply_q.put(APP_EXIT)
+                running = False
+
+            if is_press_event(event):
+                pos = get_event_pos(event)
+                raw_debug = None
+                if hasattr(event, "pos"):
+                    raw_debug = event.pos
+                elif hasattr(event, "x") and hasattr(event, "y"):
+                    raw_debug = (round(event.x, 4), round(event.y, 4))
+                last_input_debug = {
+                    "type": pygame.event.event_name(event.type),
+                    "touch": getattr(event, "touch", None),
+                    "raw": raw_debug,
+                    "mapped": pos,
+                }
+                if INPUT_DEBUG_ENABLED:
+                    logging.info("INPUT DEBUG: %s", last_input_debug)
+                if pos is None:
+                    continue
+                if pos[0] <= EXIT_GESTURE_SIZE and pos[1] <= EXIT_GESTURE_SIZE:
+                    now = time.time()
+                    exit_tap_times = [
+                        tap_time
+                        for tap_time in exit_tap_times
+                        if now - tap_time <= EXIT_GESTURE_WINDOW_SECONDS
+                    ]
+                    exit_tap_times.append(now)
+
+                    if len(exit_tap_times) >= EXIT_GESTURE_TAP_COUNT:
+                        logging.info("Developer exit gesture detected")
+                        reply_q.put(APP_EXIT)
+                        running = False
+                        continue
+                else:
+                    exit_tap_times.clear()
 
             # --- BARCODE SCANNER LOGIC ---
             if barcode_scanning_enabled and event.type == pygame.KEYDOWN:
@@ -1654,6 +1739,19 @@ def run_touchscreen(command_q, reply_q):
             current_screen_object.draw(screen)
         else:
             DEFAULT_SCREEN(screen, fonts)
+
+        if INPUT_DEBUG_ENABLED and last_input_debug is not None:
+            debug_text = (
+                f"{last_input_debug['type']} touch={last_input_debug['touch']} "
+                f"raw={last_input_debug['raw']} mapped={last_input_debug['mapped']}"
+            )
+            debug_surf = fonts.small.render(debug_text, True, Colors.RED)
+            screen.blit(debug_surf, (20, 20))
+
+        if TOUCH_VISUALIZER_ENABLED and last_input_debug is not None:
+            mapped = last_input_debug["mapped"]
+            if mapped is not None:
+                pygame.draw.circle(screen, Colors.RED, mapped, 12, 3)
 
         pygame.display.flip()
 

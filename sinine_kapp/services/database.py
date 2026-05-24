@@ -1,16 +1,17 @@
 import datetime
 import logging
 import os
-import sqlite3
 from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlparse
 
-_DB_FILE = 'database.db'
-_BACKEND_CONFIG: dict[str, Any] | None = None
+from ..paths import ENV_FILE
+
+_MYSQL_CONFIG: dict[str, Any] | None = None
 _ENV_LOADED = False
 _MYSQL_DRIVER_NAME: str | None = None
-_SQLITE_CONNECT_TIMEOUT_SECONDS = 5
+_MYSQL_CONNECTOR_WARNING_LOGGED = False
+_LAST_CONNECTION_ERROR: str | None = None
 
 
 def _load_env_file(path: Path, overwrite: bool = False) -> bool:
@@ -44,10 +45,9 @@ def _load_environment_once() -> None:
     if _ENV_LOADED:
         return
 
-    repo_root = Path(__file__).resolve().parent
     candidates = [
-        (repo_root / '.env', True),
-        (repo_root.parent / 'portaal' / '.env', False),
+        (ENV_FILE, True),
+        (ENV_FILE.parent.parent / 'portaal' / '.env', False),
     ]
 
     for candidate, overwrite in candidates:
@@ -81,8 +81,29 @@ def _parse_database_url(database_url: str) -> dict[str, Any]:
     }
 
 
+def _connection_timeout(name: str, default: int) -> int:
+    raw_value = os.environ.get(name, '').strip()
+    if not raw_value:
+        return default
+
+    try:
+        return max(1, int(raw_value))
+    except ValueError:
+        logging.warning(
+            '(DB Handler) Invalid %s=%r, using %s seconds',
+            name,
+            raw_value,
+            default,
+        )
+        return default
+
+
+def last_connection_error() -> str | None:
+    return _LAST_CONNECTION_ERROR
+
+
 def _connect_mysql(params: dict[str, Any]):
-    global _MYSQL_DRIVER_NAME
+    global _MYSQL_DRIVER_NAME, _MYSQL_CONNECTOR_WARNING_LOGGED
 
     try:
         import mysql.connector  # type: ignore
@@ -94,18 +115,22 @@ def _connect_mysql(params: dict[str, Any]):
             password=str(params['password']),
             database=str(params['database']),
             autocommit=False,
+            connection_timeout=_connection_timeout('SININE_KAPP_DB_CONNECT_TIMEOUT', 5),
         )
         if _MYSQL_DRIVER_NAME is None:
             _MYSQL_DRIVER_NAME = 'mysql-connector-python'
         return conn
     except ModuleNotFoundError:
-        logging.warning(
-            '(DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.'
-        )
+        if not _MYSQL_CONNECTOR_WARNING_LOGGED:
+            logging.warning(
+                '(DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.'
+            )
+            _MYSQL_CONNECTOR_WARNING_LOGGED = True
 
     try:
         import pymysql  # type: ignore
 
+        connect_timeout = _connection_timeout('SININE_KAPP_DB_CONNECT_TIMEOUT', 5)
         conn = pymysql.connect(
             host=str(params['host']),
             port=int(params['port']),
@@ -114,7 +139,7 @@ def _connect_mysql(params: dict[str, Any]):
             database=str(params['database']),
             autocommit=False,
             charset='utf8mb4',
-            connect_timeout=5,
+            connect_timeout=connect_timeout,
             read_timeout=10,
             write_timeout=10,
         )
@@ -128,107 +153,44 @@ def _connect_mysql(params: dict[str, Any]):
         ) from exc
 
 
-def _connect_sqlite_existing(sqlite_path: str):
-    if not Path(sqlite_path).exists():
-        raise FileNotFoundError(
-            f'SQLite fallback file not found: {sqlite_path}. '
-            'Create it manually or use SININE_KAPP_DB_BACKEND=mysql with valid MySQL connectivity.'
-        )
+def _mysql_config() -> dict[str, Any]:
+    global _MYSQL_CONFIG
 
-    return sqlite3.connect(sqlite_path, timeout=_SQLITE_CONNECT_TIMEOUT_SECONDS)
-
-
-def _resolve_backend_config() -> dict[str, Any]:
     _load_environment_once()
+    if _MYSQL_CONFIG is not None:
+        return _MYSQL_CONFIG
 
-    mode = os.environ.get('SININE_KAPP_DB_BACKEND', 'auto').strip().lower()
     database_url = os.environ.get('DATABASE_URL', '').strip()
-    sqlite_path = str(Path(__file__).resolve().parent / _DB_FILE)
-
-    if mode not in {'auto', 'sqlite', 'mysql'}:
-        logging.warning(
-            "(DB Handler) Unknown SININE_KAPP_DB_BACKEND='%s'. Falling back to 'auto'.",
-            mode,
+    if not database_url:
+        raise RuntimeError(
+            'DATABASE_URL is missing. This project is configured for external database use only.'
         )
-        mode = 'auto'
 
+    _MYSQL_CONFIG = _parse_database_url(database_url)
     logging.info(
-        '(DB Handler) Backend mode: %s, DATABASE_URL present: %s',
-        mode,
-        bool(database_url),
+        '(DB Handler) Using MySQL backend target: %s@%s:%s/%s',
+        _MYSQL_CONFIG['user'],
+        _MYSQL_CONFIG['host'],
+        _MYSQL_CONFIG['port'],
+        _MYSQL_CONFIG['database'],
     )
-
-    if mode == 'sqlite':
-        return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
-
-    if mode == 'mysql' and not database_url:
-        raise RuntimeError('SININE_KAPP_DB_BACKEND=mysql but DATABASE_URL is missing. Check .env encoding and key name (DATABASE_URL).')
-
-    if mode == 'auto' and not database_url:
-        logging.warning(
-            '(DB Handler) DATABASE_URL is missing in auto mode; using SQLite fallback at %s',
-            sqlite_path,
-        )
-        return {'kind': 'sqlite', 'sqlite_path': sqlite_path}
-
-    mysql_params = _parse_database_url(database_url)
-    config: dict[str, Any] = {'kind': 'mysql', 'mysql_params': mysql_params}
-    if mode == 'auto':
-        config['auto_sqlite_fallback_path'] = sqlite_path
-    return config
-
-
-def _backend_config() -> dict[str, Any]:
-    global _BACKEND_CONFIG
-
-    if _BACKEND_CONFIG is None:
-        _BACKEND_CONFIG = _resolve_backend_config()
-
-        if _BACKEND_CONFIG['kind'] == 'mysql':
-            params = _BACKEND_CONFIG['mysql_params']
-            logging.info(
-                '(DB Handler) Using MySQL backend target: %s@%s:%s/%s',
-                params['user'],
-                params['host'],
-                params['port'],
-                params['database'],
-            )
-        else:
-            logging.info('(DB Handler) Using SQLite backend: %s', _BACKEND_CONFIG['sqlite_path'])
-
-    return _BACKEND_CONFIG
-
-
-def _is_mysql_backend() -> bool:
-    return _backend_config()['kind'] == 'mysql'
+    return _MYSQL_CONFIG
 
 
 def _connect():
-    global _BACKEND_CONFIG
-    config = _backend_config()
+    global _LAST_CONNECTION_ERROR
 
-    if config['kind'] == 'mysql':
-        try:
-            return _connect_mysql(config['mysql_params'])
-        except Exception as exc:
-            fallback_path = config.get('auto_sqlite_fallback_path')
-            if fallback_path:
-                logging.warning(
-                    '(DB Handler) MySQL unavailable in auto mode (%s). Falling back to SQLite: %s',
-                    exc,
-                    fallback_path,
-                )
-                _BACKEND_CONFIG = {'kind': 'sqlite', 'sqlite_path': fallback_path}
-                return _connect_sqlite_existing(fallback_path)
-            raise
-
-    return _connect_sqlite_existing(config['sqlite_path'])
+    try:
+        conn = _connect_mysql(_mysql_config())
+        _LAST_CONNECTION_ERROR = None
+        return conn
+    except Exception as exc:
+        _LAST_CONNECTION_ERROR = str(exc)
+        raise
 
 
 def _sql(query: str) -> str:
-    if _is_mysql_backend():
-        return query.replace('?', '%s')
-    return query
+    return query.replace('?', '%s')
 
 
 def _execute(cursor, query: str, params: tuple[Any, ...] = ()) -> None:

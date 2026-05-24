@@ -12,13 +12,14 @@ class LCD:
         self.last_activity = time.time()
         self.running = True
         self.is_on = True
+        self._cleaned_up = False
 
         # --- Pinout (Fixed for Pi 5 & NFC Compatibility) ---
         # CS=Pin 18 (GPIO 24), DC=Pin 13 (GPIO 27), RST=Pin 15 (GPIO 22)
-        cs_pin = digitalio.DigitalInOut(board.D24)
-        dc_pin = digitalio.DigitalInOut(board.D27)
-        reset_pin = digitalio.DigitalInOut(board.D22)
-        spi = board.SPI()
+        self.cs_pin = digitalio.DigitalInOut(board.D24)
+        self.dc_pin = digitalio.DigitalInOut(board.D27)
+        self.reset_pin = digitalio.DigitalInOut(board.D22)
+        self.spi = board.SPI()
         
         # Backlight control on GPIO 26
         self.backlight = digitalio.DigitalInOut(board.D26)
@@ -27,8 +28,8 @@ class LCD:
 
         # --- Display Init ---
         self.disp = ST7789(
-            spi,
-            cs=cs_pin, dc=dc_pin, rst=reset_pin,
+            self.spi,
+            cs=self.cs_pin, dc=self.dc_pin, rst=self.reset_pin,
             baudrate=60000000,
             width=170, height=320,
             x_offset=35, y_offset=0
@@ -87,4 +88,35 @@ class LCD:
                 self.clear() # Re-use the clear function
     
     def cleanup(self):
+        if self._cleaned_up:
+            return
+
         self.running = False
+        try:
+            self.thread.join(timeout=2)
+        except Exception:
+            pass
+
+        try:
+            self.clear()
+        except Exception:
+            pass
+
+        try:
+            self.backlight.value = False
+        except Exception:
+            pass
+
+        for resource_name in ("backlight", "reset_pin", "dc_pin", "cs_pin", "spi"):
+            resource = getattr(self, resource_name, None)
+            if resource is None:
+                continue
+
+            deinit = getattr(resource, "deinit", None)
+            if callable(deinit):
+                try:
+                    deinit()
+                except Exception:
+                    pass
+
+        self._cleaned_up = True

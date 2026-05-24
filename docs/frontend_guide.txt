@@ -8,30 +8,30 @@ The UI runs in a separate process (multiprocessing) to ensure the interface
 never freezes, even if the backend (database/hardware) is busy.
 
 Files:
-  - drawer.py         -> The "Manager". Runs the main loop and listens for commands.
-  - ui_components.py  -> The "Toolbox". Contains Button class, etc.
-  - styles.py         -> The "Look". Contains Colors and Fonts.
+  - sinine_kapp/ui/touchscreen.py -> The "Manager". Runs the main loop and listens for commands.
+  - sinine_kapp/ui/components.py  -> The "Toolbox". Contains Button class, etc.
+  - sinine_kapp/ui/styles.py      -> The "Look". Contains Colors and Fonts.
 
 How it works (The Router Pattern):
   1. main.py puts a command tuple into `command_queue`.
      Example: ("SHOW_CHOICE", "Marten")
-  2. drawer.py picks up the command.
-  3. drawer.py initializes the specific Screen Class (defined in drawer.py).
+  2. touchscreen.py picks up the command.
+  3. touchscreen.py initializes the specific Screen Class (defined in touchscreen.py).
   4. The Screen Class draws itself and checks for button clicks.
   5. If a button is clicked, the Screen Class returns a Result ID.
-  6. drawer.py puts that ID into `reply_queue`.
-  7. main.py reads the ID and decides what to do next.
+  6. touchscreen.py puts that ID into `reply_queue`.
+  7. controller.py reads the ID and decides what to do next.
 
 
-2. USING STYLES (styles.py)
+2. USING STYLES (sinine_kapp/ui/styles.py)
 --------------------------------------------------------------------------------
 We use a centralized Style Manager to avoid "Magic Numbers" and inconsistent fonts.
 
 Usage:
   1. Import the manager: 
-     from styles import Colors, FontManager
+     from sinine_kapp.ui.styles import Colors, FontManager
 
-  2. Inside `drawer.py`, initialize it ONCE:
+  2. Inside `touchscreen.py`, initialize it ONCE:
      fonts = FontManager()
 
   3. Accessing Colors:
@@ -47,7 +47,7 @@ Available Fonts:
   - fonts.small   (Small, Normal)
 
 
-3. USING BUTTONS (ui_components.py)
+3. USING BUTTONS (sinine_kapp/ui/components.py)
 --------------------------------------------------------------------------------
 Buttons are objects that handle their own drawing and clicking logic.
 
@@ -71,7 +71,7 @@ Example:
 4. HOW TO ADD A NEW SCREEN (STEP-BY-STEP)
 --------------------------------------------------------------------------------
 
-STEP A: Create the Class in `drawer.py`
+STEP A: Create the Class in `sinine_kapp/ui/touchscreen.py`
 ----------------------------------------
 Define how the screen looks and behaves. Add this class definition before `run_touchscreen`.
 
@@ -104,7 +104,7 @@ class MyNewScreen:
         return None
 
 
-STEP B: Register the Screen in `drawer.py`
+STEP B: Register the Screen in `sinine_kapp/ui/touchscreen.py`
 ------------------------------------------
 Tell the router (run_touchscreen function) about your new screen.
 
@@ -113,7 +113,7 @@ Tell the router (run_touchscreen function) about your new screen.
         current_screen_object = MyNewScreen(payload, fonts)
 
 
-STEP C: Call it from `main.py`
+STEP C: Call it from `sinine_kapp/app/controller.py`
 ------------------------------------------
 Send the command to the GUI process.
 

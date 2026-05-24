@@ -1,9 +1,14 @@
 #!/bin/bash
-cd /home/pi/Sinine-kapp
+set -e
+
+cd /home/skpi/Sinine-kapp/Sinine-kapp
 
 sleep 10
 
+if [ -x "./venv/bin/python" ]; then
+  PYTHON="./venv/bin/python"
+else
+  PYTHON="python3"
+fi
 
-git pull origin main
-
-./venv/bin/python main.py
+exec "$PYTHON" -m sinine_kapp

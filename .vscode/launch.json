@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Sinine Kapp Main",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Barcode Test",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/barcodetest.py",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "NFC Test",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/nfctest.py",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "GPIO Door Test",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/gpio4test.py",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal"
+    }
+  ]
+}

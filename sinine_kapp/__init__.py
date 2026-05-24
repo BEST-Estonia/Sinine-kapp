@@ -1,0 +1,2 @@
+"""Sinine Kapp application package."""
+

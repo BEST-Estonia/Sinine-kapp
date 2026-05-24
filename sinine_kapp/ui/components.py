@@ -1,6 +1,36 @@
 # ui_components.py
 import pygame
-from styles import Colors
+from .styles import Colors
+
+USE_FINGER_EVENTS = False
+
+
+def _touch_event_to_screen_pos(event):
+    surface = pygame.display.get_surface()
+    if surface is None:
+        return None
+
+    width, height = surface.get_size()
+    x_norm = max(0.0, min(1.0, event.x))
+    y_norm = max(0.0, min(1.0, event.y))
+    return int(x_norm * width), int(y_norm * height)
+
+
+def get_event_pos(event):
+    if event.type in (pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN):
+        return event.pos
+
+    if USE_FINGER_EVENTS and event.type in (pygame.FINGERMOTION, pygame.FINGERDOWN):
+        return _touch_event_to_screen_pos(event)
+
+    return None
+
+
+def is_press_event(event):
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        return True
+
+    return USE_FINGER_EVENTS and event.type == pygame.FINGERDOWN
 
 class Button:
     
@@ -30,9 +60,10 @@ class Button:
         
     # ... check_input 
     def check_input(self, event):
-        if event.type == pygame.MOUSEMOTION:
-            self.is_hovered = self.rect.collidepoint(event.pos)
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(event.pos):
+        pos = get_event_pos(event)
+        if event.type == pygame.MOUSEMOTION and pos is not None:
+            self.is_hovered = self.rect.collidepoint(pos)
+        if is_press_event(event) and pos is not None:
+            if self.rect.collidepoint(pos):
                 return self.command_id
         return None
