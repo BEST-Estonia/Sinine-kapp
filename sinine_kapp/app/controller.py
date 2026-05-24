@@ -300,6 +300,43 @@ def _show_database_error_if_needed(timeout=8):
     Oota_kasutaja_kinnitust(timeout)
     return True
 
+
+def _register_user_from_pin(nfc_input, pinnkood):
+    status = database.get_pin_status(pinnkood)
+    if _show_database_error_if_needed():
+        return False
+
+    if not status['exists']:
+        Empty_reply_queue()
+        GUI_message("Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.")
+        Oota_kasutaja_kinnitust(20)
+        return False
+
+    if status['registered']:
+        logging.info("Kasutaja üritas registreerida juba registreeritud PIN-koodi.")
+        Empty_reply_queue()
+        GUI_message("See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt")
+        Oota_kasutaja_kinnitust(30)
+        return False
+
+    if nfc_input is None:
+        GUI_message("Kiipkaarti ei loetud. Palun proovi uuesti.")
+        Oota_kasutaja_kinnitust(10)
+        return False
+
+    if not database.create_new_user(nfc_input, pinnkood):
+        if _show_database_error_if_needed():
+            return False
+        GUI_message("Kasutaja registreerimine ebaõnnestus. Palun proovi uuesti.")
+        Oota_kasutaja_kinnitust(20)
+        return False
+
+    Empty_reply_queue()
+    GUI_kasutaja_registreeritud(status['name'])
+    Oota_kasutaja_kinnitust(30)
+    return True
+
+
 def admin_loop():
     """
     Handles the admin screen logic loop.
@@ -337,12 +374,18 @@ def admin_loop():
                     code2 = wait_for_barcode_from_queue(timeout=20)
 
                     if code1 == code2:
-                        # Assuming database service has this method
                         try:
-                            database.add_product(product_name, code1)
-                            GUI_message(f"{product_name} on lisatud andmebaasi", show_button=True)
+                            added = database.add_product(product_name, code1)
                         except AttributeError:
                             logging.error("database.add_product method missing")
+                            added = False
+                        except Exception:
+                            logging.exception("database.add_product failed")
+                            added = False
+
+                        if added:
+                            GUI_message(f"{product_name} on lisatud andmebaasi", show_button=True)
+                        else:
                             GUI_message("Viga andmebaasiga suhtlemisel", show_button=True)
 
                         Oota_kasutaja_kinnitust(10)
@@ -365,6 +408,11 @@ def admin_loop():
                     except AttributeError:
                         logging.error("database.get_all_products missing")
                         products = []
+                    except Exception:
+                        logging.exception("database.get_all_products failed")
+                        GUI_message("Viga andmebaasiga", show_button=True)
+                        Oota_kasutaja_kinnitust(5)
+                        products = []
 
                     command_queue.put(("REMOVE_PRODUCT_LIST", products))
 
@@ -375,10 +423,17 @@ def admin_loop():
                     elif isinstance(resp, tuple) and resp[0] == "DELETE_PRODUCT":
                         pid = resp[1]
                         try:
-                            database.remove_product(pid)
+                            removed = database.remove_product(pid)
+                        except AttributeError:
+                            removed = False
+                        except Exception:
+                            logging.exception("database.remove_product failed")
+                            removed = False
+
+                        if removed:
                             GUI_message("Toode eemaldatud", show_button=False)
                             time.sleep(1)
-                        except AttributeError:
+                        else:
                             GUI_message("Viga andmebaasiga", show_button=True)
                             Oota_kasutaja_kinnitust(5)
                         # Loop continues to refresh list
@@ -423,19 +478,22 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
             Oota_kasutaja_kinnitust(10)
             return
         
-        database.update_user_nfc(nfc_input, nfc_uus)
-        GUI_message(f"Uus kaart nimele {nimi} registreeritud")
+        if database.update_user_nfc(nfc_input, nfc_uus):
+            GUI_message(f"Uus kaart nimele {nimi} registreeritud")
+        else:
+            if _show_database_error_if_needed():
+                return
+            GUI_message("Uue kaardi registreerimine ebaõnnestus.")
         Oota_kasutaja_kinnitust(10)
     elif LOGITUD == False: #Kaardi regamine kui kasutajal vana kaart kadunud
         command_queue.put( ("KAOTATUD_KAART", None))
         pinnkood = _read_reply()
-        is_pin_in_pintable =  database.check_pin_code_dict(pinnkood) #kontrollib kas pin on andmebaasis
-        is_user_registered = database.is_user_registered(pinnkood) #kontrollib kas pin on juba registreeritud kasutajale
-        found, nimi = database.nime_kaeve_pintabelist(pinnkood)
+        status = database.get_pin_status(pinnkood)
         if _show_database_error_if_needed():
             return
 
-        if is_pin_in_pintable == True and is_user_registered == True:
+        if status['exists'] == True and status['registered'] == True:
+            nimi = status['name']
             GUI_message(f"Kasutaja {nimi} leitud. Viipa uut kaarti registreerimiseks", show_button=False)
             uus_nfc = hardware.get_nfc()
             # Kontrollime, kas kaart on juba kellegi teise nimel
@@ -449,18 +507,23 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
                 return
             # --- FIX END ---
 
-            database.register_new_card(uus_nfc, nimi)
-            GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
+            success, nimi = database.register_new_card_by_pin(uus_nfc, pinnkood)
+            if success:
+                GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
+            else:
+                if _show_database_error_if_needed():
+                    return
+                GUI_message("Uue kaardi registreerimine ebaõnnestus. Kontrolli, et kasutaja nimi oleks unikaalne.")
             return
-            database.register_new_card(uus_nfc, nimi)
-            GUI_message(f"Uus kaart nimele {nimi} on edukalt registreeritud.")
-            return
-        elif is_pin_in_pintable == True and is_user_registered == False:
+        elif status['exists'] == True and status['registered'] == False:
+            nimi = status['name']
             command_queue.put(("REGISTREERI_PINNKOODI_ALUSEL", None))
             vastus = _read_reply(timeout=60)
             if vastus == True:
                 GUI_message(f"Viipa kiipkaarti kasutaja {nimi} registreerimiseks.", show_button=False)
                 nfc_input = hardware.get_nfc()
+                if nfc_input is None:
+                    return
                 IsinDB, kasutu_muutuja = database.checkuser(nfc_input)
                 if _show_database_error_if_needed():
                     return
@@ -469,10 +532,7 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
                     GUI_message("Kaart on juba registreeritud mõnele kasutajale")
                     Oota_kasutaja_kinnitust(15)
                 else:
-                    database.create_new_user(nfc_input, pinnkood)
-                    Empty_reply_queue()
-                    GUI_message(f"Kasutaja {nimi} registreeritud! proosit!")
-                    Oota_kasutaja_kinnitust(15)
+                    _register_user_from_pin(nfc_input, pinnkood)
             else: 
                 pass
         else: 
@@ -533,40 +593,8 @@ def main_loop():
                 vastus, pinnkood = GUI_registreerimise_küsimine()
             
                 if vastus == True:
-                    pinnkood = int(pinnkood)
-                    
-                    is_pin_in_pintable =  database.check_pin_code_dict(pinnkood) #kontrollib kas pin on andmebaasis
-                    is_user_registered = database.is_user_registered(pinnkood) #kontrollib kas pin on juba registreeritud kasutajale
-                    if _show_database_error_if_needed():
-                        continue
-                    if is_pin_in_pintable == True:
-                        if is_user_registered == True:
-                            logging.info("Kasutaja üritas registreerida juba registreeritud PIN-koodi.")
-                            Empty_reply_queue()
-                            GUI_message("See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt")
-                            Oota_kasutaja_kinnitust(30)
-                            continue 
-                        else:
-                            database.create_new_user(nfc_input, pinnkood) #annab funktsioonile sisse nfc uid ja sisestatud pinnkoodi ja loob uue kasutaja
-                            found, nimi = database.nime_kaeve_pintabelist(pinnkood) #kaevab pintabelist nime mis vastab pinnkoodile
-                            if found:
-                                # Clear any stale messages from previous screens
-                                Empty_reply_queue()
-                                
-                                GUI_kasutaja_registreeritud(nimi)
-                                #ootab et et kasutaja vajutaks jätka. timeoutx sekundit siis kood jätkub
-                                Oota_kasutaja_kinnitust(30)
-                                continue
-                            else:
-                                GUI_message("Jõudsid koodi osasse mida keegi näha ei tohiks, palun võta ühendust adminiga.")
-                                Oota_kasutaja_kinnitust(30)
-                                continue
-                    else:
-                        #Kui pin koodi pole andmebaasis siis kuvab veateate
-                        Empty_reply_queue()
-                        GUI_message("Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.")
-                        Oota_kasutaja_kinnitust(20)
-                        continue
+                    _register_user_from_pin(nfc_input, pinnkood)
+                    continue
 
                 #Kui kasutaja ei taha kontot regada siis loop jätkub default screeniga
                 else:
@@ -596,39 +624,18 @@ def main_loop():
             if vastus == "CANCEL":
                 pass
             else:
-                is_pin_in_pintable =  database.check_pin_code_dict(pinnkood) #kontrollib kas pin on andmebaasis
-                is_user_registered = database.is_user_registered(pinnkood) #kontrollib kas pin on juba registreeritud kasutajale
+                status = database.get_pin_status(pinnkood)
                 if _show_database_error_if_needed():
                     continue
-                if is_pin_in_pintable == True:
-                    if is_user_registered == True:
-                        logging.info("Kasutaja üritas registreerida juba registreeritud PIN-koodi.")
-                        Empty_reply_queue()
-                        GUI_message("See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt")
-                        Oota_kasutaja_kinnitust(30)
-                        continue 
-                    else:
-                        found, nimi = database.nime_kaeve_pintabelist(pinnkood) #kaevab pintabelist nime mis vastab pinnkoodile
-                        GUI_message(f"Tere, {nimi}! Viipa kiipkaarti kasutaja registreerimiseks", show_button=False)
-                        nfc_input = hardware.get_nfc()
-                        database.create_new_user(nfc_input, pinnkood) #annab funktsioonile sisse nfc uid ja sisestatud pinnkoodi ja loob uue kasutaja
-                        
-                        if found:
-                            Empty_reply_queue()                               
-                            GUI_kasutaja_registreeritud(nimi)
-                            #ootab et et kasutaja vajutaks jätka. timeout x sekundit siis kood jätkub
-                            Oota_kasutaja_kinnitust(30)
-                            continue
-                        else:
-                            GUI_message("Jõudsid koodi osasse mida keegi näha ei tohiks, palun võta ühendust adminiga.")
-                            Oota_kasutaja_kinnitust(30)
-                            continue
-                else:
-                    #Kui pin koodi pole andmebaasis siis kuvab veateate
-                    Empty_reply_queue()
-                    GUI_message("Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.")
-                    Oota_kasutaja_kinnitust(20)
+                if status['exists'] and not status['registered']:
+                    GUI_message(f"Tere, {status['name']}! Viipa kiipkaarti kasutaja registreerimiseks", show_button=False)
+                    nfc_input = hardware.get_nfc()
+                    if nfc_input is None:
+                        continue
+                    _register_user_from_pin(nfc_input, pinnkood)
                     continue
+                _register_user_from_pin(None, pinnkood)
+                continue
 
         elif valik == "ADMIN":
             GUI_message("Viipa admin kiipi", show_button=True)
@@ -646,178 +653,28 @@ def main_loop():
             # If nfc_input is None (cancelled via button), loop restarts automatically
 
 
-#Joogi väljastuse plokk
-def joogi_väljastus(nfc_input):
-    nfc_input = nfc_input
-    GUI_ukse_avamine("1")
-    time.sleep(1)  # Näita ukse avamise ekraani 4 sekundit
-
-    _require_lcd().set_backlight(True)
-
-    #Avab ukse
-    hardware.Ukse_avaja()
-
-    # Enable barcode scanning before door opens
-    logging.info("joogi_väljastus: enabling barcode scanning")
-    command_queue.put(("ENABLE_BARCODE_SCANNING", None))
-
-    # Oota kuni uks avaneb
+#Joogi väljastuse/tagastuse plokk
+def _wait_for_door_open(timeout=10):
     wait_start = time.time()
     while not hardware.is_door_open():
-        if time.time() - wait_start > 10: # 10s timeout
-            break
+        if time.time() - wait_start > timeout:
+            logging.warning("Door did not report open before timeout")
+            return False
         time.sleep(0.1)
+    return True
 
-    #poe ostukorvi vaade vmidagi. Ma ka ei tea enam
-    GUI_live_cart([])
 
-     #Siia salvestub list jookidest mis skännitakse.
+def _scan_items_until_door_closes():
     scanned_items_info = []
-    scanned_barcodes = [] #See on list triipkoodidest
-    #Kapi sisese LCD tühjendus ja sõnumi kuvamine
-    _require_lcd().clear()
-    _require_lcd().show_message("Skaneeri tooted...")
-
-    #LOOP mis käib nii kaua kuni kapi uks on lahti.
-    while hardware.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
-        barcode_to_process = None
-        try:
-            # Check for messages from GUI (non-blocking)
-            message = reply_queue.get_nowait()
-            if message == APP_EXIT:
-                raise SystemExit
-            logging.info(f"MAIN-LOOP: Got message from reply_q: {message}")
-
-            if isinstance(message, str) and message.startswith("BARCODE:"):
-                barcode_to_process = message.replace("BARCODE:", "", 1)
-
-        except queue.Empty:
-            # No message, do nothing
-            pass
-
-        if barcode_to_process:
-            logging.info(f"MAIN-LOOP: Processing as barcode: {barcode_to_process}")
-            is_in_db, drink_info = database.get_drink_info(barcode_to_process)
-
-            if is_in_db == False:
-                _require_lcd().show_message("Toodet pole nimekirjas")
-                time.sleep(1) # Show message briefly
-                _require_lcd().clear()
-                _require_lcd().show_message("Skaneeri tooted...")
-                continue # Skip to next loop iteration
-
-            # This part only runs for valid barcodes
-            scanned_barcodes.append(barcode_to_process)
-            scanned_items_info.append(drink_info)
-            GUI_live_cart(scanned_items_info)
-            print(f"DEBUG: {scanned_items_info}")
-
-            count = scanned_items_info.count(drink_info)
-            _require_lcd().show_message(f"{drink_info} X{count}")
-            time.sleep(1) # Show message briefly
-            _require_lcd().clear()
-            _require_lcd().show_message("Skaneeri tooted...")
-
-        # Väike paus, et tsükkel ei koormaks protsessorit
-        time.sleep(0.05)
-
-
-    _require_lcd().set_backlight(False)
-    # Disable barcode scanning when door closes
-    logging.info("joogi_väljastus: disabling barcode scanning")
-    command_queue.put(("DISABLE_BARCODE_SCANNING", None))
-
-    # 3. Tsükkel lõppes (Uks pandi kinni)
-    # Kood jõuab siia hetkel, kui door sensor tagastab False
-
-
-    # --- CART REVIEW LOGIC START ---
-    # 1. Map names to barcodes so we can reconstruct the list later
-    name_to_barcode = {}
-    for name, code in zip(scanned_items_info, scanned_barcodes):
-        name_to_barcode[name] = code
-
-    # 2. Send data to review screen
-    logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
-    Empty_reply_queue()
-    drink_counts = Counter(scanned_items_info)
-    command_queue.put(("CART_REVIEW", dict(drink_counts)))
-
-    # 3. Wait for user confirmation (modified counts)
-    try:
-        final_counts = _read_reply(timeout=300) # 5 min timeout
-    except queue.Empty:
-        final_counts = drink_counts
-
-    # 4. Reconstruct scanned lists based on final counts
     scanned_barcodes = []
-    scanned_items_info = []
-    if isinstance(final_counts, dict):
-        for name, count in final_counts.items():
-            if count > 0:
-                code = name_to_barcode.get(name)
-                if code:
-                    scanned_barcodes.extend([code] * count)
-                    scanned_items_info.extend([name] * count)
-    # --- CART REVIEW LOGIC END ---
-    GUI_võetud(scanned_items_info)
-    time.sleep(6)
-    # 4. Salvesta andmed andmebaasi
-    # Anna kogu 'scanned_items' list ja 'nfc_input' andmebaasile
-    database.log_user_taken_drinks(nfc_input, scanned_barcodes)
-    database.keep_stock(scanned_barcodes, "taken")
-    # Tühjenda LCD uueks kasutajaks
-    _require_lcd().clear()
 
-    # (Funktsioon lõppeb ja main_loop läheb tagasi algusesse, ootama uut NFC-d)
-    Empty_reply_queue()
-    Empty_command_queue()
-    return
-
-
-def joogi_tagastus(nfc_input):
-
-    #kasutja id
-    nfc_input = nfc_input
-
-    # Fetch unreturned drinks before opening the door
-    unreturned_drinks = database.get_unreturned_drinks(nfc_input)
-    logging.info(
-        f"joogi_tagastus: unreturned payload type={type(unreturned_drinks).__name__}, count={len(unreturned_drinks) if hasattr(unreturned_drinks, '__len__') else 'n/a'}"
-    )
-
-    GUI_ukse_avamine("2", unreturned_drinks)
-    Oota_kasutaja_kinnitust(30)
-
-    _require_lcd().set_backlight(True)
-    hardware.Ukse_avaja()
-
-    # Enable barcode scanning before door opens
-    logging.info("joogi_tagastus: enabling barcode scanning")
-    command_queue.put(("ENABLE_BARCODE_SCANNING", None))
-
-    # Oota kuni uks avaneb
-    wait_start = time.time()
-    while not hardware.is_door_open():
-        if time.time() - wait_start > 10: # 10s timeout
-            break
-        time.sleep(0.1)
-
-    #Reklaam samal ajal kui uks lahti
     GUI_live_cart([])
-
-     #Siia salvestub jookide nimikiri mis skännitakse. See on list jookdie NIMEDEST
-    scanned_items_info = []
-    scanned_barcodes = [] #See on list triipkoodidest
-    #Kapi sisese LCD tühjendus ja sõnumi kuvamine
     _require_lcd().clear()
     _require_lcd().show_message("Skaneeri tooted...")
 
-    #LOOP mis käib nii kaua kuni kapi uks on lahti.
-    while hardware.is_door_open(): #kui isdooropen tagastab True on uks lahti False siis kinni
+    while hardware.is_door_open():
         barcode_to_process = None
         try:
-            # Check for messages from GUI (non-blocking)
             message = reply_queue.get_nowait()
             if message == APP_EXIT:
                 raise SystemExit
@@ -827,7 +684,6 @@ def joogi_tagastus(nfc_input):
                 barcode_to_process = message.replace("BARCODE:", "", 1)
 
         except queue.Empty:
-            # No message, do nothing
             pass
 
         if barcode_to_process:
@@ -836,79 +692,113 @@ def joogi_tagastus(nfc_input):
 
             if is_in_db == False:
                 _require_lcd().show_message("Toodet pole nimekirjas")
-                time.sleep(1) # Show message briefly
+                time.sleep(1)
                 _require_lcd().clear()
                 _require_lcd().show_message("Skaneeri tooted...")
-                continue # Skip to next loop iteration
+                continue
 
-            # This part only runs for valid barcodes
             scanned_barcodes.append(barcode_to_process)
             scanned_items_info.append(drink_info)
             GUI_live_cart(scanned_items_info)
-            print(f"DEBUG: {scanned_items_info}")
 
             count = scanned_items_info.count(drink_info)
             _require_lcd().show_message(f"{drink_info} X{count}")
-            time.sleep(1) # Show message briefly
+            time.sleep(1)
             _require_lcd().clear()
             _require_lcd().show_message("Skaneeri tooted...")
 
-        # Väike paus, et tsükkel ei koormaks protsessorit
         time.sleep(0.05)
 
-    _require_lcd().set_backlight(False)
-    # Disable barcode scanning when door closes
-    logging.info("joogi_tagastus: disabling barcode scanning")
-    command_queue.put(("DISABLE_BARCODE_SCANNING", None))
+    return scanned_items_info, scanned_barcodes
 
-    # 3. Tsükkel lõppes (Uks pandi kinni)
-    # Kood jõuab siia hetkel, kui door sensor tagastab False
 
-    print("DEBUG: Uks suletud. Lõpetan sessiooni...---")
-
-    # --- CART REVIEW LOGIC START ---
-    # 1. Map names to barcodes
-    name_to_barcode = {}
+def _review_cart(scanned_items_info, scanned_barcodes):
+    name_to_barcodes = {}
     for name, code in zip(scanned_items_info, scanned_barcodes):
-        name_to_barcode[name] = code
+        name_to_barcodes.setdefault(name, []).append(code)
 
-    # 2. Send data to review screen
     logging.info(f"MAIN-LOOP: Final cart before review: {scanned_items_info}")
     Empty_reply_queue()
-    drink_counts = Counter(scanned_items_info)
-    command_queue.put(("CART_REVIEW", dict(drink_counts)))
+    original_counts = Counter(scanned_items_info)
+    command_queue.put(("CART_REVIEW", dict(original_counts)))
 
-    # 3. Wait for user confirmation
     try:
         final_counts = _read_reply(timeout=300)
     except queue.Empty:
-        final_counts = drink_counts
+        final_counts = original_counts
 
-    # 4. Reconstruct scanned lists
-    scanned_barcodes = []
+    if not isinstance(final_counts, dict):
+        final_counts = original_counts
+
+    final_items = []
+    final_barcodes = []
+    for name, count in final_counts.items():
+        available_codes = name_to_barcodes.get(name, [])
+        for code in available_codes[:max(0, int(count))]:
+            final_items.append(name)
+            final_barcodes.append(code)
+
+    return final_items, final_barcodes
+
+
+def _run_drink_session(nfc_input, action_type):
+    is_return = action_type == "returned"
     scanned_items_info = []
-    if isinstance(final_counts, dict):
-        for name, count in final_counts.items():
-            if count > 0:
-                code = name_to_barcode.get(name)
-                if code:
-                    scanned_barcodes.extend([code] * count)
-                    scanned_items_info.extend([name] * count)
-    # --- CART REVIEW LOGIC END ---
-    GUI_tagastatud(scanned_items_info) #Kuvab mis joogid kasutaja võttis
-    time.sleep(6)
-    # 4. Salvesta andmed andmebaasi
-    # Anna kogu 'scanned_items' list ja 'user_id' andmebaasile
-    database.log_user_returned_drinks(nfc_input, scanned_barcodes)
-    database.keep_stock(scanned_barcodes, "returned")
-    # 6. Korista ja lõpeta
+    scanned_barcodes = []
 
-    # Tühjenda LCD uueks kasutajaks
+    if is_return:
+        unreturned_drinks = database.get_unreturned_drinks(nfc_input)
+        logging.info(
+            f"joogi_tagastus: unreturned payload type={type(unreturned_drinks).__name__}, "
+            f"count={len(unreturned_drinks) if hasattr(unreturned_drinks, '__len__') else 'n/a'}"
+        )
+        GUI_ukse_avamine("2", unreturned_drinks)
+        Oota_kasutaja_kinnitust(30)
+    else:
+        GUI_ukse_avamine("1")
+        time.sleep(1)
+
+    try:
+        _require_lcd().set_backlight(True)
+        hardware.Ukse_avaja()
+
+        logging.info("drink session: enabling barcode scanning for %s", action_type)
+        command_queue.put(("ENABLE_BARCODE_SCANNING", None))
+        _wait_for_door_open()
+
+        scanned_items_info, scanned_barcodes = _scan_items_until_door_closes()
+
+    finally:
+        _require_lcd().set_backlight(False)
+        logging.info("drink session: disabling barcode scanning for %s", action_type)
+        command_queue.put(("DISABLE_BARCODE_SCANNING", None))
+
+    final_items, final_barcodes = _review_cart(scanned_items_info, scanned_barcodes)
+
+    if is_return:
+        GUI_tagastatud(final_items)
+    else:
+        GUI_võetud(final_items)
+    time.sleep(3)
+
+    if not database.record_drink_session(nfc_input, action_type, final_barcodes):
+        if _show_database_error_if_needed():
+            pass
+        else:
+            GUI_message("Tehingu salvestamine ebaõnnestus. Palun võta ühendust adminiga.")
+            Oota_kasutaja_kinnitust(15)
+
     _require_lcd().clear()
-
     Empty_reply_queue()
-    # (Funktsioon lõppeb ja taastab kontrolli main_loopile)
-    return
+    Empty_command_queue()
+
+
+def joogi_väljastus(nfc_input):
+    _run_drink_session(nfc_input, "taken")
+
+
+def joogi_tagastus(nfc_input):
+    _run_drink_session(nfc_input, "returned")
 
 
    

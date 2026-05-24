@@ -162,6 +162,7 @@ These are not part of the main application flow.
 ## UI Flow
 
 - [docs/ui_screen_flow.md](/home/skpi/Sinine-kapp/Sinine-kapp/docs/ui_screen_flow.md) maps the current touchscreen paths with Mermaid diagrams.
+- [docs/ui_architecture.md](/home/skpi/Sinine-kapp/Sinine-kapp/docs/ui_architecture.md) explains the reusable UI helpers and preferred screen pattern.
 
 ## Current Direction
 

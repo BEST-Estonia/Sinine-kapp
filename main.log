@@ -676,3 +676,100 @@
 2026-05-24 20:11:17,421 - INFO - drawer DEFAULT uploaded tagasi
 2026-05-24 20:11:17,642 - INFO - Sent 'kuva_default_screen' command to GUI
 2026-05-24 20:11:17,643 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:19,573 - INFO - Received signal 2, shutting down application
+2026-05-24 20:29:19,574 - INFO - Received signal 2, shutting down application
+2026-05-24 20:29:22,713 - INFO - (DB Handler) Loaded environment values from /home/skpi/Sinine-kapp/Sinine-kapp/.env (overwrite=True)
+2026-05-24 20:29:22,713 - INFO - (DB Handler) Using MySQL backend target: sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:29:22,714 - WARNING - (DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.
+2026-05-24 20:29:22,845 - INFO - STARTUP CHECK: database connection OK - pymysql connected to sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:29:23,896 - INFO - Touchscreen display env: DISPLAY=:0 XAUTHORITY=/home/skpi/.Xauthority XDG_RUNTIME_DIR=/run/user/1000
+2026-05-24 20:29:23,897 - INFO - Door sensor initialized successfully on GPIO 21
+2026-05-24 20:29:23,898 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:24,364 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:26,152 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:29:26,897 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:29:26,917 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:26,921 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:28,052 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:29:28,054 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:28,057 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:28,668 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-05-24 20:29:28,669 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:29:29,343 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:29,347 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:31,074 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:29:31,078 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:31,080 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:32,000 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-05-24 20:29:32,000 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-05-24 20:29:32,789 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:32,790 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:34,928 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-05-24 20:29:34,929 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:29:36,401 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:36,403 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:29:36,855 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:29:37,240 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:29:37,391 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:29:37,392 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:18,705 - INFO - Received signal 2, shutting down application
+2026-05-24 20:30:18,705 - INFO - Received signal 2, shutting down application
+2026-05-24 20:30:21,094 - INFO - (DB Handler) Loaded environment values from /home/skpi/Sinine-kapp/Sinine-kapp/.env (overwrite=True)
+2026-05-24 20:30:21,094 - INFO - (DB Handler) Using MySQL backend target: sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:30:21,095 - WARNING - (DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.
+2026-05-24 20:30:21,171 - INFO - STARTUP CHECK: database connection OK - pymysql connected to sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:30:22,222 - INFO - Touchscreen display env: DISPLAY=:0 XAUTHORITY=/home/skpi/.Xauthority XDG_RUNTIME_DIR=/run/user/1000
+2026-05-24 20:30:22,223 - INFO - Door sensor initialized successfully on GPIO 21
+2026-05-24 20:30:22,224 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:22,685 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:25,345 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:30:25,883 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:30:26,027 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:26,031 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:26,470 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-05-24 20:30:26,470 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:30:27,151 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:27,155 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:28,779 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:30:28,781 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:28,784 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:30,370 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:30:31,126 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:30:31,246 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:31,250 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:33,352 - INFO - Router received: UUE_KONTO_REGAMINE_PINNKOODIGA with payload: None
+2026-05-24 20:30:33,353 - INFO - UUE_KONTO_REGAMINE_PINNKOODIGA command received
+2026-05-24 20:30:34,045 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:34,047 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:34,914 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:30:35,475 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:30:35,553 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:35,556 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:30:36,204 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:30:38,971 - INFO - Router received: REGISTREERIMINE with payload: None
+2026-05-24 20:30:38,972 - INFO - REGISTREERIMINE command received - switching to REGISTREERIMINE screen
+2026-05-24 20:30:45,861 - ERROR - (DB Handler) get_pin_status: Error: (1146, "Table 'laravel.Pintable' doesn't exist")
+2026-05-24 20:30:45,863 - INFO - Router received: MESSAGE with payload: ('Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.', True)
+2026-05-24 20:30:45,864 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:30:47,155 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:30:47,158 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:37:51,475 - INFO - Received signal 2, shutting down application
+2026-05-24 20:37:51,476 - INFO - Received signal 2, shutting down application
+2026-05-24 20:37:54,637 - INFO - (DB Handler) Loaded environment values from /home/skpi/Sinine-kapp/Sinine-kapp/.env (overwrite=True)
+2026-05-24 20:37:54,637 - INFO - (DB Handler) Using MySQL backend target: sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:37:54,637 - WARNING - (DB Handler) mysql-connector-python is not installed, trying pymysql fallback driver.
+2026-05-24 20:37:54,730 - INFO - STARTUP CHECK: database connection OK - pymysql connected to sinine_pi@192.168.88.154:3307/laravel
+2026-05-24 20:37:55,787 - INFO - Touchscreen display env: DISPLAY=:0 XAUTHORITY=/home/skpi/.Xauthority XDG_RUNTIME_DIR=/run/user/1000
+2026-05-24 20:37:55,788 - INFO - Door sensor initialized successfully on GPIO 21
+2026-05-24 20:37:55,789 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:37:56,305 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:46:01,626 - INFO - SAADAN LOGI_SISSE KÄSU
+2026-05-24 20:46:02,776 - INFO - drawer DEFAULT uploaded tagasi
+2026-05-24 20:46:02,897 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:46:02,898 - INFO - Router received: DEFAULT with payload: None
+2026-05-24 20:46:03,299 - INFO - Router received: MESSAGE with payload: ('Viipa admin kiipi', True)
+2026-05-24 20:46:03,299 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:46:06,071 - INFO - Router received: MESSAGE with payload: ('Vale kaart', True)
+2026-05-24 20:46:06,071 - INFO - MESSAGE command received - switching to MESSAGE screen
+2026-05-24 20:46:09,071 - INFO - Sent 'kuva_default_screen' command to GUI
+2026-05-24 20:46:09,073 - INFO - Router received: DEFAULT with payload: None

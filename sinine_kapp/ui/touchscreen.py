@@ -12,7 +12,16 @@ import logging
 import queue
 from PIL import Image, ImageSequence
 from ..paths import ASSETS_DIR
-from .components import Button, get_event_pos, is_press_event
+from .components import (
+    BaseScreen,
+    Button,
+    draw_count_list,
+    get_event_pos,
+    is_press_event,
+    render_centered,
+    render_at,
+    wrap_text,
+)
 from .styles import FontManager, Colors
 
 
@@ -47,11 +56,10 @@ def _configure_display_environment():
     )
 
 
-class VALIKUVAADE:
+class VALIKUVAADE(BaseScreen):
     def __init__(self, nimi, fonts):
-        
-        self.buttons = []
-        self.fonts = fonts
+        super().__init__(fonts)
+        self.background = Colors.DARK_BG
         
         self.name_line = f"Tere {nimi}"
         self.question_line = "Tahad jooki võtta või tagasi tuua?"
@@ -67,92 +75,38 @@ class VALIKUVAADE:
         self.buttons.append(btn_cancel)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        self.fill(screen)
         
-        # Render greeting on two lines
-        line1_surf = self.fonts.header.render(self.name_line, True, Colors.TEXT_PRIMARY)
-        line1_rect = line1_surf.get_rect(center=(512, 130))
-        screen.blit(line1_surf, line1_rect)
-        
-        line2_surf = self.fonts.body.render(self.question_line, True, Colors.TEXT_PRIMARY)
-        line2_rect = line2_surf.get_rect(center=(512, 200))
-        screen.blit(line2_surf, line2_rect)
-        
-        for btn in self.buttons:
-            btn.draw(screen)
-        
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        render_centered(screen, self.fonts.header, self.name_line, (512, 130))
+        render_centered(screen, self.fonts.body, self.question_line, (512, 200))
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
-    def handle_input(self, event):
-        for btn in self.buttons:
-            res = btn.check_input(event)
-            if res is not None: return res
-        return None
-
-class VÄLJASTATUD_JOOGID:
+class VÄLJASTATUD_JOOGID(BaseScreen):
     def __init__(self, payload_data, fonts):
-        self.fonts = fonts
+        super().__init__(fonts)
         # payload_data is expected to be a dict: {"Drink Name": count, ...}
         self.items = payload_data if isinstance(payload_data, dict) else {}
 
         # Create a confirm button (placeholder for future functionality)
-        self.buttons = []
         btn = Button(412, 650, 200, 60, "Kinnita", fonts.body, Colors.GREEN, True)
         self.buttons.append(btn)
 
     def draw(self, screen):
-        screen.fill(Colors.BACKGROUND)
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, "Väljastatud joogid", (512, 50))
+        draw_count_list(screen, self.fonts, self.items, empty_text="Ühtegi toodet ei leitud")
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
-        # Title
-        title_surf = self.fonts.header.render("Väljastatud joogid", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
-        screen.blit(title_surf, title_rect)
-
-        # List items
-        start_y = 150
-        line_h = 38
-        if not self.items:
-            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
-        else:
-            x_name = 100
-            x_count = 850
-            for i, (name, count) in enumerate(self.items.items()):
-                y = start_y + i * line_h
-                # Limit drawing to screen height
-                if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
-                    break
-                name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
-                count_surf = self.fonts.body.render(f"x{count}", True, Colors.TEXT_PRIMARY)
-                screen.blit(name_surf, (x_name, y))
-                screen.blit(count_surf, (x_count, y))
-
-        # Draw buttons
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
-
-    def handle_input(self, event):
-        # Let buttons process hover/clicks
-        for btn in self.buttons:
-            result = btn.check_input(event)
-            if result:
-                return result
-        return None
-
-class UKSE_AVAMINE_TAGASTAMINE:
+class UKSE_AVAMINE_TAGASTAMINE(BaseScreen):
     def __init__(self, payload_data, fonts):
         """
         Kuvatakse mis jooke kasutaja peab tagastama.
         payload_data is a list of tuples: [(productname, barcode, date_taken), ...]
         Groups drinks by product name and counts them.
         """
-        self.fonts = fonts
+        super().__init__(fonts)
         self.drink_counts = {}  # Will store {"drink_name": count}
 
         # Accept both list and tuple payloads (different DB drivers may return either).
@@ -174,98 +128,47 @@ class UKSE_AVAMINE_TAGASTAMINE:
                 self.drink_counts[product_name] = 1
         
         # Create continue button
-        self.buttons = []
         btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
         self.buttons.append(btn)
     
     def draw(self, screen):
-        screen.fill(Colors.BACKGROUND)
-        
-        # Title
-        title_surf = self.fonts.header.render("Tagastamist ootavad joogid:", True, Colors.YELLOW)
-        title_rect = title_surf.get_rect(center=(512, 50))
-        screen.blit(title_surf, title_rect)
-        
-        # List items
-        start_y = 150
-        line_h = 50
-        
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, "Tagastamist ootavad joogid:", (512, 50), Colors.YELLOW)
+
         if not self.drink_counts:
-            empty_surf = self.fonts.body.render("Ühtegi toodet ei leitud", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
+            render_at(screen, self.fonts.body, "Ühtegi toodet ei leitud", (100, 150), Colors.GREY)
         else:
             for i, (drink_name, count) in enumerate(self.drink_counts.items()):
-                y = start_y + i * line_h
-                # Limit drawing to screen height
+                y = 150 + i * 50
                 if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
+                    render_at(screen, self.fonts.small, "... rohkem tooteid", (100, y), Colors.GREY)
                     break
-                
-                # Format: "Drink Name 6X" (show count with X)
-                if count > 1:
-                    display_text = f"{drink_name} {count}X"
-                else:
-                    display_text = drink_name
-                
-                drink_surf = self.fonts.body.render(display_text, True, Colors.TEXT_PRIMARY)
-                screen.blit(drink_surf, (100, y))
-        
-        # Draw buttons
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
-    
-    def handle_input(self, event):
-        # Let buttons process hover/clicks
-        for btn in self.buttons:
-            result = btn.check_input(event)
-            if result:
-                return result
-        return None
 
-class KASUTAJA_REGISTREERITUD:
+                display_text = f"{drink_name} {count}X" if count > 1 else drink_name
+                render_at(screen, self.fonts.body, display_text, (100, y))
+
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
+
+class KASUTAJA_REGISTREERITUD(BaseScreen):
     def __init__(self, nimi, fonts):
         """
         Kinitiab et (nimi) on edukalt registreeritud. ja retruneb True kui kasutaja vajutab jätka nuppu
         """
+        super().__init__(fonts)
+        self.background = Colors.DARK_BG
         self.nimi = nimi
-        self.fonts = fonts
         
         # Create continue button
         btn_continue = Button(412, 550, 200, 80, "Jätka", fonts.body, Colors.GREEN, True)
         self.buttons = [btn_continue]
     
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
-        
-        # Success message - split into two lines
-        line1 = f"Kasutaja {self.nimi}"
-        line2 = f" on edukalt registreeritud."
-        
-        line1_surf = self.fonts.header.render(line1, True, Colors.GREEN)
-        line1_rect = line1_surf.get_rect(center=(512, 200))
-        screen.blit(line1_surf, line1_rect)
-        
-        line2_surf = self.fonts.header.render(line2, True, Colors.GREEN)
-        line2_rect = line2_surf.get_rect(center=(512, 260))
-        screen.blit(line2_surf, line2_rect)
-        
-        # Draw continue button
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
-    
-    def handle_input(self, event):
-        for btn in self.buttons:
-            result = btn.check_input(event)
-            if result:
-                return True  # Return True when button pressed
-        return None
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, f"Kasutaja {self.nimi}", (512, 200), Colors.GREEN)
+        render_centered(screen, self.fonts.header, " on edukalt registreeritud.", (512, 260), Colors.GREEN)
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
 class DEFAULT_SCREEN:
     def __init__(self, fonts):
@@ -608,9 +511,10 @@ class REGISTREERIMINE:
         
         return None
 
-class MESSAGE:
+class MESSAGE(BaseScreen):
     def __init__(self, payload, fonts):
-        self.fonts = fonts
+        super().__init__(fonts)
+        self.background = Colors.DARK_BG
         
         if isinstance(payload, tuple):
             self.text = str(payload[0]) if payload[0] else ""
@@ -619,109 +523,49 @@ class MESSAGE:
             self.text = str(payload) if payload else ""
             show_button = True
         
-        self.buttons = []
         if show_button:
             # Button returns True (boolean) which will be put in reply_queue
             btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
             self.buttons.append(btn)
         
         # Wrap text to fit screen width (900px safe area)
-        self.lines = self._wrap_text(self.text, self.fonts.body, 900)
-
-    def _wrap_text(self, text, font, max_width):
-        words = text.split(' ')
-        lines = []
-        current_line = []
-        for word in words:
-            test_line = ' '.join(current_line + [word])
-            w, h = font.size(test_line)
-            if w < max_width:
-                current_line.append(word)
-            else:
-                if current_line:
-                    lines.append(' '.join(current_line))
-                current_line = [word]
-        if current_line:
-            lines.append(' '.join(current_line))
-        return lines
+        self.lines = wrap_text(self.text, self.fonts.body, 900)
 
     def draw(self, screen):
-        screen.fill(Colors.DARK_BG)
+        self.fill(screen)
         
         # Draw text lines centered
         start_y = 200
         line_h = 40
         for i, line in enumerate(self.lines):
-            surf = self.fonts.body.render(line, True, Colors.TEXT_PRIMARY)
-            rect = surf.get_rect(center=(512, start_y + i * line_h))
-            screen.blit(surf, rect)
+            render_centered(screen, self.fonts.body, line, (512, start_y + i * line_h))
         
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
-    def handle_input(self, event):
-        for btn in self.buttons:
-            res = btn.check_input(event)
-            if res: return res
-        return None
-
-class TAGASTATUD_JOOGID:
+class TAGASTATUD_JOOGID(BaseScreen):
     def __init__(self, payload_data, fonts):
-        self.fonts = fonts
+        super().__init__(fonts)
         # payload_data is expected to be a dict: {"Drink Name": count, ...}
         self.items = payload_data if isinstance(payload_data, dict) else {}
 
         # Create a continue button
-        self.buttons = []
         btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
         self.buttons.append(btn)
 
     def draw(self, screen):
-        screen.fill(Colors.BACKGROUND)
-
-        # Title
-        title_surf = self.fonts.header.render("Tagastasid:", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
-        screen.blit(title_surf, title_rect)
-
-        # List items
-        start_y = 150
-        line_h = 38
-        if not self.items:
-            empty_surf = self.fonts.body.render("Ei tuvastatud tagastusi", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
-        else:
-            x_name = 100
-            x_count = 850
-            for i, (name, count) in enumerate(self.items.items()):
-                y = start_y + i * line_h
-                # Limit drawing to screen height
-                if y > 600:
-                    more_surf = self.fonts.small.render("... rohkem tooteid", True, Colors.GREY)
-                    screen.blit(more_surf, (100, y))
-                    break
-                name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
-                count_surf = self.fonts.body.render(f"{count}x", True, Colors.TEXT_PRIMARY)
-                screen.blit(name_surf, (x_name, y))
-                screen.blit(count_surf, (x_count, y))
-
-        # Draw buttons
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
-
-    def handle_input(self, event):
-        # Let buttons process hover/clicks
-        for btn in self.buttons:
-            result = btn.check_input(event)
-            if result:
-                return result
-        return None
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, "Tagastasid:", (512, 50))
+        draw_count_list(
+            screen,
+            self.fonts,
+            self.items,
+            empty_text="Ei tuvastatud tagastusi",
+            count_prefix='',
+            count_suffix='x',
+        )
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
 class KONTOHALDUS:
     def __init__(self, payload, fonts):
@@ -1214,50 +1058,29 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
         
         return None
 
-class LIVE_CART:
+class LIVE_CART(BaseScreen):
     def __init__(self, payload_data, fonts):
-        self.fonts = fonts
+        super().__init__(fonts)
         # payload_data is expected to be a dict: {"Drink Name": count, ...}
         self.items = payload_data if isinstance(payload_data, dict) else {}
-        self.buttons = []
 
     def draw(self, screen):
-        screen.fill(Colors.BACKGROUND)
-        
-        # Title
-        title_surf = self.fonts.header.render("Hetkel skaneeritud:", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
-        screen.blit(title_surf, title_rect)
-        
-        # List items
-        start_y = 150
-        line_h = 38
-        if not self.items:
-            empty_surf = self.fonts.body.render("Skaneeri tooteid...", True, Colors.GREY)
-            screen.blit(empty_surf, (100, start_y))
-        else:
-            x_name = 100
-            x_count = 850
-            for i, (name, count) in enumerate(self.items.items()):
-                y = start_y + i * line_h
-                if y > 700: break
-                name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
-                count_surf = self.fonts.body.render(f"x{count}", True, Colors.TEXT_PRIMARY)
-                screen.blit(name_surf, (x_name, y))
-                screen.blit(count_surf, (x_count, y))
-                
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, "Hetkel skaneeritud:", (512, 50))
+        draw_count_list(
+            screen,
+            self.fonts,
+            self.items,
+            empty_text="Skaneeri tooteid...",
+            max_y=700,
+        )
+        self.draw_debug_name(screen)
 
-    def handle_input(self, event):
-        return None
-
-class CART_REVIEW:
+class CART_REVIEW(BaseScreen):
     def __init__(self, payload_data, fonts):
-        self.fonts = fonts
+        super().__init__(fonts)
         # payload_data: {"Drink Name": count, ...}
         self.items = payload_data if isinstance(payload_data, dict) else {}
-        self.buttons = []
         self._create_ui()
 
     def _create_ui(self):
@@ -1283,11 +1106,8 @@ class CART_REVIEW:
             self.buttons.append(btn_plus)
 
     def draw(self, screen):
-        screen.fill(Colors.BACKGROUND)
-        
-        title_surf = self.fonts.header.render("Kontrolli koguseid", True, Colors.TEXT_PRIMARY)
-        title_rect = title_surf.get_rect(center=(512, 50))
-        screen.blit(title_surf, title_rect)
+        self.fill(screen)
+        render_centered(screen, self.fonts.header, "Kontrolli koguseid", (512, 50))
         
         start_y = 150
         line_h = 50
@@ -1296,17 +1116,11 @@ class CART_REVIEW:
             y = start_y + i * line_h
             if y > 650: break
             
-            name_surf = self.fonts.body.render(str(name), True, Colors.TEXT_PRIMARY)
-            screen.blit(name_surf, (100, y + 5)) 
-            
-            count_surf = self.fonts.body.render(str(count), True, Colors.TEXT_PRIMARY)
-            screen.blit(count_surf, (670, y + 5))
+            render_at(screen, self.fonts.body, name, (100, y + 5))
+            render_at(screen, self.fonts.body, count, (670, y + 5))
 
-        for btn in self.buttons:
-            btn.draw(screen)
-            
-        debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
-        screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+        self.draw_buttons(screen)
+        self.draw_debug_name(screen)
 
     def handle_input(self, event):
         for btn in self.buttons:

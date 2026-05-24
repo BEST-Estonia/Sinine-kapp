@@ -262,6 +262,47 @@ def _get_product_name(cursor, barcode: Any) -> str | None:
     return str(row[0])
 
 
+def _normalize_pin(pinnkood):
+    try:
+        return int(pinnkood)
+    except (ValueError, TypeError):
+        return pinnkood
+
+
+def get_pin_status(pinnkood):
+    """
+    Returns details for a PIN from Pintable.
+
+    Shape:
+    - {'exists': False, 'registered': False, 'name': None}
+    - {'exists': True, 'registered': bool, 'name': '...'}
+    """
+    conn = None
+
+    try:
+        pin_val = _normalize_pin(pinnkood)
+        conn = _connect()
+        cursor = conn.cursor()
+        row = _fetchone(
+            cursor,
+            'SELECT nimi, isregistered FROM `Pintable` WHERE pinnkood = ?',
+            (pin_val,),
+        )
+
+        if not row:
+            return {'exists': False, 'registered': False, 'name': None}
+
+        return {'exists': True, 'registered': bool(row[1]), 'name': str(row[0])}
+
+    except Exception as e:
+        logging.error(f'(DB Handler) get_pin_status: Error: {e}')
+        return {'exists': False, 'registered': False, 'name': None}
+
+    finally:
+        if conn:
+            conn.close()
+
+
 def checkuser(UID):
     """
     Checks if user exists by nfcid.
@@ -316,87 +357,12 @@ def get_drink_info(barcode):
 
 def log_user_returned_drinks(nfc_input, list_of_barcodes):
     """
-    Logs returned products for a user.
+    Compatibility wrapper for older callers.
 
-    For each barcode:
-    - If an open (unreturned) transaction exists, set date_returned.
-    - Otherwise insert a new transaction with date_taken = NULL.
-
-    Returns True on success, False on failure.
+    Returns are now recorded through record_drink_session(), which refuses to
+    accept a returned barcode unless the user has a matching open transaction.
     """
-    conn = None
-
-    try:
-        conn = _connect()
-        cursor = conn.cursor()
-        _execute(cursor, 'BEGIN')
-
-        user_id = _get_user_id(cursor, nfc_input)
-        if user_id is None:
-            logging.error(
-                f'(DB Handler) log_user_returned_drinks: User not found with NFC ID {nfc_input}'
-            )
-            _rollback_safely(conn)
-            return False
-
-        date_returned_str = _now_sql_timestamp()
-
-        for barcode in list_of_barcodes:
-            row = _fetchone(
-                cursor,
-                '''
-                SELECT rental_id
-                FROM `Transactions`
-                WHERE userid = ? AND barcode = ? AND date_returned IS NULL
-                ORDER BY date_taken ASC
-                LIMIT 1
-                ''',
-                (user_id, str(barcode)),
-            )
-
-            if row:
-                rental_id = int(row[0])
-                _execute(
-                    cursor,
-                    'UPDATE `Transactions` SET date_returned = ? WHERE rental_id = ?',
-                    (date_returned_str, rental_id),
-                )
-                continue
-
-            product_name = _get_product_name(cursor, barcode)
-            if not product_name:
-                logging.warning(
-                    f'(DB Handler) log_user_returned_drinks: Product not found with barcode {barcode}. '
-                    'Aborting transaction.'
-                )
-                _rollback_safely(conn)
-                return False
-
-            _execute(
-                cursor,
-                '''
-                INSERT INTO `Transactions` (userid, productname, date_taken, date_returned, barcode)
-                VALUES (?, ?, NULL, ?, ?)
-                ''',
-                (user_id, product_name, date_returned_str, str(barcode)),
-            )
-
-        conn.commit()
-        logging.info(
-            f'(DB Handler) log_user_returned_drinks: Successfully processed {len(list_of_barcodes)} '
-            f'returned items for user {user_id} ({nfc_input})'
-        )
-        return True
-
-    except Exception as e:
-        logging.error(f'(DB Handler) log_user_returned_drinks: Error: {e}')
-        if conn:
-            _rollback_safely(conn)
-        return False
-
-    finally:
-        if conn:
-            conn.close()
+    return record_drink_session(nfc_input, 'returned', list_of_barcodes)
 
 
 def create_new_user(nfc_input, pinnkood):
@@ -408,10 +374,7 @@ def create_new_user(nfc_input, pinnkood):
     conn = None
 
     try:
-        try:
-            pin_val = int(pinnkood)
-        except (ValueError, TypeError):
-            pin_val = pinnkood
+        pin_val = _normalize_pin(pinnkood)
 
         conn = _connect()
         cursor = conn.cursor()
@@ -448,62 +411,12 @@ def create_new_user(nfc_input, pinnkood):
 
 def log_user_taken_drinks(nfc_input, list_of_barcodes):
     """
-    Logs taken products for a user (date_taken set, date_returned NULL).
+    Compatibility wrapper for older callers.
 
-    Returns True on success, False on failure.
+    Takes are now recorded through record_drink_session() so transaction rows
+    and stock updates commit together.
     """
-    conn = None
-
-    try:
-        conn = _connect()
-        cursor = conn.cursor()
-        _execute(cursor, 'BEGIN')
-
-        user_id = _get_user_id(cursor, nfc_input)
-        if user_id is None:
-            logging.error(
-                f'(DB Handler) log_user_taken_drinks: User not found with NFC ID {nfc_input}'
-            )
-            _rollback_safely(conn)
-            return False
-
-        date_taken_str = _now_sql_timestamp()
-
-        for barcode in list_of_barcodes:
-            product_name = _get_product_name(cursor, barcode)
-            if not product_name:
-                logging.warning(
-                    f'(DB Handler) log_user_taken_drinks: Product not found with barcode {barcode}. '
-                    'Aborting transaction.'
-                )
-                _rollback_safely(conn)
-                return False
-
-            _execute(
-                cursor,
-                '''
-                INSERT INTO `Transactions` (userid, productname, date_taken, date_returned, barcode)
-                VALUES (?, ?, ?, NULL, ?)
-                ''',
-                (user_id, product_name, date_taken_str, str(barcode)),
-            )
-
-        conn.commit()
-        logging.info(
-            f'(DB Handler) log_user_taken_drinks: Successfully logged {len(list_of_barcodes)} '
-            f'taken items for user {user_id} ({nfc_input})'
-        )
-        return True
-
-    except Exception as e:
-        logging.error(f'(DB Handler) log_user_taken_drinks: Error: {e}')
-        if conn:
-            _rollback_safely(conn)
-        return False
-
-    finally:
-        if conn:
-            conn.close()
+    return record_drink_session(nfc_input, 'taken', list_of_barcodes)
 
 
 def check_pin_code_dict(pinnkood):
@@ -513,9 +426,10 @@ def check_pin_code_dict(pinnkood):
     conn = None
 
     try:
+        pin_val = _normalize_pin(pinnkood)
         conn = _connect()
         cursor = conn.cursor()
-        row = _fetchone(cursor, 'SELECT pinnkood FROM `Pintable` WHERE pinnkood = ?', (pinnkood,))
+        row = _fetchone(cursor, 'SELECT pinnkood FROM `Pintable` WHERE pinnkood = ?', (pin_val,))
         return bool(row)
 
     except Exception as e:
@@ -534,10 +448,7 @@ def is_user_registered(pinnkood):
     conn = None
 
     try:
-        try:
-            pin_val = int(pinnkood)
-        except (ValueError, TypeError):
-            pin_val = pinnkood
+        pin_val = _normalize_pin(pinnkood)
 
         conn = _connect()
         cursor = conn.cursor()
@@ -566,9 +477,10 @@ def nime_kaeve_pintabelist(pinnkood):
     conn = None
 
     try:
+        pin_val = _normalize_pin(pinnkood)
         conn = _connect()
         cursor = conn.cursor()
-        row = _fetchone(cursor, 'SELECT nimi FROM `Pintable` WHERE pinnkood = ?', (pinnkood,))
+        row = _fetchone(cursor, 'SELECT nimi FROM `Pintable` WHERE pinnkood = ?', (pin_val,))
 
         if row:
             return True, str(row[0])
@@ -690,6 +602,124 @@ def keep_stock(scanned_barcodes, action_type):
             conn.close()
 
 
+def record_drink_session(nfc_input, action_type, scanned_barcodes):
+    """
+    Atomically records a full drink session and stock update.
+
+    action_type:
+    - 'taken': insert open transactions and decrement stock.
+    - 'returned': close existing open transactions and increment stock.
+
+    Returns True only when all transaction rows and all stock updates commit
+    together. On any failure, nothing is written.
+    """
+    conn = None
+
+    if action_type == 'taken':
+        stock_adjustment = -1
+    elif action_type == 'returned':
+        stock_adjustment = 1
+    else:
+        logging.error(
+            f"(DB Handler) record_drink_session: Invalid action_type '{action_type}'."
+        )
+        return False
+
+    if not scanned_barcodes:
+        logging.info('(DB Handler) record_drink_session: No items to record.')
+        return True
+
+    try:
+        conn = _connect()
+        cursor = conn.cursor()
+        _execute(cursor, 'BEGIN')
+
+        user_id = _get_user_id(cursor, nfc_input)
+        if user_id is None:
+            logging.error(
+                f'(DB Handler) record_drink_session: User not found with NFC ID {nfc_input}'
+            )
+            _rollback_safely(conn)
+            return False
+
+        timestamp = _now_sql_timestamp()
+
+        for barcode in scanned_barcodes:
+            barcode = str(barcode)
+            product_name = _get_product_name(cursor, barcode)
+            if not product_name:
+                logging.warning(
+                    f'(DB Handler) record_drink_session: Product not found with barcode {barcode}.'
+                )
+                _rollback_safely(conn)
+                return False
+
+            if action_type == 'taken':
+                _execute(
+                    cursor,
+                    '''
+                    INSERT INTO `Transactions` (userid, productname, date_taken, date_returned, barcode)
+                    VALUES (?, ?, ?, NULL, ?)
+                    ''',
+                    (user_id, product_name, timestamp, barcode),
+                )
+            else:
+                row = _fetchone(
+                    cursor,
+                    '''
+                    SELECT rental_id
+                    FROM `Transactions`
+                    WHERE userid = ? AND barcode = ? AND date_returned IS NULL
+                    ORDER BY date_taken ASC
+                    LIMIT 1
+                    ''',
+                    (user_id, barcode),
+                )
+
+                if not row:
+                    logging.warning(
+                        f'(DB Handler) record_drink_session: User {user_id} attempted to return '
+                        f'barcode {barcode} without an open transaction.'
+                    )
+                    _rollback_safely(conn)
+                    return False
+
+                _execute(
+                    cursor,
+                    'UPDATE `Transactions` SET date_returned = ? WHERE rental_id = ?',
+                    (timestamp, int(row[0])),
+                )
+
+            _execute(
+                cursor,
+                'UPDATE `Products` SET stock = COALESCE(stock, 0) + ? WHERE barcode = ?',
+                (stock_adjustment, barcode),
+            )
+            if cursor.rowcount == 0:
+                logging.warning(
+                    f'(DB Handler) record_drink_session: Stock row not found for barcode {barcode}.'
+                )
+                _rollback_safely(conn)
+                return False
+
+        conn.commit()
+        logging.info(
+            f'(DB Handler) record_drink_session: Committed {len(scanned_barcodes)} '
+            f'items for user {user_id}. Action: {action_type}'
+        )
+        return True
+
+    except Exception as e:
+        logging.error(f'(DB Handler) record_drink_session: Error: {e}')
+        if conn:
+            _rollback_safely(conn)
+        return False
+
+    finally:
+        if conn:
+            conn.close()
+
+
 def update_user_nfc(nfc_input, nfc_uus):
     """
     Replaces a user's old NFC id with a new NFC id.
@@ -774,12 +804,82 @@ def register_new_card(uus_nfc, nimi):
             conn.close()
 
 
+def register_new_card_by_pin(uus_nfc, pinnkood):
+    """
+    Assigns a replacement card for the registered user represented by a PIN.
+
+    The legacy schema links Pintable to users by name, so this function refuses
+    to update when the name is missing or ambiguous instead of silently changing
+    multiple users with the same name.
+    """
+    conn = None
+
+    try:
+        pin_val = _normalize_pin(pinnkood)
+        conn = _connect()
+        cursor = conn.cursor()
+
+        pin_row = _fetchone(
+            cursor,
+            'SELECT nimi, isregistered FROM `Pintable` WHERE pinnkood = ?',
+            (pin_val,),
+        )
+        if not pin_row:
+            logging.warning(f'(DB Handler) register_new_card_by_pin: PIN not found: {pinnkood}')
+            return False, None
+
+        name = str(pin_row[0])
+        if not bool(pin_row[1]):
+            logging.warning(
+                f'(DB Handler) register_new_card_by_pin: PIN {pinnkood} is not registered yet.'
+            )
+            return False, name
+
+        existing = _fetchone(cursor, 'SELECT userid FROM `users` WHERE nfcid = ?', (str(uus_nfc),))
+        if existing:
+            logging.warning(
+                f'(DB Handler) register_new_card_by_pin: NFC ID {uus_nfc} is already in use.'
+            )
+            return False, name
+
+        matches = _fetchall(cursor, 'SELECT userid FROM `users` WHERE name = ?', (name,))
+        if len(matches) != 1:
+            logging.error(
+                f'(DB Handler) register_new_card_by_pin: Expected exactly one user named {name}, '
+                f'found {len(matches)}.'
+            )
+            return False, name
+
+        user_id = int(matches[0][0])
+        _execute(cursor, 'UPDATE `users` SET nfcid = ? WHERE userid = ?', (str(uus_nfc), user_id))
+        conn.commit()
+        logging.info(
+            f'(DB Handler) register_new_card_by_pin: Assigned new NFC {uus_nfc} to user {user_id} ({name})'
+        )
+        return True, name
+
+    except Exception as e:
+        logging.error(f'(DB Handler) register_new_card_by_pin: Error: {e}')
+        if conn:
+            _rollback_safely(conn)
+        return False, None
+
+    finally:
+        if conn:
+            conn.close()
+
+
 def add_product(name, barcode):
     conn = None
 
     try:
         conn = _connect()
         cursor = conn.cursor()
+        existing = _fetchone(cursor, 'SELECT productid FROM `Products` WHERE barcode = ?', (str(barcode),))
+        if existing:
+            logging.warning(f'(DB Handler) add_product: Barcode already exists: {barcode}')
+            return False
+
         _execute(
             cursor,
             'INSERT INTO `Products` (barcode, name, stock, weight) VALUES (?, ?, ?, ?)',
@@ -821,6 +921,7 @@ def remove_product(product_id):
         cursor = conn.cursor()
         _execute(cursor, 'DELETE FROM `Products` WHERE productid = ?', (product_id,))
         conn.commit()
+        return cursor.rowcount > 0
 
     finally:
         conn.close()

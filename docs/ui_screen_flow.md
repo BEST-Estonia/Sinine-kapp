@@ -82,6 +82,8 @@ flowchart TD
 
 ## Drink Take Flow
 
+Drink take sessions are committed as one database transaction: transaction rows and product stock update together, or neither is saved.
+
 ```mermaid
 flowchart TD
     Start[[joogi_valjastus]]
@@ -104,6 +106,8 @@ flowchart TD
 ```
 
 ## Drink Return Flow
+
+Drink return sessions are also committed atomically. A returned barcode must match an open, unreturned transaction for that user; otherwise the return is rejected instead of creating a return-only record.
 
 ```mermaid
 flowchart TD

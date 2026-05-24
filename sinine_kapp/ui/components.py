@@ -3,6 +3,9 @@ import pygame
 from .styles import Colors
 
 USE_FINGER_EVENTS = False
+SHOW_SCREEN_NAME = True
+SCREEN_WIDTH = 1024
+SCREEN_HEIGHT = 768
 
 
 def _touch_event_to_screen_pos(event):
@@ -67,3 +70,108 @@ class Button:
             if self.rect.collidepoint(pos):
                 return self.command_id
         return None
+
+
+def render_centered(screen, font, text, center, color=Colors.TEXT_PRIMARY):
+    surface = font.render(str(text), True, color)
+    screen.blit(surface, surface.get_rect(center=center))
+    return surface
+
+
+def render_at(screen, font, text, position, color=Colors.TEXT_PRIMARY):
+    surface = font.render(str(text), True, color)
+    screen.blit(surface, position)
+    return surface
+
+
+def wrap_text(text, font, max_width):
+    words = str(text).split()
+    lines = []
+    current_line = []
+
+    for word in words:
+        test_line = ' '.join(current_line + [word])
+        if font.size(test_line)[0] < max_width:
+            current_line.append(word)
+            continue
+
+        if current_line:
+            lines.append(' '.join(current_line))
+        current_line = [word]
+
+    if current_line:
+        lines.append(' '.join(current_line))
+
+    return lines
+
+
+def draw_button_group(screen, buttons):
+    for button in buttons:
+        button.draw(screen)
+
+
+def handle_button_group(buttons, event):
+    for button in buttons:
+        result = button.check_input(event)
+        if result is not None:
+            return result
+    return None
+
+
+def draw_screen_name(screen, fonts, screen_name):
+    if not SHOW_SCREEN_NAME:
+        return
+
+    debug_surf = fonts.small.render(screen_name, True, Colors.YELLOW)
+    screen.blit(debug_surf, debug_surf.get_rect(topright=(1014, 10)))
+
+
+def draw_count_list(
+    screen,
+    fonts,
+    items,
+    *,
+    empty_text,
+    start_y=150,
+    line_h=38,
+    x_name=100,
+    x_count=850,
+    max_y=600,
+    count_prefix='x',
+    count_suffix='',
+):
+    if not items:
+        render_at(screen, fonts.body, empty_text, (x_name, start_y), Colors.GREY)
+        return
+
+    for i, (name, count) in enumerate(items.items()):
+        y = start_y + i * line_h
+        if y > max_y:
+            render_at(screen, fonts.small, "... rohkem tooteid", (x_name, y), Colors.GREY)
+            break
+
+        render_at(screen, fonts.body, name, (x_name, y))
+        render_at(screen, fonts.body, f"{count_prefix}{count}{count_suffix}", (x_count, y))
+
+
+class BaseScreen:
+    background = Colors.BACKGROUND
+
+    def __init__(self, fonts):
+        self.fonts = fonts
+        self.buttons = []
+
+    def fill(self, screen, color=None):
+        screen.fill(color or self.background)
+
+    def draw_buttons(self, screen):
+        draw_button_group(screen, self.buttons)
+
+    def draw_debug_name(self, screen):
+        draw_screen_name(screen, self.fonts, self.__class__.__name__)
+
+    def handle_buttons(self, event):
+        return handle_button_group(self.buttons, event)
+
+    def handle_input(self, event):
+        return self.handle_buttons(event)
