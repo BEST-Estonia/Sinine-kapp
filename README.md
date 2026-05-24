@@ -6,7 +6,7 @@ Raspberry Pi application for a smart drink cabinet with:
 - barcode-based drink tracking
 - door sensor input
 - small LCD feedback
-- MySQL or SQLite-backed user/product data
+- portal API-backed user/product data
 
 ## Project Layout
 
@@ -18,7 +18,7 @@ Sinine-kapp/
 ├── sinine_kapp/
 │   ├── app/                 Main cabinet flow and process orchestration
 │   ├── devices/             Hardware integrations (GPIO, NFC, LCD)
-│   ├── services/            Database access
+│   ├── services/            Portal API access
 │   ├── ui/                  Pygame touchscreen UI
 │   ├── __main__.py          `python -m sinine_kapp`
 │   └── paths.py             Shared project paths
@@ -37,7 +37,7 @@ Sinine-kapp/
 - [sinine_kapp/devices/nfc_reader.py](/home/skpi/Sinine-kapp/Sinine-kapp/sinine_kapp/devices/nfc_reader.py) contains NFC reader access.
 - [sinine_kapp/devices/door.py](/home/skpi/Sinine-kapp/Sinine-kapp/sinine_kapp/devices/door.py) contains door sensor and door actuator helpers.
 - [sinine_kapp/devices/lcd.py](/home/skpi/Sinine-kapp/Sinine-kapp/sinine_kapp/devices/lcd.py) controls the small LCD.
-- [sinine_kapp/services/database.py](/home/skpi/Sinine-kapp/Sinine-kapp/sinine_kapp/services/database.py) contains the database backend logic.
+- [sinine_kapp/services/database.py](/home/skpi/Sinine-kapp/Sinine-kapp/sinine_kapp/services/database.py) contains the portal API client used by the cabinet flow.
 
 ## Running
 
@@ -137,15 +137,25 @@ Based on the current code and library defaults, `GPIO22` is used by both:
 
 That overlap may be intentional hardware sharing, or it may be a wiring/configuration conflict worth verifying on the real cabinet.
 
-## Database Setup
+## Portal API Setup
 
-Create `.env` in the repo root if you want MySQL:
+Create `.env` in the repo root. The Raspberry Pi cabinet calls the `portaal`
+API, and the API writes to MySQL.
 
 ```env
-DATABASE_URL=mysql://USER:PASSWORD@HOST:3306/laravel
+SININE_KAPP_API_BASE_URL=http://PORTAAL_HOST_OR_IP:3000
+SININE_KAPP_DEVICE_API_KEY=THE_SAME_SECRET_AS_PORTAAL
+SININE_KAPP_API_TIMEOUT=8
 ```
 
-The app now expects an external database connection and does not fall back to a local SQLite database.
+The same `SININE_KAPP_DEVICE_API_KEY` must be set in `portaal/.env`.
+
+Test from the Pi:
+
+```bash
+curl -H "X-Sinine-Kapp-Key: THE_SAME_SECRET_AS_PORTAAL" \
+  http://PORTAAL_HOST_OR_IP:3000/sinine-kapp/kiosk/health
+```
 
 ## Utility Scripts
 
