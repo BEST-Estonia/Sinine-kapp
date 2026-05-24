@@ -92,6 +92,28 @@ def _cleanup():
         logging.exception("Hardware cleanup failed")
 
 
+def _check_startup_database_connection():
+    ok, details = database.check_connection()
+
+    if ok:
+        logging.info("STARTUP CHECK: database connection OK - %s", details)
+        try:
+            _require_lcd().show_message("DB OK")
+            time.sleep(1)
+            _require_lcd().clear()
+        except Exception:
+            logging.exception("Failed to show startup DB OK message on LCD")
+        return
+
+    logging.error("STARTUP CHECK: database connection FAILED - %s", details)
+    try:
+        _require_lcd().show_message("DB viga")
+        time.sleep(2)
+        _require_lcd().clear()
+    except Exception:
+        logging.exception("Failed to show startup DB error message on LCD")
+
+
 def _read_reply(timeout=None):
     if timeout is None:
         message = reply_queue.get()
@@ -903,6 +925,7 @@ def run():
     lcd = LCD()
 
     try:
+        _check_startup_database_connection()
         main_loop()
     finally:
         _cleanup()

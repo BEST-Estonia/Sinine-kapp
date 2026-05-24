@@ -189,6 +189,36 @@ def _connect():
         raise
 
 
+def check_connection() -> tuple[bool, str]:
+    """
+    Performs a lightweight startup health check against the configured database.
+
+    Returns (True, details) when a connection and SELECT 1 succeed.
+    Returns (False, error_message) when the external database is unreachable.
+    """
+    conn = None
+
+    try:
+        conn = _connect()
+        cursor = conn.cursor()
+        cursor.execute('SELECT 1')
+        cursor.fetchone()
+
+        config = _mysql_config()
+        driver = _MYSQL_DRIVER_NAME or 'unknown-driver'
+        return (
+            True,
+            f"{driver} connected to {config['user']}@{config['host']}:{config['port']}/{config['database']}",
+        )
+
+    except Exception as exc:
+        return False, str(exc)
+
+    finally:
+        if conn:
+            conn.close()
+
+
 def _sql(query: str) -> str:
     return query.replace('?', '%s')
 
