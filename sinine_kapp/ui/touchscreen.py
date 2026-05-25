@@ -1,7 +1,9 @@
-"""Ekraani juhib funktsioon koodi lõpus run_touchscreen(). Funktsioon ootab kuni main.py lisab järjekorda käsu ja andmed. 
-Selle põhjal otsustab run_touchscreen() mis ekraani kuvada. mida ekraanile kuvada, kui status pole quueue kontrollimise vahepeal 
-muutunnud siis ekraan jääb samaks kuni järgmise käsuni. Iga erineva state(default, regamisekraan, jne on abifunktsioonid kus on täpsemalt 
-kirjeldatud mis ekraanil toimub). Kood saab lisada adnmeid quesse RESPONSE mida main.py saab lugeda.
+"""Pygame touchscreen process for the cabinet.
+
+The controller sends screen commands through ``command_q``. This module keeps
+one active screen object, draws it every frame, and sends button/barcode
+results back through ``reply_q``. Business logic stays in controller.py; screen
+classes here should only render UI and translate local input into replies.
 """
 
 import os
@@ -25,6 +27,10 @@ from .components import (
 from .styles import FontManager, Colors
 
 
+# ---------------------------------------------------------------------------
+# Runtime constants
+# ---------------------------------------------------------------------------
+
 APP_EXIT = "__APP_EXIT__"
 GIF_PATH = ASSETS_DIR / "67GIF.gif"
 EXIT_GESTURE_WINDOW_SECONDS = 4
@@ -33,6 +39,10 @@ EXIT_GESTURE_SIZE = 120
 INPUT_DEBUG_ENABLED = False
 TOUCH_VISUALIZER_ENABLED = True
 
+
+# ---------------------------------------------------------------------------
+# Display setup
+# ---------------------------------------------------------------------------
 
 def _configure_display_environment():
     """
@@ -55,6 +65,10 @@ def _configure_display_environment():
         os.environ.get("XDG_RUNTIME_DIR"),
     )
 
+
+# ---------------------------------------------------------------------------
+# Main menu and drink-session screens
+# ---------------------------------------------------------------------------
 
 class VALIKUVAADE(BaseScreen):
     def __init__(self, nimi, fonts):
@@ -82,6 +96,7 @@ class VALIKUVAADE(BaseScreen):
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
 
+
 class VÄLJASTATUD_JOOGID(BaseScreen):
     def __init__(self, payload_data, fonts):
         super().__init__(fonts)
@@ -98,6 +113,7 @@ class VÄLJASTATUD_JOOGID(BaseScreen):
         draw_count_list(screen, self.fonts, self.items, empty_text="Ühtegi toodet ei leitud")
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
+
 
 class UKSE_AVAMINE_TAGASTAMINE(BaseScreen):
     def __init__(self, payload_data, fonts):
@@ -150,6 +166,7 @@ class UKSE_AVAMINE_TAGASTAMINE(BaseScreen):
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
 
+
 class KASUTAJA_REGISTREERITUD(BaseScreen):
     def __init__(self, nimi, fonts):
         """
@@ -170,7 +187,10 @@ class KASUTAJA_REGISTREERITUD(BaseScreen):
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
 
+
 class DEFAULT_SCREEN:
+    """Main menu plus its small internal account-options state."""
+
     def __init__(self, fonts):
         self.fonts = fonts
         self.state = "default" # default, viipa, options
@@ -273,6 +293,7 @@ class DEFAULT_SCREEN:
                 
         return None
 
+
 class UKSE_AVAMINE_VÕTMINE:
     def __init__(self, data, fonts):
         self.data = data
@@ -299,8 +320,10 @@ class UKSE_AVAMINE_VÕTMINE:
         # No interaction on door screen
         return None
 
-#kuvab ükskõik mida samal ajal kui uks on avatud
+
 class REKLAAM:
+    """Simple passive screen for an open-door/waiting state."""
+
     def __init__(self, payload_data, fonts):
         self.fonts = fonts
         
@@ -317,6 +340,11 @@ class REKLAAM:
         # No interaction on reklaam screen
         return None
   
+
+# ---------------------------------------------------------------------------
+# Registration and message screens
+# ---------------------------------------------------------------------------
+
 class REGISTREERIMINE:
     """
     Two-stage registration:
@@ -511,7 +539,14 @@ class REGISTREERIMINE:
         
         return None
 
+
 class MESSAGE(BaseScreen):
+    """Generic message/wait/confirmation screen.
+
+    The payload can be either a plain string or a tuple:
+    (message, show_button, button_text, button_value).
+    """
+
     def __init__(self, payload, fonts):
         super().__init__(fonts)
         self.background = Colors.DARK_BG
@@ -547,6 +582,7 @@ class MESSAGE(BaseScreen):
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
 
+
 class TAGASTATUD_JOOGID(BaseScreen):
     def __init__(self, payload_data, fonts):
         super().__init__(fonts)
@@ -571,7 +607,14 @@ class TAGASTATUD_JOOGID(BaseScreen):
         self.draw_buttons(screen)
         self.draw_debug_name(screen)
 
+
+# ---------------------------------------------------------------------------
+# Account and card-management screens
+# ---------------------------------------------------------------------------
+
 class KONTOHALDUS:
+    """Account-management screen shown after card authentication."""
+
     def __init__(self, payload, fonts):
         self.fonts = fonts
         # payload structure: (nimi, unreturned_drinks_list)
@@ -714,7 +757,10 @@ class KONTOHALDUS:
         
         return None
 
+
 class UUS_KAART:
+    """Passive prompt while controller waits for a replacement card scan."""
+
     def __init__(self, payload, fonts):
         self.fonts = fonts
         
@@ -738,7 +784,10 @@ class UUS_KAART:
     def handle_input(self, event):
         return None
 
+
 class KAOTATUD_KAART:
+    """PIN pad for lost-card replacement."""
+
     def __init__(self, payload, fonts):
         self.fonts = fonts
         self.pincode = ""
@@ -878,7 +927,10 @@ class KAOTATUD_KAART:
         
         return None
 
+
 class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida pole regatud
+    """Confirm whether an existing unused PIN should become a new account."""
+
     def __init__(self, payload, fonts):
         self.fonts = fonts
         self.buttons = []
@@ -922,7 +974,10 @@ class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida po
                 return res
         return None
 
+
 class UUE_KONTO_REGAMINE_PINNKOODIGA:
+    """PIN pad for creating/registering a new user account."""
+
     def __init__(self, payload, fonts):
         self.fonts = fonts
         self.pincode = ""
@@ -1062,7 +1117,14 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
         
         return None
 
+
+# ---------------------------------------------------------------------------
+# Cart and admin screens
+# ---------------------------------------------------------------------------
+
 class LIVE_CART(BaseScreen):
+    """Live scanned-item summary while the door is open."""
+
     def __init__(self, payload_data, fonts):
         super().__init__(fonts)
         # payload_data is expected to be a dict: {"Drink Name": count, ...}
@@ -1080,7 +1142,10 @@ class LIVE_CART(BaseScreen):
         )
         self.draw_debug_name(screen)
 
+
 class CART_REVIEW(BaseScreen):
+    """Editable final count screen before the controller saves a session."""
+
     def __init__(self, payload_data, fonts):
         super().__init__(fonts)
         # payload_data: {"Drink Name": count, ...}
@@ -1149,7 +1214,10 @@ class CART_REVIEW(BaseScreen):
                     return None
         return None
 
+
 class REMOVE_PRODUCT_LIST:
+    """Admin product deletion list with local selection state."""
+
     def __init__(self, products, fonts):
         self.fonts = fonts
         self.products = products # list of (id, name, barcode)
@@ -1214,7 +1282,10 @@ class REMOVE_PRODUCT_LIST:
             elif res: return res
         return None
 
+
 class ADMIN:
+    """Admin menu and product-name entry keyboard."""
+
     def __init__(self, fonts):
         self.fonts = fonts
         self.state = "main" # main, products
@@ -1364,7 +1435,19 @@ class ADMIN:
         
         return None
 
+
+# ---------------------------------------------------------------------------
+# Main pygame process loop
+# ---------------------------------------------------------------------------
+
 def run_touchscreen(command_q, reply_q):
+    """Run the fullscreen pygame UI process.
+
+    This loop has three responsibilities:
+    1. Consume controller commands and switch the active screen.
+    2. Translate touch/keyboard/barcode input into reply_q messages.
+    3. Draw the active screen every frame.
+    """
     _configure_display_environment()
     pygame.init()
 
@@ -1377,19 +1460,20 @@ def run_touchscreen(command_q, reply_q):
 
     #pygame.display.set_caption("Sinine_kapp")
 
-    # 1. INITIALIZE STYLE MANAGER
-    # Laeb fondid
     fonts = FontManager()
 
-    current_screen_object = None
     current_screen_object = DEFAULT_SCREEN(fonts)
     running = True
     barcode_buffer = ""
-    barcode_scanning_enabled = False  # Control whether barcode scanning is active
+    # Scanner input arrives as keyboard events. The controller explicitly
+    # enables this only while barcode input should be captured.
+    barcode_scanning_enabled = False
     exit_tap_times = []
     last_input_debug = None
 
     while running:
+        # Controller commands are non-blocking so pygame can keep drawing even
+        # when there is no new command this frame.
         try:
             command, payload = command_q.get_nowait()
             logging.info(f"Router received: {command} with payload: {payload}")
@@ -1486,7 +1570,8 @@ def run_touchscreen(command_q, reply_q):
         except queue.Empty:
             pass 
 
-        # ... Input Handling
+        # Input handling: developer exits, barcode keyboard buffering, then the
+        # active screen's own button/pinpad handling.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 reply_q.put(APP_EXIT)
@@ -1531,7 +1616,6 @@ def run_touchscreen(command_q, reply_q):
                 else:
                     exit_tap_times.clear()
 
-            # --- BARCODE SCANNER LOGIC ---
             if barcode_scanning_enabled and event.type == pygame.KEYDOWN:
                 # On enter, send buffer and clear it
                 if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
@@ -1545,13 +1629,12 @@ def run_touchscreen(command_q, reply_q):
                 # Otherwise, add character to buffer
                 else:
                     barcode_buffer += event.unicode
-            # --- END OF BARCODE SCANNER LOGIC ---
 
             if current_screen_object:
                 res = current_screen_object.handle_input(event)
                 if res is not None: reply_q.put(res)
 
-        # ... Drawing 
+        # Draw the current screen after processing all input for this frame.
         if current_screen_object:
             current_screen_object.draw(screen)
         else:

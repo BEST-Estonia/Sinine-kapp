@@ -1,7 +1,11 @@
+"""Standalone door sensor diagnostic."""
+
 from pathlib import Path
 import sys
 import time
 
+
+# Let this script run from tools/ without installing the package.
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
@@ -12,12 +16,14 @@ from sinine_kapp.devices.door import DOOR_SENSOR_PIN
 
 
 def format_state(raw_value):
+    """Map the raw GPIO value to the app's door state labels."""
     if raw_value == GPIO.LOW:
         return "CLOSED"
     return "OPEN"
 
 
 def main():
+    """Print door sensor state whenever it changes."""
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DOOR_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 

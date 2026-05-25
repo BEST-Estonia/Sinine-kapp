@@ -1,7 +1,12 @@
-# style.py
+"""Shared colors and fonts for the pygame touchscreen UI."""
+
 import pygame
 
-# --- COLORS (Define them once here) ---
+
+# ---------------------------------------------------------------------------
+# Colors
+# ---------------------------------------------------------------------------
+
 class Colors:
     BACKGROUND = (255, 255, 255)
     DARK_BG    = (200, 200, 240)
@@ -13,18 +18,21 @@ class Colors:
     RED        = (200, 50, 50)
     YELLOW     = (240, 200, 0)
     TEXT_PRIMARY = (0, 0, 0)
-# --- FONT MANAGER ---
+
+
+# ---------------------------------------------------------------------------
+# Fonts
+# ---------------------------------------------------------------------------
+
 class FontManager:
+    """Load the font sizes used by screen classes."""
+
     def __init__(self):
-       #Predefined font styles
         self.header = pygame.font.SysFont("arial", 48, bold=True)
         self.body   = pygame.font.SysFont("arial", 32, bold=True)
         self.small  = pygame.font.SysFont("arial", 24)
         self.huge   = pygame.font.SysFont("arial", 72, bold=True)
 
-    # Helper to make text rendering cleaner
     def render(self, font_type, text, color=Colors.TEXT_PRIMARY):
-        """
-        Usage: fonts.render(fonts.header, "Hello")
-        """
+        """Render text with one of the preloaded pygame fonts."""
         return font_type.render(text, True, color)

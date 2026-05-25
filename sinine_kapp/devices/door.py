@@ -1,17 +1,29 @@
+"""Door sensor and door actuator helpers."""
+
 import logging
 
 import RPi.GPIO as GPIO
 
+
+# ---------------------------------------------------------------------------
+# GPIO configuration
+# ---------------------------------------------------------------------------
 
 DOOR_SENSOR_PIN = 21
 _gpio_initialized = False
 
 
 def open_door():
+    """Open/unlock the cabinet door.
+
+    This is currently a placeholder. The controller calls it at the start of a
+    drink session, so this is the seam for adding relay/lock hardware later.
+    """
     return 0
 
 
 def init_sensor():
+    """Initialize the door sensor input with an internal pull-up."""
     global _gpio_initialized
     try:
         if not _gpio_initialized:
@@ -29,6 +41,7 @@ def init_sensor():
 
 
 def is_open() -> bool:
+    """Return True when the door sensor reports open."""
     if not _gpio_initialized:
         logging.error("CRITICAL: Door sensor not initialized - returning False (door closed)")
         return False
@@ -42,6 +55,7 @@ def is_open() -> bool:
 
 
 def cleanup():
+    """Release GPIO resources owned by this process."""
     global _gpio_initialized
 
     try:

@@ -1,3 +1,10 @@
+"""Direct USB keyboard-style barcode scanner reader.
+
+The main pygame app captures scanner input through keyboard events while the
+touchscreen process is active. This module is still useful for standalone tools
+and for direct reads from /dev/input/by-id devices.
+"""
+
 import logging
 import os
 import select
@@ -5,6 +12,10 @@ import struct
 import time
 from pathlib import Path
 
+
+# ---------------------------------------------------------------------------
+# Linux input constants
+# ---------------------------------------------------------------------------
 
 INPUT_BY_ID_DIR = Path("/dev/input/by-id")
 INPUT_EVENT_FORMAT = "llHHI"
@@ -80,7 +91,12 @@ KEYCODE_TO_CHAR = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Device discovery
+# ---------------------------------------------------------------------------
+
 def list_keyboard_devices() -> list[Path]:
+    """Return keyboard-like input devices exposed through /dev/input/by-id."""
     if not INPUT_BY_ID_DIR.exists():
         return []
 
@@ -88,6 +104,7 @@ def list_keyboard_devices() -> list[Path]:
 
 
 def find_barcode_device(device_path: str | None = None) -> Path | None:
+    """Pick the most likely barcode scanner input device."""
     if device_path:
         path = Path(device_path)
         return path if path.exists() else None
@@ -122,7 +139,12 @@ def find_barcode_device(device_path: str | None = None) -> Path | None:
     return candidates[0]
 
 
+# ---------------------------------------------------------------------------
+# Barcode read loop
+# ---------------------------------------------------------------------------
+
 def read_barcode(timeout: float = 10.0, device_path: str | None = None) -> str | None:
+    """Read one barcode from a keyboard-like Linux input device."""
     device = find_barcode_device(device_path)
     if device is None:
         logging.warning("No barcode scanner input device found")
@@ -146,6 +168,8 @@ def read_barcode(timeout: float = 10.0, device_path: str | None = None) -> str |
             if not event_bytes:
                 continue
 
+            # Input events arrive as fixed-size binary structs. Barcode
+            # scanners usually emit normal key-down events plus Enter.
             for offset in range(0, len(event_bytes), INPUT_EVENT_SIZE):
                 chunk = event_bytes[offset : offset + INPUT_EVENT_SIZE]
                 if len(chunk) != INPUT_EVENT_SIZE:

@@ -1,3 +1,10 @@
+"""Portal API client for kiosk user, product, and transaction data.
+
+The historic name is ``database.py``, but this module talks to the external
+portal over HTTP. Controller code should call these high-level helpers rather
+than building requests directly.
+"""
+
 import json
 import logging
 import os
@@ -9,12 +16,22 @@ from urllib.request import Request, urlopen
 
 from ..paths import ENV_FILE
 
+
+# ---------------------------------------------------------------------------
+# Module state and configuration
+# ---------------------------------------------------------------------------
+
 _ENV_LOADED = False
 _LAST_CONNECTION_ERROR: str | None = None
 _DEFAULT_TIMEOUT_SECONDS = 8
 
 
+# ---------------------------------------------------------------------------
+# Environment loading
+# ---------------------------------------------------------------------------
+
 def _load_env_file(path: Path, overwrite: bool = False) -> bool:
+    """Load KEY=value pairs from a .env file into os.environ."""
     if not path.exists():
         return False
 
@@ -40,6 +57,7 @@ def _load_env_file(path: Path, overwrite: bool = False) -> bool:
 
 
 def _load_environment_once() -> None:
+    """Load kiosk and nearby portal .env files once per process."""
     global _ENV_LOADED
 
     if _ENV_LOADED:
@@ -63,6 +81,7 @@ def _load_environment_once() -> None:
 
 
 def _request_timeout() -> int:
+    """Return the configured API timeout with a safe fallback."""
     raw_value = os.environ.get('SININE_KAPP_API_TIMEOUT', '').strip()
     if not raw_value:
         return _DEFAULT_TIMEOUT_SECONDS
@@ -79,6 +98,7 @@ def _request_timeout() -> int:
 
 
 def _api_base_url() -> str:
+    """Return the configured portal API base URL."""
     _load_environment_once()
     base_url = os.environ.get('SININE_KAPP_API_BASE_URL', '').strip().rstrip('/')
     if not base_url:
@@ -90,6 +110,7 @@ def _api_base_url() -> str:
 
 
 def _api_key() -> str:
+    """Return the shared kiosk API key used for portal authentication."""
     _load_environment_once()
     api_key = os.environ.get('SININE_KAPP_DEVICE_API_KEY', '').strip()
     if not api_key:
@@ -98,10 +119,16 @@ def _api_key() -> str:
 
 
 def last_connection_error() -> str | None:
+    """Return the last API transport/auth/server error recorded by this module."""
     return _LAST_CONNECTION_ERROR
 
 
+# ---------------------------------------------------------------------------
+# HTTP request helper
+# ---------------------------------------------------------------------------
+
 def _api_request(path: str, method: str = 'GET', payload: dict[str, Any] | None = None):
+    """Send one JSON request to the portal and return decoded JSON."""
     global _LAST_CONNECTION_ERROR
 
     body = None
@@ -146,7 +173,12 @@ def _quote(value: Any) -> str:
     return quote(str(value), safe='')
 
 
+# ---------------------------------------------------------------------------
+# Health and lookup helpers
+# ---------------------------------------------------------------------------
+
 def check_connection() -> tuple[bool, str]:
+    """Check whether the portal health endpoint is reachable."""
     try:
         _api_request('/kiosk/health')
         return True, f'connected to portal API at {_api_base_url()}'
@@ -155,6 +187,7 @@ def check_connection() -> tuple[bool, str]:
 
 
 def checkuser(UID):
+    """Look up a kiosk user by NFC UID."""
     try:
         data = _api_request(f'/kiosk/users/by-nfc/{_quote(UID)}')
         return bool(data.get('exists')), data.get('name')
@@ -164,6 +197,7 @@ def checkuser(UID):
 
 
 def get_drink_info(barcode):
+    """Look up a product name by barcode."""
     try:
         data = _api_request(f'/kiosk/products/by-barcode/{_quote(barcode)}')
         return bool(data.get('exists')), data.get('name')
@@ -172,7 +206,12 @@ def get_drink_info(barcode):
         return False, None
 
 
+# ---------------------------------------------------------------------------
+# Transaction recording
+# ---------------------------------------------------------------------------
+
 def log_user_returned_drinks(nfc_input, list_of_barcodes):
+    """Record returned drinks for a user."""
     try:
         data = _api_request(
             '/kiosk/returned',
@@ -188,20 +227,8 @@ def log_user_returned_drinks(nfc_input, list_of_barcodes):
         return False
 
 
-def create_new_user(nfc_input, pinnkood):
-    try:
-        data = _api_request(
-            '/kiosk/users/register',
-            method='POST',
-            payload={'nfcid': str(nfc_input), 'pinnkood': int(pinnkood)},
-        )
-        return bool(data.get('success'))
-    except Exception as e:
-        logging.error(f'(API DB Handler) create_new_user: Error: {e}')
-        return False
-
-
 def log_user_taken_drinks(nfc_input, list_of_barcodes):
+    """Record taken drinks for a user."""
     try:
         data = _api_request(
             '/kiosk/taken',
@@ -217,7 +244,47 @@ def log_user_taken_drinks(nfc_input, list_of_barcodes):
         return False
 
 
+def record_drink_session(nfc_input, action_type, list_of_barcodes):
+    """Record a take or return drink session through the matching endpoint."""
+    if action_type == 'taken':
+        return log_user_taken_drinks(nfc_input, list_of_barcodes)
+    if action_type == 'returned':
+        return log_user_returned_drinks(nfc_input, list_of_barcodes)
+
+    logging.error(f'(API DB Handler) record_drink_session: Unknown action type: {action_type}')
+    return False
+
+
+def keep_stock(scanned_barcodes, action_type):
+    """
+    Stock is updated atomically by the portal API transaction endpoints.
+
+    This compatibility function remains because the controller still calls it
+    after logging take/return transactions.
+    """
+    return True
+
+
+# ---------------------------------------------------------------------------
+# PIN and card registration
+# ---------------------------------------------------------------------------
+
+def create_new_user(nfc_input, pinnkood):
+    """Register an unused PIN to an NFC UID."""
+    try:
+        data = _api_request(
+            '/kiosk/users/register',
+            method='POST',
+            payload={'nfcid': str(nfc_input), 'pinnkood': int(pinnkood)},
+        )
+        return bool(data.get('success'))
+    except Exception as e:
+        logging.error(f'(API DB Handler) create_new_user: Error: {e}')
+        return False
+
+
 def check_pin_code_dict(pinnkood):
+    """Return whether a PIN exists in the portal."""
     try:
         data = _api_request(
             '/kiosk/pins/exists',
@@ -231,6 +298,7 @@ def check_pin_code_dict(pinnkood):
 
 
 def is_user_registered(pinnkood):
+    """Return whether a PIN is already tied to a registered card/user."""
     try:
         data = _api_request(
             '/kiosk/pins/registered',
@@ -244,6 +312,7 @@ def is_user_registered(pinnkood):
 
 
 def nime_kaeve_pintabelist(pinnkood):
+    """Fetch the display name associated with a PIN."""
     try:
         data = _api_request(f'/kiosk/pins/{_quote(int(pinnkood))}/name')
         return bool(data.get('found')), data.get('name')
@@ -253,6 +322,7 @@ def nime_kaeve_pintabelist(pinnkood):
 
 
 def get_pin_status(pinnkood):
+    """Return combined PIN existence, registration state, and user name."""
     exists = check_pin_code_dict(pinnkood)
     if _LAST_CONNECTION_ERROR is not None:
         return {'exists': False, 'registered': False, 'name': None}
@@ -271,36 +341,8 @@ def get_pin_status(pinnkood):
     return {'exists': found, 'registered': registered, 'name': name}
 
 
-def get_unreturned_drinks(nfc_input):
-    try:
-        data = _api_request(f'/kiosk/users/{_quote(nfc_input)}/unreturned')
-        return data.get('items', [])
-    except Exception as e:
-        logging.error(f'(API DB Handler) get_unreturned_drinks: Error: {e}')
-        return []
-
-
-def keep_stock(scanned_barcodes, action_type):
-    """
-    Stock is updated atomically by the portal API transaction endpoints.
-
-    This compatibility function remains because the controller still calls it
-    after logging take/return transactions.
-    """
-    return True
-
-
-def record_drink_session(nfc_input, action_type, list_of_barcodes):
-    if action_type == 'taken':
-        return log_user_taken_drinks(nfc_input, list_of_barcodes)
-    if action_type == 'returned':
-        return log_user_returned_drinks(nfc_input, list_of_barcodes)
-
-    logging.error(f'(API DB Handler) record_drink_session: Unknown action type: {action_type}')
-    return False
-
-
 def update_user_nfc(nfc_input, nfc_uus):
+    """Replace an existing user's NFC UID with a new one."""
     try:
         data = _api_request(
             '/kiosk/users/nfc',
@@ -314,6 +356,7 @@ def update_user_nfc(nfc_input, nfc_uus):
 
 
 def register_new_card(uus_nfc, nimi):
+    """Register a new card for an existing user name."""
     try:
         data = _api_request(
             '/kiosk/users/register-card',
@@ -327,6 +370,7 @@ def register_new_card(uus_nfc, nimi):
 
 
 def register_new_card_by_pin(uus_nfc, pinnkood):
+    """Register a replacement or first card depending on PIN state."""
     status = get_pin_status(pinnkood)
     if _LAST_CONNECTION_ERROR is not None:
         return False, None
@@ -342,7 +386,22 @@ def register_new_card_by_pin(uus_nfc, pinnkood):
     return success, status['name'] if success else None
 
 
+# ---------------------------------------------------------------------------
+# Account state and admin helpers
+# ---------------------------------------------------------------------------
+
+def get_unreturned_drinks(nfc_input):
+    """Return open/unreturned drink rows for one user."""
+    try:
+        data = _api_request(f'/kiosk/users/{_quote(nfc_input)}/unreturned')
+        return data.get('items', [])
+    except Exception as e:
+        logging.error(f'(API DB Handler) get_unreturned_drinks: Error: {e}')
+        return []
+
+
 def add_product(name, barcode):
+    """Add a product to the portal product catalog."""
     try:
         data = _api_request(
             '/kiosk/products/admin',
@@ -356,6 +415,7 @@ def add_product(name, barcode):
 
 
 def get_all_products():
+    """Return all products for admin deletion/listing UI."""
     try:
         data = _api_request('/kiosk/products/admin')
         return data.get('products', [])
@@ -365,6 +425,7 @@ def get_all_products():
 
 
 def get_debtors():
+    """Return users with outstanding unreturned drinks."""
     try:
         data = _api_request('/kiosk/debtors')
         return data.get('debtors', [])
@@ -374,6 +435,7 @@ def get_debtors():
 
 
 def remove_product(product_id):
+    """Remove a product from the portal catalog."""
     try:
         _api_request(f'/kiosk/products/admin/{_quote(product_id)}', method='DELETE')
         return True

@@ -1,7 +1,11 @@
+"""Quick polling test for the app's door sensor wrapper."""
+
 from pathlib import Path
 import sys
 import time
 
+
+# Let this script run from tools/ without installing the package.
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))

@@ -1,7 +1,15 @@
+"""Standalone barcode scanner diagnostic.
+
+This bypasses the pygame UI and reads directly from the Linux keyboard input
+device, which is useful when scanner input is not reaching the main app.
+"""
+
 from pathlib import Path
 import sys
 import time
 
+
+# Let this script run from tools/ without installing the package.
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
@@ -10,6 +18,7 @@ from sinine_kapp.devices import barcode_scanner
 
 
 def main():
+    """Find a scanner-like keyboard device and print scanned codes."""
     device = barcode_scanner.find_barcode_device()
     devices = barcode_scanner.list_keyboard_devices()
 

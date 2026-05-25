@@ -1,3 +1,5 @@
+"""Small ST7789 LCD display used for operational feedback."""
+
 import time
 import threading
 import board
@@ -5,9 +7,12 @@ import digitalio
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display.st7789 import ST7789
 
+
 class LCD:
+    """Thin drawing wrapper around the ST7789 display."""
+
     def __init__(self):
-        # --- Config ---
+        # Runtime state for the auto-off worker.
         self.TIMEOUT_SECONDS = 30
         self.last_activity = time.time()
         self.running = True
@@ -26,7 +31,6 @@ class LCD:
         self.backlight.direction = digitalio.Direction.OUTPUT
         self.backlight.value = False # Start with backlight OFF
 
-        # --- Display Init ---
         self.disp = ST7789(
             self.spi,
             cs=self.cs_pin, dc=self.dc_pin, rst=self.reset_pin,
@@ -35,7 +39,7 @@ class LCD:
             x_offset=35, y_offset=0
         )
 
-        # --- Drawing Context ---
+        # PIL image buffer that gets pushed to the physical LCD.
         self.height = self.disp.width   # 170
         self.width = self.disp.height   # 320
         self.image = Image.new("RGB", (self.width, self.height))
@@ -52,6 +56,7 @@ class LCD:
         self.thread.start()
 
     def set_backlight(self, state):
+        """Turn the LCD backlight on or off."""
         self.backlight.value = state
 
     def show_message(self, text):
@@ -88,6 +93,7 @@ class LCD:
                 self.clear() # Re-use the clear function
     
     def cleanup(self):
+        """Stop the background worker and release display GPIO/SPI resources."""
         if self._cleaned_up:
             return
 

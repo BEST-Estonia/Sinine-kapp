@@ -1,3 +1,5 @@
+"""MFRC522 NFC reader access used by the controller."""
+
 import time
 from typing import Callable
 
@@ -8,6 +10,7 @@ CancelCallback = Callable[[], bool]
 
 
 def read_tag(cancel_check_callback: CancelCallback | None = None) -> int | None:
+    """Block until an NFC tag UID is read or cancellation is requested."""
     reader = SimpleMFRC522()
     try:
         while True:
@@ -22,6 +25,7 @@ def read_tag(cancel_check_callback: CancelCallback | None = None) -> int | None:
 
 
 def read_tag_details(cancel_check_callback: CancelCallback | None = None) -> tuple[int | None, str]:
+    """Block until a tag is read and return both UID and stored text."""
     reader = SimpleMFRC522()
     try:
         while True:
