@@ -252,6 +252,25 @@ def nime_kaeve_pintabelist(pinnkood):
         return False, None
 
 
+def get_pin_status(pinnkood):
+    exists = check_pin_code_dict(pinnkood)
+    if _LAST_CONNECTION_ERROR is not None:
+        return {'exists': False, 'registered': False, 'name': None}
+
+    if not exists:
+        return {'exists': False, 'registered': False, 'name': None}
+
+    registered = is_user_registered(pinnkood)
+    if _LAST_CONNECTION_ERROR is not None:
+        return {'exists': True, 'registered': False, 'name': None}
+
+    found, name = nime_kaeve_pintabelist(pinnkood)
+    if _LAST_CONNECTION_ERROR is not None:
+        return {'exists': True, 'registered': registered, 'name': None}
+
+    return {'exists': found, 'registered': registered, 'name': name}
+
+
 def get_unreturned_drinks(nfc_input):
     try:
         data = _api_request(f'/kiosk/users/{_quote(nfc_input)}/unreturned')
@@ -269,6 +288,16 @@ def keep_stock(scanned_barcodes, action_type):
     after logging take/return transactions.
     """
     return True
+
+
+def record_drink_session(nfc_input, action_type, list_of_barcodes):
+    if action_type == 'taken':
+        return log_user_taken_drinks(nfc_input, list_of_barcodes)
+    if action_type == 'returned':
+        return log_user_returned_drinks(nfc_input, list_of_barcodes)
+
+    logging.error(f'(API DB Handler) record_drink_session: Unknown action type: {action_type}')
+    return False
 
 
 def update_user_nfc(nfc_input, nfc_uus):
@@ -297,6 +326,22 @@ def register_new_card(uus_nfc, nimi):
         return False
 
 
+def register_new_card_by_pin(uus_nfc, pinnkood):
+    status = get_pin_status(pinnkood)
+    if _LAST_CONNECTION_ERROR is not None:
+        return False, None
+
+    if not status['exists']:
+        return False, None
+
+    if status['registered']:
+        success = register_new_card(uus_nfc, status['name'])
+    else:
+        success = create_new_user(uus_nfc, pinnkood)
+
+    return success, status['name'] if success else None
+
+
 def add_product(name, barcode):
     try:
         data = _api_request(
@@ -316,6 +361,15 @@ def get_all_products():
         return data.get('products', [])
     except Exception as e:
         logging.error(f'(API DB Handler) get_all_products: Error: {e}')
+        return []
+
+
+def get_debtors():
+    try:
+        data = _api_request('/kiosk/debtors')
+        return data.get('debtors', [])
+    except Exception as e:
+        logging.error(f'(API DB Handler) get_debtors: Error: {e}')
         return []
 
 

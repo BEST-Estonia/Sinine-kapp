@@ -289,8 +289,8 @@ def GUI_kasutaja_registreeritud(nimi):
 def GUI_pinn_vale():
     GUI_message("Vale pinnkood")
 
-def GUI_message(message, show_button=True):
-    command_queue.put( ("MESSAGE", (message, show_button)) )
+def GUI_message(message, show_button=True, button_text="Jätka"):
+    command_queue.put( ("MESSAGE", (message, show_button, button_text)) )
 
 def _show_database_error_if_needed(timeout=8):
     if database.last_connection_error() is None:
@@ -437,6 +437,31 @@ def admin_loop():
                             GUI_message("Viga andmebaasiga", show_button=True)
                             Oota_kasutaja_kinnitust(5)
                         # Loop continues to refresh list
+
+            elif valik == "SHOW_DEBTORS":
+                debtors = database.get_debtors()
+                if _show_database_error_if_needed():
+                    command_queue.put(("ADMIN", None))
+                    continue
+
+                if not debtors:
+                    GUI_message("Võlglasi ei ole.", show_button=True, button_text="Tagasi")
+                    Oota_kasutaja_kinnitust(10)
+                    command_queue.put(("ADMIN", None))
+                    continue
+
+                lines = []
+                for debtor in debtors[:8]:
+                    name = debtor.get('name') or f"Kasutaja #{debtor.get('userid')}"
+                    count = debtor.get('count', 0)
+                    lines.append(f"{name}: {count}")
+
+                if len(debtors) > 8:
+                    lines.append(f"... ja veel {len(debtors) - 8}")
+
+                GUI_message("Võlglased:\n" + "\n".join(lines), show_button=True, button_text="Tagasi")
+                Oota_kasutaja_kinnitust(30)
+                command_queue.put(("ADMIN", None))
 
         except queue.Empty:
             pass
@@ -638,19 +663,23 @@ def main_loop():
                 continue
 
         elif valik == "ADMIN":
-            GUI_message("Viipa admin kiipi", show_button=True)
-            nfc_input = hardware.get_nfc(check_for_cancel)
-            
-            if nfc_input:
+            while True:
+                GUI_message("Viipa admin kiipi", show_button=True, button_text="Tagasi")
+                nfc_input = hardware.get_nfc(check_for_cancel)
+
+                if nfc_input is None:
+                    break
+
                 is_in_db, name = database.checkuser(nfc_input)
                 if is_in_db and name == "ADMIN":
                     admin_loop()
-                else:
-                    if _show_database_error_if_needed():
-                        continue
-                    GUI_message("Vale kaart")
-                    Oota_kasutaja_kinnitust(3)
-            # If nfc_input is None (cancelled via button), loop restarts automatically
+                    break
+
+                if _show_database_error_if_needed():
+                    break
+
+                GUI_message("Vale kaart. Viipa admin kiipi uuesti.", show_button=False)
+                time.sleep(2)
 
 
 #Joogi väljastuse/tagastuse plokk

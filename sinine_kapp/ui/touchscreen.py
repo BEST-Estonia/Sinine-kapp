@@ -519,13 +519,15 @@ class MESSAGE(BaseScreen):
         if isinstance(payload, tuple):
             self.text = str(payload[0]) if payload[0] else ""
             show_button = payload[1]
+            button_text = str(payload[2]) if len(payload) > 2 and payload[2] else "Jätka"
         else:
             self.text = str(payload) if payload else ""
             show_button = True
+            button_text = "Jätka"
         
         if show_button:
             # Button returns True (boolean) which will be put in reply_queue
-            btn = Button(412, 650, 200, 60, "Jätka", fonts.body, Colors.GREEN, True)
+            btn = Button(412, 650, 200, 60, button_text, fonts.body, Colors.GREEN, True)
             self.buttons.append(btn)
         
         # Wrap text to fit screen width (900px safe area)
@@ -1204,11 +1206,10 @@ class REMOVE_PRODUCT_LIST:
             if btn == self.btn_delete and self.selected_id is None: continue
             res = btn.check_input(event)
             if res == "DELETE": return ("DELETE_PRODUCT", self.selected_id)
-            elif res: return res
-            
             if res == "SCROLL_UP": self.scroll_index = max(0, self.scroll_index - 5)
             elif res == "SCROLL_DOWN": 
                 if self.scroll_index + 5 < len(self.products): self.scroll_index += 5
+            elif res: return res
         return None
 
 class ADMIN:
