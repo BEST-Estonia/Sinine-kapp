@@ -349,7 +349,7 @@ class REGISTREERIMINE:
     """
     Two-stage registration:
     1. Ask "Do you want to register?" with Yes/No buttons
-    2. If Yes, show PIN pad to enter registration code
+    2. If Yes, show numeric pad to enter phone number
     """
     
     def __init__(self, fonts):
@@ -370,7 +370,7 @@ class REGISTREERIMINE:
         self.buttons.append(btn_yes)
         self.buttons.append(btn_no)
         
-        # Create PIN pad buttons (0-9, Clear, Enter)
+        # Create numeric pad buttons (0-9, Clear, Enter)
         self.pinpad_buttons = []
         self._create_pinpad()
     
@@ -480,19 +480,19 @@ class REGISTREERIMINE:
             btn.draw(screen)
     
     def _draw_pinpad_stage(self, screen):
-        """Draw the PIN pad entry screen"""
+        """Draw the phone number entry screen"""
         # Title
-        title_surf = self.fonts.header.render("Sisesta PIN-kood", True, Colors.TEXT_PRIMARY)
+        title_surf = self.fonts.header.render("Sisesta telefoninumber", True, Colors.TEXT_PRIMARY)
         title_rect = title_surf.get_rect(center=(512, 100))
         screen.blit(title_surf, title_rect)
         
-        # Display entered PIN with asterisks
+        # Display entered phone number
         pin_display = self.pincode if self.pincode else "_ _ _ _"
         pin_surf = self.fonts.body.render(pin_display, True, Colors.TEXT_PRIMARY)
         pin_rect = pin_surf.get_rect(center=(512, 180))
         screen.blit(pin_surf, pin_rect)
         
-        # Draw PIN pad buttons
+        # Draw numeric pad buttons
         for btn in self.pinpad_buttons:
             btn.draw(screen)
     
@@ -500,7 +500,7 @@ class REGISTREERIMINE:
         """
         Handle user input. Returns:
         - None if still waiting
-        - (True, pincode) if user confirms PIN
+        - (True, pincode) if user confirms phone number
         - (False, None) if user cancels
         """
         if self.stage == "question":
@@ -786,7 +786,7 @@ class UUS_KAART:
 
 
 class KAOTATUD_KAART:
-    """PIN pad for lost-card replacement."""
+    """Phone number pad for lost-card replacement."""
 
     def __init__(self, payload, fonts):
         self.fonts = fonts
@@ -873,8 +873,8 @@ class KAOTATUD_KAART:
 
         screen.fill(Colors.DARK_BG)
         
-        line1 = "Sisesta pinnkood uue kaardi"
-        line2 = "registreerimiseks"
+        line1 = "Sisesta telefoninumber"
+        line2 = "uue kaardi registreerimiseks"
         
         surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
         rect1 = surf1.get_rect(center=(512, 100))
@@ -928,8 +928,8 @@ class KAOTATUD_KAART:
         return None
 
 
-class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida pole regatud
-    """Confirm whether an existing unused PIN should become a new account."""
+class REGISTREERI_PINNKOODI_ALUSEL: # Compatibility name; phone based registration.
+    """Confirm whether an existing phone number should become a new account."""
 
     def __init__(self, payload, fonts):
         self.fonts = fonts
@@ -945,7 +945,7 @@ class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida po
     def draw(self, screen):
         screen.fill(Colors.DARK_BG)
         
-        line1 = "Pinnkoodile vastavat kasutajat"
+        line1 = "Telefoninumbrile vastavat kasutajat"
         line2 = "pole registreeritud."
         line3 = "Kas soovid registreerida?"
         
@@ -976,7 +976,7 @@ class REGISTREERI_PINNKOODI_ALUSEL: #Regamine kui kasutaja sisetsas pini mida po
 
 
 class UUE_KONTO_REGAMINE_PINNKOODIGA:
-    """PIN pad for creating/registering a new user account."""
+    """Phone number pad for creating/registering a new user account."""
 
     def __init__(self, payload, fonts):
         self.fonts = fonts
@@ -1064,7 +1064,7 @@ class UUE_KONTO_REGAMINE_PINNKOODIGA:
         screen.fill(Colors.DARK_BG)
         
         line1 = "Kasutaja registreerimiseks"
-        line2 = "sisesta pinnkood!"
+        line2 = "sisesta telefoninumber!"
         
         surf1 = self.fonts.header.render(line1, True, Colors.TEXT_PRIMARY)
         rect1 = surf1.get_rect(center=(512, 100))

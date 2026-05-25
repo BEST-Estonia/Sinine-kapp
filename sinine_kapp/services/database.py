@@ -270,7 +270,7 @@ def keep_stock(scanned_barcodes, action_type):
 # ---------------------------------------------------------------------------
 
 def create_new_user(nfc_input, pinnkood):
-    """Register an unused PIN to an NFC UID."""
+    """Register a phone number to an NFC UID."""
     try:
         data = _api_request(
             '/kiosk/users/register',
@@ -284,7 +284,7 @@ def create_new_user(nfc_input, pinnkood):
 
 
 def check_pin_code_dict(pinnkood):
-    """Return whether a PIN exists in the portal."""
+    """Return whether a phone number exists in the portal."""
     try:
         data = _api_request(
             '/kiosk/pins/exists',
@@ -298,7 +298,7 @@ def check_pin_code_dict(pinnkood):
 
 
 def is_user_registered(pinnkood):
-    """Return whether a PIN is already tied to a registered card/user."""
+    """Return whether a phone number is already tied to a registered card/user."""
     try:
         data = _api_request(
             '/kiosk/pins/registered',
@@ -312,7 +312,7 @@ def is_user_registered(pinnkood):
 
 
 def nime_kaeve_pintabelist(pinnkood):
-    """Fetch the display name associated with a PIN."""
+    """Fetch the display name associated with a phone number."""
     try:
         data = _api_request(f'/kiosk/pins/{_quote(int(pinnkood))}/name')
         return bool(data.get('found')), data.get('name')
@@ -322,7 +322,7 @@ def nime_kaeve_pintabelist(pinnkood):
 
 
 def get_pin_status(pinnkood):
-    """Return combined PIN existence, registration state, and user name."""
+    """Return combined phone existence, registration state, and user name."""
     exists = check_pin_code_dict(pinnkood)
     if _LAST_CONNECTION_ERROR is not None:
         return {'exists': False, 'registered': False, 'name': None}
@@ -370,7 +370,7 @@ def register_new_card(uus_nfc, nimi):
 
 
 def register_new_card_by_pin(uus_nfc, pinnkood):
-    """Register a replacement or first card depending on PIN state."""
+    """Register a replacement or first card by phone number."""
     status = get_pin_status(pinnkood)
     if _LAST_CONNECTION_ERROR is not None:
         return False, None
@@ -378,10 +378,7 @@ def register_new_card_by_pin(uus_nfc, pinnkood):
     if not status['exists']:
         return False, None
 
-    if status['registered']:
-        success = register_new_card(uus_nfc, status['name'])
-    else:
-        success = create_new_user(uus_nfc, pinnkood)
+    success = create_new_user(uus_nfc, pinnkood)
 
     return success, status['name'] if success else None
 

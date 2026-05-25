@@ -303,7 +303,7 @@ def GUI_reklaam():
 
 
 def GUI_registreerimise_küsimine():
-    """Ask whether an unknown NFC card should be registered and collect PIN."""
+    """Ask whether an unknown NFC card should be registered and collect phone number."""
     _command_queue().put(("REGISTREERIMINE", None)) #Reutirb vastus(True/False), pinnkood
     try:
         vastus, pinnkood = _read_reply(timeout=60)
@@ -362,7 +362,7 @@ def GUI_kasutaja_registreeritud(nimi):
     
 
 def GUI_pinn_vale():
-    GUI_message("Vale pinnkood")
+    GUI_message("Telefoninumbrit ei leitud")
 
 
 def GUI_message(message, show_button=True, button_text="Jätka", button_value=True):
@@ -384,21 +384,21 @@ def _show_database_error_if_needed(timeout=8):
 
 
 def _register_user_from_pin(nfc_input, pinnkood):
-    """Register an unused PIN to a newly scanned NFC card."""
+    """Register a phone number to a newly scanned NFC card."""
     status = database.get_pin_status(pinnkood)
     if _show_database_error_if_needed():
         return False
 
     if not status['exists']:
         Empty_reply_queue()
-        GUI_message("Sisestatud PIN-kood ei ole kehtiv. Palun proovi uuesti.")
+        GUI_message("Sisestatud telefoninumbrit ei leitud. Palun proovi uuesti.")
         Oota_kasutaja_kinnitust(20)
         return False
 
     if status['registered']:
-        logging.info("Kasutaja üritas registreerida juba registreeritud PIN-koodi.")
+        logging.info("Kasutaja üritas registreerida juba registreeritud telefoninumbrit.")
         Empty_reply_queue()
-        GUI_message("See PIN on juba registreeritud kiipkaardile, uue kaardi registreerimiseks valige Kontohaldus avaekraanilt")
+        GUI_message("See telefoninumber on juba kiipkaardile registreeritud. Uue kaardi jaoks vali Kontohaldus.")
         Oota_kasutaja_kinnitust(30)
         return False
 
@@ -601,7 +601,7 @@ def kontohaldus():
 
 def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul kui kasutaja sisse logitd ja juhul kui kaart kadunud
     '''Kui LOGITUD = True siis kasutaja sisse logitud ja registreerib uue kaardi
-       Kui LOGITUD = False siis kasutaja pole sisse logitud ja registreerib kaardi pinnkoodiga'''
+       Kui LOGITUD = False siis kasutaja pole sisse logitud ja registreerib kaardi telefoninumbriga'''
     payload = (LOGITUD, nimi, nfc_input)
     Empty_reply_queue()
     _command_queue().put( ("UUS_KAART", payload) )
@@ -656,7 +656,7 @@ def uus_kaart(LOGITUD, nimi, nfc_input): #UUe NFC kaardi regamise funkt. juhul k
             else: 
                 pass
         else: 
-            GUI_message("Pinnkoodi ei leitud.")
+            GUI_message("Telefoninumbrit ei leitud.")
             Oota_kasutaja_kinnitust(10)
 
 
@@ -842,7 +842,7 @@ def main_loop():
         valik = _read_reply()  # Ootab, kuni kasutaja vajutab ekraanil midagi kas
         """LOGI SISSE - kasutaja saab jooke väljastada või tagastada
            LOGIN_SEADED - kasutaja siseneb kontohalduse menüüsse kust saab vaadata võetud jookide seisu ja uut kaarti regada
-           KAOTATUD KAART - kasutaja registreerib uue pinkoodi alusel"""
+           KAOTATUD KAART - kasutaja registreerib uue telefoninumbri alusel"""
             
         if valik == "LOGI_SISSE":
             #Ootab  handlerilt nfc inputi
