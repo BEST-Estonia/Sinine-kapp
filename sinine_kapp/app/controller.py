@@ -289,8 +289,8 @@ def GUI_kasutaja_registreeritud(nimi):
 def GUI_pinn_vale():
     GUI_message("Vale pinnkood")
 
-def GUI_message(message, show_button=True, button_text="Jätka"):
-    command_queue.put( ("MESSAGE", (message, show_button, button_text)) )
+def GUI_message(message, show_button=True, button_text="Jätka", button_value=True):
+    command_queue.put( ("MESSAGE", (message, show_button, button_text, button_value)) )
 
 def _show_database_error_if_needed(timeout=8):
     if database.last_connection_error() is None:
@@ -664,13 +664,17 @@ def main_loop():
 
         elif valik == "ADMIN":
             while True:
-                GUI_message("Viipa admin kiipi", show_button=True, button_text="Tagasi")
+                Empty_reply_queue()
+                GUI_message("Viipa admin kiipi", show_button=True, button_text="Tagasi", button_value="tagasi")
+                logging.info("Admin auth: waiting for NFC")
                 nfc_input = hardware.get_nfc(check_for_cancel)
+                logging.info("Admin auth: NFC result=%s", nfc_input)
 
                 if nfc_input is None:
                     break
 
                 is_in_db, name = database.checkuser(nfc_input)
+                logging.info("Admin auth: checkuser exists=%s name=%s", is_in_db, name)
                 if is_in_db and name == "ADMIN":
                     admin_loop()
                     break

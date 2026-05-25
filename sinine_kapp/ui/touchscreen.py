@@ -520,14 +520,16 @@ class MESSAGE(BaseScreen):
             self.text = str(payload[0]) if payload[0] else ""
             show_button = payload[1]
             button_text = str(payload[2]) if len(payload) > 2 and payload[2] else "Jätka"
+            button_value = payload[3] if len(payload) > 3 else True
         else:
             self.text = str(payload) if payload else ""
             show_button = True
             button_text = "Jätka"
+            button_value = True
         
         if show_button:
             # Button returns True (boolean) which will be put in reply_queue
-            btn = Button(412, 650, 200, 60, button_text, fonts.body, Colors.GREEN, True)
+            btn = Button(412, 650, 200, 60, button_text, fonts.body, Colors.GREEN, button_value)
             self.buttons.append(btn)
         
         # Wrap text to fit screen width (900px safe area)
