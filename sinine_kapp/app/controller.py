@@ -464,6 +464,7 @@ def admin_loop():
 
             elif isinstance(valik, tuple) and valik[0] == "PRODUCT_NAME":
                 product_name = valik[1]
+                product_stock = int(valik[2]) if len(valik) > 2 else 0
 
                 # Enable barcode scanning for product addition
                 logging.info("Admin loop: enabling barcode scanning for product addition")
@@ -485,7 +486,7 @@ def admin_loop():
 
                     if code1 == code2:
                         try:
-                            added = database.add_product(product_name, code1)
+                            added = database.add_product(product_name, code1, product_stock)
                         except AttributeError:
                             logging.error("database.add_product method missing")
                             added = False
@@ -570,6 +571,7 @@ def admin_loop():
                     lines.append(f"... ja veel {len(debtors) - 8}")
 
                 GUI_message("Võlglased:\n" + "\n".join(lines), show_button=True, button_text="Tagasi")
+                _command_queue().put(("DEBTORS_TABLE", debtors))
                 Oota_kasutaja_kinnitust(30)
                 _command_queue().put(("ADMIN", None))
 
@@ -747,7 +749,15 @@ def _review_cart(scanned_items_info, scanned_barcodes):
     final_barcodes = []
     for name, count in final_counts.items():
         available_codes = name_to_barcodes.get(name, [])
-        for code in available_codes[:max(0, int(count))]:
+        target_count = max(0, int(count))
+        if not available_codes:
+            continue
+
+        codes_for_count = list(available_codes[:target_count])
+        while len(codes_for_count) < target_count:
+            codes_for_count.append(available_codes[-1])
+
+        for code in codes_for_count:
             final_items.append(name)
             final_barcodes.append(code)
 

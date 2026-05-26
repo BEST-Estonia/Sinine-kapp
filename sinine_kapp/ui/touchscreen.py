@@ -1283,14 +1283,79 @@ class REMOVE_PRODUCT_LIST:
         return None
 
 
+class DEBTORS_TABLE(BaseScreen):
+    """Admin debtors table grouped by user and product."""
+
+    def __init__(self, debtors, fonts):
+        super().__init__(fonts)
+        self.debtors = debtors if isinstance(debtors, list) else []
+        self.scroll_index = 0
+        self.rows = []
+
+        for debtor in self.debtors:
+            name = debtor.get("name") or f"Kasutaja #{debtor.get('userid')}"
+            for item in debtor.get("items", []):
+                self.rows.append({
+                    "name": name,
+                    "product": item.get("productname", "-"),
+                    "count": item.get("count", 1),
+                })
+
+        self.btn_up = Button(850, 150, 100, 70, "ÜLES", fonts.small, Colors.BLUE, "SCROLL_UP")
+        self.btn_down = Button(850, 525, 100, 70, "ALLA", fonts.small, Colors.BLUE, "SCROLL_DOWN")
+        self.btn_back = Button(412, 680, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK")
+        self.buttons = [self.btn_up, self.btn_down, self.btn_back]
+
+    def draw(self, screen):
+        self.fill(screen, Colors.DARK_BG)
+        render_centered(screen, self.fonts.header, "Võlglased", (512, 50))
+
+        render_at(screen, self.fonts.small, "Kasutaja", (70, 110), Colors.GREY)
+        render_at(screen, self.fonts.small, "Jook", (430, 110), Colors.GREY)
+        render_at(screen, self.fonts.small, "Kogus", (760, 110), Colors.GREY)
+
+        if not self.rows:
+            render_centered(screen, self.fonts.body, "Võlglasi ei ole", (512, 360), Colors.GREY)
+        else:
+            visible_rows = self.rows[self.scroll_index:self.scroll_index + 9]
+            for i, row in enumerate(visible_rows):
+                y = 150 + i * 55
+                render_at(screen, self.fonts.small, row["name"][:28], (70, y))
+                render_at(screen, self.fonts.small, row["product"][:24], (430, y))
+                render_at(screen, self.fonts.body, f"x{row['count']}", (770, y - 5))
+
+        for btn in self.buttons:
+            if btn == self.btn_up and self.scroll_index == 0:
+                continue
+            if btn == self.btn_down and self.scroll_index + 9 >= len(self.rows):
+                continue
+            btn.draw(screen)
+        self.draw_debug_name(screen)
+
+    def handle_input(self, event):
+        for btn in self.buttons:
+            res = btn.check_input(event)
+            if res == "SCROLL_UP":
+                self.scroll_index = max(0, self.scroll_index - 4)
+            elif res == "SCROLL_DOWN":
+                if self.scroll_index + 9 < len(self.rows):
+                    self.scroll_index += 4
+            elif res:
+                return res
+        return None
+
+
 class ADMIN:
     """Admin menu and product-name entry keyboard."""
 
     def __init__(self, fonts):
         self.fonts = fonts
-        self.state = "main" # main, products
+        self.state = "main" # main, products, enter_name, enter_amount
         self.input_text = ""
+        self.input_amount = "1"
+        self.amount_started = False
         self.keyboard_buttons = []
+        self.amount_buttons = []
         
         # Main state buttons
         self.btn_products = Button(312, 300, 400, 100, "Lisa/Eemalda toode", fonts.body, Colors.BLUE, "GOTO_PRODUCTS")
@@ -1303,6 +1368,7 @@ class ADMIN:
         self.btn_back_products = Button(50, 650, 200, 60, "Tagasi", fonts.body, Colors.GREY, "BACK_TO_MAIN")
         
         self._create_keyboard()
+        self._create_amount_pad()
 
     def _create_keyboard(self):
         self.keyboard_buttons = []
@@ -1344,6 +1410,27 @@ class ADMIN:
         btn_enter = Button(722, y_special, 100, key_size, "OK", self.fonts.body, Colors.GREEN, "KEY_ENTER")
         self.keyboard_buttons.append(btn_enter)
 
+    def _create_amount_pad(self):
+        self.amount_buttons = []
+        start_x = 382
+        start_y = 250
+        btn_width = 80
+        btn_height = 80
+        spacing = 10
+
+        labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        for i, label in enumerate(labels):
+            row = i // 3
+            col = i % 3
+            x = start_x + col * (btn_width + spacing)
+            y = start_y + row * (btn_height + spacing)
+            self.amount_buttons.append(Button(x, y, btn_width, btn_height, label, self.fonts.body, Colors.DK_BLUE, f"AMOUNT_{label}"))
+
+        row_y = start_y + 3 * (btn_height + spacing)
+        self.amount_buttons.append(Button(start_x, row_y, btn_width, btn_height, "C", self.fonts.body, Colors.RED, "AMOUNT_CLEAR"))
+        self.amount_buttons.append(Button(start_x + btn_width + spacing, row_y, btn_width, btn_height, "0", self.fonts.body, Colors.BLUE, "AMOUNT_0"))
+        self.amount_buttons.append(Button(start_x + 2 * (btn_width + spacing), row_y, btn_width, btn_height, "OK", self.fonts.body, Colors.GREEN, "AMOUNT_ENTER"))
+
     def draw(self, screen):
         screen.fill(Colors.DARK_BG)
         rect = screen.get_rect()
@@ -1377,6 +1464,22 @@ class ADMIN:
                 btn.draw(screen)
                 
             # Cancel button for input mode
+            self.btn_back_products.draw(screen)
+
+        elif self.state == "enter_amount":
+            title = self.fonts.header.render("SISESTA kogus", True, Colors.TEXT_PRIMARY)
+            screen.blit(title, title.get_rect(center=(rect.centerx, 80)))
+
+            subtitle = self.fonts.body.render(self.input_text, True, Colors.GREY)
+            screen.blit(subtitle, subtitle.get_rect(center=(rect.centerx, 135)))
+
+            pygame.draw.rect(screen, Colors.GREY, (362, 160, 300, 70), 2)
+            amount_surf = self.fonts.header.render(self.input_amount or "0", True, Colors.TEXT_PRIMARY)
+            screen.blit(amount_surf, amount_surf.get_rect(center=(rect.centerx, 195)))
+
+            for btn in self.amount_buttons:
+                btn.draw(screen)
+
             self.btn_back_products.draw(screen)
             
         debug_surf = self.fonts.small.render(self.__class__.__name__, True, Colors.YELLOW)
@@ -1427,10 +1530,40 @@ class ADMIN:
                             self.input_text = self.input_text[:-1]
                         elif key == "ENTER":
                             if self.input_text:
-                                return ("PRODUCT_NAME", self.input_text)
+                                self.state = "enter_amount"
+                                self.input_amount = "1"
+                                self.amount_started = False
+                                return None
                         else:
                             if len(self.input_text) < 20:
                                 self.input_text += key
+                    return None
+
+        elif self.state == "enter_amount":
+            res = self.btn_back_products.check_input(event)
+            if res == "BACK_TO_MAIN":
+                self.state = "enter_name"
+                return None
+
+            for btn in self.amount_buttons:
+                res = btn.check_input(event)
+                if res == "AMOUNT_CLEAR":
+                    self.input_amount = ""
+                    self.amount_started = False
+                    return None
+                if res == "AMOUNT_ENTER":
+                    amount = int(self.input_amount) if self.input_amount else 0
+                    if amount > 0:
+                        return ("PRODUCT_NAME", self.input_text, amount)
+                    return None
+                if isinstance(res, str) and res.startswith("AMOUNT_"):
+                    digit = res.replace("AMOUNT_", "", 1)
+                    if digit.isdigit() and len(self.input_amount) < 3:
+                        if not self.amount_started:
+                            self.input_amount = digit
+                            self.amount_started = True
+                        else:
+                            self.input_amount = (self.input_amount + digit).lstrip("0") or "0"
                     return None
         
         return None
@@ -1562,6 +1695,10 @@ def run_touchscreen(command_q, reply_q):
             elif command == "REMOVE_PRODUCT_LIST":
                 logging.info("REMOVE_PRODUCT_LIST command received")
                 current_screen_object = REMOVE_PRODUCT_LIST(payload, fonts)
+
+            elif command == "DEBTORS_TABLE":
+                logging.info("DEBTORS_TABLE command received")
+                current_screen_object = DEBTORS_TABLE(payload, fonts)
 
             elif command == "STOP":
                 reply_q.put(APP_EXIT)

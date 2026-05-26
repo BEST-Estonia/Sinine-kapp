@@ -397,13 +397,13 @@ def get_unreturned_drinks(nfc_input):
         return []
 
 
-def add_product(name, barcode):
+def add_product(name, barcode, stock=0):
     """Add a product to the portal product catalog."""
     try:
         data = _api_request(
             '/kiosk/products/admin',
             method='POST',
-            payload={'name': str(name), 'barcode': str(barcode)},
+            payload={'name': str(name), 'barcode': str(barcode), 'stock': int(stock)},
         )
         return bool(data.get('success'))
     except Exception as e:
