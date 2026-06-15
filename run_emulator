@@ -1,0 +1,62 @@
+import sys
+import threading
+from unittest.mock import MagicMock
+import pygame
+
+# 1. Fake the Raspberry Pi hardware libraries
+# This stops Python from crashing when it tries to find Raspberry Pi components on your PC
+sys.modules['RPi'] = MagicMock()
+sys.modules['RPi.GPIO'] = MagicMock()
+sys.modules['board'] = MagicMock()
+sys.modules['digitalio'] = MagicMock()
+sys.modules['adafruit_rgb_display'] = MagicMock()
+sys.modules['adafruit_rgb_display.st7789'] = MagicMock()
+sys.modules['mfrc522'] = MagicMock()
+
+# 2. Intercept Pygame to stop Fullscreen mode
+# We save the original screen-drawing function, then replace it with one that forces a window
+original_set_mode = pygame.display.set_mode
+
+def windowed_set_mode(size, flags=0, depth=0, display=0, vsync=0):
+    # Ignore whatever fullscreen flags the app tries to pass and force a 1024x768 window
+    return original_set_mode((1024, 768))
+
+pygame.display.set_mode = windowed_set_mode
+
+# 3. Load your app's hardware module and replace its functions
+import sinine_kapp.devices.hardware as hardware
+
+door_is_open = False
+
+def mock_is_door_open():
+    return door_is_open
+
+def mock_get_nfc(cancel_check_callback=None):
+    uid = input("\n[EMULATOR] NFC requested. Enter fake UID (or press Enter for '112233'): ")
+    return int(uid) if uid.isdigit() else 112233
+
+hardware.is_door_open = mock_is_door_open
+hardware.get_nfc = mock_get_nfc
+
+# 4. Create a terminal control panel for the fake hardware
+def terminal_control():
+    global door_is_open
+    print("\n[EMULATOR] Type 'o' + Enter to open door, 'c' + Enter to close door.")
+    while True:
+        cmd = input().strip().lower()
+        if cmd == 'o':
+            door_is_open = True
+            print("[EMULATOR] Door is OPEN")
+        elif cmd == 'c':
+            door_is_open = False
+            print("[EMULATOR] Door is CLOSED")
+
+# Start a background thread to listen for your keyboard commands
+t = threading.Thread(target=terminal_control, daemon=True)
+t.start()
+
+# 5. Launch your unmodified application
+if __name__ == "__main__":
+    print("Starting wrapper script...")
+    from sinine_kapp.app.controller import run
+    run()
