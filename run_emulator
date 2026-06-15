@@ -4,7 +4,6 @@ from unittest.mock import MagicMock
 import pygame
 
 # 1. Fake the Raspberry Pi hardware libraries
-# This stops Python from crashing when it tries to find Raspberry Pi components on your PC
 sys.modules['RPi'] = MagicMock()
 sys.modules['RPi.GPIO'] = MagicMock()
 sys.modules['board'] = MagicMock()
@@ -13,12 +12,13 @@ sys.modules['adafruit_rgb_display'] = MagicMock()
 sys.modules['adafruit_rgb_display.st7789'] = MagicMock()
 sys.modules['mfrc522'] = MagicMock()
 
+# NEW FIX: Completely bypass the physical mini-LCD screen module
+sys.modules['sinine_kapp.devices.lcd'] = MagicMock()
+
 # 2. Intercept Pygame to stop Fullscreen mode
-# We save the original screen-drawing function, then replace it with one that forces a window
 original_set_mode = pygame.display.set_mode
 
 def windowed_set_mode(size, flags=0, depth=0, display=0, vsync=0):
-    # Ignore whatever fullscreen flags the app tries to pass and force a 1024x768 window
     return original_set_mode((1024, 768))
 
 pygame.display.set_mode = windowed_set_mode
@@ -51,7 +51,6 @@ def terminal_control():
             door_is_open = False
             print("[EMULATOR] Door is CLOSED")
 
-# Start a background thread to listen for your keyboard commands
 t = threading.Thread(target=terminal_control, daemon=True)
 t.start()
 
